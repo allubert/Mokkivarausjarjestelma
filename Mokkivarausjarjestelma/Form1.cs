@@ -9,7 +9,6 @@ namespace Mokkivarausjarjestelma
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           ListViewHitTestInfo 123;
         }
     }
 }
