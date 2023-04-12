@@ -52,7 +52,6 @@
             this.btnToiminta.TabIndex = 0;
             this.btnToiminta.Text = "Toiminta-alueiden hallinta";
             this.btnToiminta.UseVisualStyleBackColor = true;
-            this.btnToiminta.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnPalvelu
             // 
