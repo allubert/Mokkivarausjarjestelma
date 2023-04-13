@@ -44,6 +44,7 @@
             this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
             this.tbpgAsiakashallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
+            this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,7 +92,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Mokkivarausjarjestelma.Properties.Resources._6368_log_cabin_black_and_white_free_download;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 76);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 75);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(251, 263);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -214,6 +215,13 @@
             this.tbpgLaskujenhallinta.Text = "Laskujen hallinta";
             this.tbpgLaskujenhallinta.UseVisualStyleBackColor = true;
             // 
+            // mySqlCommand1
+            // 
+            this.mySqlCommand1.CacheAge = 0;
+            this.mySqlCommand1.Connection = null;
+            this.mySqlCommand1.EnableCaching = false;
+            this.mySqlCommand1.Transaction = null;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -252,5 +260,6 @@
         private TabPage tbpgAsiakashallinta;
         private TabPage tbpgLaskujenhallinta;
         private PictureBox pictureBox1;
+        private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
     }
 }
