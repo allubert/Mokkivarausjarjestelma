@@ -31,14 +31,18 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnLasku = new System.Windows.Forms.Button();
             this.btnAsiakas = new System.Windows.Forms.Button();
             this.btnMokkivaraus = new System.Windows.Forms.Button();
-            this.btnToiminta = new System.Windows.Forms.Button();
-            this.btnPalvelu = new System.Windows.Forms.Button();
-            this.lblTittle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTittle = new System.Windows.Forms.Label();
+            this.btnPalvelu = new System.Windows.Forms.Button();
+            this.btnToiminta = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -56,6 +60,10 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -75,16 +83,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(952, 743);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnLasku
             // 
@@ -113,23 +111,15 @@
             this.btnMokkivaraus.Text = "Mökkivarausten hallinta";
             this.btnMokkivaraus.UseVisualStyleBackColor = true;
             // 
-            // btnToiminta
+            // panel1
             // 
-            this.btnToiminta.Location = new System.Drawing.Point(88, 131);
-            this.btnToiminta.Name = "btnToiminta";
-            this.btnToiminta.Size = new System.Drawing.Size(260, 75);
-            this.btnToiminta.TabIndex = 0;
-            this.btnToiminta.Text = "Toiminta-alueiden hallinta";
-            this.btnToiminta.UseVisualStyleBackColor = true;
-            // 
-            // btnPalvelu
-            // 
-            this.btnPalvelu.Location = new System.Drawing.Point(88, 225);
-            this.btnPalvelu.Name = "btnPalvelu";
-            this.btnPalvelu.Size = new System.Drawing.Size(260, 75);
-            this.btnPalvelu.TabIndex = 1;
-            this.btnPalvelu.Text = "Palveluiden hallinta";
-            this.btnPalvelu.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.lblTittle);
+            this.panel1.Controls.Add(this.btnPalvelu);
+            this.panel1.Controls.Add(this.btnToiminta);
+            this.panel1.Location = new System.Drawing.Point(264, 55);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(425, 632);
+            this.panel1.TabIndex = 11;
             // 
             // lblTittle
             // 
@@ -141,15 +131,73 @@
             this.lblTittle.TabIndex = 5;
             this.lblTittle.Text = "Mökkivarausjärjestelmä\r\n    Village Newbies Oy\r\n";
             // 
-            // panel1
+            // btnPalvelu
             // 
-            this.panel1.Controls.Add(this.lblTittle);
-            this.panel1.Controls.Add(this.btnPalvelu);
-            this.panel1.Controls.Add(this.btnToiminta);
-            this.panel1.Location = new System.Drawing.Point(264, 55);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(425, 632);
-            this.panel1.TabIndex = 11;
+            this.btnPalvelu.Location = new System.Drawing.Point(88, 225);
+            this.btnPalvelu.Name = "btnPalvelu";
+            this.btnPalvelu.Size = new System.Drawing.Size(260, 75);
+            this.btnPalvelu.TabIndex = 1;
+            this.btnPalvelu.Text = "Palveluiden hallinta";
+            this.btnPalvelu.UseVisualStyleBackColor = true;
+            // 
+            // btnToiminta
+            // 
+            this.btnToiminta.Location = new System.Drawing.Point(88, 131);
+            this.btnToiminta.Name = "btnToiminta";
+            this.btnToiminta.Size = new System.Drawing.Size(260, 75);
+            this.btnToiminta.TabIndex = 0;
+            this.btnToiminta.Text = "Toiminta-alueiden hallinta";
+            this.btnToiminta.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(952, 743);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(952, 743);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(952, 743);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(952, 743);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(952, 743);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "tabPage6";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -183,5 +231,9 @@
         private Button btnPalvelu;
         private Button btnToiminta;
         private TabPage tabPage2;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private TabPage tabPage6;
     }
 }
