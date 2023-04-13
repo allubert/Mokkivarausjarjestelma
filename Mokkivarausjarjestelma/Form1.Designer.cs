@@ -30,7 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tbcHallinta = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbpgAloitussivu = new System.Windows.Forms.TabPage();
             this.btnLasku = new System.Windows.Forms.Button();
             this.btnAsiakas = new System.Windows.Forms.Button();
             this.btnMokkivaraus = new System.Windows.Forms.Button();
@@ -38,13 +38,13 @@
             this.lblTittle = new System.Windows.Forms.Label();
             this.btnPalvelu = new System.Windows.Forms.Button();
             this.btnToiminta = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
+            this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
+            this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
+            this.tbpgAsiakashallinta = new System.Windows.Forms.TabPage();
+            this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.tbcHallinta.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tbpgAloitussivu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,12 +60,12 @@
             // 
             // tbcHallinta
             // 
-            this.tbcHallinta.Controls.Add(this.tabPage1);
-            this.tbcHallinta.Controls.Add(this.tabPage2);
-            this.tbcHallinta.Controls.Add(this.tabPage3);
-            this.tbcHallinta.Controls.Add(this.tabPage4);
-            this.tbcHallinta.Controls.Add(this.tabPage5);
-            this.tbcHallinta.Controls.Add(this.tabPage6);
+            this.tbcHallinta.Controls.Add(this.tbpgAloitussivu);
+            this.tbcHallinta.Controls.Add(this.tbpgToimintaaluehallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgPalveluhallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgMokkivaraushallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgAsiakashallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgLaskujenhallinta);
             this.tbcHallinta.Location = new System.Drawing.Point(0, 0);
             this.tbcHallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbcHallinta.Name = "tbcHallinta";
@@ -73,20 +73,20 @@
             this.tbcHallinta.Size = new System.Drawing.Size(1371, 1285);
             this.tbcHallinta.TabIndex = 7;
             // 
-            // tabPage1
+            // tbpgAloitussivu
             // 
-            this.tabPage1.Controls.Add(this.btnLasku);
-            this.tabPage1.Controls.Add(this.btnAsiakas);
-            this.tabPage1.Controls.Add(this.btnMokkivaraus);
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 34);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Aloitussivu";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbpgAloitussivu.Controls.Add(this.btnLasku);
+            this.tbpgAloitussivu.Controls.Add(this.btnAsiakas);
+            this.tbpgAloitussivu.Controls.Add(this.btnMokkivaraus);
+            this.tbpgAloitussivu.Controls.Add(this.panel1);
+            this.tbpgAloitussivu.Location = new System.Drawing.Point(4, 34);
+            this.tbpgAloitussivu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgAloitussivu.Name = "tbpgAloitussivu";
+            this.tbpgAloitussivu.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgAloitussivu.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgAloitussivu.TabIndex = 0;
+            this.tbpgAloitussivu.Text = "Aloitussivu";
+            this.tbpgAloitussivu.UseVisualStyleBackColor = true;
             // 
             // btnLasku
             // 
@@ -160,60 +160,60 @@
             this.btnToiminta.Text = "Toiminta-alueiden hallinta";
             this.btnToiminta.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tbpgToimintaaluehallinta
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 34);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Toiminta-alueiden hallinta";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tbpgToimintaaluehallinta.Location = new System.Drawing.Point(4, 34);
+            this.tbpgToimintaaluehallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgToimintaaluehallinta.Name = "tbpgToimintaaluehallinta";
+            this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgToimintaaluehallinta.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgToimintaaluehallinta.TabIndex = 1;
+            this.tbpgToimintaaluehallinta.Text = "Toiminta-alueiden hallinta";
+            this.tbpgToimintaaluehallinta.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tbpgPalveluhallinta
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 34);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Palveluiden hallinta";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 34);
+            this.tbpgPalveluhallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgPalveluhallinta.Name = "tbpgPalveluhallinta";
+            this.tbpgPalveluhallinta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgPalveluhallinta.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgPalveluhallinta.TabIndex = 2;
+            this.tbpgPalveluhallinta.Text = "Palveluiden hallinta";
+            this.tbpgPalveluhallinta.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // tbpgMokkivaraushallinta
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 34);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage4.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Mökkivarausten hallinta";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tbpgMokkivaraushallinta.Location = new System.Drawing.Point(4, 34);
+            this.tbpgMokkivaraushallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgMokkivaraushallinta.Name = "tbpgMokkivaraushallinta";
+            this.tbpgMokkivaraushallinta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgMokkivaraushallinta.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgMokkivaraushallinta.TabIndex = 3;
+            this.tbpgMokkivaraushallinta.Text = "Mökkivarausten hallinta";
+            this.tbpgMokkivaraushallinta.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // tbpgAsiakashallinta
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 34);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage5.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Asiakashallinta";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tbpgAsiakashallinta.Location = new System.Drawing.Point(4, 34);
+            this.tbpgAsiakashallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgAsiakashallinta.Name = "tbpgAsiakashallinta";
+            this.tbpgAsiakashallinta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgAsiakashallinta.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgAsiakashallinta.TabIndex = 4;
+            this.tbpgAsiakashallinta.Text = "Asiakashallinta";
+            this.tbpgAsiakashallinta.UseVisualStyleBackColor = true;
             // 
-            // tabPage6
+            // tbpgLaskujenhallinta
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 34);
-            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage6.Size = new System.Drawing.Size(1363, 1247);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Laskujen halinta";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tbpgLaskujenhallinta.Location = new System.Drawing.Point(4, 34);
+            this.tbpgLaskujenhallinta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgLaskujenhallinta.Name = "tbpgLaskujenhallinta";
+            this.tbpgLaskujenhallinta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpgLaskujenhallinta.Size = new System.Drawing.Size(1363, 1247);
+            this.tbpgLaskujenhallinta.TabIndex = 5;
+            this.tbpgLaskujenhallinta.Text = "Laskujen hallinta";
+            this.tbpgLaskujenhallinta.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -228,7 +228,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mökkivarausjärjestelmä - Village Newbies Oy";
             this.tbcHallinta.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tbpgAloitussivu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -239,7 +239,7 @@
         #endregion
         private MenuStrip menuStrip1;
         private TabControl tbcHallinta;
-        private TabPage tabPage1;
+        private TabPage tbpgAloitussivu;
         private Button btnLasku;
         private Button btnAsiakas;
         private Button btnMokkivaraus;
@@ -247,10 +247,10 @@
         private Label lblTittle;
         private Button btnPalvelu;
         private Button btnToiminta;
-        private TabPage tabPage2;
-        private TabPage tabPage3;
-        private TabPage tabPage4;
-        private TabPage tabPage5;
-        private TabPage tabPage6;
+        private TabPage tbpgToimintaaluehallinta;
+        private TabPage tbpgPalveluhallinta;
+        private TabPage tbpgMokkivaraushallinta;
+        private TabPage tbpgAsiakashallinta;
+        private TabPage tbpgLaskujenhallinta;
     }
 }
