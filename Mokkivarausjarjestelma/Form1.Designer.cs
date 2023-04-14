@@ -83,7 +83,7 @@
             this.tbpgAloitussivu.Controls.Add(this.panel1);
             this.tbpgAloitussivu.Location = new System.Drawing.Point(4, 24);
             this.tbpgAloitussivu.Name = "tbpgAloitussivu";
-            this.tbpgAloitussivu.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgAloitussivu.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgAloitussivu.Size = new System.Drawing.Size(952, 743);
             this.tbpgAloitussivu.TabIndex = 0;
             this.tbpgAloitussivu.Text = "Aloitussivu";
@@ -164,12 +164,13 @@
             this.btnToiminta.TabIndex = 0;
             this.btnToiminta.Text = "Toiminta-alueiden hallinta";
             this.btnToiminta.UseVisualStyleBackColor = true;
+            this.btnToiminta.Click += new System.EventHandler(this.btnToiminta_Click);
             // 
             // tbpgToimintaaluehallinta
             // 
             this.tbpgToimintaaluehallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgToimintaaluehallinta.Name = "tbpgToimintaaluehallinta";
-            this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgToimintaaluehallinta.Size = new System.Drawing.Size(952, 743);
             this.tbpgToimintaaluehallinta.TabIndex = 1;
             this.tbpgToimintaaluehallinta.Text = "Toiminta-alueiden hallinta";
@@ -179,7 +180,7 @@
             // 
             this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgPalveluhallinta.Name = "tbpgPalveluhallinta";
-            this.tbpgPalveluhallinta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgPalveluhallinta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgPalveluhallinta.Size = new System.Drawing.Size(952, 743);
             this.tbpgPalveluhallinta.TabIndex = 2;
             this.tbpgPalveluhallinta.Text = "Palveluiden hallinta";
@@ -189,7 +190,7 @@
             // 
             this.tbpgMokkivaraushallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgMokkivaraushallinta.Name = "tbpgMokkivaraushallinta";
-            this.tbpgMokkivaraushallinta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgMokkivaraushallinta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgMokkivaraushallinta.Size = new System.Drawing.Size(952, 743);
             this.tbpgMokkivaraushallinta.TabIndex = 3;
             this.tbpgMokkivaraushallinta.Text = "Mökkivarausten hallinta";
@@ -199,7 +200,7 @@
             // 
             this.tbpgAsiakashallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgAsiakashallinta.Name = "tbpgAsiakashallinta";
-            this.tbpgAsiakashallinta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgAsiakashallinta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgAsiakashallinta.Size = new System.Drawing.Size(952, 743);
             this.tbpgAsiakashallinta.TabIndex = 4;
             this.tbpgAsiakashallinta.Text = "Asiakashallinta";
@@ -209,7 +210,7 @@
             // 
             this.tbpgLaskujenhallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgLaskujenhallinta.Name = "tbpgLaskujenhallinta";
-            this.tbpgLaskujenhallinta.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpgLaskujenhallinta.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tbpgLaskujenhallinta.Size = new System.Drawing.Size(952, 743);
             this.tbpgLaskujenhallinta.TabIndex = 5;
             this.tbpgLaskujenhallinta.Text = "Laskujen hallinta";
@@ -232,7 +233,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mökkivarausjärjestelmä - Village Newbies Oy";
+            this.Text = "  ";
             this.tbcHallinta.ResumeLayout(false);
             this.tbpgAloitussivu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
