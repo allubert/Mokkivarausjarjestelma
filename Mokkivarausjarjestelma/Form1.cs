@@ -11,5 +11,10 @@ namespace Mokkivarausjarjestelma
         {
 
         }
+
+        private void btnPalvelu_Click(object sender, EventArgs e)
+        {
+            tbcHallinta.SelectedTab = tbpgPalveluhallinta;
+        }
     }
 }
