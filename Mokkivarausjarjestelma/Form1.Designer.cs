@@ -123,7 +123,6 @@
             this.btnAsiakas.TabIndex = 9;
             this.btnAsiakas.Text = "Asiakashallinta";
             this.btnAsiakas.UseVisualStyleBackColor = true;
-            this.btnAsiakas.Click += new System.EventHandler(this.btnAsiakas_Click);
             // 
             // btnMokkivaraus
             // 
