@@ -123,6 +123,7 @@
             this.btnAsiakas.TabIndex = 9;
             this.btnAsiakas.Text = "Asiakashallinta";
             this.btnAsiakas.UseVisualStyleBackColor = true;
+            this.btnAsiakas.Click += new System.EventHandler(this.btnAsiakas_Click);
             // 
             // btnMokkivaraus
             // 
@@ -133,6 +134,7 @@
             this.btnMokkivaraus.TabIndex = 8;
             this.btnMokkivaraus.Text = "Mökkivarausten hallinta";
             this.btnMokkivaraus.UseVisualStyleBackColor = true;
+            this.btnMokkivaraus.Click += new System.EventHandler(this.btnMokkivaraus_Click);
             // 
             // panel1
             // 
