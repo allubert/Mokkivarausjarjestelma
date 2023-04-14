@@ -21,5 +21,10 @@ namespace Mokkivarausjarjestelma
         {
             tbcHallinta.SelectedTab = tbpgAsiakashallinta; 
         }
+
+        private void btnMokkivaraus_Click(object sender, EventArgs e)
+        {
+            tbcHallinta.SelectedTab = tbpgMokkivaraushallinta;
+        }
     }
 }
