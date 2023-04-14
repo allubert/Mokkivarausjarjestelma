@@ -7,9 +7,9 @@ namespace Mokkivarausjarjestelma
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btnPalvelu_Click(object sender, EventArgs e)
         {
-
+            tbcHallinta.SelectedTab = tbpgPalveluhallinta;
         }
 
         private void btnToiminta_Click(object sender, EventArgs e)
