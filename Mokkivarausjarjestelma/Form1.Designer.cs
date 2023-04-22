@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tbcHallinta = new System.Windows.Forms.TabControl();
             this.tbpgAloitussivu = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTittle = new System.Windows.Forms.Label();
@@ -57,12 +56,20 @@
             this.lblAsiakas = new System.Windows.Forms.Label();
             this.dgvAsiakashallinta = new System.Windows.Forms.DataGridView();
             this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblKuvaus = new System.Windows.Forms.Label();
+            this.lblTyyppi = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPalveluID = new System.Windows.Forms.Label();
             this.dgvPalvelut = new System.Windows.Forms.DataGridView();
             this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -78,14 +85,26 @@
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblAlv = new System.Windows.Forms.Label();
+            this.lblHinta = new System.Windows.Forms.Label();
+            this.btnPalveluHae = new System.Windows.Forms.Button();
+            this.btnPalveluPoista = new System.Windows.Forms.Button();
+            this.btnPalveluPaivita = new System.Windows.Forms.Button();
+            this.btnPalveluLisaa = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.btnAsiakasHae = new System.Windows.Forms.Button();
+            this.btnAsiakasLisaa = new System.Windows.Forms.Button();
+            this.btnAsiakasPaivita = new System.Windows.Forms.Button();
+            this.btnAsiakasPoista = new System.Windows.Forms.Button();
+            this.btnMokkiHae = new System.Windows.Forms.Button();
+            this.btnMokkiLisaa = new System.Windows.Forms.Button();
+            this.btnMokkiPaivita = new System.Windows.Forms.Button();
+            this.btnMokkiPoista = new System.Windows.Forms.Button();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -123,7 +142,6 @@
             // 
             // tbpgAloitussivu
             // 
-            this.tbpgAloitussivu.Controls.Add(this.button1);
             this.tbpgAloitussivu.Controls.Add(this.pictureBox1);
             this.tbpgAloitussivu.Controls.Add(this.panel1);
             this.tbpgAloitussivu.Location = new System.Drawing.Point(4, 24);
@@ -133,16 +151,6 @@
             this.tbpgAloitussivu.TabIndex = 0;
             this.tbpgAloitussivu.Text = "Aloitussivu";
             this.tbpgAloitussivu.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(147, 288);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(280, 46);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Yllatus nappi";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -229,6 +237,10 @@
             // 
             // tbpgAsiakashallinta
             // 
+            this.tbpgAsiakashallinta.Controls.Add(this.btnAsiakasPoista);
+            this.tbpgAsiakashallinta.Controls.Add(this.btnAsiakasPaivita);
+            this.tbpgAsiakashallinta.Controls.Add(this.btnAsiakasLisaa);
+            this.tbpgAsiakashallinta.Controls.Add(this.btnAsiakasHae);
             this.tbpgAsiakashallinta.Controls.Add(this.tbSukunimi);
             this.tbpgAsiakashallinta.Controls.Add(this.tbLahiosoite);
             this.tbpgAsiakashallinta.Controls.Add(this.tbEtunimi);
@@ -377,10 +389,22 @@
             // 
             // tbpgPalveluhallinta
             // 
-            this.tbpgPalveluhallinta.Controls.Add(this.label4);
-            this.tbpgPalveluhallinta.Controls.Add(this.label3);
+            this.tbpgPalveluhallinta.Controls.Add(this.richTextBox3);
+            this.tbpgPalveluhallinta.Controls.Add(this.textBox12);
+            this.tbpgPalveluhallinta.Controls.Add(this.textBox11);
+            this.tbpgPalveluhallinta.Controls.Add(this.textBox10);
+            this.tbpgPalveluhallinta.Controls.Add(this.textBox8);
+            this.tbpgPalveluhallinta.Controls.Add(this.textBox5);
+            this.tbpgPalveluhallinta.Controls.Add(this.btnPalveluLisaa);
+            this.tbpgPalveluhallinta.Controls.Add(this.btnPalveluPaivita);
+            this.tbpgPalveluhallinta.Controls.Add(this.btnPalveluPoista);
+            this.tbpgPalveluhallinta.Controls.Add(this.btnPalveluHae);
+            this.tbpgPalveluhallinta.Controls.Add(this.lblHinta);
+            this.tbpgPalveluhallinta.Controls.Add(this.lblAlv);
+            this.tbpgPalveluhallinta.Controls.Add(this.lblKuvaus);
+            this.tbpgPalveluhallinta.Controls.Add(this.lblTyyppi);
             this.tbpgPalveluhallinta.Controls.Add(this.label2);
-            this.tbpgPalveluhallinta.Controls.Add(this.label1);
+            this.tbpgPalveluhallinta.Controls.Add(this.lblPalveluID);
             this.tbpgPalveluhallinta.Controls.Add(this.dgvPalvelut);
             this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgPalveluhallinta.Name = "tbpgPalveluhallinta";
@@ -391,41 +415,41 @@
             this.tbpgPalveluhallinta.UseVisualStyleBackColor = true;
             this.tbpgPalveluhallinta.Click += new System.EventHandler(this.tbpgPalveluhallinta_Click);
             // 
-            // label4
+            // lblKuvaus
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 231);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "label4";
+            this.lblKuvaus.AutoSize = true;
+            this.lblKuvaus.Location = new System.Drawing.Point(28, 177);
+            this.lblKuvaus.Name = "lblKuvaus";
+            this.lblKuvaus.Size = new System.Drawing.Size(45, 15);
+            this.lblKuvaus.TabIndex = 4;
+            this.lblKuvaus.Text = "Kuvaus";
             // 
-            // label3
+            // lblTyyppi
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 160);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.lblTyyppi.AutoSize = true;
+            this.lblTyyppi.Location = new System.Drawing.Point(28, 136);
+            this.lblTyyppi.Name = "lblTyyppi";
+            this.lblTyyppi.Size = new System.Drawing.Size(41, 15);
+            this.lblTyyppi.TabIndex = 3;
+            this.lblTyyppi.Text = "Tyyppi";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 99);
+            this.label2.Location = new System.Drawing.Point(28, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 15);
+            this.label2.Size = new System.Drawing.Size(33, 15);
             this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.label2.Text = "Nimi";
             // 
-            // label1
+            // lblPalveluID
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.lblPalveluID.AutoSize = true;
+            this.lblPalveluID.Location = new System.Drawing.Point(28, 42);
+            this.lblPalveluID.Name = "lblPalveluID";
+            this.lblPalveluID.Size = new System.Drawing.Size(56, 15);
+            this.lblPalveluID.TabIndex = 1;
+            this.lblPalveluID.Text = "PalveluID";
             // 
             // dgvPalvelut
             // 
@@ -439,6 +463,10 @@
             // 
             // tbpgMokkivaraushallinta
             // 
+            this.tbpgMokkivaraushallinta.Controls.Add(this.btnMokkiPoista);
+            this.tbpgMokkivaraushallinta.Controls.Add(this.btnMokkiPaivita);
+            this.tbpgMokkivaraushallinta.Controls.Add(this.btnMokkiLisaa);
+            this.tbpgMokkivaraushallinta.Controls.Add(this.btnMokkiHae);
             this.tbpgMokkivaraushallinta.Controls.Add(this.label5);
             this.tbpgMokkivaraushallinta.Controls.Add(this.textBox4);
             this.tbpgMokkivaraushallinta.Controls.Add(this.richTextBox2);
@@ -466,6 +494,71 @@
             this.tbpgMokkivaraushallinta.TabIndex = 3;
             this.tbpgMokkivaraushallinta.Text = "Mökkivarausten hallinta";
             this.tbpgMokkivaraushallinta.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 15);
+            this.label5.TabIndex = 38;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(92, 175);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(148, 23);
+            this.textBox4.TabIndex = 37;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(92, 332);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(148, 118);
+            this.richTextBox2.TabIndex = 36;
+            this.richTextBox2.Text = "";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(92, 197);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(148, 112);
+            this.richTextBox1.TabIndex = 35;
+            this.richTextBox1.Text = "";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(92, 309);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(148, 23);
+            this.textBox9.TabIndex = 33;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(8, 312);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(88, 20);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Henkilömäärä";
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(8, 197);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label12.Size = new System.Drawing.Size(88, 20);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Kuvaus";
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(8, 175);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 25);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Hinta (/vrk)";
             // 
             // textBox1
             // 
@@ -594,70 +687,174 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // textBox9
+            // lblAlv
             // 
-            this.textBox9.Location = new System.Drawing.Point(92, 309);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(148, 23);
-            this.textBox9.TabIndex = 33;
+            this.lblAlv.AutoSize = true;
+            this.lblAlv.Location = new System.Drawing.Point(28, 292);
+            this.lblAlv.Name = "lblAlv";
+            this.lblAlv.Size = new System.Drawing.Size(24, 15);
+            this.lblAlv.TabIndex = 5;
+            this.lblAlv.Text = "Alv";
             // 
-            // label11
+            // lblHinta
             // 
-            this.label11.Location = new System.Drawing.Point(8, 312);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(88, 20);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "Henkilömäärä";
+            this.lblHinta.AutoSize = true;
+            this.lblHinta.Location = new System.Drawing.Point(25, 251);
+            this.lblHinta.Name = "lblHinta";
+            this.lblHinta.Size = new System.Drawing.Size(36, 15);
+            this.lblHinta.TabIndex = 6;
+            this.lblHinta.Text = "Hinta";
             // 
-            // label12
+            // btnPalveluHae
             // 
-            this.label12.Location = new System.Drawing.Point(8, 197);
-            this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label12.Size = new System.Drawing.Size(88, 20);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "Kuvaus";
+            this.btnPalveluHae.Location = new System.Drawing.Point(283, 29);
+            this.btnPalveluHae.Name = "btnPalveluHae";
+            this.btnPalveluHae.Size = new System.Drawing.Size(46, 28);
+            this.btnPalveluHae.TabIndex = 7;
+            this.btnPalveluHae.Text = "Hae";
+            this.btnPalveluHae.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // btnPalveluPoista
             // 
-            this.label13.Location = new System.Drawing.Point(8, 175);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(88, 25);
-            this.label13.TabIndex = 30;
-            this.label13.Text = "Hinta (/vrk)";
+            this.btnPalveluPoista.Location = new System.Drawing.Point(254, 360);
+            this.btnPalveluPoista.Name = "btnPalveluPoista";
+            this.btnPalveluPoista.Size = new System.Drawing.Size(75, 23);
+            this.btnPalveluPoista.TabIndex = 8;
+            this.btnPalveluPoista.Text = "Poista";
+            this.btnPalveluPoista.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // btnPalveluPaivita
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(92, 197);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(148, 112);
-            this.richTextBox1.TabIndex = 35;
-            this.richTextBox1.Text = "";
+            this.btnPalveluPaivita.Location = new System.Drawing.Point(143, 360);
+            this.btnPalveluPaivita.Name = "btnPalveluPaivita";
+            this.btnPalveluPaivita.Size = new System.Drawing.Size(75, 23);
+            this.btnPalveluPaivita.TabIndex = 9;
+            this.btnPalveluPaivita.Text = "Päivitä";
+            this.btnPalveluPaivita.UseVisualStyleBackColor = true;
             // 
-            // richTextBox2
+            // btnPalveluLisaa
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(92, 332);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(148, 118);
-            this.richTextBox2.TabIndex = 36;
-            this.richTextBox2.Text = "";
+            this.btnPalveluLisaa.Location = new System.Drawing.Point(28, 360);
+            this.btnPalveluLisaa.Name = "btnPalveluLisaa";
+            this.btnPalveluLisaa.Size = new System.Drawing.Size(75, 23);
+            this.btnPalveluLisaa.TabIndex = 10;
+            this.btnPalveluLisaa.Text = "Syötä";
+            this.btnPalveluLisaa.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // textBox5
             // 
-            this.textBox4.Location = new System.Drawing.Point(92, 175);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(148, 23);
-            this.textBox4.TabIndex = 37;
+            this.textBox5.Location = new System.Drawing.Point(108, 39);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(130, 23);
+            this.textBox5.TabIndex = 11;
             // 
-            // label5
+            // textBox8
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 15);
-            this.label5.TabIndex = 38;
+            this.textBox8.Location = new System.Drawing.Point(108, 95);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(130, 23);
+            this.textBox8.TabIndex = 12;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(108, 136);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(130, 23);
+            this.textBox10.TabIndex = 13;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(108, 248);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(130, 23);
+            this.textBox11.TabIndex = 14;
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(108, 292);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(130, 23);
+            this.textBox12.TabIndex = 15;
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(108, 177);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(197, 65);
+            this.richTextBox3.TabIndex = 16;
+            this.richTextBox3.Text = "";
+            // 
+            // btnAsiakasHae
+            // 
+            this.btnAsiakasHae.Location = new System.Drawing.Point(244, 44);
+            this.btnAsiakasHae.Name = "btnAsiakasHae";
+            this.btnAsiakasHae.Size = new System.Drawing.Size(63, 23);
+            this.btnAsiakasHae.TabIndex = 15;
+            this.btnAsiakasHae.Text = "Hae";
+            this.btnAsiakasHae.UseVisualStyleBackColor = true;
+            // 
+            // btnAsiakasLisaa
+            // 
+            this.btnAsiakasLisaa.Location = new System.Drawing.Point(32, 390);
+            this.btnAsiakasLisaa.Name = "btnAsiakasLisaa";
+            this.btnAsiakasLisaa.Size = new System.Drawing.Size(63, 23);
+            this.btnAsiakasLisaa.TabIndex = 16;
+            this.btnAsiakasLisaa.Text = "Lisää";
+            this.btnAsiakasLisaa.UseVisualStyleBackColor = true;
+            // 
+            // btnAsiakasPaivita
+            // 
+            this.btnAsiakasPaivita.Location = new System.Drawing.Point(111, 390);
+            this.btnAsiakasPaivita.Name = "btnAsiakasPaivita";
+            this.btnAsiakasPaivita.Size = new System.Drawing.Size(63, 23);
+            this.btnAsiakasPaivita.TabIndex = 17;
+            this.btnAsiakasPaivita.Text = "Päivitä";
+            this.btnAsiakasPaivita.UseVisualStyleBackColor = true;
+            // 
+            // btnAsiakasPoista
+            // 
+            this.btnAsiakasPoista.Location = new System.Drawing.Point(186, 390);
+            this.btnAsiakasPoista.Name = "btnAsiakasPoista";
+            this.btnAsiakasPoista.Size = new System.Drawing.Size(63, 23);
+            this.btnAsiakasPoista.TabIndex = 18;
+            this.btnAsiakasPoista.Text = "Poista";
+            this.btnAsiakasPoista.UseVisualStyleBackColor = true;
+            // 
+            // btnMokkiHae
+            // 
+            this.btnMokkiHae.Location = new System.Drawing.Point(165, 30);
+            this.btnMokkiHae.Name = "btnMokkiHae";
+            this.btnMokkiHae.Size = new System.Drawing.Size(75, 23);
+            this.btnMokkiHae.TabIndex = 39;
+            this.btnMokkiHae.Text = "Hae";
+            this.btnMokkiHae.UseVisualStyleBackColor = true;
+            // 
+            // btnMokkiLisaa
+            // 
+            this.btnMokkiLisaa.Location = new System.Drawing.Point(11, 476);
+            this.btnMokkiLisaa.Name = "btnMokkiLisaa";
+            this.btnMokkiLisaa.Size = new System.Drawing.Size(75, 23);
+            this.btnMokkiLisaa.TabIndex = 40;
+            this.btnMokkiLisaa.Text = "Lisää";
+            this.btnMokkiLisaa.UseVisualStyleBackColor = true;
+            // 
+            // btnMokkiPaivita
+            // 
+            this.btnMokkiPaivita.Location = new System.Drawing.Point(92, 476);
+            this.btnMokkiPaivita.Name = "btnMokkiPaivita";
+            this.btnMokkiPaivita.Size = new System.Drawing.Size(75, 23);
+            this.btnMokkiPaivita.TabIndex = 41;
+            this.btnMokkiPaivita.Text = "Päivitä";
+            this.btnMokkiPaivita.UseVisualStyleBackColor = true;
+            // 
+            // btnMokkiPoista
+            // 
+            this.btnMokkiPoista.Location = new System.Drawing.Point(175, 476);
+            this.btnMokkiPoista.Name = "btnMokkiPoista";
+            this.btnMokkiPoista.Size = new System.Drawing.Size(75, 23);
+            this.btnMokkiPoista.TabIndex = 42;
+            this.btnMokkiPoista.Text = "Poista";
+            this.btnMokkiPoista.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -708,11 +905,10 @@
         private PictureBox pictureBox1;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private DataGridView dgvPalvelut;
-        private Label label1;
-        private Label label4;
-        private Label label3;
+        private Label lblPalveluID;
+        private Label lblKuvaus;
+        private Label lblTyyppi;
         private Label label2;
-        private Button button1;
         private Label lblAsiakas;
         private DataGridView dgvAsiakashallinta;
         private Label lblPuhelinnumero;
@@ -748,5 +944,25 @@
         private Label label11;
         private Label label12;
         private Label label13;
+        private Label lblHinta;
+        private Label lblAlv;
+        private Button btnAsiakasPoista;
+        private Button btnAsiakasPaivita;
+        private Button btnAsiakasLisaa;
+        private Button btnAsiakasHae;
+        private RichTextBox richTextBox3;
+        private TextBox textBox12;
+        private TextBox textBox11;
+        private TextBox textBox10;
+        private TextBox textBox8;
+        private TextBox textBox5;
+        private Button btnPalveluLisaa;
+        private Button btnPalveluPaivita;
+        private Button btnPalveluPoista;
+        private Button btnPalveluHae;
+        private Button btnMokkiPoista;
+        private Button btnMokkiPaivita;
+        private Button btnMokkiLisaa;
+        private Button btnMokkiHae;
     }
 }
