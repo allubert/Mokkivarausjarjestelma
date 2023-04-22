@@ -7,7 +7,7 @@ namespace Mokkivarausjarjestelma
             InitializeComponent();
         }
 
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='test_db';username=root;password=ruutti");
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='test_db';username=root;password=Ruutti");
 
         private void btnPalvelu_Click(object sender, EventArgs e)
         {
