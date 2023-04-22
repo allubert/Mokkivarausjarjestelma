@@ -28,7 +28,6 @@ namespace Mokkivarausjarjestelma
             tbcHallinta.SelectedTab = tbpgLaskujenhallinta;
         }
         
-
         private void btnMokkivaraus_Click(object sender, EventArgs e)
         {
             tbcHallinta.SelectedTab = tbpgMokkivaraushallinta;
@@ -55,5 +54,51 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.DataSource = table;
             dgvPalvelut.Update();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Maunon koodirivit 100-150
+        //BLAA BLAA BLAA
+
     }
 }
