@@ -7,6 +7,8 @@ namespace Mokkivarausjarjestelma
             InitializeComponent();
         }
 
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='test_db';username=root;password=ruutti");
+
         private void btnPalvelu_Click(object sender, EventArgs e)
         {
             tbcHallinta.SelectedTab = tbpgPalveluhallinta;
@@ -31,6 +33,11 @@ namespace Mokkivarausjarjestelma
         private void btnAsiakas_Click(object sender, EventArgs e)
         {
             tbcHallinta.SelectedTab = tbpgAsiakashallinta;
+        }
+
+        private void tbpgPalveluhallinta_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

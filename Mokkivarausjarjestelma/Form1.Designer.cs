@@ -32,23 +32,26 @@
             this.tbcHallinta = new System.Windows.Forms.TabControl();
             this.tbpgAloitussivu = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnLasku = new System.Windows.Forms.Button();
-            this.btnAsiakas = new System.Windows.Forms.Button();
-            this.btnMokkivaraus = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTittle = new System.Windows.Forms.Label();
+            this.btnLasku = new System.Windows.Forms.Button();
             this.btnPalvelu = new System.Windows.Forms.Button();
+            this.btnAsiakas = new System.Windows.Forms.Button();
             this.btnToiminta = new System.Windows.Forms.Button();
+            this.btnMokkivaraus = new System.Windows.Forms.Button();
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
             this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
             this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
             this.tbpgAsiakashallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            this.dgvPalvelut = new System.Windows.Forms.DataGridView();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tbpgPalveluhallinta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -96,36 +99,6 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // btnLasku
-            // 
-            this.btnLasku.Location = new System.Drawing.Point(88, 477);
-            this.btnLasku.Name = "btnLasku";
-            this.btnLasku.Size = new System.Drawing.Size(260, 75);
-            this.btnLasku.TabIndex = 10;
-            this.btnLasku.Text = "Laskujen hallinta";
-            this.btnLasku.UseVisualStyleBackColor = true;
-            this.btnLasku.Click += new System.EventHandler(this.btnLasku_Click);
-            // 
-            // btnAsiakas
-            // 
-            this.btnAsiakas.Location = new System.Drawing.Point(88, 385);
-            this.btnAsiakas.Name = "btnAsiakas";
-            this.btnAsiakas.Size = new System.Drawing.Size(260, 75);
-            this.btnAsiakas.TabIndex = 9;
-            this.btnAsiakas.Text = "Asiakashallinta";
-            this.btnAsiakas.UseVisualStyleBackColor = true;
-            this.btnAsiakas.Click += new System.EventHandler(this.btnAsiakas_Click);
-            // 
-            // btnMokkivaraus
-            // 
-            this.btnMokkivaraus.Location = new System.Drawing.Point(88, 290);
-            this.btnMokkivaraus.Name = "btnMokkivaraus";
-            this.btnMokkivaraus.Size = new System.Drawing.Size(260, 75);
-            this.btnMokkivaraus.TabIndex = 8;
-            this.btnMokkivaraus.Text = "Mökkivarausten hallinta";
-            this.btnMokkivaraus.UseVisualStyleBackColor = true;
-            this.btnMokkivaraus.Click += new System.EventHandler(this.btnMokkivaraus_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.lblTittle);
@@ -149,6 +122,16 @@
             this.lblTittle.TabIndex = 5;
             this.lblTittle.Text = "Mökkivarausjärjestelmä\r\n    Village Newbies Oy\r\n";
             // 
+            // btnLasku
+            // 
+            this.btnLasku.Location = new System.Drawing.Point(88, 477);
+            this.btnLasku.Name = "btnLasku";
+            this.btnLasku.Size = new System.Drawing.Size(260, 75);
+            this.btnLasku.TabIndex = 10;
+            this.btnLasku.Text = "Laskujen hallinta";
+            this.btnLasku.UseVisualStyleBackColor = true;
+            this.btnLasku.Click += new System.EventHandler(this.btnLasku_Click);
+            // 
             // btnPalvelu
             // 
             this.btnPalvelu.Location = new System.Drawing.Point(88, 198);
@@ -159,6 +142,16 @@
             this.btnPalvelu.UseVisualStyleBackColor = true;
             this.btnPalvelu.Click += new System.EventHandler(this.btnPalvelu_Click);
             // 
+            // btnAsiakas
+            // 
+            this.btnAsiakas.Location = new System.Drawing.Point(88, 385);
+            this.btnAsiakas.Name = "btnAsiakas";
+            this.btnAsiakas.Size = new System.Drawing.Size(260, 75);
+            this.btnAsiakas.TabIndex = 9;
+            this.btnAsiakas.Text = "Asiakashallinta";
+            this.btnAsiakas.UseVisualStyleBackColor = true;
+            this.btnAsiakas.Click += new System.EventHandler(this.btnAsiakas_Click);
+            // 
             // btnToiminta
             // 
             this.btnToiminta.Location = new System.Drawing.Point(88, 106);
@@ -168,6 +161,16 @@
             this.btnToiminta.Text = "Toiminta-alueiden hallinta";
             this.btnToiminta.UseVisualStyleBackColor = true;
             this.btnToiminta.Click += new System.EventHandler(this.btnToiminta_Click);
+            // 
+            // btnMokkivaraus
+            // 
+            this.btnMokkivaraus.Location = new System.Drawing.Point(88, 290);
+            this.btnMokkivaraus.Name = "btnMokkivaraus";
+            this.btnMokkivaraus.Size = new System.Drawing.Size(260, 75);
+            this.btnMokkivaraus.TabIndex = 8;
+            this.btnMokkivaraus.Text = "Mökkivarausten hallinta";
+            this.btnMokkivaraus.UseVisualStyleBackColor = true;
+            this.btnMokkivaraus.Click += new System.EventHandler(this.btnMokkivaraus_Click);
             // 
             // tbpgToimintaaluehallinta
             // 
@@ -181,6 +184,7 @@
             // 
             // tbpgPalveluhallinta
             // 
+            this.tbpgPalveluhallinta.Controls.Add(this.dgvPalvelut);
             this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgPalveluhallinta.Name = "tbpgPalveluhallinta";
             this.tbpgPalveluhallinta.Padding = new System.Windows.Forms.Padding(2);
@@ -188,6 +192,7 @@
             this.tbpgPalveluhallinta.TabIndex = 2;
             this.tbpgPalveluhallinta.Text = "Palveluiden hallinta";
             this.tbpgPalveluhallinta.UseVisualStyleBackColor = true;
+            this.tbpgPalveluhallinta.Click += new System.EventHandler(this.tbpgPalveluhallinta_Click);
             // 
             // tbpgMokkivaraushallinta
             // 
@@ -226,6 +231,15 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
+            // dgvPalvelut
+            // 
+            this.dgvPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPalvelut.Location = new System.Drawing.Point(357, 5);
+            this.dgvPalvelut.Name = "dgvPalvelut";
+            this.dgvPalvelut.RowTemplate.Height = 25;
+            this.dgvPalvelut.Size = new System.Drawing.Size(587, 386);
+            this.dgvPalvelut.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -242,6 +256,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tbpgPalveluhallinta.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +281,6 @@
         private TabPage tbpgLaskujenhallinta;
         private PictureBox pictureBox1;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
+        private DataGridView dgvPalvelut;
     }
 }
