@@ -50,6 +50,7 @@
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            this.button1 = new System.Windows.Forms.Button();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +84,7 @@
             // 
             // tbpgAloitussivu
             // 
+            this.tbpgAloitussivu.Controls.Add(this.button1);
             this.tbpgAloitussivu.Controls.Add(this.pictureBox1);
             this.tbpgAloitussivu.Controls.Add(this.panel1);
             this.tbpgAloitussivu.Location = new System.Drawing.Point(4, 24);
@@ -284,6 +286,16 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(147, 288);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(280, 46);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Yllatus nappi";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -331,5 +343,6 @@
         private Label label4;
         private Label label3;
         private Label label2;
+        private Button button1;
     }
 }
