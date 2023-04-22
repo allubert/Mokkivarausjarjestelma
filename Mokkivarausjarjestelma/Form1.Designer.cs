@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tbcHallinta = new System.Windows.Forms.TabControl();
             this.tbpgAloitussivu = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTittle = new System.Windows.Forms.Label();
@@ -50,13 +51,24 @@
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnMokkiID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAlueID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPostinro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMokkiNimi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnOsoite = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnHinta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnKuvaus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnHenkilo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnVarustelu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tbpgPalveluhallinta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
+            this.tbpgMokkivaraushallinta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,6 +106,16 @@
             this.tbpgAloitussivu.TabIndex = 0;
             this.tbpgAloitussivu.Text = "Aloitussivu";
             this.tbpgAloitussivu.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(147, 288);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(280, 46);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Yllatus nappi";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -251,6 +273,7 @@
             // 
             // tbpgMokkivaraushallinta
             // 
+            this.tbpgMokkivaraushallinta.Controls.Add(this.dataGridView1);
             this.tbpgMokkivaraushallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgMokkivaraushallinta.Name = "tbpgMokkivaraushallinta";
             this.tbpgMokkivaraushallinta.Padding = new System.Windows.Forms.Padding(2);
@@ -286,15 +309,74 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // button1
+            // dataGridView1
             // 
-            this.button1.Location = new System.Drawing.Point(147, 288);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(280, 46);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Yllatus nappi";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnMokkiID,
+            this.ColumnAlueID,
+            this.ColumnPostinro,
+            this.ColumnMokkiNimi,
+            this.ColumnOsoite,
+            this.ColumnHinta,
+            this.ColumnKuvaus,
+            this.ColumnHenkilo,
+            this.ColumnVarustelu});
+            this.dataGridView1.Location = new System.Drawing.Point(283, 5);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(663, 500);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // ColumnMokkiID
+            // 
+            this.ColumnMokkiID.HeaderText = "MokkiID";
+            this.ColumnMokkiID.Name = "ColumnMokkiID";
+            this.ColumnMokkiID.Width = 55;
+            // 
+            // ColumnAlueID
+            // 
+            this.ColumnAlueID.HeaderText = "AlueID";
+            this.ColumnAlueID.Name = "ColumnAlueID";
+            this.ColumnAlueID.Width = 55;
+            // 
+            // ColumnPostinro
+            // 
+            this.ColumnPostinro.HeaderText = "Postinro";
+            this.ColumnPostinro.Name = "ColumnPostinro";
+            this.ColumnPostinro.Width = 65;
+            // 
+            // ColumnMokkiNimi
+            // 
+            this.ColumnMokkiNimi.HeaderText = "Mökin nimi";
+            this.ColumnMokkiNimi.Name = "ColumnMokkiNimi";
+            // 
+            // ColumnOsoite
+            // 
+            this.ColumnOsoite.HeaderText = "Osoite";
+            this.ColumnOsoite.Name = "ColumnOsoite";
+            this.ColumnOsoite.Width = 150;
+            // 
+            // ColumnHinta
+            // 
+            this.ColumnHinta.HeaderText = "Hinta(/vrk)";
+            this.ColumnHinta.Name = "ColumnHinta";
+            this.ColumnHinta.Width = 75;
+            // 
+            // ColumnKuvaus
+            // 
+            this.ColumnKuvaus.HeaderText = "Kuvaus";
+            this.ColumnKuvaus.Name = "ColumnKuvaus";
+            // 
+            // ColumnHenkilo
+            // 
+            this.ColumnHenkilo.HeaderText = "Hlö";
+            this.ColumnHenkilo.Name = "ColumnHenkilo";
+            // 
+            // ColumnVarustelu
+            // 
+            this.ColumnVarustelu.HeaderText = "Varustelu";
+            this.ColumnVarustelu.Name = "ColumnVarustelu";
             // 
             // Form1
             // 
@@ -315,6 +397,8 @@
             this.tbpgPalveluhallinta.ResumeLayout(false);
             this.tbpgPalveluhallinta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
+            this.tbpgMokkivaraushallinta.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,5 +428,15 @@
         private Label label3;
         private Label label2;
         private Button button1;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn ColumnMokkiID;
+        private DataGridViewTextBoxColumn ColumnAlueID;
+        private DataGridViewTextBoxColumn ColumnPostinro;
+        private DataGridViewTextBoxColumn ColumnMokkiNimi;
+        private DataGridViewTextBoxColumn ColumnOsoite;
+        private DataGridViewTextBoxColumn ColumnHinta;
+        private DataGridViewTextBoxColumn ColumnKuvaus;
+        private DataGridViewTextBoxColumn ColumnHenkilo;
+        private DataGridViewTextBoxColumn ColumnVarustelu;
     }
 }
