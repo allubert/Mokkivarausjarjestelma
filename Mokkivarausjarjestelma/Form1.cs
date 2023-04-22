@@ -41,11 +41,10 @@ namespace Mokkivarausjarjestelma
 
         private void tbpgPalveluhallinta_Click(object sender, EventArgs e)
         {
-
-            populateDGV();
+            populatedgvPalvelut();
         }
 
-        public void populateDGV() 
+        public void populatedgvPalvelut() 
         {
             //hae dataa
             string selectQuery = "SELECT * FROM palvelut";
@@ -55,5 +54,39 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.DataSource = table;
             dgvPalvelut.Update();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //jarmo kaikkonen
     }
 }
