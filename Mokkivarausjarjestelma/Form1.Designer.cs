@@ -39,13 +39,17 @@
             this.btnAsiakas = new System.Windows.Forms.Button();
             this.btnToiminta = new System.Windows.Forms.Button();
             this.btnMokkivaraus = new System.Windows.Forms.Button();
-            this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
-            this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
-            this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
             this.tbpgAsiakashallinta = new System.Windows.Forms.TabPage();
+            this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvPalvelut = new System.Windows.Forms.DataGridView();
+            this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
+            this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.dgvPalvelut = new System.Windows.Forms.DataGridView();
             this.tbcHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -66,10 +70,10 @@
             // tbcHallinta
             // 
             this.tbcHallinta.Controls.Add(this.tbpgAloitussivu);
-            this.tbcHallinta.Controls.Add(this.tbpgToimintaaluehallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgAsiakashallinta);
             this.tbcHallinta.Controls.Add(this.tbpgPalveluhallinta);
             this.tbcHallinta.Controls.Add(this.tbpgMokkivaraushallinta);
-            this.tbcHallinta.Controls.Add(this.tbpgAsiakashallinta);
+            this.tbcHallinta.Controls.Add(this.tbpgToimintaaluehallinta);
             this.tbcHallinta.Controls.Add(this.tbpgLaskujenhallinta);
             this.tbcHallinta.Location = new System.Drawing.Point(0, 0);
             this.tbcHallinta.Name = "tbcHallinta";
@@ -92,7 +96,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Mokkivarausjarjestelma.Properties.Resources._6368_log_cabin_black_and_white_free_download;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 75);
+            this.pictureBox1.Location = new System.Drawing.Point(8, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(251, 262);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -107,7 +111,7 @@
             this.panel1.Controls.Add(this.btnAsiakas);
             this.panel1.Controls.Add(this.btnToiminta);
             this.panel1.Controls.Add(this.btnMokkivaraus);
-            this.panel1.Location = new System.Drawing.Point(260, 21);
+            this.panel1.Location = new System.Drawing.Point(519, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(425, 632);
             this.panel1.TabIndex = 11;
@@ -172,18 +176,22 @@
             this.btnMokkivaraus.UseVisualStyleBackColor = true;
             this.btnMokkivaraus.Click += new System.EventHandler(this.btnMokkivaraus_Click);
             // 
-            // tbpgToimintaaluehallinta
+            // tbpgAsiakashallinta
             // 
-            this.tbpgToimintaaluehallinta.Location = new System.Drawing.Point(4, 24);
-            this.tbpgToimintaaluehallinta.Name = "tbpgToimintaaluehallinta";
-            this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(2);
-            this.tbpgToimintaaluehallinta.Size = new System.Drawing.Size(952, 743);
-            this.tbpgToimintaaluehallinta.TabIndex = 1;
-            this.tbpgToimintaaluehallinta.Text = "Toiminta-alueiden hallinta";
-            this.tbpgToimintaaluehallinta.UseVisualStyleBackColor = true;
+            this.tbpgAsiakashallinta.Location = new System.Drawing.Point(4, 24);
+            this.tbpgAsiakashallinta.Name = "tbpgAsiakashallinta";
+            this.tbpgAsiakashallinta.Padding = new System.Windows.Forms.Padding(2);
+            this.tbpgAsiakashallinta.Size = new System.Drawing.Size(952, 743);
+            this.tbpgAsiakashallinta.TabIndex = 1;
+            this.tbpgAsiakashallinta.Text = "Asiakashallinta";
+            this.tbpgAsiakashallinta.UseVisualStyleBackColor = true;
             // 
             // tbpgPalveluhallinta
             // 
+            this.tbpgPalveluhallinta.Controls.Add(this.label4);
+            this.tbpgPalveluhallinta.Controls.Add(this.label3);
+            this.tbpgPalveluhallinta.Controls.Add(this.label2);
+            this.tbpgPalveluhallinta.Controls.Add(this.label1);
             this.tbpgPalveluhallinta.Controls.Add(this.dgvPalvelut);
             this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgPalveluhallinta.Name = "tbpgPalveluhallinta";
@@ -193,6 +201,51 @@
             this.tbpgPalveluhallinta.Text = "Palveluiden hallinta";
             this.tbpgPalveluhallinta.UseVisualStyleBackColor = true;
             this.tbpgPalveluhallinta.Click += new System.EventHandler(this.tbpgPalveluhallinta_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(46, 231);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "label4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(46, 160);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "label3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(46, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "label2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // dgvPalvelut
+            // 
+            this.dgvPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPalvelut.Location = new System.Drawing.Point(357, 5);
+            this.dgvPalvelut.Name = "dgvPalvelut";
+            this.dgvPalvelut.RowTemplate.Height = 25;
+            this.dgvPalvelut.Size = new System.Drawing.Size(587, 386);
+            this.dgvPalvelut.TabIndex = 0;
             // 
             // tbpgMokkivaraushallinta
             // 
@@ -204,15 +257,15 @@
             this.tbpgMokkivaraushallinta.Text = "Mökkivarausten hallinta";
             this.tbpgMokkivaraushallinta.UseVisualStyleBackColor = true;
             // 
-            // tbpgAsiakashallinta
+            // tbpgToimintaaluehallinta
             // 
-            this.tbpgAsiakashallinta.Location = new System.Drawing.Point(4, 24);
-            this.tbpgAsiakashallinta.Name = "tbpgAsiakashallinta";
-            this.tbpgAsiakashallinta.Padding = new System.Windows.Forms.Padding(2);
-            this.tbpgAsiakashallinta.Size = new System.Drawing.Size(952, 743);
-            this.tbpgAsiakashallinta.TabIndex = 4;
-            this.tbpgAsiakashallinta.Text = "Asiakashallinta";
-            this.tbpgAsiakashallinta.UseVisualStyleBackColor = true;
+            this.tbpgToimintaaluehallinta.Location = new System.Drawing.Point(4, 24);
+            this.tbpgToimintaaluehallinta.Name = "tbpgToimintaaluehallinta";
+            this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(2);
+            this.tbpgToimintaaluehallinta.Size = new System.Drawing.Size(952, 743);
+            this.tbpgToimintaaluehallinta.TabIndex = 4;
+            this.tbpgToimintaaluehallinta.Text = "Toiminta-alueiden hallinta";
+            this.tbpgToimintaaluehallinta.UseVisualStyleBackColor = true;
             // 
             // tbpgLaskujenhallinta
             // 
@@ -231,15 +284,6 @@
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // dgvPalvelut
-            // 
-            this.dgvPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPalvelut.Location = new System.Drawing.Point(357, 5);
-            this.dgvPalvelut.Name = "dgvPalvelut";
-            this.dgvPalvelut.RowTemplate.Height = 25;
-            this.dgvPalvelut.Size = new System.Drawing.Size(587, 386);
-            this.dgvPalvelut.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -257,6 +301,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tbpgPalveluhallinta.ResumeLayout(false);
+            this.tbpgPalveluhallinta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -274,13 +319,17 @@
         private Label lblTittle;
         private Button btnPalvelu;
         private Button btnToiminta;
-        private TabPage tbpgToimintaaluehallinta;
+        private TabPage tbpgAsiakashallinta;
         private TabPage tbpgPalveluhallinta;
         private TabPage tbpgMokkivaraushallinta;
-        private TabPage tbpgAsiakashallinta;
+        private TabPage tbpgToimintaaluehallinta;
         private TabPage tbpgLaskujenhallinta;
         private PictureBox pictureBox1;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private DataGridView dgvPalvelut;
+        private Label label1;
+        private Label label4;
+        private Label label3;
+        private Label label2;
     }
 }

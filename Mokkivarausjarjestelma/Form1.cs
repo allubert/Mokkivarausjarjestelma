@@ -1,3 +1,7 @@
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Data;
+
 namespace Mokkivarausjarjestelma
 {
     public partial class Form1 : Form
@@ -7,7 +11,7 @@ namespace Mokkivarausjarjestelma
             InitializeComponent();
         }
 
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='test_db';username=root;password=Ruutti");
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
 
         private void btnPalvelu_Click(object sender, EventArgs e)
         {
@@ -38,6 +42,18 @@ namespace Mokkivarausjarjestelma
         private void tbpgPalveluhallinta_Click(object sender, EventArgs e)
         {
 
+            populateDGV();
+        }
+
+        public void populateDGV() 
+        {
+            //hae dataa
+            string selectQuery = "SELECT * FROM palvelut";
+            DataTable table = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
+            adapter.Fill(table);
+            dgvPalvelut.DataSource = table;
+            dgvPalvelut.Update();
         }
     }
 }
