@@ -57,10 +57,10 @@
             this.lblAsiakas = new System.Windows.Forms.Label();
             this.dgvAsiakashallinta = new System.Windows.Forms.DataGridView();
             this.tbpgPalveluhallinta = new System.Windows.Forms.TabPage();
-            this.lblKuvaus = new System.Windows.Forms.Label();
-            this.lblTyyppi = new System.Windows.Forms.Label();
-            this.lblPalvelun_nimi = new System.Windows.Forms.Label();
-            this.lblpalveluID = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dgvPalvelut = new System.Windows.Forms.DataGridView();
             this.tbpgMokkivaraushallinta = new System.Windows.Forms.TabPage();
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
@@ -114,6 +114,17 @@
             this.tbpgAloitussivu.TabIndex = 0;
             this.tbpgAloitussivu.Text = "Aloitussivu";
             this.tbpgAloitussivu.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(168, 384);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(320, 61);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Yllatus nappi";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -348,22 +359,10 @@
             // 
             // tbpgPalveluhallinta
             // 
-            this.tbpgPalveluhallinta.Controls.Add(this.btnPoista);
-            this.tbpgPalveluhallinta.Controls.Add(this.btnPaivitys);
-            this.tbpgPalveluhallinta.Controls.Add(this.btnSyota);
-            this.tbpgPalveluhallinta.Controls.Add(this.btnHae);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox6);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox5);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox4);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox3);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox2);
-            this.tbpgPalveluhallinta.Controls.Add(this.textBox1);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblAlv);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblHinta);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblKuvaus);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblTyyppi);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblPalvelun_nimi);
-            this.tbpgPalveluhallinta.Controls.Add(this.lblpalveluID);
+            this.tbpgPalveluhallinta.Controls.Add(this.label4);
+            this.tbpgPalveluhallinta.Controls.Add(this.label3);
+            this.tbpgPalveluhallinta.Controls.Add(this.label2);
+            this.tbpgPalveluhallinta.Controls.Add(this.label1);
             this.tbpgPalveluhallinta.Controls.Add(this.dgvPalvelut);
             this.tbpgPalveluhallinta.Location = new System.Drawing.Point(4, 29);
             this.tbpgPalveluhallinta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -375,50 +374,51 @@
             this.tbpgPalveluhallinta.UseVisualStyleBackColor = true;
             this.tbpgPalveluhallinta.Click += new System.EventHandler(this.tbpgPalveluhallinta_Click);
             // 
-            // lblKuvaus
+            // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 231);
+            this.label4.Location = new System.Drawing.Point(53, 308);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.Size = new System.Drawing.Size(50, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "label4";
             // 
-            // lblTyyppi
+            // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 160);
+            this.label3.Location = new System.Drawing.Point(53, 213);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "label3";
             // 
-            // lblPalvelun_nimi
+            // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 99);
+            this.label2.Location = new System.Drawing.Point(53, 132);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 15);
+            this.label2.Size = new System.Drawing.Size(50, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
             // 
-            // lblpalveluID
+            // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 45);
+            this.label1.Location = new System.Drawing.Point(53, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
             // dgvPalvelut
             // 
             this.dgvPalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPalvelut.Location = new System.Drawing.Point(357, 5);
+            this.dgvPalvelut.Location = new System.Drawing.Point(408, 7);
+            this.dgvPalvelut.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvPalvelut.Name = "dgvPalvelut";
             this.dgvPalvelut.RowHeadersWidth = 51;
             this.dgvPalvelut.RowTemplate.Height = 25;
-            this.dgvPalvelut.Size = new System.Drawing.Size(587, 386);
+            this.dgvPalvelut.Size = new System.Drawing.Size(671, 515);
             this.dgvPalvelut.TabIndex = 0;
             // 
             // tbpgMokkivaraushallinta
@@ -460,16 +460,6 @@
             this.mySqlCommand1.Connection = null;
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(147, 288);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(280, 46);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Yllatus nappi";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -518,10 +508,25 @@
         private PictureBox pictureBox1;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private DataGridView dgvPalvelut;
-        private Label lblpalveluID;
-        private Label lblKuvaus;
-        private Label lblTyyppi;
-        private Label lblPalvelun_nimi;
+        private Label label1;
+        private Label label4;
+        private Label label3;
+        private Label label2;
         private Button button1;
+        private Label lblAsiakas;
+        private DataGridView dgvAsiakashallinta;
+        private Label lblPuhelinnumero;
+        private Label lblSahkoposti;
+        private Label lblLahiosoite;
+        private Label lblSukunimi;
+        private Label lblEtunimi;
+        private Label lblPostinumero;
+        private TextBox tbSukunimi;
+        private TextBox tbLahiosoite;
+        private TextBox tbEtunimi;
+        private TextBox tbSahkoposti;
+        private TextBox tbPuhelinnumero;
+        private TextBox tbPostinumero;
+        private TextBox tbAsiakas;
     }
 }
