@@ -103,6 +103,29 @@
             this.lblMokkiID = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tbpgToimintaaluehallinta = new System.Windows.Forms.TabPage();
+            this.pnlToiminta = new System.Windows.Forms.Panel();
+            this.btnToimintaRaportointi = new System.Windows.Forms.Button();
+            this.btnToimintaKohteet = new System.Windows.Forms.Button();
+            this.btnToimintaPoistaAlue = new System.Windows.Forms.Button();
+            this.btnToimintaLisaaAlue = new System.Windows.Forms.Button();
+            this.lblToimintaOtsikko = new System.Windows.Forms.Label();
+            this.lblToimintaAlue = new System.Windows.Forms.Label();
+            this.lblToimintaMokinnimi = new System.Windows.Forms.Label();
+            this.tbToimintaAlue = new System.Windows.Forms.TextBox();
+            this.tbToimintaNimi = new System.Windows.Forms.TextBox();
+            this.tbToimintaKuvaus = new System.Windows.Forms.TextBox();
+            this.btnToimintaPoista = new System.Windows.Forms.Button();
+            this.lblToimintaVarustelu = new System.Windows.Forms.Label();
+            this.btnToimintaLisaa = new System.Windows.Forms.Button();
+            this.tbToimintaOsoite = new System.Windows.Forms.TextBox();
+            this.lblToimintaHenkilo = new System.Windows.Forms.Label();
+            this.tbToimintaPostinro = new System.Windows.Forms.TextBox();
+            this.lblToimintaPostinro = new System.Windows.Forms.Label();
+            this.tbToimintaHenkilo = new System.Windows.Forms.TextBox();
+            this.lblToimintaOsoite = new System.Windows.Forms.Label();
+            this.tbToimintaVarustelu = new System.Windows.Forms.TextBox();
+            this.lblToimintaKuvaus = new System.Windows.Forms.Label();
+            this.dgvHallinta = new System.Windows.Forms.DataGridView();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.tbcHallinta.SuspendLayout();
@@ -115,6 +138,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.tbpgMokkivaraushallinta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tbpgToimintaaluehallinta.SuspendLayout();
+            this.pnlToiminta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHallinta)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -834,6 +860,26 @@
             // 
             // tbpgToimintaaluehallinta
             // 
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaRaportointi);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.pnlToiminta);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaKohteet);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.dgvHallinta);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaPoistaAlue);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaNimi);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaLisaaAlue);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaKuvaus);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaVarustelu);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaOsoite);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaMokinnimi);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaHenkilo);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaPostinro);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaPostinro);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaKuvaus);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaHenkilo);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaPoista);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.tbToimintaOsoite);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.lblToimintaVarustelu);
+            this.tbpgToimintaaluehallinta.Controls.Add(this.btnToimintaLisaa);
             this.tbpgToimintaaluehallinta.Location = new System.Drawing.Point(4, 24);
             this.tbpgToimintaaluehallinta.Name = "tbpgToimintaaluehallinta";
             this.tbpgToimintaaluehallinta.Padding = new System.Windows.Forms.Padding(2);
@@ -841,6 +887,202 @@
             this.tbpgToimintaaluehallinta.TabIndex = 4;
             this.tbpgToimintaaluehallinta.Text = "Toiminta-alueiden hallinta";
             this.tbpgToimintaaluehallinta.UseVisualStyleBackColor = true;
+            // 
+            // pnlToiminta
+            // 
+            this.pnlToiminta.Controls.Add(this.lblToimintaOtsikko);
+            this.pnlToiminta.Controls.Add(this.lblToimintaAlue);
+            this.pnlToiminta.Controls.Add(this.tbToimintaAlue);
+            this.pnlToiminta.Location = new System.Drawing.Point(5, 45);
+            this.pnlToiminta.Name = "pnlToiminta";
+            this.pnlToiminta.Size = new System.Drawing.Size(209, 100);
+            this.pnlToiminta.TabIndex = 15;
+            // 
+            // btnToimintaRaportointi
+            // 
+            this.btnToimintaRaportointi.Location = new System.Drawing.Point(111, 507);
+            this.btnToimintaRaportointi.Name = "btnToimintaRaportointi";
+            this.btnToimintaRaportointi.Size = new System.Drawing.Size(99, 42);
+            this.btnToimintaRaportointi.TabIndex = 21;
+            this.btnToimintaRaportointi.Text = "Näytä raportointi";
+            this.btnToimintaRaportointi.UseVisualStyleBackColor = true;
+            // 
+            // btnToimintaKohteet
+            // 
+            this.btnToimintaKohteet.Location = new System.Drawing.Point(11, 507);
+            this.btnToimintaKohteet.Name = "btnToimintaKohteet";
+            this.btnToimintaKohteet.Size = new System.Drawing.Size(94, 42);
+            this.btnToimintaKohteet.TabIndex = 20;
+            this.btnToimintaKohteet.Text = "Näytä kohteet";
+            this.btnToimintaKohteet.UseVisualStyleBackColor = true;
+            // 
+            // btnToimintaPoistaAlue
+            // 
+            this.btnToimintaPoistaAlue.Location = new System.Drawing.Point(111, 459);
+            this.btnToimintaPoistaAlue.Name = "btnToimintaPoistaAlue";
+            this.btnToimintaPoistaAlue.Size = new System.Drawing.Size(99, 42);
+            this.btnToimintaPoistaAlue.TabIndex = 19;
+            this.btnToimintaPoistaAlue.Text = "Poista toiminta-alue";
+            this.btnToimintaPoistaAlue.UseVisualStyleBackColor = true;
+            // 
+            // btnToimintaLisaaAlue
+            // 
+            this.btnToimintaLisaaAlue.Location = new System.Drawing.Point(11, 459);
+            this.btnToimintaLisaaAlue.Name = "btnToimintaLisaaAlue";
+            this.btnToimintaLisaaAlue.Size = new System.Drawing.Size(94, 42);
+            this.btnToimintaLisaaAlue.TabIndex = 17;
+            this.btnToimintaLisaaAlue.Text = "Lisää toiminta-alue";
+            this.btnToimintaLisaaAlue.UseVisualStyleBackColor = true;
+            this.btnToimintaLisaaAlue.Click += new System.EventHandler(this.btnToimintaLisaaAlue_Click);
+            // 
+            // lblToimintaOtsikko
+            // 
+            this.lblToimintaOtsikko.AutoSize = true;
+            this.lblToimintaOtsikko.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblToimintaOtsikko.Location = new System.Drawing.Point(3, 0);
+            this.lblToimintaOtsikko.Name = "lblToimintaOtsikko";
+            this.lblToimintaOtsikko.Size = new System.Drawing.Size(203, 37);
+            this.lblToimintaOtsikko.TabIndex = 18;
+            this.lblToimintaOtsikko.Text = "Toiminta-alueet";
+            // 
+            // lblToimintaAlue
+            // 
+            this.lblToimintaAlue.AutoSize = true;
+            this.lblToimintaAlue.Location = new System.Drawing.Point(3, 44);
+            this.lblToimintaAlue.Name = "lblToimintaAlue";
+            this.lblToimintaAlue.Size = new System.Drawing.Size(120, 15);
+            this.lblToimintaAlue.TabIndex = 17;
+            this.lblToimintaAlue.Text = "Toiminta-alueen nimi";
+            // 
+            // lblToimintaMokinnimi
+            // 
+            this.lblToimintaMokinnimi.AutoSize = true;
+            this.lblToimintaMokinnimi.Location = new System.Drawing.Point(11, 149);
+            this.lblToimintaMokinnimi.Name = "lblToimintaMokinnimi";
+            this.lblToimintaMokinnimi.Size = new System.Drawing.Size(68, 15);
+            this.lblToimintaMokinnimi.TabIndex = 7;
+            this.lblToimintaMokinnimi.Text = "Mökin nimi";
+            // 
+            // tbToimintaAlue
+            // 
+            this.tbToimintaAlue.Location = new System.Drawing.Point(6, 62);
+            this.tbToimintaAlue.Name = "tbToimintaAlue";
+            this.tbToimintaAlue.Size = new System.Drawing.Size(202, 23);
+            this.tbToimintaAlue.TabIndex = 16;
+            // 
+            // tbToimintaNimi
+            // 
+            this.tbToimintaNimi.Location = new System.Drawing.Point(11, 167);
+            this.tbToimintaNimi.Name = "tbToimintaNimi";
+            this.tbToimintaNimi.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaNimi.TabIndex = 1;
+            // 
+            // tbToimintaKuvaus
+            // 
+            this.tbToimintaKuvaus.Location = new System.Drawing.Point(11, 208);
+            this.tbToimintaKuvaus.Name = "tbToimintaKuvaus";
+            this.tbToimintaKuvaus.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaKuvaus.TabIndex = 2;
+            // 
+            // btnToimintaPoista
+            // 
+            this.btnToimintaPoista.Location = new System.Drawing.Point(111, 411);
+            this.btnToimintaPoista.Name = "btnToimintaPoista";
+            this.btnToimintaPoista.Size = new System.Drawing.Size(99, 42);
+            this.btnToimintaPoista.TabIndex = 14;
+            this.btnToimintaPoista.Text = "Poista mökki";
+            this.btnToimintaPoista.UseVisualStyleBackColor = true;
+            // 
+            // lblToimintaVarustelu
+            // 
+            this.lblToimintaVarustelu.AutoSize = true;
+            this.lblToimintaVarustelu.Location = new System.Drawing.Point(8, 364);
+            this.lblToimintaVarustelu.Name = "lblToimintaVarustelu";
+            this.lblToimintaVarustelu.Size = new System.Drawing.Size(55, 15);
+            this.lblToimintaVarustelu.TabIndex = 12;
+            this.lblToimintaVarustelu.Text = "Varustelu";
+            // 
+            // btnToimintaLisaa
+            // 
+            this.btnToimintaLisaa.Location = new System.Drawing.Point(11, 411);
+            this.btnToimintaLisaa.Name = "btnToimintaLisaa";
+            this.btnToimintaLisaa.Size = new System.Drawing.Size(94, 42);
+            this.btnToimintaLisaa.TabIndex = 13;
+            this.btnToimintaLisaa.Text = "Lisää mökki";
+            this.btnToimintaLisaa.UseVisualStyleBackColor = true;
+            // 
+            // tbToimintaOsoite
+            // 
+            this.tbToimintaOsoite.Location = new System.Drawing.Point(11, 250);
+            this.tbToimintaOsoite.Name = "tbToimintaOsoite";
+            this.tbToimintaOsoite.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaOsoite.TabIndex = 3;
+            // 
+            // lblToimintaHenkilo
+            // 
+            this.lblToimintaHenkilo.AutoSize = true;
+            this.lblToimintaHenkilo.Location = new System.Drawing.Point(8, 323);
+            this.lblToimintaHenkilo.Name = "lblToimintaHenkilo";
+            this.lblToimintaHenkilo.Size = new System.Drawing.Size(81, 15);
+            this.lblToimintaHenkilo.TabIndex = 11;
+            this.lblToimintaHenkilo.Text = "Henkilömäärä";
+            // 
+            // tbToimintaPostinro
+            // 
+            this.tbToimintaPostinro.Location = new System.Drawing.Point(11, 297);
+            this.tbToimintaPostinro.Name = "tbToimintaPostinro";
+            this.tbToimintaPostinro.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaPostinro.TabIndex = 4;
+            // 
+            // lblToimintaPostinro
+            // 
+            this.lblToimintaPostinro.AutoSize = true;
+            this.lblToimintaPostinro.Location = new System.Drawing.Point(8, 276);
+            this.lblToimintaPostinro.Name = "lblToimintaPostinro";
+            this.lblToimintaPostinro.Size = new System.Drawing.Size(75, 15);
+            this.lblToimintaPostinro.TabIndex = 10;
+            this.lblToimintaPostinro.Text = "Postinumero";
+            // 
+            // tbToimintaHenkilo
+            // 
+            this.tbToimintaHenkilo.Location = new System.Drawing.Point(11, 341);
+            this.tbToimintaHenkilo.Name = "tbToimintaHenkilo";
+            this.tbToimintaHenkilo.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaHenkilo.TabIndex = 5;
+            // 
+            // lblToimintaOsoite
+            // 
+            this.lblToimintaOsoite.AutoSize = true;
+            this.lblToimintaOsoite.Location = new System.Drawing.Point(8, 232);
+            this.lblToimintaOsoite.Name = "lblToimintaOsoite";
+            this.lblToimintaOsoite.Size = new System.Drawing.Size(63, 15);
+            this.lblToimintaOsoite.TabIndex = 9;
+            this.lblToimintaOsoite.Text = "Katuosoite";
+            // 
+            // tbToimintaVarustelu
+            // 
+            this.tbToimintaVarustelu.Location = new System.Drawing.Point(11, 382);
+            this.tbToimintaVarustelu.Name = "tbToimintaVarustelu";
+            this.tbToimintaVarustelu.Size = new System.Drawing.Size(199, 23);
+            this.tbToimintaVarustelu.TabIndex = 6;
+            // 
+            // lblToimintaKuvaus
+            // 
+            this.lblToimintaKuvaus.AutoSize = true;
+            this.lblToimintaKuvaus.Location = new System.Drawing.Point(11, 193);
+            this.lblToimintaKuvaus.Name = "lblToimintaKuvaus";
+            this.lblToimintaKuvaus.Size = new System.Drawing.Size(45, 15);
+            this.lblToimintaKuvaus.TabIndex = 8;
+            this.lblToimintaKuvaus.Text = "Kuvaus";
+            // 
+            // dgvHallinta
+            // 
+            this.dgvHallinta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHallinta.Location = new System.Drawing.Point(248, 5);
+            this.dgvHallinta.Name = "dgvHallinta";
+            this.dgvHallinta.RowTemplate.Height = 25;
+            this.dgvHallinta.Size = new System.Drawing.Size(696, 450);
+            this.dgvHallinta.TabIndex = 0;
             // 
             // tbpgLaskujenhallinta
             // 
@@ -884,6 +1126,11 @@
             this.tbpgMokkivaraushallinta.ResumeLayout(false);
             this.tbpgMokkivaraushallinta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tbpgToimintaaluehallinta.ResumeLayout(false);
+            this.tbpgToimintaaluehallinta.PerformLayout();
+            this.pnlToiminta.ResumeLayout(false);
+            this.pnlToiminta.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHallinta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -967,5 +1214,28 @@
         private Button btnMokkiPaivita;
         private Button btnMokkiLisaa;
         private Button btnMokkiHae;
+        private DataGridView dgvHallinta;
+        private Label lblToimintaAlue;
+        private TextBox tbToimintaAlue;
+        private Panel pnlToiminta;
+        private Label lblToimintaMokinnimi;
+        private TextBox tbToimintaNimi;
+        private TextBox tbToimintaKuvaus;
+        private Label lblToimintaVarustelu;
+        private TextBox tbToimintaOsoite;
+        private Label lblToimintaHenkilo;
+        private TextBox tbToimintaPostinro;
+        private Label lblToimintaPostinro;
+        private TextBox tbToimintaHenkilo;
+        private Label lblToimintaOsoite;
+        private TextBox tbToimintaVarustelu;
+        private Label lblToimintaKuvaus;
+        private Button btnToimintaPoista;
+        private Button btnToimintaLisaa;
+        private Label lblToimintaOtsikko;
+        private Button btnToimintaRaportointi;
+        private Button btnToimintaKohteet;
+        private Button btnToimintaPoistaAlue;
+        private Button btnToimintaLisaaAlue;
     }
 }

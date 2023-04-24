@@ -133,5 +133,25 @@ namespace Mokkivarausjarjestelma
                 connection.Close();
             }
         }
+
+        private void btnToimintaLisaaAlue_Click(object sender, EventArgs e)
+        {
+            foreach (TextBox tb in pnlToiminta.Controls.OfType<TextBox>())
+            {
+                if (tb.Text == "") // Tarkistaa onko panelin sisällä olevat textiboxit täytetty, jos ei ole antaa virheilmoituksen.
+                {
+                    tb.Focus();
+                    MessageBox.Show("Kaikkia kenttiä ei ole täytetty oikein.");
+                    return;
+                }
+            }
+            connection.Open(); // Avaa tietokanta yhteyden
+
+            string insertQuery = "insert into toimintaalue(nimi) values (" + "'" + tbToimintaNimi.Text + "')";
+        }
+
+
+       
+        
     }
 }
