@@ -48,14 +48,8 @@ namespace Mokkivarausjarjestelma
         public void populatedgvPalvelut()
         {
             //hae dataa
-            int palveluid = int.Parse(tbPalveluID.Text);
-            int tyyppi = int.Parse(tbPalvelutyyppi.Text);
-            double hinta = double.Parse(tbPalveluhinta.Text);
-            double alv = double.Parse(tbPalvelualv.Text);
-
-            string selectQuery = "SELECT * FROM palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"
-               +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
-            DataTable table = new DataTable(selectQuery);
+            string selectQuery = "SELECT * FROM palvelu";
+            DataTable table = new DataTable();
             MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
             adapter.Fill(table); //ongelma kun yrittää syöttää tietoa
             dgvPalvelut.DataSource = table;
