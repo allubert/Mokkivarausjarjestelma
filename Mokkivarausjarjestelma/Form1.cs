@@ -12,6 +12,8 @@ namespace Mokkivarausjarjestelma
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
+        
+        MySqlCommand command;
 
         private void btnPalvelu_Click(object sender, EventArgs e)
         {
@@ -43,20 +45,99 @@ namespace Mokkivarausjarjestelma
             populatedgvPalvelut();
         }
 
-        public void populatedgvPalvelut() 
+        public void populatedgvPalvelut()
         {
             //hae dataa
-            string selectQuery = "SELECT * FROM palvelut";
-            DataTable table = new DataTable();
+            int palveluid = int.Parse(tbPalveluID.Text);
+            int tyyppi = int.Parse(tbPalvelutyyppi.Text);
+            double hinta = double.Parse(tbPalveluhinta.Text);
+            double alv = double.Parse(tbPalvelualv.Text);
+
+            string selectQuery = "SELECT * FROM palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"
+               +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
+            DataTable table = new DataTable(selectQuery);
             MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
-            adapter.Fill(table);
+            adapter.Fill(table); //ongelma kun yritt‰‰ syˆtt‰‰ tietoa
             dgvPalvelut.DataSource = table;
+        }
+
+        private void dgvPalvelut_MouseClick(object sender, MouseEventArgs e)
+        {
+            //siirt‰‰ datagridviewiss‰ olevan rivin tiedot takaisin textboxeihin
+
+            tbPalveluID.Text = dgvPalvelut.CurrentRow.Cells[0].Value.ToString();
+            tbPalvelunimi.Text = dgvPalvelut.CurrentRow.Cells[1].Value.ToString();
+            tbPalvelutyyppi.Text = dgvPalvelut.CurrentRow.Cells[2].Value.ToString();
+            rtbPalvelukuvaus.Text = dgvPalvelut.CurrentRow.Cells[3].Value.ToString();
+            tbPalveluhinta.Text = dgvPalvelut.CurrentRow.Cells[4].Value.ToString();
+            tbPalvelualv.Text = dgvPalvelut.CurrentRow.Cells[5].Value.ToString();
+        }
+
+        private void btnPalveluLisaa_Click(object sender, EventArgs e)
+        {
+            //Palvelu tietojen lis‰‰minen tietokannan tauluun "palvelu"
+
+            int palveluid = int.Parse(tbPalveluID.Text);
+            int tyyppi = int.Parse(tbPalvelutyyppi.Text);
+            double hinta = double.Parse(tbPalveluhinta.Text);
+            double alv = double.Parse(tbPalvelualv.Text);
+
+            string insertQuery = "INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"
+                +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
+
+            ExecuteMyQuery(insertQuery);
+
+            populatedgvPalvelut();
+        }
+
+        private void btnPalveluPaivita_Click(object sender, EventArgs e)
+        {
             dgvPalvelut.Update();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void ExecuteMyQuery(string query) 
         {
-            Application.Exit();
+            try
+            {
+                AvaaYhteys();
+
+                command = new MySqlCommand(query, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Kysely suoritettu");
+                }
+                else
+                {
+                    MessageBox.Show("Kysely‰ ei suoritettu");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally 
+            {
+                SuljeYhteys();
+            }
+        }
+
+        public void AvaaYhteys() 
+        {
+            //avaa tietokanta yhteyden tarkistettuaan onko yhteys kiinni
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
+
+        public void SuljeYhteys() 
+        {
+            //sulkee tietokanta yhteyden tarkistettuaan onko yhteys auki
+            if (connection.State == ConnectionState.Open) 
+            {
+                connection.Close();
+            }
         }
     }
 }
