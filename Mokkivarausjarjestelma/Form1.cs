@@ -150,8 +150,56 @@ namespace Mokkivarausjarjestelma
             string insertQuery = "insert into toimintaalue(nimi) values (" + "'" + tbToimintaNimi.Text + "')";
         }
 
+        private void btnUusiVaraus_Click(object sender, EventArgs e)
+        {
+            string VarausMokinNimi = tbValittuMokkiNimi.Text.ToString();
+            var VarausForm = new FormVaraus(VarausMokinNimi);
+            VarausForm.Show();
+        }
 
-       
-        
+        private void tbcHallinta_Selected(object sender, TabControlEventArgs e)
+        {
+            dgMokkiLista.AutoGenerateColumns = true;
+
+            UpdatedgMokkiLista();
+        }
+        //Lisää uuden mökin tiedot tietokantaan
+        private void btnLisaaMokinTiedot_Click(object sender, EventArgs e)
+        {
+            int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
+            int alueid = int.Parse(tbValittuMokkiAlueID.Text);
+            string postinro = tbValittuMokkiPostiNro.Text.ToString();
+            string mokkinimi = tbValittuMokkiNimi.Text.ToString();
+            string katuosoite = tbValittuMokkiOsoite.Text.ToString();
+            double hinta = double.Parse(tbValittuMokkiHintaVrk.Text);
+            string mokinkuvaus = rtbValittuMokkiKuvaus.Text.ToString();
+            int hlomaara = int.Parse(tbValittuMokkiHloMaara.Text);
+            string mokinvarustelu = rtbValittuMokkiVarustelu.Text.ToString();
+
+            String MokintiedotInsertQuery = ("INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (mokkiid, alueid, postinro, mokkinimi, katuosoite, hinta, mokinkuvaus, hlomaara, mokinvarustelu)");
+            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+            command = new MySqlCommand(MokintiedotInsertQuery, myconnection);
+            myconnection.Close();
+            UpdatedgMokkiLista();
+        }
+        private void UpdatedgMokkiLista()
+        {
+            //Mökkivarausten hallinnan datagridviewiin tietojen vienti
+            string selectQuery = "SELECT * FROM mokki";
+            DataTable datatable = new DataTable();
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                using (MySqlCommand command = new MySqlCommand(selectQuery, myconnection))
+                {
+                    connection.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+            }
+            dgMokkiLista.DataSource = datatable;
+
+        }
+
     }
 }
