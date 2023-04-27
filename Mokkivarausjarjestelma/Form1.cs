@@ -55,6 +55,15 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.DataSource = table;
         }
 
+        public void populatedgvAsiakkaat()
+        {
+            string query = "SELECT * FROM asiakas";
+            DataTable table = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection);
+            adapter.Fill(table);
+            dgvAsiakashallinta.DataSource = table;
+        }
+
         private void dgvPalvelut_MouseClick(object sender, MouseEventArgs e)
         {
             //siirt‰‰ datagridviewiss‰ olevan rivin tiedot takaisin textboxeihin
@@ -201,5 +210,45 @@ namespace Mokkivarausjarjestelma
 
         }
 
+        private void btnAsiakasLisaa_Click(object sender, EventArgs e)
+        {
+            int asiakasid = int.Parse(tbAsiakasid.Text);
+
+            string insertQuery = "insert into asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)values"+asiakasid+", '"
+             +tbasiakasPostinumero.Text+"','"+tbAsiakasEtunimi.Text+"','"+tbAsiakasSukunimi.Text+"','"+tbAsiakasLahiosoite.Text+"','"
+                + tbAsiakasSahkoposti.Text+"','"+tbAsiakasPuhelinnumero.Text+"')";
+            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+            command = new MySqlCommand(insertQuery, myconnection);
+            myconnection.Close();
+            UpdateAsiakkaat();
+        }
+        private void UpdateAsiakkaat()
+        {
+            string query = "SELECT * FROM asiakas";
+            DataTable datatable = new DataTable();
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                using (MySqlCommand command = new MySqlCommand(query, myconnection))
+                {
+                    connection.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+            }
+            dgvAsiakashallinta.DataSource = datatable; 
+        }
+
+        private void dgvAsiakashallinta_Click(object sender, EventArgs e)
+        {
+            tbAsiakasid.Text = dgvAsiakashallinta.CurrentRow.Cells[0].Value.ToString();
+            int asiakasid = int.Parse(tbAsiakasid.Text);
+            tbasiakasPostinumero.Text = dgvAsiakashallinta.CurrentRow.Cells[1].Value.ToString();
+            tbAsiakasEtunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[2].Value.ToString();
+            tbAsiakasSukunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[3].Value.ToString();
+            tbAsiakasLahiosoite.Text = dgvAsiakashallinta.CurrentRow.Cells[4].Value.ToString();
+            tbAsiakasSahkoposti.Text = dgvAsiakashallinta.CurrentRow.Cells[5].Value.ToString();
+            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString(); 
+        }
     }
 }
