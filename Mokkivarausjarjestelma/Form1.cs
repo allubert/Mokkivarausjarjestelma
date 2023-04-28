@@ -240,8 +240,22 @@ namespace Mokkivarausjarjestelma
             string insertQuery = "insert into asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)values"+asiakasid+", '"
              +tbasiakasPostinumero.Text+"','"+tbAsiakasEtunimi.Text+"','"+tbAsiakasSukunimi.Text+"','"+tbAsiakasLahiosoite.Text+"','"
                 + tbAsiakasSahkoposti.Text+"','"+tbAsiakasPuhelinnumero.Text+"')";
-            ExecuteMyQuery(insertQuery);
-            populatedgvAsiakkaat();
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
+                {
+                    command.Parameters.AddWithValue("@asiakasid", asiakasid);
+                    command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                    command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
+                    command.Parameters.AddWithValue("@sukunimi", tbAsiakasSukunimi.Text);
+                    command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
+                    command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
+                    command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
+                    myconnection.Open();
+                    command.ExecuteNonQuery();
+                    myconnection.Close();
+                }
+            }
         }
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
         {
