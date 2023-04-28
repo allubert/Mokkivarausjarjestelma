@@ -238,5 +238,18 @@ namespace Mokkivarausjarjestelma
             tbAsiakasSahkoposti.Text = dgvAsiakashallinta.CurrentRow.Cells[5].Value.ToString();
             tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString(); 
         }
+
+        private void btnAsiakasPoista_Click(object sender, EventArgs e)
+        {
+            if(dgvAsiakashallinta.Rows.Count > 0)
+            {
+                connection.Open();
+                string deletequery = "DELETE from asiakas WHERE asiakas_id=" + dgvAsiakashallinta.SelectedRows[0].Cells[0].Value;
+                MySqlCommand deletekomento = new MySqlCommand(deletequery, connection);
+                deletekomento.ExecuteNonQuery();
+                connection.Close();
+                populatedgvAsiakkaat();
+            }
+        }
     }
 }

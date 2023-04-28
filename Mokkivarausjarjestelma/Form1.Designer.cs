@@ -318,6 +318,7 @@
             this.btnAsiakasPoista.TabIndex = 18;
             this.btnAsiakasPoista.Text = "Poista";
             this.btnAsiakasPoista.UseVisualStyleBackColor = true;
+            this.btnAsiakasPoista.Click += new System.EventHandler(this.btnAsiakasPoista_Click);
             // 
             // btnAsiakasPaivita
             // 
