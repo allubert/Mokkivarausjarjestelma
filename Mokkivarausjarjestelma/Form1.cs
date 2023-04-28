@@ -184,11 +184,26 @@ namespace Mokkivarausjarjestelma
             string mokinkuvaus = rtbValittuMokkiKuvaus.Text.ToString();
             int hlomaara = int.Parse(tbValittuMokkiHloMaara.Text);
             string mokinvarustelu = rtbValittuMokkiVarustelu.Text.ToString();
+            string MokintiedotInsertQuery = "INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (@mokkiid, @alueid, @postinro, @mokkinimi, @katuosoite, @hinta, @mokinkuvaus, @hlomaara, @mokinvarustelu)";
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                using (MySqlCommand command = new MySqlCommand(MokintiedotInsertQuery, myconnection))
+                {
+                    command.Parameters.AddWithValue("@mokkiid", mokkiid);
+                    command.Parameters.AddWithValue("@alueid", alueid);
+                    command.Parameters.AddWithValue("@postinro", postinro);
+                    command.Parameters.AddWithValue("@mokkinimi", mokkinimi);
+                    command.Parameters.AddWithValue("@katuosoite", katuosoite);
+                    command.Parameters.AddWithValue("@hinta", hinta);
+                    command.Parameters.AddWithValue("@mokinkuvaus", mokinkuvaus);
+                    command.Parameters.AddWithValue("@hlomaara", hlomaara);
+                    command.Parameters.AddWithValue("@mokinvarustelu", mokinvarustelu);
 
-            String MokintiedotInsertQuery = ("INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (mokkiid, alueid, postinro, mokkinimi, katuosoite, hinta, mokinkuvaus, hlomaara, mokinvarustelu)");
-            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-            command = new MySqlCommand(MokintiedotInsertQuery, myconnection);
-            myconnection.Close();
+                    myconnection.Open();
+                    command.ExecuteNonQuery();
+                    myconnection.Close();
+                }
+            }
             UpdatedgMokkiLista();
         }
         private void UpdatedgMokkiLista()
