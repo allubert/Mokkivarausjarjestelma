@@ -17,27 +17,27 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalvelu_Click(object sender, EventArgs e)
         {
-            tbcHallinta.SelectedTab = tbpgPalveluhallinta;
+            tbcAsiakasHallinta.SelectedTab = tbpgPalveluhallinta;
         }
 
         private void btnToiminta_Click(object sender, EventArgs e)
         {
-            tbcHallinta.SelectedTab = tbpgToimintaaluehallinta;
+            tbcAsiakasHallinta.SelectedTab = tbpgToimintaaluehallinta;
         }
 
         private void btnLasku_Click(object sender, EventArgs e)
         {
-            tbcHallinta.SelectedTab = tbpgLaskujenhallinta;
+            tbcAsiakasHallinta.SelectedTab = tbpgLaskujenhallinta;
         }
         
         private void btnMokkivaraus_Click(object sender, EventArgs e)
         {
-            tbcHallinta.SelectedTab = tbpgMokkivaraushallinta;
+            tbcAsiakasHallinta.SelectedTab = tbpgMokkivaraushallinta;
         }
 
         private void btnAsiakas_Click(object sender, EventArgs e)
         {
-            tbcHallinta.SelectedTab = tbpgAsiakashallinta;
+            tbcAsiakasHallinta.SelectedTab = tbpgAsiakashallinta;
         }
 
         private void tbpgPalveluhallinta_Click(object sender, EventArgs e)
@@ -212,37 +212,25 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
         {
+            foreach(TextBox tb in tbcAsiakasHallinta.Controls.OfType<TextBox>())
+            {
+                if (tb.Text == "")
+                {
+                    tb.Focus();
+                    MessageBox.Show("Kaikkia kenttiä ei ole täytetty");
+                    return;
+                }
+            }
             int asiakasid = int.Parse(tbAsiakasid.Text);
-
             string insertQuery = "insert into asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)values"+asiakasid+", '"
              +tbasiakasPostinumero.Text+"','"+tbAsiakasEtunimi.Text+"','"+tbAsiakasSukunimi.Text+"','"+tbAsiakasLahiosoite.Text+"','"
                 + tbAsiakasSahkoposti.Text+"','"+tbAsiakasPuhelinnumero.Text+"')";
-            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-            command = new MySqlCommand(insertQuery, myconnection);
-            myconnection.Close();
-            UpdateAsiakkaat();
+            ExecuteMyQuery(insertQuery);
+            populatedgvAsiakkaat();
         }
-        private void UpdateAsiakkaat()
-        {
-            string query = "SELECT * FROM asiakas";
-            DataTable datatable = new DataTable();
-            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
-            {
-                using (MySqlCommand command = new MySqlCommand(query, myconnection))
-                {
-                    connection.Open();
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    adapter.Fill(datatable);
-                    connection.Close();
-                }
-            }
-            dgvAsiakashallinta.DataSource = datatable; 
-        }
-
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
         {
             tbAsiakasid.Text = dgvAsiakashallinta.CurrentRow.Cells[0].Value.ToString();
-            int asiakasid = int.Parse(tbAsiakasid.Text);
             tbasiakasPostinumero.Text = dgvAsiakashallinta.CurrentRow.Cells[1].Value.ToString();
             tbAsiakasEtunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[2].Value.ToString();
             tbAsiakasSukunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[3].Value.ToString();

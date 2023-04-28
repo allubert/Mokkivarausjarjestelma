@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.tbcHallinta = new System.Windows.Forms.TabControl();
+            this.tbcAsiakasHallinta = new System.Windows.Forms.TabControl();
             this.tbpgAloitussivu = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -134,7 +134,7 @@
             this.btnToimintaLisaa = new System.Windows.Forms.Button();
             this.tbpgLaskujenhallinta = new System.Windows.Forms.TabPage();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.tbcHallinta.SuspendLayout();
+            this.tbcAsiakasHallinta.SuspendLayout();
             this.tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -160,21 +160,21 @@
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // tbcHallinta
+            // tbcAsiakasHallinta
             // 
-            this.tbcHallinta.Controls.Add(this.tbpgAloitussivu);
-            this.tbcHallinta.Controls.Add(this.tbpgAsiakashallinta);
-            this.tbcHallinta.Controls.Add(this.tbpgPalveluhallinta);
-            this.tbcHallinta.Controls.Add(this.tbpgMokkivaraushallinta);
-            this.tbcHallinta.Controls.Add(this.tbpgToimintaaluehallinta);
-            this.tbcHallinta.Controls.Add(this.tbpgLaskujenhallinta);
-            this.tbcHallinta.Location = new System.Drawing.Point(0, 0);
-            this.tbcHallinta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbcHallinta.Name = "tbcHallinta";
-            this.tbcHallinta.SelectedIndex = 0;
-            this.tbcHallinta.Size = new System.Drawing.Size(1097, 1028);
-            this.tbcHallinta.TabIndex = 0;
-            this.tbcHallinta.Selected += new System.Windows.Forms.TabControlEventHandler(this.tbcHallinta_Selected);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgAloitussivu);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgAsiakashallinta);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgPalveluhallinta);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgMokkivaraushallinta);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgToimintaaluehallinta);
+            this.tbcAsiakasHallinta.Controls.Add(this.tbpgLaskujenhallinta);
+            this.tbcAsiakasHallinta.Location = new System.Drawing.Point(0, 0);
+            this.tbcAsiakasHallinta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbcAsiakasHallinta.Name = "tbcAsiakasHallinta";
+            this.tbcAsiakasHallinta.SelectedIndex = 0;
+            this.tbcAsiakasHallinta.Size = new System.Drawing.Size(1097, 1028);
+            this.tbcAsiakasHallinta.TabIndex = 0;
+            this.tbcAsiakasHallinta.Selected += new System.Windows.Forms.TabControlEventHandler(this.tbcHallinta_Selected);
             // 
             // tbpgAloitussivu
             // 
@@ -1210,14 +1210,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 835);
-            this.Controls.Add(this.tbcHallinta);
+            this.Controls.Add(this.tbcAsiakasHallinta);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "  ";
-            this.tbcHallinta.ResumeLayout(false);
+            this.tbcAsiakasHallinta.ResumeLayout(false);
             this.tbpgAloitussivu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -1245,7 +1245,7 @@
 
         #endregion
         private MenuStrip menuStrip1;
-        private TabControl tbcHallinta;
+        private TabControl tbcAsiakasHallinta;
         private TabPage tbpgAloitussivu;
         private Button btnLasku;
         private Button btnAsiakas;
