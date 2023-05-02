@@ -237,20 +237,15 @@ namespace Mokkivarausjarjestelma
                     return;
                 }
             }
-            int asiakasid = int.Parse(tbAsiakasid.Text);
+            int asiakasid = int.Parse(tbAsiakasid.Text); 
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-            string insertKysely2 = "INSERT INTO posti(postinro) VALUES (@postinro); SELECT LAST_INSERT_ID();";
-            int postiId;
+            string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
 
             using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
             {
-                myconnection.Open();
-                using (MySqlCommand komento = new MySqlCommand(insertKysely2, myconnection))
-                {
-                    komento.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
-                }
                 using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
                 {
+                    myconnection.Open();
                     command.Parameters.AddWithValue("@asiakasid", asiakasid);
                     command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
                     command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
@@ -258,10 +253,27 @@ namespace Mokkivarausjarjestelma
                     command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
                     command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
                     command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
+
+                    // Check if postinro exists in posti table
+                    string checkPostiQuery = "SELECT COUNT(*) FROM posti WHERE postinro = @postinro";
+                    using (MySqlCommand checkPostiCommand = new MySqlCommand(checkPostiQuery, myconnection))
+                    {
+                        checkPostiCommand.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                        int postiCount = Convert.ToInt32(checkPostiCommand.ExecuteScalar());
+                        if (postiCount == 0)
+                        {
+                            // Insert into posti table
+                            using (MySqlCommand insertPostiCommand = new MySqlCommand(insertPostiQuery, myconnection))
+                            {
+                                insertPostiCommand.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                                insertPostiCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
                     command.ExecuteNonQuery();
+                    populatedgvAsiakkaat();
                 }
-            }
-        }
+            }  }
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
         {
             tbAsiakasid.Text = dgvAsiakashallinta.CurrentRow.Cells[0].Value.ToString();
