@@ -27,26 +27,70 @@ namespace Mokkivarausjarjestelma
             myconnection.Close();
 
         }
+        
         //"INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"  +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
         private void btnValmisVaraus_Click(object sender, EventArgs e)
         {
+        /*
+            DateTime varattualkupvm = Convert.ToDateTime(dateTimeMokinVarausAlkuPvm.Text);
+            DateTime varattuloppupvm = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
+
+            int asiakasid;
+            int mokkimokkiid;
+
+            // Kriteerit mokki_mokki_id ja 
+            string asiakasKriteerit = "your_asiakas_criteria";
+            string mokkiKriteerit = "your_mokki_criteria";
+
+            string GetIdsQuery = $@"SELECT asiakas.asiakas_id, mokki.mokki_id
+                            FROM asiakas, mokki
+                            WHERE asiakas.criteria = '{asiakasKriteerit}' AND mokki.criteria = '{mokkiKriteerit}'";
+
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                myconnection.Open();
+
+                using (MySqlCommand getIdCommand = new MySqlCommand(GetIdsQuery, myconnection))
+                {
+                    using (MySqlDataReader reader = getIdCommand.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            asiakasid = reader.GetInt32(0);
+                            mokkimokkiid = reader.GetInt32(1);
+                        }
+                        else
+                        {
+                            // Ei löydy yhtäläisyyksiä
+                            return;
+                        }
+                    }
+                }
+                string VarauksentiedotInsertQuery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
+                "VALUES (@varausid, @asiakasid, @mokkimokkiid, @varattupvm, @vahvistuspvm, @varattualkupvm, @varattuloppupvm)";
+
+                using (MySqlCommand command = new MySqlCommand(VarauksentiedotInsertQuery, myconnection))
+                {
+                    command.Parameters.AddWithValue("@varausid", varausid);
+                    command.Parameters.AddWithValue("@asiakasid", asiakasid);
+                    command.Parameters.AddWithValue("@mokkimokkiid", mokkimokkiid);
+                    command.Parameters.AddWithValue("@varattupvm", DateTime.Now);
+                    command.Parameters.AddWithValue("@vahvistuspvm", DateTime.Now);
+                    command.Parameters.AddWithValue("@varattualkupvm", varattualkupvm);
+                    command.Parameters.AddWithValue("@varattuloppupvm", varattuloppupvm);
+
+                    command.ExecuteNonQuery();
+                }
+                myconnection.Close();
+
+            }
             this.Close();
+        */
         }
 
         private void btnMokinVarausVahvista_Click(object sender, EventArgs e)
         {
-            DateTime dtFrom = Convert.ToDateTime(dateTimeMokinVarausAlkuPvm.Text);
-            DateTime dtTo = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
-
-            /*
-            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;username=root;password=Ruutti");
-            command = new MySqlCommand(query, myconnection);
-            DataSet ds = new DataSet();
-            mda.Fill(ds);
-            dbgrid1.DataSource = ds;
-            dbgrid1.Refresh
-            myconnection.Close();
-            */
+            //Tarkastaa, tuleeko päällekkäisiä varauksia
             btnValmisVaraus.Enabled = true;
         }
     }
