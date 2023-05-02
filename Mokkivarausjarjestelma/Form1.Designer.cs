@@ -350,6 +350,7 @@
             this.btnAsiakasHae.TabIndex = 15;
             this.btnAsiakasHae.Text = "Hae";
             this.btnAsiakasHae.UseVisualStyleBackColor = true;
+            this.btnAsiakasHae.Click += new System.EventHandler(this.btnAsiakasHae_Click);
             // 
             // tbAsiakasSukunimi
             // 

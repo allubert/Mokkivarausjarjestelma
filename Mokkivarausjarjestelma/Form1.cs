@@ -237,9 +237,7 @@ namespace Mokkivarausjarjestelma
                 }
             }
             int asiakasid = int.Parse(tbAsiakasid.Text);
-            string insertQuery = "insert into asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro)values"+asiakasid+", '"
-             +tbasiakasPostinumero.Text+"','"+tbAsiakasEtunimi.Text+"','"+tbAsiakasSukunimi.Text+"','"+tbAsiakasLahiosoite.Text+"','"
-                + tbAsiakasSahkoposti.Text+"','"+tbAsiakasPuhelinnumero.Text+"')";
+            string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
             using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
             {
                 using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
@@ -279,6 +277,31 @@ namespace Mokkivarausjarjestelma
                 connection.Close();
                 populatedgvAsiakkaat();
             }
+        }
+
+        private void btnAsiakasHae_Click(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+            
+            string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid"; 
+            MySqlCommand command = new MySqlCommand (query, connection);
+            command.Parameters.AddWithValue("@asiakasid", tbAsiakasid.Text);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            if (table.Rows.Count > 0)
+            {
+                DataRow row = table.Rows[0];
+                tbasiakasPostinumero.Text = row["postinro"].ToString();
+                tbAsiakasEtunimi.Text = row["etunimi"].ToString();
+                tbAsiakasSukunimi.Text = row["sukunimi"].ToString();
+                tbAsiakasLahiosoite.Text = row["lahiosoite"].ToString();
+                tbAsiakasSahkoposti.Text = row["email"].ToString();
+                tbAsiakasPuhelinnumero.Text = row["puhelinnro"].ToString();
+            }
+
+            
         }
     }
 }
