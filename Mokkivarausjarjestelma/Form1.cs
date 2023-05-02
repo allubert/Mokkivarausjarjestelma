@@ -1,6 +1,7 @@
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mokkivarausjarjestelma
 {
@@ -12,7 +13,7 @@ namespace Mokkivarausjarjestelma
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
-        
+
         MySqlCommand command;
 
         private void btnPalvelu_Click(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace Mokkivarausjarjestelma
         {
             tbcAsiakasHallinta.SelectedTab = tbpgLaskujenhallinta;
         }
-        
+
         private void btnMokkivaraus_Click(object sender, EventArgs e)
         {
             tbcAsiakasHallinta.SelectedTab = tbpgMokkivaraushallinta;
@@ -85,8 +86,8 @@ namespace Mokkivarausjarjestelma
             double hinta = double.Parse(tbPalveluhinta.Text);
             double alv = double.Parse(tbPalvelualv.Text);
 
-            string insertQuery = "INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"
-                +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
+            string insertQuery = "INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES(" + palveluid + ",'" + tbPalvelunimi.Text + "','"
+                + tyyppi + ",'" + rtbPalvelukuvaus + "','" + hinta + ",'" + alv + ")";
 
             ExecuteMyQuery(insertQuery);
 
@@ -98,7 +99,7 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.Update();
         }
 
-        public void ExecuteMyQuery(string query) 
+        public void ExecuteMyQuery(string query)
         {
             try
             {
@@ -119,13 +120,13 @@ namespace Mokkivarausjarjestelma
             {
                 MessageBox.Show(ex.Message);
             }
-            finally 
+            finally
             {
                 SuljeYhteys();
             }
         }
 
-        public void AvaaYhteys() 
+        public void AvaaYhteys()
         {
             //avaa tietokanta yhteyden tarkistettuaan onko yhteys kiinni
             if (connection.State == ConnectionState.Closed)
@@ -134,10 +135,10 @@ namespace Mokkivarausjarjestelma
             }
         }
 
-        public void SuljeYhteys() 
+        public void SuljeYhteys()
         {
             //sulkee tietokanta yhteyden tarkistettuaan onko yhteys auki
-            if (connection.State == ConnectionState.Open) 
+            if (connection.State == ConnectionState.Open)
             {
                 connection.Close();
             }
@@ -227,7 +228,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
         {
-            foreach(TextBox tb in tbcAsiakasHallinta.Controls.OfType<TextBox>())
+            foreach (TextBox tb in tbcAsiakasHallinta.Controls.OfType<TextBox>())
             {
                 if (tb.Text == "")
                 {
@@ -238,8 +239,16 @@ namespace Mokkivarausjarjestelma
             }
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
+            string insertKysely2 = "INSERT INTO posti(postinro) VALUES (@postinro); SELECT LAST_INSERT_ID();";
+            int postiId;
+
             using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
             {
+                myconnection.Open();
+                using (MySqlCommand komento = new MySqlCommand(insertKysely2, myconnection))
+                {
+                    komento.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                }
                 using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
                 {
                     command.Parameters.AddWithValue("@asiakasid", asiakasid);
@@ -249,9 +258,7 @@ namespace Mokkivarausjarjestelma
                     command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
                     command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
                     command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
-                    myconnection.Open();
                     command.ExecuteNonQuery();
-                    myconnection.Close();
                 }
             }
         }
@@ -263,12 +270,12 @@ namespace Mokkivarausjarjestelma
             tbAsiakasSukunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[3].Value.ToString();
             tbAsiakasLahiosoite.Text = dgvAsiakashallinta.CurrentRow.Cells[4].Value.ToString();
             tbAsiakasSahkoposti.Text = dgvAsiakashallinta.CurrentRow.Cells[5].Value.ToString();
-            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString(); 
+            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString();
         }
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
-            if(dgvAsiakashallinta.Rows.Count > 0)
+            if (dgvAsiakashallinta.Rows.Count > 0)
             {
                 connection.Open();
                 string deletequery = "DELETE from asiakas WHERE asiakas_id=" + dgvAsiakashallinta.SelectedRows[0].Cells[0].Value;
@@ -282,9 +289,9 @@ namespace Mokkivarausjarjestelma
         private void btnAsiakasHae_Click(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-            
-            string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid"; 
-            MySqlCommand command = new MySqlCommand (query, connection);
+
+            string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid";
+            MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@asiakasid", tbAsiakasid.Text);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             DataTable table = new DataTable();
@@ -300,8 +307,11 @@ namespace Mokkivarausjarjestelma
                 tbAsiakasSahkoposti.Text = row["email"].ToString();
                 tbAsiakasPuhelinnumero.Text = row["puhelinnro"].ToString();
             }
+        }
 
-            
+        private void tbcAsiakasHallinta_Click(object sender, EventArgs e)
+        {
+            populatedgvAsiakkaat();
         }
     }
 }
