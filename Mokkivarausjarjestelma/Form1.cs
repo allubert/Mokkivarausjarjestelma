@@ -238,7 +238,8 @@ namespace Mokkivarausjarjestelma
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
             string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
-            try {
+            try
+            {
                 using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
                 {
                     using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
@@ -272,10 +273,11 @@ namespace Mokkivarausjarjestelma
                         populatedgvAsiakkaat();
                     }
                 }
-                MessageBox.Show("Toimii"); 
+                MessageBox.Show("Toimii");
             }
-            catch (Exception ex) {
-                MessageBox.Show("Ei voi lis‰t‰ p‰‰llekk‰in. Tsekkaa postinumero ja id."); 
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ei voi lis‰t‰ p‰‰llekk‰in. Tsekkaa postinumero ja id.");
             }
         }
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
@@ -332,7 +334,7 @@ namespace Mokkivarausjarjestelma
                 "', sukunimi='" + tbAsiakasSukunimi.Text + "', lahiosoite='" + tbAsiakasLahiosoite.Text + "', email='" + tbAsiakasSahkoposti.Text +
                 "', puhelinnro=" + tbAsiakasPuhelinnumero.Text + " WHERE asiakas_id = " + tbAsiakasid.Text;
             ExecuteMyQuery(kysely);
-            populatedgvAsiakkaat(); 
+            populatedgvAsiakkaat();
         }
     }
 }

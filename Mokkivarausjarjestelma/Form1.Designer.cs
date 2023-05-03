@@ -58,7 +58,7 @@
             lblSukunimi = new Label();
             lblEtunimi = new Label();
             lblPostinumero = new Label();
-            lblAsiakas = new Label();
+            lblAsiakasid = new Label();
             dgvAsiakashallinta = new DataGridView();
             tbpgPalveluhallinta = new TabPage();
             rtbPalvelukuvaus = new RichTextBox();
@@ -134,6 +134,8 @@
             btnToimintaLisaa = new Button();
             tbpgLaskujenhallinta = new TabPage();
             mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            lblToimipaikka = new Label();
+            tbAsiakasToimipaikka = new TextBox();
             tbcAsiakasHallinta.SuspendLayout();
             tbpgAloitussivu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -282,6 +284,8 @@
             // 
             // tbpgAsiakashallinta
             // 
+            tbpgAsiakashallinta.Controls.Add(tbAsiakasToimipaikka);
+            tbpgAsiakashallinta.Controls.Add(lblToimipaikka);
             tbpgAsiakashallinta.Controls.Add(btnAsiakasPoista);
             tbpgAsiakashallinta.Controls.Add(btnAsiakasPaivita);
             tbpgAsiakashallinta.Controls.Add(btnAsiakasLisaa);
@@ -299,7 +303,7 @@
             tbpgAsiakashallinta.Controls.Add(lblSukunimi);
             tbpgAsiakashallinta.Controls.Add(lblEtunimi);
             tbpgAsiakashallinta.Controls.Add(lblPostinumero);
-            tbpgAsiakashallinta.Controls.Add(lblAsiakas);
+            tbpgAsiakashallinta.Controls.Add(lblAsiakasid);
             tbpgAsiakashallinta.Controls.Add(dgvAsiakashallinta);
             tbpgAsiakashallinta.Location = new Point(4, 29);
             tbpgAsiakashallinta.Margin = new Padding(3, 4, 3, 4);
@@ -312,7 +316,7 @@
             // 
             // btnAsiakasPoista
             // 
-            btnAsiakasPoista.Location = new Point(213, 520);
+            btnAsiakasPoista.Location = new Point(212, 566);
             btnAsiakasPoista.Margin = new Padding(3, 4, 3, 4);
             btnAsiakasPoista.Name = "btnAsiakasPoista";
             btnAsiakasPoista.Size = new Size(72, 31);
@@ -323,7 +327,7 @@
             // 
             // btnAsiakasPaivita
             // 
-            btnAsiakasPaivita.Location = new Point(127, 520);
+            btnAsiakasPaivita.Location = new Point(127, 566);
             btnAsiakasPaivita.Margin = new Padding(3, 4, 3, 4);
             btnAsiakasPaivita.Name = "btnAsiakasPaivita";
             btnAsiakasPaivita.Size = new Size(72, 31);
@@ -334,7 +338,7 @@
             // 
             // btnAsiakasLisaa
             // 
-            btnAsiakasLisaa.Location = new Point(37, 520);
+            btnAsiakasLisaa.Location = new Point(37, 566);
             btnAsiakasLisaa.Margin = new Padding(3, 4, 3, 4);
             btnAsiakasLisaa.Name = "btnAsiakasLisaa";
             btnAsiakasLisaa.Size = new Size(72, 31);
@@ -356,42 +360,42 @@
             // 
             // tbAsiakasSukunimi
             // 
-            tbAsiakasSukunimi.Location = new Point(114, 244);
+            tbAsiakasSukunimi.Location = new Point(114, 290);
             tbAsiakasSukunimi.Name = "tbAsiakasSukunimi";
             tbAsiakasSukunimi.Size = new Size(157, 27);
             tbAsiakasSukunimi.TabIndex = 14;
             // 
             // tbAsiakasLahiosoite
             // 
-            tbAsiakasLahiosoite.Location = new Point(114, 305);
+            tbAsiakasLahiosoite.Location = new Point(114, 348);
             tbAsiakasLahiosoite.Name = "tbAsiakasLahiosoite";
             tbAsiakasLahiosoite.Size = new Size(157, 27);
             tbAsiakasLahiosoite.TabIndex = 13;
             // 
             // tbAsiakasEtunimi
             // 
-            tbAsiakasEtunimi.Location = new Point(114, 175);
+            tbAsiakasEtunimi.Location = new Point(114, 221);
             tbAsiakasEtunimi.Name = "tbAsiakasEtunimi";
             tbAsiakasEtunimi.Size = new Size(157, 27);
             tbAsiakasEtunimi.TabIndex = 12;
             // 
             // tbAsiakasSahkoposti
             // 
-            tbAsiakasSahkoposti.Location = new Point(114, 365);
+            tbAsiakasSahkoposti.Location = new Point(114, 408);
             tbAsiakasSahkoposti.Name = "tbAsiakasSahkoposti";
             tbAsiakasSahkoposti.Size = new Size(157, 27);
             tbAsiakasSahkoposti.TabIndex = 11;
             // 
             // tbAsiakasPuhelinnumero
             // 
-            tbAsiakasPuhelinnumero.Location = new Point(127, 437);
+            tbAsiakasPuhelinnumero.Location = new Point(127, 483);
             tbAsiakasPuhelinnumero.Name = "tbAsiakasPuhelinnumero";
             tbAsiakasPuhelinnumero.Size = new Size(157, 27);
             tbAsiakasPuhelinnumero.TabIndex = 10;
             // 
             // tbasiakasPostinumero
             // 
-            tbasiakasPostinumero.Location = new Point(114, 115);
+            tbasiakasPostinumero.Location = new Point(114, 107);
             tbasiakasPostinumero.Name = "tbasiakasPostinumero";
             tbasiakasPostinumero.Size = new Size(157, 27);
             tbasiakasPostinumero.TabIndex = 9;
@@ -406,7 +410,7 @@
             // 
             // lblPuhelinnumero
             // 
-            lblPuhelinnumero.Location = new Point(8, 437);
+            lblPuhelinnumero.Location = new Point(8, 483);
             lblPuhelinnumero.Name = "lblPuhelinnumero";
             lblPuhelinnumero.Size = new Size(113, 60);
             lblPuhelinnumero.TabIndex = 7;
@@ -414,7 +418,7 @@
             // 
             // lblSahkoposti
             // 
-            lblSahkoposti.Location = new Point(8, 365);
+            lblSahkoposti.Location = new Point(8, 411);
             lblSahkoposti.Name = "lblSahkoposti";
             lblSahkoposti.Size = new Size(101, 60);
             lblSahkoposti.TabIndex = 6;
@@ -422,7 +426,7 @@
             // 
             // lblLahiosoite
             // 
-            lblLahiosoite.Location = new Point(8, 305);
+            lblLahiosoite.Location = new Point(8, 351);
             lblLahiosoite.Name = "lblLahiosoite";
             lblLahiosoite.Size = new Size(101, 60);
             lblLahiosoite.TabIndex = 5;
@@ -430,7 +434,7 @@
             // 
             // lblSukunimi
             // 
-            lblSukunimi.Location = new Point(8, 247);
+            lblSukunimi.Location = new Point(8, 293);
             lblSukunimi.Name = "lblSukunimi";
             lblSukunimi.Size = new Size(101, 60);
             lblSukunimi.TabIndex = 4;
@@ -438,7 +442,7 @@
             // 
             // lblEtunimi
             // 
-            lblEtunimi.Location = new Point(8, 179);
+            lblEtunimi.Location = new Point(8, 225);
             lblEtunimi.Name = "lblEtunimi";
             lblEtunimi.Size = new Size(101, 60);
             lblEtunimi.TabIndex = 3;
@@ -446,19 +450,19 @@
             // 
             // lblPostinumero
             // 
-            lblPostinumero.Location = new Point(8, 117);
+            lblPostinumero.Location = new Point(3, 107);
             lblPostinumero.Name = "lblPostinumero";
-            lblPostinumero.Size = new Size(101, 60);
+            lblPostinumero.Size = new Size(101, 34);
             lblPostinumero.TabIndex = 2;
             lblPostinumero.Text = "Postinumero";
             // 
-            // lblAsiakas
+            // lblAsiakasid
             // 
-            lblAsiakas.Location = new Point(8, 59);
-            lblAsiakas.Name = "lblAsiakas";
-            lblAsiakas.Size = new Size(101, 60);
-            lblAsiakas.TabIndex = 1;
-            lblAsiakas.Text = "AsiakasID";
+            lblAsiakasid.Location = new Point(8, 59);
+            lblAsiakasid.Name = "lblAsiakasid";
+            lblAsiakasid.Size = new Size(101, 60);
+            lblAsiakasid.TabIndex = 1;
+            lblAsiakasid.Text = "AsiakasID";
             // 
             // dgvAsiakashallinta
             // 
@@ -1209,6 +1213,21 @@
             mySqlCommand1.EnableCaching = false;
             mySqlCommand1.Transaction = null;
             // 
+            // lblToimipaikka
+            // 
+            lblToimipaikka.Location = new Point(7, 164);
+            lblToimipaikka.Name = "lblToimipaikka";
+            lblToimipaikka.Size = new Size(101, 33);
+            lblToimipaikka.TabIndex = 19;
+            lblToimipaikka.Text = "Toimipaikka";
+            // 
+            // tbAsiakasToimipaikka
+            // 
+            tbAsiakasToimipaikka.Location = new Point(114, 164);
+            tbAsiakasToimipaikka.Name = "tbAsiakasToimipaikka";
+            tbAsiakasToimipaikka.Size = new Size(157, 27);
+            tbAsiakasToimipaikka.TabIndex = 20;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1269,7 +1288,7 @@
         private Label lblKuvaus;
         private Label lblTyyppi;
         private Label label2;
-        private Label lblAsiakas;
+        private Label lblAsiakasid;
         private DataGridView dgvAsiakashallinta;
         private Label lblPuhelinnumero;
         private Label lblSahkoposti;
@@ -1352,5 +1371,7 @@
         private Button btnLisaaMokinTiedot;
         private Panel panel2;
         private Label label1;
+        private TextBox tbAsiakasToimipaikka;
+        private Label lblToimipaikka;
     }
 }
