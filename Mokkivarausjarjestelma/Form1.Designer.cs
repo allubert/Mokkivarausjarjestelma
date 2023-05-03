@@ -330,6 +330,7 @@
             btnAsiakasPaivita.TabIndex = 17;
             btnAsiakasPaivita.Text = "Päivitä";
             btnAsiakasPaivita.UseVisualStyleBackColor = true;
+            btnAsiakasPaivita.Click += btnAsiakasPaivita_Click;
             // 
             // btnAsiakasLisaa
             // 

@@ -238,39 +238,44 @@ namespace Mokkivarausjarjestelma
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
             string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
-
-            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
-            {
-                using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
+            try {
+                using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
                 {
-                    myconnection.Open();
-                    command.Parameters.AddWithValue("@asiakasid", asiakasid);
-                    command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
-                    command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
-                    command.Parameters.AddWithValue("@sukunimi", tbAsiakasSukunimi.Text);
-                    command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
-                    command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
-                    command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
-
-                    // tarkistaa onko postinro jo olemassa  posti taulussa 
-                    string checkPostiQuery = "SELECT COUNT(*) FROM posti WHERE postinro = @postinro";
-                    using (MySqlCommand komento = new MySqlCommand(checkPostiQuery, myconnection))
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
                     {
-                        komento.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
-                        int postiCount = Convert.ToInt32(komento.ExecuteScalar());
-                        if (postiCount == 0)
+                        myconnection.Open();
+                        command.Parameters.AddWithValue("@asiakasid", asiakasid);
+                        command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                        command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
+                        command.Parameters.AddWithValue("@sukunimi", tbAsiakasSukunimi.Text);
+                        command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
+                        command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
+                        command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
+
+                        // tarkistaa onko postinro jo olemassa  posti taulussa 
+                        string checkPostiQuery = "SELECT COUNT(*) FROM posti WHERE postinro = @postinro";
+                        using (MySqlCommand komento = new MySqlCommand(checkPostiQuery, myconnection))
                         {
-                            // Insert into posti table
-                            using (MySqlCommand posti = new MySqlCommand(insertPostiQuery, myconnection))
+                            komento.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                            int postiCount = Convert.ToInt32(komento.ExecuteScalar());
+                            if (postiCount == 0)
                             {
-                                posti.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
-                                posti.ExecuteNonQuery();
+                                // lis‰‰ postitauluun
+                                using (MySqlCommand posti = new MySqlCommand(insertPostiQuery, myconnection))
+                                {
+                                    posti.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                                    posti.ExecuteNonQuery();
+                                }
                             }
                         }
+                        command.ExecuteNonQuery();
+                        populatedgvAsiakkaat();
                     }
-                    command.ExecuteNonQuery();
-                    populatedgvAsiakkaat();
                 }
+                MessageBox.Show("Toimii"); 
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Ei voi lis‰t‰ p‰‰llekk‰in. Tsekkaa postinumero ja id."); 
             }
         }
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
@@ -288,7 +293,7 @@ namespace Mokkivarausjarjestelma
         {
             int numero = int.Parse(tbasiakasPostinumero.Text);
             string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
-            ExecuteMyQuery(deletequery);    
+            ExecuteMyQuery(deletequery);
             populatedgvAsiakkaat();
 
         }
@@ -319,6 +324,15 @@ namespace Mokkivarausjarjestelma
         private void tbcAsiakasHallinta_Click(object sender, EventArgs e)
         {
             populatedgvAsiakkaat();
+        }
+
+        private void btnAsiakasPaivita_Click(object sender, EventArgs e)
+        {
+            string kysely = "UPDATE asiakas SET postinro='" + tbasiakasPostinumero.Text + "', etunimi='" + tbAsiakasEtunimi.Text +
+                "', sukunimi='" + tbAsiakasSukunimi.Text + "', lahiosoite='" + tbAsiakasLahiosoite.Text + "', email='" + tbAsiakasSahkoposti.Text +
+                "', puhelinnro=" + tbAsiakasPuhelinnumero.Text + " WHERE asiakas_id = " + tbAsiakasid.Text;
+            ExecuteMyQuery(kysely);
+            populatedgvAsiakkaat(); 
         }
     }
 }
