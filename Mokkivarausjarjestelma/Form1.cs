@@ -273,7 +273,9 @@ namespace Mokkivarausjarjestelma
                         populatedgvAsiakkaat();
                     }
                 }
-                MessageBox.Show("Toimii");
+                MessageBox.Show("Mahtavaa");
+                btnAsiakasPaivita.Visible = true;
+                btnAsiakasPoista.Visible = true;
             }
             catch (Exception ex)
             {
@@ -321,6 +323,8 @@ namespace Mokkivarausjarjestelma
                 tbAsiakasSahkoposti.Text = row["email"].ToString();
                 tbAsiakasPuhelinnumero.Text = row["puhelinnro"].ToString();
             }
+            btnAsiakasPaivita.Visible = true;
+            btnAsiakasPoista.Visible = true;    
         }
 
         private void tbcAsiakasHallinta_Click(object sender, EventArgs e)
