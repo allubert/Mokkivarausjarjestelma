@@ -237,7 +237,7 @@ namespace Mokkivarausjarjestelma
             }
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-            string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
+            string insertPostiQuery = "INSERT INTO posti(postinro, toimipaikka) VALUES (@postinro, @toimipaikka)";
             try
             {
                 using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
