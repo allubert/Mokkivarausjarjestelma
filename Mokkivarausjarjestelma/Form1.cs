@@ -1,4 +1,3 @@
-using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -12,7 +11,7 @@ namespace Mokkivarausjarjestelma
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
-        
+
         MySqlCommand command;
 
         private void btnPalvelu_Click(object sender, EventArgs e)
@@ -29,7 +28,7 @@ namespace Mokkivarausjarjestelma
         {
             tbcAsiakasHallinta.SelectedTab = tbpgLaskujenhallinta;
         }
-        
+
         private void btnMokkivaraus_Click(object sender, EventArgs e)
         {
             tbcAsiakasHallinta.SelectedTab = tbpgMokkivaraushallinta;
@@ -85,8 +84,8 @@ namespace Mokkivarausjarjestelma
             double hinta = double.Parse(tbPalveluhinta.Text);
             double alv = double.Parse(tbPalvelualv.Text);
 
-            string insertQuery = "INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"
-                +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
+            string insertQuery = "INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES(" + palveluid + ",'" + tbPalvelunimi.Text + "','"
+                + tyyppi + ",'" + rtbPalvelukuvaus + "','" + hinta + ",'" + alv + ")";
 
             ExecuteMyQuery(insertQuery);
 
@@ -98,7 +97,7 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.Update();
         }
 
-        public void ExecuteMyQuery(string query) 
+        public void ExecuteMyQuery(string query)
         {
             try
             {
@@ -119,13 +118,13 @@ namespace Mokkivarausjarjestelma
             {
                 MessageBox.Show(ex.Message);
             }
-            finally 
+            finally
             {
                 SuljeYhteys();
             }
         }
 
-        public void AvaaYhteys() 
+        public void AvaaYhteys()
         {
             //avaa tietokanta yhteyden tarkistettuaan onko yhteys kiinni
             if (connection.State == ConnectionState.Closed)
@@ -134,10 +133,10 @@ namespace Mokkivarausjarjestelma
             }
         }
 
-        public void SuljeYhteys() 
+        public void SuljeYhteys()
         {
             //sulkee tietokanta yhteyden tarkistettuaan onko yhteys auki
-            if (connection.State == ConnectionState.Open) 
+            if (connection.State == ConnectionState.Open)
             {
                 connection.Close();
             }
@@ -227,7 +226,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
         {
-            foreach(TextBox tb in tbcAsiakasHallinta.Controls.OfType<TextBox>())
+            foreach (TextBox tb in tbcAsiakasHallinta.Controls.OfType<TextBox>())
             {
                 if (tb.Text == "")
                 {
@@ -238,21 +237,45 @@ namespace Mokkivarausjarjestelma
             }
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
-            {
-                using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
+            string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
+            try {
+                using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
                 {
-                    command.Parameters.AddWithValue("@asiakasid", asiakasid);
-                    command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
-                    command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
-                    command.Parameters.AddWithValue("@sukunimi", tbAsiakasSukunimi.Text);
-                    command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
-                    command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
-                    command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
-                    myconnection.Open();
-                    command.ExecuteNonQuery();
-                    myconnection.Close();
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
+                    {
+                        myconnection.Open();
+                        command.Parameters.AddWithValue("@asiakasid", asiakasid);
+                        command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                        command.Parameters.AddWithValue("@etunimi", tbAsiakasEtunimi.Text);
+                        command.Parameters.AddWithValue("@sukunimi", tbAsiakasSukunimi.Text);
+                        command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
+                        command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
+                        command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
+
+                        // tarkistaa onko postinro jo olemassa  posti taulussa 
+                        string checkPostiQuery = "SELECT COUNT(*) FROM posti WHERE postinro = @postinro";
+                        using (MySqlCommand komento = new MySqlCommand(checkPostiQuery, myconnection))
+                        {
+                            komento.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                            int postiCount = Convert.ToInt32(komento.ExecuteScalar());
+                            if (postiCount == 0)
+                            {
+                                // lisää postitauluun
+                                using (MySqlCommand posti = new MySqlCommand(insertPostiQuery, myconnection))
+                                {
+                                    posti.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
+                                    posti.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        command.ExecuteNonQuery();
+                        populatedgvAsiakkaat();
+                    }
                 }
+                MessageBox.Show("Toimii"); 
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Ei voi lisätä päällekkäin. Tsekkaa postinumero ja id."); 
             }
         }
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
@@ -263,28 +286,24 @@ namespace Mokkivarausjarjestelma
             tbAsiakasSukunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[3].Value.ToString();
             tbAsiakasLahiosoite.Text = dgvAsiakashallinta.CurrentRow.Cells[4].Value.ToString();
             tbAsiakasSahkoposti.Text = dgvAsiakashallinta.CurrentRow.Cells[5].Value.ToString();
-            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString(); 
+            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString();
         }
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
-            if(dgvAsiakashallinta.Rows.Count > 0)
-            {
-                connection.Open();
-                string deletequery = "DELETE from asiakas WHERE asiakas_id=" + dgvAsiakashallinta.SelectedRows[0].Cells[0].Value;
-                MySqlCommand deletekomento = new MySqlCommand(deletequery, connection);
-                deletekomento.ExecuteNonQuery();
-                connection.Close();
-                populatedgvAsiakkaat();
-            }
+            int numero = int.Parse(tbasiakasPostinumero.Text);
+            string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
+            ExecuteMyQuery(deletequery);
+            populatedgvAsiakkaat();
+
         }
 
         private void btnAsiakasHae_Click(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-            
-            string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid"; 
-            MySqlCommand command = new MySqlCommand (query, connection);
+
+            string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid";
+            MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@asiakasid", tbAsiakasid.Text);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             DataTable table = new DataTable();
@@ -300,8 +319,20 @@ namespace Mokkivarausjarjestelma
                 tbAsiakasSahkoposti.Text = row["email"].ToString();
                 tbAsiakasPuhelinnumero.Text = row["puhelinnro"].ToString();
             }
+        }
 
-            
+        private void tbcAsiakasHallinta_Click(object sender, EventArgs e)
+        {
+            populatedgvAsiakkaat();
+        }
+
+        private void btnAsiakasPaivita_Click(object sender, EventArgs e)
+        {
+            string kysely = "UPDATE asiakas SET postinro='" + tbasiakasPostinumero.Text + "', etunimi='" + tbAsiakasEtunimi.Text +
+                "', sukunimi='" + tbAsiakasSukunimi.Text + "', lahiosoite='" + tbAsiakasLahiosoite.Text + "', email='" + tbAsiakasSahkoposti.Text +
+                "', puhelinnro=" + tbAsiakasPuhelinnumero.Text + " WHERE asiakas_id = " + tbAsiakasid.Text;
+            ExecuteMyQuery(kysely);
+            populatedgvAsiakkaat(); 
         }
     }
 }
