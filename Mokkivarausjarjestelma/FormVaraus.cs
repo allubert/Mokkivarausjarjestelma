@@ -14,10 +14,12 @@ namespace Mokkivarausjarjestelma
 {
     public partial class FormVaraus : Form
     {
+        public string VarausmokinNimi;
         public FormVaraus(string VarausMokinNimi)
         {
             InitializeComponent();
             lblVarausMokinNimi.Text = VarausMokinNimi;
+            VarausmokinNimi = VarausMokinNimi;
             string selectQuery = "SELECT * FROM varaus";
             DataTable datatable = new DataTable();
             MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
@@ -31,7 +33,7 @@ namespace Mokkivarausjarjestelma
         //"INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"  +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
         private void btnValmisVaraus_Click(object sender, EventArgs e)
         {
-        /*
+        
             DateTime varattualkupvm = Convert.ToDateTime(dateTimeMokinVarausAlkuPvm.Text);
             DateTime varattuloppupvm = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
 
@@ -39,8 +41,8 @@ namespace Mokkivarausjarjestelma
             int mokkimokkiid;
 
             // Kriteerit mokki_mokki_id ja 
-            string asiakasKriteerit = "your_asiakas_criteria";
-            string mokkiKriteerit = "your_mokki_criteria";
+            string asiakasKriteerit = "";
+            string mokkiKriteerit = "mokkinimi = " + VarausmokinNimi;
 
             string GetIdsQuery = $@"SELECT asiakas.asiakas_id, mokki.mokki_id
                             FROM asiakas, mokki
@@ -71,7 +73,7 @@ namespace Mokkivarausjarjestelma
 
                 using (MySqlCommand command = new MySqlCommand(VarauksentiedotInsertQuery, myconnection))
                 {
-                    command.Parameters.AddWithValue("@varausid", varausid);
+                    //command.Parameters.AddWithValue("@varausid", varausid);
                     command.Parameters.AddWithValue("@asiakasid", asiakasid);
                     command.Parameters.AddWithValue("@mokkimokkiid", mokkimokkiid);
                     command.Parameters.AddWithValue("@varattupvm", DateTime.Now);
@@ -85,7 +87,7 @@ namespace Mokkivarausjarjestelma
 
             }
             this.Close();
-        */
+        
         }
 
         private void btnMokinVarausVahvista_Click(object sender, EventArgs e)
