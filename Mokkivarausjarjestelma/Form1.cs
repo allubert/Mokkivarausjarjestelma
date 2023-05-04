@@ -161,7 +161,7 @@ namespace Mokkivarausjarjestelma
         private void btnUusiVaraus_Click(object sender, EventArgs e)
         {
             string VarausMokinNimi = tbValittuMokkiNimi.Text.ToString();
-            var VarausForm = new FormVaraus(VarausMokinNimi);
+            var VarausForm = new FormVaraus();
             VarausForm.Show();
         }
 
