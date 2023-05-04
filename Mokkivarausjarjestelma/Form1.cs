@@ -155,7 +155,7 @@ namespace Mokkivarausjarjestelma
             }
             connection.Open(); // Avaa tietokanta yhteyden
 
-            string insertQuery = "insert into toimintaalue(nimi) values (" + "'" + tbToimintaNimi.Text + "')";
+            string insertQuery = "insert into toimintaalue(nimi) values (" + "'" + tbToimintaAlue.Text + "')";
         }
 
         private void btnUusiVaraus_Click(object sender, EventArgs e)
@@ -340,5 +340,40 @@ namespace Mokkivarausjarjestelma
             ExecuteMyQuery(kysely);
             populatedgvAsiakkaat();
         }
+
+        private void btnToimintaLisaaAlue_Click_1(object sender, EventArgs e)
+        {
+            foreach (TextBox tb in pnlToiminta.Controls.OfType<TextBox>())
+            {
+                if (tb.Text == "")
+                {
+                    tb.Focus();
+                    MessageBox.Show("Kaikkia kenttiä ei ole täytetty oikein.");
+                    return;
+                }
+            }
+
+            int alueid = int.Parse(tbToimintaAlue.Text);
+            string postinro = tbToimintaPostinro.Text.ToString();
+            string toimipaikka = tbToimintaToimip.Text.ToString();
+            string MokintiedotInsertQuery = "INSERT INTO mokki(alue_id, postinro, toimipaikka) VALUES (@alueid, @postinro, @toimipaikka)";
+            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            {
+                using (MySqlCommand command = new MySqlCommand(MokintiedotInsertQuery, myconnection))
+                {
+                    
+                    command.Parameters.AddWithValue("@alueid", alueid);
+                    command.Parameters.AddWithValue("@postinro", postinro);
+                    command.Parameters.AddWithValue("@toimipaikka", toimipaikka);
+                 
+                    myconnection.Open();
+                    command.ExecuteNonQuery();
+                    myconnection.Close();
+                }
+            }
+            UpdatedgMokkiLista();
+        }
+
+       
     }
 }
