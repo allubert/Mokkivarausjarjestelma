@@ -14,66 +14,78 @@ namespace Mokkivarausjarjestelma
 {
     public partial class FormVaraus : Form
     {
-        public string VarausmokinNimi;
-        public FormVaraus(string VarausMokinNimi)
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+
+        public FormVaraus()
         {
             InitializeComponent();
-            lblVarausMokinNimi.Text = VarausMokinNimi;
-            VarausmokinNimi = VarausMokinNimi;
+            using (connection)
+            {
+                try
+                {
+                    // täyttää asiakas_id comboboxin
+                    string asiakasnimetQuery = "SELECT asiakas_id, etunimi, sukunimi FROM asiakas";
+                    MySqlDataAdapter asiakasAdapter = new MySqlDataAdapter(asiakasnimetQuery, connection);
+                    DataTable asiakasDt = new DataTable();
+                    asiakasAdapter.Fill(asiakasDt);
+
+                    var asiakasData = asiakasDt.AsEnumerable()
+                        .Select(row => new
+                        {
+                            asiakas_id = row.Field<uint>("asiakas_id"),
+                            FullName = row.Field<string>("etunimi") + " " + row.Field<string>("sukunimi")
+                        })
+                        .ToList();
+
+                    cmbUusiVarausValitseAsiakas.DisplayMember = "FullName";
+                    cmbUusiVarausValitseAsiakas.ValueMember = "asiakas_id";
+                    cmbUusiVarausValitseAsiakas.DataSource = asiakasData;
+
+
+                    // täyttää mokki_id comboboxin
+                    string mokkinimiQuery = "SELECT mokki_id, mokkinimi FROM mokki";
+                    MySqlDataAdapter mokkiAdapter = new MySqlDataAdapter(mokkinimiQuery, connection);
+                    DataSet mokkiDs = new DataSet();
+                    mokkiAdapter.Fill(mokkiDs, "mokki");
+                    cmbUusiVarausValitseMokki.DisplayMember = "mokkinimi";
+                    cmbUusiVarausValitseMokki.ValueMember = "mokki_id";
+                    cmbUusiVarausValitseMokki.DataSource = mokkiDs.Tables["mokki"];
+                }
+                catch (Exception ex)
+                {
+                    // tietokantaan ei ole lisätty mökkejä, tai asiakkaita.
+                    MessageBox.Show("Varausta ei voi tehdä, koska tietokannasta luultavasti puuttuu mökin ja/tai asiakkaan tiedot\n " + ex.ToString()); ;
+                    return;
+                }
+            }
             string selectQuery = "SELECT * FROM varaus";
             DataTable datatable = new DataTable();
-            MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-            MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, myconnection);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
             dgMokkiVaraukset.DataSource = datatable;
             adapter.Fill(datatable);
-            myconnection.Close();
+            connection.Close();
 
         }
         
-        //"INSERT INTO palvelu(palvelu_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES("+palveluid+",'"+tbPalvelunimi.Text+"','"  +tyyppi+",'"+rtbPalvelukuvaus+"','"+hinta+",'"+alv+")";
         private void btnValmisVaraus_Click(object sender, EventArgs e)
         {
         
             DateTime varattualkupvm = Convert.ToDateTime(dateTimeMokinVarausAlkuPvm.Text);
             DateTime varattuloppupvm = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
 
-            int asiakasid;
-            int mokkimokkiid;
-
-            // Kriteerit mokki_mokki_id ja 
-            string asiakasKriteerit = "";
-            string mokkiKriteerit = "mokkinimi = " + VarausmokinNimi;
-
-            string GetIdsQuery = $@"SELECT asiakas.asiakas_id, mokki.mokki_id
-                            FROM asiakas, mokki
-                            WHERE asiakas.criteria = '{asiakasKriteerit}' AND mokki.criteria = '{mokkiKriteerit}'";
-
-            using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
+            int asiakasid = int.Parse(cmbUusiVarausValitseAsiakas.Text);
+            int mokkimokkiid = int.Parse(cmbUusiVarausValitseMokki.Text);
+            int varausid = int.Parse(tbUusiVarausVarausID.Text);
+            using (connection)
             {
-                myconnection.Open();
-
-                using (MySqlCommand getIdCommand = new MySqlCommand(GetIdsQuery, myconnection))
-                {
-                    using (MySqlDataReader reader = getIdCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            asiakasid = reader.GetInt32(0);
-                            mokkimokkiid = reader.GetInt32(1);
-                        }
-                        else
-                        {
-                            // Ei löydy yhtäläisyyksiä
-                            return;
-                        }
-                    }
-                }
-                string VarauksentiedotInsertQuery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm)" +
+                connection.Open();
+                string VarauksentiedotInsertQuery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, " +
+                    "varattu_alkupvm, varattu_loppupvm)" +
                 "VALUES (@varausid, @asiakasid, @mokkimokkiid, @varattupvm, @vahvistuspvm, @varattualkupvm, @varattuloppupvm)";
 
-                using (MySqlCommand command = new MySqlCommand(VarauksentiedotInsertQuery, myconnection))
+                using (MySqlCommand command = new MySqlCommand(VarauksentiedotInsertQuery, connection))
                 {
-                    //command.Parameters.AddWithValue("@varausid", varausid);
+                    command.Parameters.AddWithValue("@varausid", varausid);
                     command.Parameters.AddWithValue("@asiakasid", asiakasid);
                     command.Parameters.AddWithValue("@mokkimokkiid", mokkimokkiid);
                     command.Parameters.AddWithValue("@varattupvm", DateTime.Now);
@@ -83,17 +95,40 @@ namespace Mokkivarausjarjestelma
 
                     command.ExecuteNonQuery();
                 }
-                myconnection.Close();
+                connection.Close();
 
             }
-            this.Close();
+            UpdatedgMokkiVaraukset();
         
         }
+        private void UpdatedgMokkiVaraukset()
+        {
+            //Varauksen hallinnan datagridviewiin tietojen vienti
+            string selectQuery = "SELECT * FROM varaus";
+            DataTable datatable = new DataTable();
+            using (connection)
+            {
+                using (MySqlCommand command = new MySqlCommand(selectQuery, connection))
+                {
+                    connection.Open();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+            }
+            dgMokkiVaraukset.DataSource = datatable;
 
+        }
+        //Lukitsee annetut tiedot varauksen tietokantaan viemistä varten.
         private void btnMokinVarausVahvista_Click(object sender, EventArgs e)
         {
-            //Tarkastaa, tuleeko päällekkäisiä varauksia
             btnValmisVaraus.Enabled = true;
+        }
+
+        //Tarkastaa, etteivät varaukset mene päällekäin.
+        private void btnMokinVarausTarkistaPvm_Click(object sender, EventArgs e)
+        {
+            btnMokinVarausVahvista.Enabled = true;
         }
     }
 }
