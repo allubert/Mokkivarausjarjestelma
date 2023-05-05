@@ -40,11 +40,11 @@ namespace Mokkivarausjarjestelma
 
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    MessageBox.Show("Kysely suoritettu");
+                    MessageBox.Show("Onnistui", "Onnistuminen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Kyselyä ei suoritettu");
+                    MessageBox.Show("Ei toiminut");
                 }
             }
             catch (Exception ex)
@@ -59,10 +59,15 @@ namespace Mokkivarausjarjestelma
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
             Form formaloitus = new Form1();
-            this.Hide();
 
-            formaloitus.ShowDialog();
-            this.Close();
+            DialogResult alkuvalikko = MessageBox.Show("Haluatko varmasti poistua", "Varo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (alkuvalikko == DialogResult.Yes)
+            {
+                this.Hide();
+                formaloitus.ShowDialog();
+                this.Close();
+            }
         }
 
         private void btnAsiakasHae_Click(object sender, EventArgs e)
@@ -92,10 +97,15 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
-            int numero = int.Parse(tbasiakasPostinumero.Text);
-            string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
-            ExecuteMyQuery(deletequery);
-            populatedgvAsiakkaat();
+            DialogResult poisto = MessageBox.Show("Haluatko varmasti poistaa kyseisen asiakkaan?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (poisto == DialogResult.Yes)
+            {
+                int numero = int.Parse(tbasiakasPostinumero.Text);
+                string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
+                ExecuteMyQuery(deletequery);
+                populatedgvAsiakkaat();
+            }
         }
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
@@ -111,7 +121,7 @@ namespace Mokkivarausjarjestelma
             }
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
-            string insertPostiQuery = "INSERT INTO posti(postinro, toimipaikka) VALUES (@postinro, @toimipaikka)";
+            string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
             try
             {
                 using (MySqlConnection myconnection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti"))
@@ -153,8 +163,35 @@ namespace Mokkivarausjarjestelma
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ei voi lisätä päällekkäin. Tsekkaa postinumero ja id.");
+                MessageBox.Show("Ei voi lisätä päällekkäin. Tsekkaa postinumero ja asiakasid.");
             }
+        }
+
+        private void FormAsiakashallinta_Load(object sender, EventArgs e)
+        {
+            populatedgvAsiakkaat();
+        }
+
+        private void btnAsiakasPaivita_Click(object sender, EventArgs e)
+        {
+            string kysely = "UPDATE asiakas SET postinro='" + tbasiakasPostinumero.Text + "', etunimi='" + tbAsiakasEtunimi.Text +
+                "', sukunimi='" + tbAsiakasSukunimi.Text + "', lahiosoite='" + tbAsiakasLahiosoite.Text + "', email='" + tbAsiakasSahkoposti.Text +
+                "', puhelinnro=" + tbAsiakasPuhelinnumero.Text + " WHERE asiakas_id = " + tbAsiakasid.Text;
+            ExecuteMyQuery(kysely);
+            populatedgvAsiakkaat();
+        }
+
+        private void dgvAsiakashallinta_Click(object sender, EventArgs e)
+        {
+            tbAsiakasid.Text = dgvAsiakashallinta.CurrentRow.Cells[0].Value.ToString();
+            tbasiakasPostinumero.Text = dgvAsiakashallinta.CurrentRow.Cells[1].Value.ToString();
+            tbAsiakasEtunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[2].Value.ToString();
+            tbAsiakasSukunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[3].Value.ToString();
+            tbAsiakasLahiosoite.Text = dgvAsiakashallinta.CurrentRow.Cells[4].Value.ToString();
+            tbAsiakasSahkoposti.Text = dgvAsiakashallinta.CurrentRow.Cells[5].Value.ToString();
+            tbAsiakasPuhelinnumero.Text = dgvAsiakashallinta.CurrentRow.Cells[6].Value.ToString();
+            btnAsiakasPaivita.Visible = true;
+            btnAsiakasPoista.Visible = true;
         }
     }
 }

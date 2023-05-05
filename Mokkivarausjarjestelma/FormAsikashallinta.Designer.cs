@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAsiakashallinta));
             btnTakaisinAloitusFormiin = new Button();
             btnAsiakasPoista = new Button();
             btnAsiakasPaivita = new Button();
@@ -48,7 +49,10 @@
             lblPostinumero = new Label();
             lblAsiakasid = new Label();
             dgvAsiakashallinta = new DataGridView();
+            panel1 = new Panel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAsiakashallinta).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnTakaisinAloitusFormiin
@@ -84,6 +88,7 @@
             btnAsiakasPaivita.Text = "Päivitä";
             btnAsiakasPaivita.UseVisualStyleBackColor = true;
             btnAsiakasPaivita.Visible = false;
+            btnAsiakasPaivita.Click += btnAsiakasPaivita_Click;
             // 
             // btnAsiakasLisaa
             // 
@@ -223,12 +228,31 @@
             dgvAsiakashallinta.RowTemplate.Height = 29;
             dgvAsiakashallinta.Size = new Size(731, 516);
             dgvAsiakashallinta.TabIndex = 77;
+            dgvAsiakashallinta.Click += dgvAsiakashallinta_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(14, 573);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(971, 95);
+            panel1.TabIndex = 96;
+            // 
+            // label1
+            // 
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(922, 92);
+            label1.TabIndex = 0;
+            label1.Text = resources.GetString("label1.Text");
             // 
             // FormAsiakashallinta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1097, 835);
+            Controls.Add(panel1);
             Controls.Add(btnAsiakasPoista);
             Controls.Add(btnAsiakasPaivita);
             Controls.Add(btnAsiakasLisaa);
@@ -252,7 +276,9 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormAsiakashallinta";
             Text = "FormAsiakashallinta";
+            Load += FormAsiakashallinta_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAsiakashallinta).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -279,5 +305,7 @@
         private Label lblPostinumero;
         private Label lblAsiakasid;
         private DataGridView dgvAsiakashallinta;
+        private Panel panel1;
+        private Label label1;
     }
 }

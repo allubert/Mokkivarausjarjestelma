@@ -57,4 +57,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Voit hakea, lisätä, päivittää ja poistaa tietoa tässä formissa. Sinun tulee ensimmäisenä, joko hakea tietoja tai lisätä ennen kuin voit poistaa tai päivittää. Puuttuvat napit tulevat siis näkyviin, kun olet hakenut tai lisännyt tietoa. Voit hakea tietoa suoraan taulukosta klikkaamalla hiirellä tai sitten asiakasid:n perusteella. Tietojen lisäämisessä et voi käyttää samaa asiakasid:tä usealla asiakkaalla, koska muuten asiakkaat menevät sekaisin tietokannassa. Muuten ei ole rajoitteita.
+</value>
+  </data>
 </root>
