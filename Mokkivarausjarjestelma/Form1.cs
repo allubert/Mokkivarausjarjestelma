@@ -391,7 +391,7 @@ namespace Mokkivarausjarjestelma
         }
         private void btnAsiakas_Click_1(object sender, EventArgs e)
         {
-            FormAsikashallinta formasiakashallinta = new FormAsikashallinta();
+            FormAsiakashallinta formasiakashallinta = new FormAsiakashallinta();
             this.Hide();
 
             formasiakashallinta.ShowDialog();
