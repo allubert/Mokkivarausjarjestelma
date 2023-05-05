@@ -16,6 +16,8 @@ namespace Mokkivarausjarjestelma
         public FormMokitJaMokkivaraukset()
         {
             InitializeComponent();
+            dgMokkiLista.AutoGenerateColumns = true;
+            UpdatedgMokkiLista();
         }
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
 
