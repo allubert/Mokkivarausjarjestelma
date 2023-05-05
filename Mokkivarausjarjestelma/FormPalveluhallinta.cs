@@ -55,7 +55,6 @@ namespace Mokkivarausjarjestelma
                     return;
                 }
             }
-
             try
             {
                 using (connection)
@@ -100,7 +99,6 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
         {
-            
             populatedgvPalvelut();
         }
 
