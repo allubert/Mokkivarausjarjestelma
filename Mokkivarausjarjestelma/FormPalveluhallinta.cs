@@ -102,5 +102,14 @@ namespace Mokkivarausjarjestelma
             tbPalveluhinta.Text = dgvPalvelut.CurrentRow.Cells[5].Value.ToString();
             tbPalvelualv.Text = dgvPalvelut.CurrentRow.Cells[6].Value.ToString();
         }
+
+        private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
+        {
+            Form formaloitus = new Form1();
+            this.Hide();
+
+            formaloitus.ShowDialog();
+            this.Close();
+        }
     }
 }

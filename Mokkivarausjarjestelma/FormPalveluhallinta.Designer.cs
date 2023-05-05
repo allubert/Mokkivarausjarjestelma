@@ -47,6 +47,7 @@
             this.dgvPalvelut = new System.Windows.Forms.DataGridView();
             this.tbAlueID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,11 +214,22 @@
             this.label1.TabIndex = 35;
             this.label1.Text = "AlueID";
             // 
+            // btnTakaisinAloitusFormiin
+            // 
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(837, 558);
+            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.TabIndex = 76;
+            this.btnTakaisinAloitusFormiin.Text = "NEEKERI";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
             // FormPalveluhallinta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 593);
+            this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbAlueID);
             this.Controls.Add(this.rtbPalvelukuvaus);
@@ -267,5 +279,6 @@
         private DataGridView dgvPalvelut;
         private TextBox tbAlueID;
         private Label label1;
+        private Button btnTakaisinAloitusFormiin;
     }
 }
