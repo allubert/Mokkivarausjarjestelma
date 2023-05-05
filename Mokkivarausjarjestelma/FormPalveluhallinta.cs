@@ -66,26 +66,33 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
         {
-            dgvPalvelut.Update();
+            populatedgvPalvelut();
         }
 
         private void btnPalveluPoista_Click(object sender, EventArgs e)
         {
-            if (dgvPalvelut.SelectedRows.Count == 0) 
+            string deleteQuery = "DELETE FROM palvelu WHERE palvelu_id = @id";
+
+            if (dgvPalvelut.SelectedRows.Count > 0) 
             {
-                MessageBox.Show("Valitse rivi, jonka haluat poistaa.", "Riviä ei ole valittu!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+                int valittuIndex = dgvPalvelut.SelectedRows[0].Index;
+                int poistoID = Convert.ToInt32(dgvPalvelut[0, valittuIndex].Value);
 
-            DialogResult result = MessageBox.Show("Oletko varma, että haluat poistaa kyseisen rivin?", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Oletko varma, että haluat poistaa kyseisen rivin tietokannastasi? Tämä poistaa kaikki syöttämäsi tiedot tietokantaan.", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes) 
-            {
-                DataGridViewRow rivi = dgvPalvelut.SelectedRows[0];
-
-                if (rivi.IsNewRow) 
+                if (result == DialogResult.Yes)
                 {
-                    dgvPalvelut.Rows.RemoveAt(rivi.Index);
+                    using (connection) 
+                    {
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(deleteQuery, connection)) 
+                        {
+                            command.Parameters.AddWithValue("@id", poistoID);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    dgvPalvelut.Rows.RemoveAt(valittuIndex);
+                    populatedgvPalvelut();
                 }
             }
         }
