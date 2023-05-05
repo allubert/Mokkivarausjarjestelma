@@ -324,7 +324,7 @@ namespace Mokkivarausjarjestelma
                 tbAsiakasPuhelinnumero.Text = row["puhelinnro"].ToString();
             }
             btnAsiakasPaivita.Visible = true;
-            btnAsiakasPoista.Visible = true;    
+            btnAsiakasPoista.Visible = true;
         }
 
         private void tbcAsiakasHallinta_Click(object sender, EventArgs e)
@@ -361,11 +361,11 @@ namespace Mokkivarausjarjestelma
             {
                 using (MySqlCommand command = new MySqlCommand(MokintiedotInsertQuery, myconnection))
                 {
-                    
+
                     command.Parameters.AddWithValue("@alueid", alueid);
                     command.Parameters.AddWithValue("@postinro", postinro);
                     command.Parameters.AddWithValue("@toimipaikka", toimipaikka);
-                 
+
                     myconnection.Open();
                     command.ExecuteNonQuery();
                     myconnection.Close();
@@ -374,6 +374,9 @@ namespace Mokkivarausjarjestelma
             UpdatedgMokkiLista();
         }
 
-       
+        private void tbpgAsiakashallinta_Click(object sender, EventArgs e)
+        {
+            populatedgvAsiakkaat();
+        }
     }
 }
