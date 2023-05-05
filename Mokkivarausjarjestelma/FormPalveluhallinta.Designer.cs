@@ -216,11 +216,11 @@
             // 
             // btnTakaisinAloitusFormiin
             // 
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(837, 558);
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(11, 558);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(137, 23);
             this.btnTakaisinAloitusFormiin.TabIndex = 76;
-            this.btnTakaisinAloitusFormiin.Text = "NEEKERI";
+            this.btnTakaisinAloitusFormiin.Text = "Takaisin aloitussivulle";
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
             // 
