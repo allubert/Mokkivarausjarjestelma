@@ -9,7 +9,7 @@ namespace Mokkivarausjarjestelma
         {
             InitializeComponent();
         }
-
+        /*
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
 
         MySqlCommand command;
@@ -378,7 +378,7 @@ namespace Mokkivarausjarjestelma
         {
             populatedgvAsiakkaat();
         }
-
+        */
         private void btnToiminta_Click_1(object sender, EventArgs e)
         {
 
@@ -389,12 +389,6 @@ namespace Mokkivarausjarjestelma
             this.Close();
 
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnAsiakas_Click_1(object sender, EventArgs e)
         {
             FormAsikashallinta formasiakashallinta = new FormAsikashallinta();
@@ -410,6 +404,15 @@ namespace Mokkivarausjarjestelma
             this.Hide();
 
             formlaskutus.ShowDialog();
+            this.Close();
+        }
+
+        private void btnMokkivaraus_Click(object sender, EventArgs e)
+        {
+            Form formmokit = new FormMokitJaMokkivaraukset();
+            this.Hide();
+
+            formmokit.ShowDialog();
             this.Close();
         }
     }

@@ -110,8 +110,13 @@ namespace Mokkivarausjarjestelma
             }
         }
 
+        private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
+        {
+            Form formaloitus = new Form1();
+            this.Hide();
 
-
-
+            formaloitus.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -58,6 +58,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMokkiListaOhje = new System.Windows.Forms.Label();
+            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiLista)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +103,7 @@
             // 
             // btnVaraaValittuMokki
             // 
-            this.btnVaraaValittuMokki.Location = new System.Drawing.Point(166, 19);
+            this.btnVaraaValittuMokki.Location = new System.Drawing.Point(169, 1);
             this.btnVaraaValittuMokki.Name = "btnVaraaValittuMokki";
             this.btnVaraaValittuMokki.Size = new System.Drawing.Size(75, 23);
             this.btnVaraaValittuMokki.TabIndex = 57;
@@ -312,11 +313,22 @@
             this.lblMokkiListaOhje.TabIndex = 43;
             this.lblMokkiListaOhje.Text = resources.GetString("lblMokkiListaOhje.Text");
             // 
+            // btnTakaisinAloitusFormiin
+            // 
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(4, 1);
+            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.TabIndex = 74;
+            this.btnTakaisinAloitusFormiin.Text = "button1";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
             // FormMokitJaMokkivaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 626);
+            this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.btnLisaaMokinTiedot);
             this.Controls.Add(this.btnMuokkaaValitunMokinTietoja);
             this.Controls.Add(this.btnMokkiPoista);
@@ -386,5 +398,6 @@
         private Panel panel2;
         private Label label1;
         private Label lblMokkiListaOhje;
+        private Button btnTakaisinAloitusFormiin;
     }
 }

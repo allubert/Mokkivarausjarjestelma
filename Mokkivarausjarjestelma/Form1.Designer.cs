@@ -255,6 +255,7 @@
             this.btnMokkivaraus.TabIndex = 8;
             this.btnMokkivaraus.Text = "Mökkivarausten hallinta";
             this.btnMokkivaraus.UseVisualStyleBackColor = true;
+            this.btnMokkivaraus.Click += new System.EventHandler(this.btnMokkivaraus_Click);
             // 
             // tbpgAsiakashallinta
             // 
@@ -1067,7 +1068,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "  ";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tbcAsiakasHallinta.ResumeLayout(false);
             this.tbpgAloitussivu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
