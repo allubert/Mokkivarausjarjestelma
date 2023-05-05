@@ -216,6 +216,7 @@
             this.btnLasku.TabIndex = 10;
             this.btnLasku.Text = "Laskujen hallinta";
             this.btnLasku.UseVisualStyleBackColor = true;
+            this.btnLasku.Click += new System.EventHandler(this.btnLasku_Click_1);
             // 
             // btnPalvelu
             // 
@@ -234,6 +235,7 @@
             this.btnAsiakas.TabIndex = 9;
             this.btnAsiakas.Text = "Asiakashallinta";
             this.btnAsiakas.UseVisualStyleBackColor = true;
+            this.btnAsiakas.Click += new System.EventHandler(this.btnAsiakas_Click_1);
             // 
             // btnToiminta
             // 

@@ -394,5 +394,23 @@ namespace Mokkivarausjarjestelma
         {
 
         }
+
+        private void btnAsiakas_Click_1(object sender, EventArgs e)
+        {
+            FormAsikashallinta formasiakashallinta = new FormAsikashallinta();
+            this.Hide();
+
+            formasiakashallinta.ShowDialog();
+            this.Close();
+        }
+
+        private void btnLasku_Click_1(object sender, EventArgs e)
+        {
+            FormLaskutus formlaskutus = new FormLaskutus();
+            this.Hide();
+
+            formlaskutus.ShowDialog();
+            this.Close();
+        }
     }
 }
