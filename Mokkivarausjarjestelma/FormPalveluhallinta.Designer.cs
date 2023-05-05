@@ -252,6 +252,7 @@
             this.Name = "FormPalveluhallinta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Palveluiden hallinta";
+            this.Load += new System.EventHandler(this.FormPalveluhallinta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

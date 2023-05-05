@@ -42,26 +42,60 @@ namespace Mokkivarausjarjestelma
             double hinta = double.Parse(tbPalveluhinta.Text);
             double alv = double.Parse(tbPalvelualv.Text);
 
-
             string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
-            using (connection)
-            {
-                using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@palveluid", palveluid);
-                    command.Parameters.AddWithValue("@alueid", alueid);
-                    command.Parameters.AddWithValue("@nimi", nimi);
-                    command.Parameters.AddWithValue("@tyyppi", tyyppi);
-                    command.Parameters.AddWithValue("@palvelukuvaus", palvelukuvaus);
-                    command.Parameters.AddWithValue("@hinta", hinta);
-                    command.Parameters.AddWithValue("@alv", alv);
+            string query = "SELECT COUNT(*) FROM palvelu WHERE palvelu_id = @palveluid";
+            string insertPalveluQuery = "INSERT INTO palvelu(palvelu_id) VALUES (@palveluid)";
 
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+            foreach (TextBox tb in Controls.OfType<TextBox>())
+            {
+                if (tb.Text == "")
+                {
+                    tb.Focus();
+                    MessageBox.Show("Et ole täyttänyt kaikkia kenttiä!");
+                    return;
                 }
             }
-            populatedgvPalvelut();
+
+            try
+            {
+                using (connection)
+                {
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@palveluid", palveluid);
+                        command.Parameters.AddWithValue("@alueid", alueid);
+                        command.Parameters.AddWithValue("@nimi", nimi);
+                        command.Parameters.AddWithValue("@tyyppi", tyyppi);
+                        command.Parameters.AddWithValue("@palvelukuvaus", palvelukuvaus);
+                        command.Parameters.AddWithValue("@hinta", hinta);
+                        command.Parameters.AddWithValue("@alv", alv);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                        using (MySqlCommand command2 = new MySqlCommand(query, connection))
+                        {
+                            command2.Parameters.AddWithValue("@palveluid", tbPalveluID.Text);
+                            int palveluIDlaskuri = Convert.ToInt32(command2.ExecuteScalar());
+
+                            if (palveluIDlaskuri == 0) 
+                            {
+                                using (MySqlCommand palvelu = new MySqlCommand(insertPalveluQuery, connection)) 
+                                {
+                                    palvelu.Parameters.AddWithValue("@palveluid", tbPalveluID);
+                                    palvelu.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        command.ExecuteNonQuery();
+                        populatedgvPalvelut();
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Olit juuri niin idiootti, että syötit jo olemassa olevan palveluID:n tietokantaan. Ole hyvä ja tapa itsesi.");
+            }
         }
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
@@ -120,6 +154,13 @@ namespace Mokkivarausjarjestelma
 
             formaloitus.ShowDialog();
             this.Close();
+        }
+
+        private void FormPalveluhallinta_Load(object sender, EventArgs e)
+        {
+            //päivittää datagridviewin heti sovelluksen käynnistäessä
+
+            populatedgvPalvelut();
         }
     }
 }
