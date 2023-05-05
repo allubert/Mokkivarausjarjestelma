@@ -319,7 +319,7 @@
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
             this.btnTakaisinAloitusFormiin.TabIndex = 74;
-            this.btnTakaisinAloitusFormiin.Text = "button1";
+            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
             // 

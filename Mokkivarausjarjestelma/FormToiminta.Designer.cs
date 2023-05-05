@@ -43,6 +43,7 @@
             this.dgvHallinta = new System.Windows.Forms.DataGridView();
             this.btnToimintaPoistaAlue = new System.Windows.Forms.Button();
             this.btnToimintaLisaaAlue = new System.Windows.Forms.Button();
+            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             this.pnlToiminta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHallinta)).BeginInit();
             this.SuspendLayout();
@@ -109,7 +110,7 @@
             // 
             // tbToimintaAlue
             // 
-            this.tbToimintaAlue.Location = new System.Drawing.Point(3, 83);
+            this.tbToimintaAlue.Location = new System.Drawing.Point(6, 83);
             this.tbToimintaAlue.Name = "tbToimintaAlue";
             this.tbToimintaAlue.Size = new System.Drawing.Size(199, 23);
             this.tbToimintaAlue.TabIndex = 16;
@@ -183,11 +184,22 @@
             this.btnToimintaLisaaAlue.Text = "Lisää toiminta-alue";
             this.btnToimintaLisaaAlue.UseVisualStyleBackColor = true;
             // 
+            // btnTakaisinAloitusFormiin
+            // 
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(855, 591);
+            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.TabIndex = 75;
+            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
             // FormToiminta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 626);
+            this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.btnToimintaRaportointi);
             this.Controls.Add(this.pnlToiminta);
             this.Controls.Add(this.btnToimintaKohteet);
@@ -221,5 +233,6 @@
         private DataGridView dgvHallinta;
         private Button btnToimintaPoistaAlue;
         private Button btnToimintaLisaaAlue;
+        private Button btnTakaisinAloitusFormiin;
     }
 }

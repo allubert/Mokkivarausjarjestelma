@@ -28,12 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnTakaisinAloitusFormiin
+            // 
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(695, 415);
+            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.TabIndex = 76;
+            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
+            // FormLaskutus
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTakaisinAloitusFormiin);
+            this.Name = "FormLaskutus";
             this.Text = "FormLaskutus";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Button btnTakaisinAloitusFormiin;
     }
 }

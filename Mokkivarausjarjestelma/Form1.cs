@@ -415,5 +415,14 @@ namespace Mokkivarausjarjestelma
             formmokit.ShowDialog();
             this.Close();
         }
+
+        private void btnPalvelu_Click(object sender, EventArgs e)
+        {
+            FormPalveluhallinta formpalvelu = new FormPalveluhallinta();
+            this.Hide();
+
+            formpalvelu.ShowDialog();
+            this.Close();
+        }
     }
 }

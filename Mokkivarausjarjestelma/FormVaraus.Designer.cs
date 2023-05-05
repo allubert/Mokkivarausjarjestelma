@@ -46,6 +46,7 @@
             this.lblVarausValittuAsiakasNimi = new System.Windows.Forms.Label();
             this.btnMokinVarausTarkastaPvm = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,11 +208,22 @@
             this.label6.Text = "Tarkasta, etteivät valitut päivämäärät mene\r\npäällekäin olemassaolevan varauksen " +
     "kanssa";
             // 
+            // btnTakaisinAloitusFormiin
+            // 
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 277);
+            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.TabIndex = 76;
+            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
             // FormVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 312);
+            this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnMokinVarausTarkastaPvm);
             this.Controls.Add(this.lblVarausValittuAsiakasNimi);
@@ -258,5 +270,6 @@
         private Label lblVarausValittuAsiakasNimi;
         private Button btnMokinVarausTarkastaPvm;
         private Label label6;
+        private Button btnTakaisinAloitusFormiin;
     }
 }

@@ -226,6 +226,7 @@
             this.btnPalvelu.TabIndex = 1;
             this.btnPalvelu.Text = "Palveluiden hallinta";
             this.btnPalvelu.UseVisualStyleBackColor = true;
+            this.btnPalvelu.Click += new System.EventHandler(this.btnPalvelu_Click);
             // 
             // btnAsiakas
             // 
