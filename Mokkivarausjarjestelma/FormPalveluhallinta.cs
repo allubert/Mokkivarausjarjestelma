@@ -32,7 +32,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluLisaa_Click(object sender, EventArgs e)
         {
-            //Palvelu tietojen lisääminen tietokannan tauluun "palvelu"
+            //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin
 
             int palveluid = int.Parse(tbPalveluID.Text);
             int alueid = int.Parse(tbAlueID.Text);
@@ -66,11 +66,14 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
         {
+            
             populatedgvPalvelut();
         }
 
         private void btnPalveluPoista_Click(object sender, EventArgs e)
         {
+            //poistaa tiedot datagridviewistä sekä tietokannasta
+
             string deleteQuery = "DELETE FROM palvelu WHERE palvelu_id = @id";
 
             if (dgvPalvelut.SelectedRows.Count > 0) 
