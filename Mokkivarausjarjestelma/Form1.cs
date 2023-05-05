@@ -378,5 +378,21 @@ namespace Mokkivarausjarjestelma
         {
             populatedgvAsiakkaat();
         }
+
+        private void btnToiminta_Click_1(object sender, EventArgs e)
+        {
+
+            FormToiminta formtoiminta = new FormToiminta();
+            this.Hide();
+
+            formtoiminta.ShowDialog();
+            this.Close();
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
