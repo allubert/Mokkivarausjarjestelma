@@ -32,7 +32,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluLisaa_Click(object sender, EventArgs e)
         {
-            //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin
+            //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin, tiedon lisääminen ei onnistu mikäli käyttäjä yrittää käyttää samaa palveluID:tä
 
             foreach (TextBox tb in Controls.OfType<TextBox>())
             {
