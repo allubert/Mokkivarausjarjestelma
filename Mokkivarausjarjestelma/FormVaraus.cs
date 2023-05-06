@@ -73,8 +73,9 @@ namespace Mokkivarausjarjestelma
             DateTime varattualkupvm = Convert.ToDateTime(dateTimeMokinVarausAlkuPvm.Text);
             DateTime varattuloppupvm = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
 
-            int asiakasid = int.Parse(cmbUusiVarausValitseAsiakas.Text);
-            int mokkimokkiid = int.Parse(cmbUusiVarausValitseMokki.Text);
+            int asiakasid = Convert.ToInt32(cmbUusiVarausValitseAsiakas.SelectedValue);
+            int mokkimokkiid = Convert.ToInt32(cmbUusiVarausValitseMokki.SelectedValue);
+
             int varausid = int.Parse(tbUusiVarausVarausID.Text);
             using (connection)
             {

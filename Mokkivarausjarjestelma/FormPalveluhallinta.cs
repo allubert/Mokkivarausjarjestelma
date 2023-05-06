@@ -19,6 +19,7 @@ namespace Mokkivarausjarjestelma
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+        MySqlCommand command;
 
         public void populatedgvPalvelut()
         {
@@ -30,44 +31,111 @@ namespace Mokkivarausjarjestelma
             dgvPalvelut.DataSource = table;
         }
 
+        public void ExecuteMyQuery(string query)
+        {
+            try
+            {
+                connection.Open();
+
+                command = new MySqlCommand(query, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Kysely suoritettu");
+                }
+                else
+                {
+                    MessageBox.Show("Kyselyä ei suoritettu");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         private void btnPalveluLisaa_Click(object sender, EventArgs e)
         {
-            //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin
+            //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin, tiedon lisääminen ei onnistu mikäli käyttäjä yrittää käyttää samaa palveluID:tä
+
+            foreach (TextBox tb in Controls.OfType<TextBox>())
+            {
+                if (tb.Text == "")
+                {
+                    tb.Focus();
+                    MessageBox.Show("Et ole täyttänyt kaikkia kenttiä!");
+                    return;
+                }
+            }
 
             int palveluid = int.Parse(tbPalveluID.Text);
             int alueid = int.Parse(tbAlueID.Text);
-            string nimi = tbPalvelunimi.Text.ToString();
+            string nimi = tbPalvelunimi.Text;
             int tyyppi = int.Parse(tbPalvelutyyppi.Text);
-            string palvelukuvaus = rtbPalvelukuvaus.Text.ToString();
+            string palvelukuvaus = rtbPalvelukuvaus.Text;
             double hinta = double.Parse(tbPalveluhinta.Text);
             double alv = double.Parse(tbPalvelualv.Text);
 
-
             string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
-            using (connection)
-            {
-                using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@palveluid", palveluid);
-                    command.Parameters.AddWithValue("@alueid", alueid);
-                    command.Parameters.AddWithValue("@nimi", nimi);
-                    command.Parameters.AddWithValue("@tyyppi", tyyppi);
-                    command.Parameters.AddWithValue("@palvelukuvaus", palvelukuvaus);
-                    command.Parameters.AddWithValue("@hinta", hinta);
-                    command.Parameters.AddWithValue("@alv", alv);
 
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+            try
+            {
+                using (connection)
+                {
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@palveluid", palveluid);
+                        command.Parameters.AddWithValue("@alueid", alueid);
+                        command.Parameters.AddWithValue("@nimi", nimi);
+                        command.Parameters.AddWithValue("@tyyppi", tyyppi);
+                        command.Parameters.AddWithValue("@palvelukuvaus", palvelukuvaus);
+                        command.Parameters.AddWithValue("@hinta", hinta);
+                        command.Parameters.AddWithValue("@alv", alv);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        populatedgvPalvelut();
+                    }
                 }
             }
-            populatedgvPalvelut();
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Olit juuri niin idiootti, että syötit jo olemassa olevan palveluID:n tietokantaan. Ole hyvä ja tapa itsesi.");
+            }
         }
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
         {
-            
-            populatedgvPalvelut();
+            try
+            {
+                using (connection)
+                {
+                    string query = "UPDATE palvelu SET alue_id=@alueid, nimi=@nimi, tyyppi=@tyyppi, kuvaus=@palvelukuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palveluid";
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@alueid", tbAlueID.Text);
+                        command.Parameters.AddWithValue("@nimi", tbPalvelunimi.Text);
+                        command.Parameters.AddWithValue("@tyyppi", tbPalvelutyyppi.Text);
+                        command.Parameters.AddWithValue("@palvelukuvaus", rtbPalvelukuvaus.Text);
+                        command.Parameters.AddWithValue("@hinta", tbPalveluhinta.Text);
+                        command.Parameters.AddWithValue("@alv", tbPalvelualv.Text);
+                        command.Parameters.AddWithValue("@palveluid", tbPalveluID.Text);
+                        connection.Open();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        connection.Close();
+                        populatedgvPalvelut();
+                    }
+                }
+                MessageBox.Show("Tietokannan päivittäminen onnistui", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("Tietokannan päivittäminen epäonnistui");
+            }
+
         }
 
         private void btnPalveluPoista_Click(object sender, EventArgs e)
@@ -120,6 +188,13 @@ namespace Mokkivarausjarjestelma
 
             formaloitus.ShowDialog();
             this.Close();
+        }
+
+        private void FormPalveluhallinta_Load(object sender, EventArgs e)
+        {
+            //päivittää datagridviewin heti sovelluksen käynnistäessä
+
+            populatedgvPalvelut();
         }
     }
 }
