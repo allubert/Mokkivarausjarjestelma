@@ -34,18 +34,6 @@ namespace Mokkivarausjarjestelma
         {
             //Palvelu tietojen lisääminen tietokantaan sekä datagridviewiin
 
-            int palveluid = int.Parse(tbPalveluID.Text);
-            int alueid = int.Parse(tbAlueID.Text);
-            string nimi = tbPalvelunimi.Text.ToString();
-            int tyyppi = int.Parse(tbPalvelutyyppi.Text);
-            string palvelukuvaus = rtbPalvelukuvaus.Text.ToString();
-            double hinta = double.Parse(tbPalveluhinta.Text);
-            double alv = double.Parse(tbPalvelualv.Text);
-
-            string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
-            string query = "SELECT COUNT(*) FROM palvelu WHERE palvelu_id = @palveluid";
-            string insertPalveluQuery = "INSERT INTO palvelu(palvelu_id) VALUES (@palveluid)";
-
             foreach (TextBox tb in Controls.OfType<TextBox>())
             {
                 if (tb.Text == "")
@@ -55,6 +43,17 @@ namespace Mokkivarausjarjestelma
                     return;
                 }
             }
+
+            int palveluid = int.Parse(tbPalveluID.Text);
+            int alueid = int.Parse(tbAlueID.Text);
+            string nimi = tbPalvelunimi.Text;
+            int tyyppi = int.Parse(tbPalvelutyyppi.Text);
+            string palvelukuvaus = rtbPalvelukuvaus.Text;
+            double hinta = double.Parse(tbPalveluhinta.Text);
+            double alv = double.Parse(tbPalvelualv.Text);
+
+            string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
+
             try
             {
                 using (connection)
@@ -68,24 +67,7 @@ namespace Mokkivarausjarjestelma
                         command.Parameters.AddWithValue("@palvelukuvaus", palvelukuvaus);
                         command.Parameters.AddWithValue("@hinta", hinta);
                         command.Parameters.AddWithValue("@alv", alv);
-
                         connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        using (MySqlCommand command2 = new MySqlCommand(query, connection))
-                        {
-                            command2.Parameters.AddWithValue("@palveluid", tbPalveluID.Text);
-                            int palveluIDlaskuri = Convert.ToInt32(command2.ExecuteScalar());
-
-                            if (palveluIDlaskuri == 0) 
-                            {
-                                using (MySqlCommand palvelu = new MySqlCommand(insertPalveluQuery, connection)) 
-                                {
-                                    palvelu.Parameters.AddWithValue("@palveluid", tbPalveluID);
-                                    palvelu.ExecuteNonQuery();
-                                }
-                            }
-                        }
                         command.ExecuteNonQuery();
                         populatedgvPalvelut();
                     }
