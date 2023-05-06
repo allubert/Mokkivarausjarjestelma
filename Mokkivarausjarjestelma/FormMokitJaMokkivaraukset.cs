@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,42 @@ namespace Mokkivarausjarjestelma
             UpdatedgMokkiLista();
             this.Shown += Form_Shown; // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin
             btnMuokkaaValitunMokinTietoja.Enabled = false;
+            using (connection)
+            {
+                try
+                {
+                    // täyttää alue_id comboboxin
+                    string alueidQuery = "SELECT alue_id FROM alue";
+                    MySqlDataAdapter alueAdapter = new MySqlDataAdapter(alueidQuery, connection);
+                    DataSet alueDs= new DataSet();
+                    alueAdapter.Fill(alueDs, "alue");
+
+                    cmbUusiMokkiValitseAlueID.DisplayMember = "alue_id";
+                    cmbUusiMokkiValitseAlueID.ValueMember = "alue_id";
+                    cmbUusiMokkiValitseAlueID.DataSource = alueDs.Tables["alue"];
+
+
+                    // täyttää postinumero comboboxin
+                    string postinroQuery = "SELECT postinro FROM posti";
+                    MySqlDataAdapter postiAdapter = new MySqlDataAdapter(postinroQuery, connection);
+                    DataSet postiDs = new DataSet();
+                    postiAdapter.Fill(postiDs, "posti");
+
+                    cmbUusiMokkiValitsePostiNro.DisplayMember = "postinro";
+                    cmbUusiMokkiValitsePostiNro.ValueMember = "postinro";
+                    cmbUusiMokkiValitsePostiNro.DataSource = postiDs.Tables["posti"];
+                }
+                catch (Exception ex)
+                {
+                    // tietokantaan ei ole lisätty alueita, tai postitoimipaikkoja.
+                    MessageBox.Show("Mökkilista ei ole saatavilla, koska tietokannasta luultavasti puuttuu alueen ja/tai postitoimipaikan tiedot\n " + ex.ToString()); ;
+                    Form formaloitus = new Form1();
+                    this.Hide();
+
+                    formaloitus.ShowDialog();
+                    this.Close();
+                }
+            }
         }
         // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin
         private void Form_Shown(object sender, EventArgs e)
@@ -56,11 +93,12 @@ namespace Mokkivarausjarjestelma
         {
             if (btnLisaaMokinTiedot.Text == "Lisää mökin tiedot")
             {
-                if (ValidateTextBoxes())
+                if (ValidateTexts())
                 {
+                    int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
+                    string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
+
                     int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
-                    int alueid = int.Parse(tbValittuMokkiAlueID.Text);
-                    string postinro = tbValittuMokkiPostiNro.Text.ToString();
                     string mokkinimi = tbValittuMokkiNimi.Text.ToString();
                     string katuosoite = tbValittuMokkiOsoite.Text.ToString();
                     double hinta = double.Parse(tbValittuMokkiHintaVrk.Text);
@@ -115,8 +153,6 @@ namespace Mokkivarausjarjestelma
             {
                 ClearTextBoxes();
                 tbValittuMokkiMokkiID.ReadOnly = false;
-                tbValittuMokkiAlueID.ReadOnly = false;
-                tbValittuMokkiPostiNro.ReadOnly = false;
                 tbValittuMokkiNimi.ReadOnly = false;
                 tbValittuMokkiOsoite.ReadOnly = false;
                 tbValittuMokkiHintaVrk.ReadOnly = false;
@@ -126,13 +162,13 @@ namespace Mokkivarausjarjestelma
                 isUpdating = false;
                 btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
                 btnMuokkaaValitunMokinTietoja.Enabled = false;
+                cmbUusiMokkiValitseAlueID.Enabled = true;
+                cmbUusiMokkiValitsePostiNro.Enabled = true;
             }
         }
         private void ClearTextBoxes()
         {
             tbValittuMokkiMokkiID.Clear();
-            tbValittuMokkiAlueID.Clear();
-            tbValittuMokkiPostiNro.Clear();
             tbValittuMokkiNimi.Clear();
             tbValittuMokkiOsoite.Clear();
             tbValittuMokkiHintaVrk.Clear();
@@ -146,8 +182,8 @@ namespace Mokkivarausjarjestelma
             if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !isUpdating)
             {
                 tbValittuMokkiMokkiID.ReadOnly = true;
-                tbValittuMokkiAlueID.ReadOnly = true;
-                tbValittuMokkiPostiNro.ReadOnly = true;
+                cmbUusiMokkiValitseAlueID.Enabled = false;
+                cmbUusiMokkiValitsePostiNro.Enabled = false;
                 tbValittuMokkiNimi.ReadOnly = true;
                 tbValittuMokkiOsoite.ReadOnly = true;
                 tbValittuMokkiHintaVrk.ReadOnly = true;
@@ -156,8 +192,8 @@ namespace Mokkivarausjarjestelma
                 rtbValittuMokkiVarustelu.ReadOnly = true;
 
                 tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
-                tbValittuMokkiAlueID.Text = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
-                tbValittuMokkiPostiNro.Text = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
+                cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
+                cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
                 tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
                 tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
                 tbValittuMokkiHintaVrk.Text = dgMokkiLista.CurrentRow.Cells[5].Value.ToString();
@@ -235,9 +271,8 @@ namespace Mokkivarausjarjestelma
                 // muokkaustila
                 btnLisaaMokinTiedot.Enabled = false;
                 btnMuokkaaValitunMokinTietoja.Text = "Valmis";
-                tbValittuMokkiMokkiID.ReadOnly = false;
-                tbValittuMokkiAlueID.ReadOnly = false;
-                tbValittuMokkiPostiNro.ReadOnly = false;
+                cmbUusiMokkiValitseAlueID.Enabled = true;
+                cmbUusiMokkiValitsePostiNro.Enabled = true;
                 tbValittuMokkiNimi.ReadOnly = false;
                 tbValittuMokkiOsoite.ReadOnly = false;
                 tbValittuMokkiHintaVrk.ReadOnly = false;
@@ -248,7 +283,7 @@ namespace Mokkivarausjarjestelma
             }
             else
             {
-                if (ValidateTextBoxes())
+                if (ValidateTexts())
                 {
                     // tietokanta ja dgv päivittyvät
                     UpdateDatabaseAndDataGridView();
@@ -257,8 +292,8 @@ namespace Mokkivarausjarjestelma
                     btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
                     btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
                     tbValittuMokkiMokkiID.ReadOnly = true;
-                    tbValittuMokkiAlueID.ReadOnly = true;
-                    tbValittuMokkiPostiNro.ReadOnly = true;
+                    cmbUusiMokkiValitseAlueID.Enabled = false;
+                    cmbUusiMokkiValitsePostiNro.Enabled = false;
                     tbValittuMokkiNimi.ReadOnly = true;
                     tbValittuMokkiOsoite.ReadOnly = true;
                     tbValittuMokkiHintaVrk.ReadOnly = true;
@@ -279,8 +314,8 @@ namespace Mokkivarausjarjestelma
         private void UpdateDatabaseAndDataGridView()
         {
             int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
-            int alueid = int.Parse(tbValittuMokkiAlueID.Text);
-            string postinro = tbValittuMokkiPostiNro.Text.ToString();
+            int alueid = int.Parse(cmbUusiMokkiValitseAlueID.Text);
+            string postinro = cmbUusiMokkiValitsePostiNro.Text.ToString();
             string mokkinimi = tbValittuMokkiNimi.Text.ToString();
             string katuosoite = tbValittuMokkiOsoite.Text.ToString();
             double hinta = double.Parse(tbValittuMokkiHintaVrk.Text);
@@ -311,7 +346,7 @@ namespace Mokkivarausjarjestelma
             }
             UpdatedgMokkiLista();
         }
-        private bool ValidateTextBoxes()
+        private bool ValidateTexts()
         {
             int mokkiid;
             int alueid;
@@ -320,7 +355,7 @@ namespace Mokkivarausjarjestelma
 
             // tarkastaa int-tekstikentät
             if (!int.TryParse(tbValittuMokkiMokkiID.Text, out mokkiid) ||
-                !int.TryParse(tbValittuMokkiAlueID.Text, out alueid) ||
+                !int.TryParse(cmbUusiMokkiValitseAlueID.Text, out alueid) ||
                 !int.TryParse(tbValittuMokkiHloMaara.Text, out hlomaara))
             {
                 return false;
@@ -333,7 +368,7 @@ namespace Mokkivarausjarjestelma
             }
 
             // tarkastaa string-tekstikentät
-            if (string.IsNullOrWhiteSpace(tbValittuMokkiPostiNro.Text) ||
+            if (string.IsNullOrWhiteSpace(cmbUusiMokkiValitsePostiNro.Text) || !Regex.IsMatch(cmbUusiMokkiValitsePostiNro.Text, @"^\d{5}$") ||
                 string.IsNullOrWhiteSpace(tbValittuMokkiNimi.Text) ||
                 string.IsNullOrWhiteSpace(tbValittuMokkiOsoite.Text) ||
                 string.IsNullOrWhiteSpace(rtbValittuMokkiKuvaus.Text) ||

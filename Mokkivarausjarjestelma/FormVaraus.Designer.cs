@@ -148,6 +148,7 @@
             // 
             // cmbUusiVarausValitseAsiakas
             // 
+            this.cmbUusiVarausValitseAsiakas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUusiVarausValitseAsiakas.FormattingEnabled = true;
             this.cmbUusiVarausValitseAsiakas.Location = new System.Drawing.Point(117, 71);
             this.cmbUusiVarausValitseAsiakas.Name = "cmbUusiVarausValitseAsiakas";
@@ -156,6 +157,7 @@
             // 
             // cmbUusiVarausValitseMokki
             // 
+            this.cmbUusiVarausValitseMokki.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUusiVarausValitseMokki.FormattingEnabled = true;
             this.cmbUusiVarausValitseMokki.Location = new System.Drawing.Point(117, 42);
             this.cmbUusiVarausValitseMokki.Name = "cmbUusiVarausValitseMokki";

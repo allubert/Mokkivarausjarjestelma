@@ -44,7 +44,6 @@
             this.tbValittuMokkiNimi = new System.Windows.Forms.TextBox();
             this.tbValittuMokkiOsoite = new System.Windows.Forms.TextBox();
             this.tbValittuMokkiPostiNro = new System.Windows.Forms.TextBox();
-            this.tbValittuMokkiAlueID = new System.Windows.Forms.TextBox();
             this.tbValittuMokkiMokkiID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -57,6 +56,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMokkiListaOhje = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
+            this.cmbUusiMokkiValitseAlueID = new System.Windows.Forms.ComboBox();
+            this.cmbUusiMokkiValitsePostiNro = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiLista)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             // btnLisaaMokinTiedot
             // 
             this.btnLisaaMokinTiedot.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnLisaaMokinTiedot.Location = new System.Drawing.Point(12, 433);
+            this.btnLisaaMokinTiedot.Location = new System.Drawing.Point(15, 433);
             this.btnLisaaMokinTiedot.Name = "btnLisaaMokinTiedot";
             this.btnLisaaMokinTiedot.Size = new System.Drawing.Size(226, 30);
             this.btnLisaaMokinTiedot.TabIndex = 56;
@@ -75,9 +76,9 @@
             // btnMuokkaaValitunMokinTietoja
             // 
             this.btnMuokkaaValitunMokinTietoja.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMuokkaaValitunMokinTietoja.Location = new System.Drawing.Point(12, 396);
+            this.btnMuokkaaValitunMokinTietoja.Location = new System.Drawing.Point(15, 396);
             this.btnMuokkaaValitunMokinTietoja.Name = "btnMuokkaaValitunMokinTietoja";
-            this.btnMuokkaaValitunMokinTietoja.Size = new System.Drawing.Size(75, 30);
+            this.btnMuokkaaValitunMokinTietoja.Size = new System.Drawing.Size(72, 30);
             this.btnMuokkaaValitunMokinTietoja.TabIndex = 61;
             this.btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
             this.btnMuokkaaValitunMokinTietoja.UseVisualStyleBackColor = true;
@@ -86,7 +87,7 @@
             // btnMokkiPoista
             // 
             this.btnMokkiPoista.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMokkiPoista.Location = new System.Drawing.Point(769, 468);
+            this.btnMokkiPoista.Location = new System.Drawing.Point(1006, 468);
             this.btnMokkiPoista.Name = "btnMokkiPoista";
             this.btnMokkiPoista.Size = new System.Drawing.Size(187, 30);
             this.btnMokkiPoista.TabIndex = 60;
@@ -188,19 +189,11 @@
             // 
             // tbValittuMokkiPostiNro
             // 
-            this.tbValittuMokkiPostiNro.Location = new System.Drawing.Point(93, 82);
+            this.tbValittuMokkiPostiNro.Location = new System.Drawing.Point(461, 27);
             this.tbValittuMokkiPostiNro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiPostiNro.Name = "tbValittuMokkiPostiNro";
             this.tbValittuMokkiPostiNro.Size = new System.Drawing.Size(148, 23);
             this.tbValittuMokkiPostiNro.TabIndex = 49;
-            // 
-            // tbValittuMokkiAlueID
-            // 
-            this.tbValittuMokkiAlueID.Location = new System.Drawing.Point(93, 59);
-            this.tbValittuMokkiAlueID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbValittuMokkiAlueID.Name = "tbValittuMokkiAlueID";
-            this.tbValittuMokkiAlueID.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiAlueID.TabIndex = 48;
             // 
             // tbValittuMokkiMokkiID
             // 
@@ -269,7 +262,7 @@
             this.dgMokkiLista.RowHeadersWidth = 51;
             this.dgMokkiLista.RowTemplate.Height = 29;
             this.dgMokkiLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgMokkiLista.Size = new System.Drawing.Size(706, 450);
+            this.dgMokkiLista.Size = new System.Drawing.Size(943, 450);
             this.dgMokkiLista.TabIndex = 62;
             this.dgMokkiLista.SelectionChanged += new System.EventHandler(this.dgMokkiLista_SelectionChanged);
             // 
@@ -278,9 +271,10 @@
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblMokkiListaOhje);
+            this.panel2.Controls.Add(this.tbValittuMokkiPostiNro);
             this.panel2.Location = new System.Drawing.Point(4, 504);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(952, 119);
+            this.panel2.Size = new System.Drawing.Size(1189, 119);
             this.panel2.TabIndex = 73;
             // 
             // label1
@@ -313,11 +307,31 @@
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
             // 
+            // cmbUusiMokkiValitseAlueID
+            // 
+            this.cmbUusiMokkiValitseAlueID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUusiMokkiValitseAlueID.FormattingEnabled = true;
+            this.cmbUusiMokkiValitseAlueID.Location = new System.Drawing.Point(93, 59);
+            this.cmbUusiMokkiValitseAlueID.Name = "cmbUusiMokkiValitseAlueID";
+            this.cmbUusiMokkiValitseAlueID.Size = new System.Drawing.Size(148, 23);
+            this.cmbUusiMokkiValitseAlueID.TabIndex = 75;
+            // 
+            // cmbUusiMokkiValitsePostiNro
+            // 
+            this.cmbUusiMokkiValitsePostiNro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUusiMokkiValitsePostiNro.FormattingEnabled = true;
+            this.cmbUusiMokkiValitsePostiNro.Location = new System.Drawing.Point(93, 82);
+            this.cmbUusiMokkiValitsePostiNro.Name = "cmbUusiMokkiValitsePostiNro";
+            this.cmbUusiMokkiValitsePostiNro.Size = new System.Drawing.Size(148, 23);
+            this.cmbUusiMokkiValitsePostiNro.TabIndex = 76;
+            // 
             // FormMokitJaMokkivaraukset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 626);
+            this.ClientSize = new System.Drawing.Size(1198, 626);
+            this.Controls.Add(this.cmbUusiMokkiValitsePostiNro);
+            this.Controls.Add(this.cmbUusiMokkiValitseAlueID);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.btnLisaaMokinTiedot);
             this.Controls.Add(this.btnMuokkaaValitunMokinTietoja);
@@ -333,8 +347,6 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.tbValittuMokkiNimi);
             this.Controls.Add(this.tbValittuMokkiOsoite);
-            this.Controls.Add(this.tbValittuMokkiPostiNro);
-            this.Controls.Add(this.tbValittuMokkiAlueID);
             this.Controls.Add(this.tbValittuMokkiMokkiID);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
@@ -372,7 +384,6 @@
         private TextBox tbValittuMokkiNimi;
         private TextBox tbValittuMokkiOsoite;
         private TextBox tbValittuMokkiPostiNro;
-        private TextBox tbValittuMokkiAlueID;
         private TextBox tbValittuMokkiMokkiID;
         private Label label6;
         private Label label7;
@@ -385,5 +396,7 @@
         private Label label1;
         private Label lblMokkiListaOhje;
         private Button btnTakaisinAloitusFormiin;
+        private ComboBox cmbUusiMokkiValitseAlueID;
+        private ComboBox cmbUusiMokkiValitsePostiNro;
     }
 }
