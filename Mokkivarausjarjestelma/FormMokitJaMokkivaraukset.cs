@@ -181,27 +181,34 @@ namespace Mokkivarausjarjestelma
         {
             if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !isUpdating)
             {
-                tbValittuMokkiMokkiID.ReadOnly = true;
-                cmbUusiMokkiValitseAlueID.Enabled = false;
-                cmbUusiMokkiValitsePostiNro.Enabled = false;
-                tbValittuMokkiNimi.ReadOnly = true;
-                tbValittuMokkiOsoite.ReadOnly = true;
-                tbValittuMokkiHintaVrk.ReadOnly = true;
-                rtbValittuMokkiKuvaus.ReadOnly = true;
-                tbValittuMokkiHloMaara.ReadOnly = true;
-                rtbValittuMokkiVarustelu.ReadOnly = true;
+                try
+                {
+                    tbValittuMokkiMokkiID.ReadOnly = true;
+                    cmbUusiMokkiValitseAlueID.Enabled = false;
+                    cmbUusiMokkiValitsePostiNro.Enabled = false;
+                    tbValittuMokkiNimi.ReadOnly = true;
+                    tbValittuMokkiOsoite.ReadOnly = true;
+                    tbValittuMokkiHintaVrk.ReadOnly = true;
+                    rtbValittuMokkiKuvaus.ReadOnly = true;
+                    tbValittuMokkiHloMaara.ReadOnly = true;
+                    rtbValittuMokkiVarustelu.ReadOnly = true;
 
-                tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
-                cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
-                cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
-                tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
-                tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
-                tbValittuMokkiHintaVrk.Text = dgMokkiLista.CurrentRow.Cells[5].Value.ToString();
-                rtbValittuMokkiKuvaus.Text = dgMokkiLista.CurrentRow.Cells[6].Value.ToString();
-                tbValittuMokkiHloMaara.Text = dgMokkiLista.CurrentRow.Cells[7].Value.ToString();
-                rtbValittuMokkiVarustelu.Text = dgMokkiLista.CurrentRow.Cells[8].Value.ToString();
-                btnMuokkaaValitunMokinTietoja.Enabled = true;
-                btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
+                    tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
+                    cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
+                    cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
+                    tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
+                    tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
+                    tbValittuMokkiHintaVrk.Text = dgMokkiLista.CurrentRow.Cells[5].Value.ToString();
+                    rtbValittuMokkiKuvaus.Text = dgMokkiLista.CurrentRow.Cells[6].Value.ToString();
+                    tbValittuMokkiHloMaara.Text = dgMokkiLista.CurrentRow.Cells[7].Value.ToString();
+                    rtbValittuMokkiVarustelu.Text = dgMokkiLista.CurrentRow.Cells[8].Value.ToString();
+                    btnMuokkaaValitunMokinTietoja.Enabled = true;
+                    btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Virhe rivin valinnassa");
+                }
             }
             else
             {
