@@ -124,6 +124,7 @@ namespace Mokkivarausjarjestelma
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
                     connection.Close();
+                    populatedgvPalvelut();
                 }
             }
 
