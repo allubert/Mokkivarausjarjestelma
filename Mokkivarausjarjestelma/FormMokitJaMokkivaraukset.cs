@@ -82,8 +82,25 @@ namespace Mokkivarausjarjestelma
                             command.Parameters.AddWithValue("@hlomaara", hlomaara);
                             command.Parameters.AddWithValue("@mokinvarustelu", mokinvarustelu);
                             connection.Open();
-                            command.ExecuteNonQuery();
-                            connection.Close();
+                            try
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            catch (MySqlException ex)
+                            {
+                                if (ex.Number == 1062) // ID on jo käytössä
+                                {
+                                    MessageBox.Show("Mökki ID on jo olemassa. Valitse uusi ID.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Virhe tiedonsiirrossa: " + ex.Message);
+                                }
+                            }
+                            finally
+                            {
+                                connection.Close();
+                            }
                         }
                     }
                     UpdatedgMokkiLista();
@@ -108,6 +125,7 @@ namespace Mokkivarausjarjestelma
                 rtbValittuMokkiVarustelu.ReadOnly = false;
                 isUpdating = false;
                 btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
+                btnMuokkaaValitunMokinTietoja.Enabled = false;
             }
         }
         private void ClearTextBoxes()
@@ -146,8 +164,8 @@ namespace Mokkivarausjarjestelma
                 rtbValittuMokkiKuvaus.Text = dgMokkiLista.CurrentRow.Cells[6].Value.ToString();
                 tbValittuMokkiHloMaara.Text = dgMokkiLista.CurrentRow.Cells[7].Value.ToString();
                 rtbValittuMokkiVarustelu.Text = dgMokkiLista.CurrentRow.Cells[8].Value.ToString();
-                btnLisaaMokinTiedot.Enabled = false; // = "Tyhjennä tekstikentät";
                 btnMuokkaaValitunMokinTietoja.Enabled = true;
+                btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
             }
             else
             {
