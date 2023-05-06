@@ -19,6 +19,7 @@ namespace Mokkivarausjarjestelma
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
+        MySqlCommand command;
 
         public void populatedgvPalvelut()
         {
@@ -28,6 +29,33 @@ namespace Mokkivarausjarjestelma
             MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
             adapter.Fill(table);
             dgvPalvelut.DataSource = table;
+        }
+
+        public void ExecuteMyQuery(string query)
+        {
+            try
+            {
+                connection.Open();
+
+                command = new MySqlCommand(query, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Kysely suoritettu");
+                }
+                else
+                {
+                    MessageBox.Show("Kyselyä ei suoritettu");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         private void btnPalveluLisaa_Click(object sender, EventArgs e)
@@ -81,7 +109,24 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
         {
-            populatedgvPalvelut();
+            using (connection)
+            {
+                string query = "UPDATE palvelu SET alue_id=@alueid, nimi=@nimi, tyyppi=@tyyppi, kuvaus=@palvelukuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palveluid";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@alueid", tbAlueID.Text);
+                    command.Parameters.AddWithValue("@nimi", tbPalvelunimi.Text);
+                    command.Parameters.AddWithValue("@tyyppi", tbPalvelutyyppi.Text);
+                    command.Parameters.AddWithValue("@palvelukuvaus", rtbPalvelukuvaus.Text);
+                    command.Parameters.AddWithValue("@hinta", tbPalveluhinta.Text);
+                    command.Parameters.AddWithValue("@alv", tbPalvelualv.Text);
+                    command.Parameters.AddWithValue("@palveluid", tbPalveluID.Text);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+
         }
 
         private void btnPalveluPoista_Click(object sender, EventArgs e)
