@@ -198,6 +198,7 @@ namespace Mokkivarausjarjestelma
         }
         public void EmptyTB(Control con)
         {
+            //määritellään tekstikenttien tyhjennys
             foreach (Control c in con.Controls)
             {
                 if (c is TextBox)
@@ -217,6 +218,8 @@ namespace Mokkivarausjarjestelma
 
         private void btnPalveluTyhj_Click(object sender, EventArgs e)
         {
+            //varmistaa käyttäjältä haluaako hän tyhjentää napin painalluksellaan kaikki tekstikentät tyhjiksi
+
             DialogResult result = MessageBox.Show("Oletko varma, että haluat tyhjentää kaikki tekstikentät?", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
