@@ -58,8 +58,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblMokkiListaOhje.Text" xml:space="preserve">
-    <value>Mikäli haluat lisätä mökkilistalle uuden mökin tiedot, kirjoita ne tekstikenttiin.
-Paina sen jälkeen 'Lisää mökin tiedot'. Antamasi tiedot menevät tietokantaan, ja niiden pitäisi ilmestyä oheiselle listalle.
-</value>
+    <value>Jos haluat lisätä mökkilistalle uuden mökin tiedot, kirjoita ne tekstikenttiin. Paina sen jälkeen 'Lisää mökin tiedot'. Antamasi tiedot menevät tietokantaan, ja niiden pitäisi ilmestyä oheiselle listalle.
+Muokataksesi olemassaolevan mökin tietoja, valitse mökki listalta, ja paina 'Muokkaa'. (Mökki_ID:tä ei voi vaihtaa) Kun olet muokannut ja haluat tallentaa muutokset tietokantaan, paina 'Valmis'.
+Voit myös hakea mökkejä Alue_ID:n ja Postinumeron perusteella. 
+Voit poistaa mökin tietokannasta, mikäli sille ei ole tehty varausta. Valitse mökki listalta, ja paina 'Poista mökki tietokannasta'. 
+Mikäli haluat tehdä mökkivarauksia, paina 'Mökkivarausten hallinta'.</value>
+  </data>
+  <data name="lblHakuOhjeet.Text" xml:space="preserve">
+    <value>Hakutilan saa pois päältä 'Lopeta'-napista.
+
+Hakuohjeet:
+1. Jos haluat hakea AlueID:llä, kytke se
+päälle klikkaamalla checkboxia.
+Jos haluat hakea
+Postinumerolla, klikkaa sen kohdalla olevaa
+checkboxia.
+Voit myös hakea käyttämällä molempia; 
+klikkaa molemmat checkboxit päälle.
+
+2. Valitse sopivat hakukriteerit laatikosta
+/laatikoista
+
+3. Paina 'Lopeta'-napin vieressä olevasta
+hakupainikkeesta.
+
+4. Mökit, jotka sisältävät valitsemasi
+hakukriteerit, tulevat näkyviin listalle.
+
+(Hakemistila lähtee itsestään pois)</value>
   </data>
 </root>

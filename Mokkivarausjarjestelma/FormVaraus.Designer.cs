@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimeMokinVarausAlkuPvm = new System.Windows.Forms.DateTimePicker();
             this.dateTimeMokinVarausLoppuPvm = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,22 +45,29 @@
             this.tbUusiVarausVarausID = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblVarausValittuAsiakasNimi = new System.Windows.Forms.Label();
-            this.btnMokinVarausTarkastaPvm = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimeMokinVarausAlkuPvm
             // 
-            this.dateTimeMokinVarausAlkuPvm.Location = new System.Drawing.Point(117, 129);
+            this.dateTimeMokinVarausAlkuPvm.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.dateTimeMokinVarausAlkuPvm.CalendarMonthBackground = System.Drawing.Color.Beige;
+            this.dateTimeMokinVarausAlkuPvm.CalendarTitleBackColor = System.Drawing.Color.PaleGoldenrod;
+            this.dateTimeMokinVarausAlkuPvm.Location = new System.Drawing.Point(100, 140);
             this.dateTimeMokinVarausAlkuPvm.Name = "dateTimeMokinVarausAlkuPvm";
             this.dateTimeMokinVarausAlkuPvm.Size = new System.Drawing.Size(209, 23);
             this.dateTimeMokinVarausAlkuPvm.TabIndex = 0;
             // 
             // dateTimeMokinVarausLoppuPvm
             // 
-            this.dateTimeMokinVarausLoppuPvm.Location = new System.Drawing.Point(117, 168);
+            this.dateTimeMokinVarausLoppuPvm.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.dateTimeMokinVarausLoppuPvm.CalendarMonthBackground = System.Drawing.Color.Beige;
+            this.dateTimeMokinVarausLoppuPvm.CalendarTitleBackColor = System.Drawing.Color.PaleGoldenrod;
+            this.dateTimeMokinVarausLoppuPvm.Location = new System.Drawing.Point(100, 179);
             this.dateTimeMokinVarausLoppuPvm.Name = "dateTimeMokinVarausLoppuPvm";
             this.dateTimeMokinVarausLoppuPvm.Size = new System.Drawing.Size(209, 23);
             this.dateTimeMokinVarausLoppuPvm.TabIndex = 1;
@@ -67,41 +75,54 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 135);
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(15, 146);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 15);
+            this.label1.Size = new System.Drawing.Size(82, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Varaus alkaa:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 174);
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Location = new System.Drawing.Point(7, 185);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 15);
+            this.label2.Size = new System.Drawing.Size(90, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Varaus loppuu:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnValmisVaraus
             // 
+            this.btnValmisVaraus.BackColor = System.Drawing.Color.DarkRed;
             this.btnValmisVaraus.Enabled = false;
-            this.btnValmisVaraus.Location = new System.Drawing.Point(187, 271);
+            this.btnValmisVaraus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnValmisVaraus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnValmisVaraus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnValmisVaraus.Location = new System.Drawing.Point(136, 267);
             this.btnValmisVaraus.Name = "btnValmisVaraus";
-            this.btnValmisVaraus.Size = new System.Drawing.Size(139, 31);
+            this.btnValmisVaraus.Size = new System.Drawing.Size(179, 31);
             this.btnValmisVaraus.TabIndex = 5;
             this.btnValmisVaraus.Text = "Tallenna varaus";
-            this.btnValmisVaraus.UseVisualStyleBackColor = true;
+            this.btnValmisVaraus.UseVisualStyleBackColor = false;
             this.btnValmisVaraus.Click += new System.EventHandler(this.btnValmisVaraus_Click);
             // 
             // btnMokinVarausVahvista
             // 
-            this.btnMokinVarausVahvista.Enabled = false;
-            this.btnMokinVarausVahvista.Location = new System.Drawing.Point(187, 234);
+            this.btnMokinVarausVahvista.BackColor = System.Drawing.Color.DarkRed;
+            this.btnMokinVarausVahvista.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMokinVarausVahvista.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnMokinVarausVahvista.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnMokinVarausVahvista.Location = new System.Drawing.Point(136, 230);
             this.btnMokinVarausVahvista.Name = "btnMokinVarausVahvista";
-            this.btnMokinVarausVahvista.Size = new System.Drawing.Size(139, 31);
+            this.btnMokinVarausVahvista.Size = new System.Drawing.Size(179, 31);
             this.btnMokinVarausVahvista.TabIndex = 6;
-            this.btnMokinVarausVahvista.Text = "Vahvista päivämäärät";
-            this.btnMokinVarausVahvista.UseVisualStyleBackColor = true;
+            this.btnMokinVarausVahvista.Text = "Vahvista varauksen tiedot";
+            this.btnMokinVarausVahvista.UseVisualStyleBackColor = false;
             this.btnMokinVarausVahvista.Click += new System.EventHandler(this.btnMokinVarausVahvista_Click);
             // 
             // mySqlCommand1
@@ -114,11 +135,14 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 45);
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(15, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 15);
+            this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 7;
             this.label3.Text = "Valittu mökki:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblVarausValittuMokkiNimi
             // 
@@ -130,55 +154,76 @@
             // 
             // dgMokkiVaraukset
             // 
+            this.dgMokkiVaraukset.BackgroundColor = System.Drawing.Color.Firebrick;
+            this.dgMokkiVaraukset.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgMokkiVaraukset.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgMokkiVaraukset.Location = new System.Drawing.Point(332, 2);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMokkiVaraukset.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgMokkiVaraukset.EnableHeadersVisualStyles = false;
+            this.dgMokkiVaraukset.Location = new System.Drawing.Point(332, 9);
             this.dgMokkiVaraukset.Name = "dgMokkiVaraukset";
+            this.dgMokkiVaraukset.ReadOnly = true;
             this.dgMokkiVaraukset.RowTemplate.Height = 25;
-            this.dgMokkiVaraukset.Size = new System.Drawing.Size(704, 310);
+            this.dgMokkiVaraukset.Size = new System.Drawing.Size(747, 299);
             this.dgMokkiVaraukset.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 74);
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(43, 79);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 15);
+            this.label4.Size = new System.Drawing.Size(54, 15);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Varauksen tekijä:";
+            this.label4.Text = "Varaaja:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // cmbUusiVarausValitseAsiakas
             // 
+            this.cmbUusiVarausValitseAsiakas.BackColor = System.Drawing.Color.Beige;
             this.cmbUusiVarausValitseAsiakas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUusiVarausValitseAsiakas.FormattingEnabled = true;
-            this.cmbUusiVarausValitseAsiakas.Location = new System.Drawing.Point(117, 71);
+            this.cmbUusiVarausValitseAsiakas.Location = new System.Drawing.Point(100, 76);
             this.cmbUusiVarausValitseAsiakas.Name = "cmbUusiVarausValitseAsiakas";
             this.cmbUusiVarausValitseAsiakas.Size = new System.Drawing.Size(209, 23);
             this.cmbUusiVarausValitseAsiakas.TabIndex = 11;
             // 
             // cmbUusiVarausValitseMokki
             // 
+            this.cmbUusiVarausValitseMokki.BackColor = System.Drawing.Color.Beige;
             this.cmbUusiVarausValitseMokki.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUusiVarausValitseMokki.FormattingEnabled = true;
-            this.cmbUusiVarausValitseMokki.Location = new System.Drawing.Point(117, 42);
+            this.cmbUusiVarausValitseMokki.Location = new System.Drawing.Point(100, 47);
             this.cmbUusiVarausValitseMokki.Name = "cmbUusiVarausValitseMokki";
             this.cmbUusiVarausValitseMokki.Size = new System.Drawing.Size(209, 23);
             this.cmbUusiVarausValitseMokki.TabIndex = 12;
             // 
             // tbUusiVarausVarausID
             // 
-            this.tbUusiVarausVarausID.Location = new System.Drawing.Point(117, 100);
+            this.tbUusiVarausVarausID.BackColor = System.Drawing.Color.MistyRose;
+            this.tbUusiVarausVarausID.Location = new System.Drawing.Point(100, 105);
             this.tbUusiVarausVarausID.Name = "tbUusiVarausVarausID";
-            this.tbUusiVarausVarausID.Size = new System.Drawing.Size(147, 23);
+            this.tbUusiVarausVarausID.Size = new System.Drawing.Size(209, 23);
             this.tbUusiVarausVarausID.TabIndex = 13;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 103);
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(33, 108);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 15);
+            this.label5.Size = new System.Drawing.Size(64, 15);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Anna varaus_id:";
+            this.label5.Text = "Varaus_id:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblVarausValittuAsiakasNimi
             // 
@@ -188,65 +233,74 @@
             this.lblVarausValittuAsiakasNimi.Size = new System.Drawing.Size(0, 15);
             this.lblVarausValittuAsiakasNimi.TabIndex = 15;
             // 
-            // btnMokinVarausTarkastaPvm
-            // 
-            this.btnMokinVarausTarkastaPvm.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMokinVarausTarkastaPvm.Location = new System.Drawing.Point(187, 197);
-            this.btnMokinVarausTarkastaPvm.Name = "btnMokinVarausTarkastaPvm";
-            this.btnMokinVarausTarkastaPvm.Size = new System.Drawing.Size(139, 31);
-            this.btnMokinVarausTarkastaPvm.TabIndex = 16;
-            this.btnMokinVarausTarkastaPvm.Text = "Tarkasta päivämäärät";
-            this.btnMokinVarausTarkastaPvm.UseVisualStyleBackColor = true;
-            this.btnMokinVarausTarkastaPvm.Click += new System.EventHandler(this.btnMokinVarausTarkistaPvm_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(89, 9);
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label6.Location = new System.Drawing.Point(23, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(237, 26);
+            this.label6.Size = new System.Drawing.Size(285, 38);
             this.label6.TabIndex = 17;
             this.label6.Text = "Tarkasta, etteivät valitut päivämäärät mene\r\npäällekäin olemassaolevan varauksen " +
     "kanssa";
             // 
             // btnTakaisinAloitusFormiin
             // 
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 277);
+            this.btnTakaisinAloitusFormiin.BackColor = System.Drawing.Color.DarkRed;
+            this.btnTakaisinAloitusFormiin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTakaisinAloitusFormiin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTakaisinAloitusFormiin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 450);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
+            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 31);
             this.btnTakaisinAloitusFormiin.TabIndex = 76;
-            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
-            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.Text = "Takaisin";
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Firebrick;
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.dateTimeMokinVarausAlkuPvm);
+            this.panel1.Controls.Add(this.dateTimeMokinVarausLoppuPvm);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.tbUusiVarausVarausID);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmbUusiVarausValitseMokki);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.cmbUusiVarausValitseAsiakas);
+            this.panel1.Location = new System.Drawing.Point(7, 9);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(319, 299);
+            this.panel1.TabIndex = 77;
             // 
             // FormVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 312);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1083, 493);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnMokinVarausTarkastaPvm);
             this.Controls.Add(this.lblVarausValittuAsiakasNimi);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.tbUusiVarausVarausID);
-            this.Controls.Add(this.cmbUusiVarausValitseMokki);
-            this.Controls.Add(this.cmbUusiVarausValitseAsiakas);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.dgMokkiVaraukset);
             this.Controls.Add(this.lblVarausValittuMokkiNimi);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnMokinVarausVahvista);
             this.Controls.Add(this.btnValmisVaraus);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimeMokinVarausLoppuPvm);
-            this.Controls.Add(this.dateTimeMokinVarausAlkuPvm);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "FormVaraus";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Uusi Varaus";
+            this.Text = "Varausten hallinta";
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,8 +324,8 @@
         private TextBox tbUusiVarausVarausID;
         private Label label5;
         private Label lblVarausValittuAsiakasNimi;
-        private Button btnMokinVarausTarkastaPvm;
         private Label label6;
         private Button btnTakaisinAloitusFormiin;
+        private Panel panel1;
     }
 }
