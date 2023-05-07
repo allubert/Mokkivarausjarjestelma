@@ -14,7 +14,8 @@ namespace Mokkivarausjarjestelma
 {
     public partial class FormMokitJaMokkivaraukset : Form
     {
-        private bool isUpdating = false;
+        private bool muokkausMenossa = false;
+        private bool hakuPaalla = false;
 
         public FormMokitJaMokkivaraukset()
         {
@@ -159,7 +160,7 @@ namespace Mokkivarausjarjestelma
                 rtbValittuMokkiKuvaus.ReadOnly = false;
                 tbValittuMokkiHloMaara.ReadOnly = false;
                 rtbValittuMokkiVarustelu.ReadOnly = false;
-                isUpdating = false;
+                muokkausMenossa = false;
                 btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
                 btnMuokkaaValitunMokinTietoja.Enabled = false;
                 cmbUusiMokkiValitseAlueID.Enabled = true;
@@ -179,87 +180,104 @@ namespace Mokkivarausjarjestelma
 
         private void dgMokkiLista_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !isUpdating)
+            if (!hakuPaalla)
             {
-                try
+                if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !muokkausMenossa)
                 {
-                    tbValittuMokkiMokkiID.ReadOnly = true;
-                    cmbUusiMokkiValitseAlueID.Enabled = false;
-                    cmbUusiMokkiValitsePostiNro.Enabled = false;
-                    tbValittuMokkiNimi.ReadOnly = true;
-                    tbValittuMokkiOsoite.ReadOnly = true;
-                    tbValittuMokkiHintaVrk.ReadOnly = true;
-                    rtbValittuMokkiKuvaus.ReadOnly = true;
-                    tbValittuMokkiHloMaara.ReadOnly = true;
-                    rtbValittuMokkiVarustelu.ReadOnly = true;
+                    try
+                    {
+                        tbValittuMokkiMokkiID.ReadOnly = true;
+                        cmbUusiMokkiValitseAlueID.Enabled = false;
+                        cmbUusiMokkiValitsePostiNro.Enabled = false;
+                        tbValittuMokkiNimi.ReadOnly = true;
+                        tbValittuMokkiOsoite.ReadOnly = true;
+                        tbValittuMokkiHintaVrk.ReadOnly = true;
+                        rtbValittuMokkiKuvaus.ReadOnly = true;
+                        tbValittuMokkiHloMaara.ReadOnly = true;
+                        rtbValittuMokkiVarustelu.ReadOnly = true;
 
-                    tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
-                    cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
-                    cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
-                    tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
-                    tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
-                    tbValittuMokkiHintaVrk.Text = dgMokkiLista.CurrentRow.Cells[5].Value.ToString();
-                    rtbValittuMokkiKuvaus.Text = dgMokkiLista.CurrentRow.Cells[6].Value.ToString();
-                    tbValittuMokkiHloMaara.Text = dgMokkiLista.CurrentRow.Cells[7].Value.ToString();
-                    rtbValittuMokkiVarustelu.Text = dgMokkiLista.CurrentRow.Cells[8].Value.ToString();
-                    btnMuokkaaValitunMokinTietoja.Enabled = true;
-                    btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
+                        tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
+                        cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
+                        cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
+                        tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
+                        tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
+                        tbValittuMokkiHintaVrk.Text = dgMokkiLista.CurrentRow.Cells[5].Value.ToString();
+                        rtbValittuMokkiKuvaus.Text = dgMokkiLista.CurrentRow.Cells[6].Value.ToString();
+                        tbValittuMokkiHloMaara.Text = dgMokkiLista.CurrentRow.Cells[7].Value.ToString();
+                        rtbValittuMokkiVarustelu.Text = dgMokkiLista.CurrentRow.Cells[8].Value.ToString();
+                        btnMuokkaaValitunMokinTietoja.Enabled = true;
+                        btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Virhe rivin valinnassa");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Virhe rivin valinnassa");
+                    btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
                 }
             }
             else
             {
-                btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
-            }
+                return;
+            }            
         }
+
 
         private void btnPoistaValittuMokkiListalta_Click(object sender, EventArgs e)
         {
-            if (dgMokkiLista.SelectedRows.Count > 0)
+            
+            if (!hakuPaalla)
             {
-                DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun mökin tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
+                if (dgMokkiLista.SelectedRows.Count > 0)
                 {
-                    int selectedIndex = dgMokkiLista.SelectedRows[0].Index;
-                    int mokkiid = int.Parse(dgMokkiLista[0, selectedIndex].Value.ToString());
-                    string TarkastaMahdollisetVarauksetMokilleQuery = "SELECT * FROM varaus WHERE mokki_mokki_id = @mokkiid";
-
-                    using (connection)
+                    DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun mökin tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
                     {
-                        using (MySqlCommand checkCommand = new MySqlCommand(TarkastaMahdollisetVarauksetMokilleQuery, connection))
-                        {
-                            checkCommand.Parameters.AddWithValue("@mokkiid", mokkiid);
-                            connection.Open();
-                            MySqlDataReader reader = checkCommand.ExecuteReader();
+                        int selectedIndex = dgMokkiLista.SelectedRows[0].Index;
+                        int mokkiid = int.Parse(dgMokkiLista[0, selectedIndex].Value.ToString());
+                        string TarkastaMahdollisetVarauksetMokilleQuery = "SELECT * FROM varaus WHERE mokki_mokki_id = @mokkiid";
 
-                            if (!reader.HasRows) // true = Mökille ei varauksia, joten sen voi poistaa
+                        using (connection)
+                        {
+                            using (MySqlCommand checkCommand = new MySqlCommand(TarkastaMahdollisetVarauksetMokilleQuery, connection))
                             {
-                                reader.Close();
-                                string PoistaMokinTiedotQuery = "DELETE FROM mokki WHERE mokki_id = @mokkiid";
-                                using (MySqlCommand command = new MySqlCommand(PoistaMokinTiedotQuery, connection))
+                                checkCommand.Parameters.AddWithValue("@mokkiid", mokkiid);
+                                connection.Open();
+                                MySqlDataReader reader = checkCommand.ExecuteReader();
+
+                                if (!reader.HasRows) // true = Mökille ei varauksia, joten sen voi poistaa
                                 {
-                                    command.Parameters.AddWithValue("@mokkiid", mokkiid);
-                                    command.ExecuteNonQuery();
+                                    reader.Close();
+                                    string PoistaMokinTiedotQuery = "DELETE FROM mokki WHERE mokki_id = @mokkiid";
+                                    using (MySqlCommand command = new MySqlCommand(PoistaMokinTiedotQuery, connection))
+                                    {
+                                        command.Parameters.AddWithValue("@mokkiid", mokkiid);
+                                        command.ExecuteNonQuery();
+                                    }
+                                    UpdatedgMokkiLista();
+                                    ClearTextBoxes();
                                 }
-                                UpdatedgMokkiLista();
-                                ClearTextBoxes();
+                                else
+                                {
+                                    MessageBox.Show("Mökki on varattu. Sitä ei voi poistaa tietokannasta.");
+                                }
+                                connection.Close();
                             }
-                            else
-                            {
-                                MessageBox.Show("Mökki on varattu. Sitä ei voi poistaa tietokannasta.");
-                            }
-                            connection.Close();
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Valitse mökki, jonka haluat poistaa. Kokeile sitten uudelleen.");
                 }
             }
             else
             {
-                MessageBox.Show("Valitse mökki, jonka haluat poistaa. Kokeile sitten uudelleen.");
+                MessageBox.Show("Laita ensin haku pois päältä 'Lopeta'-napista");
             }
+            
         }
 
         
@@ -273,50 +291,59 @@ namespace Mokkivarausjarjestelma
         }
         private void btnMuokkaaValitunMokinTietoja_Click(object sender, EventArgs e)
         {
-            if (!isUpdating)
+            
+            if (!hakuPaalla)
             {
-                // muokkaustila
-                btnLisaaMokinTiedot.Enabled = false;
-                btnMuokkaaValitunMokinTietoja.Text = "Valmis";
-                cmbUusiMokkiValitseAlueID.Enabled = true;
-                cmbUusiMokkiValitsePostiNro.Enabled = true;
-                tbValittuMokkiNimi.ReadOnly = false;
-                tbValittuMokkiOsoite.ReadOnly = false;
-                tbValittuMokkiHintaVrk.ReadOnly = false;
-                rtbValittuMokkiKuvaus.ReadOnly = false;
-                tbValittuMokkiHloMaara.ReadOnly = false;
-                rtbValittuMokkiVarustelu.ReadOnly = false;
-                isUpdating = true;
-            }
-            else
-            {
-                if (ValidateTexts())
+                if (!muokkausMenossa)
                 {
-                    // tietokanta ja dgv päivittyvät
-                    UpdateDatabaseAndDataGridView();
-                    // pois muokkaustilasta
-                    btnLisaaMokinTiedot.Enabled = true;
-                    btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
-                    btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
-                    tbValittuMokkiMokkiID.ReadOnly = true;
-                    cmbUusiMokkiValitseAlueID.Enabled = false;
-                    cmbUusiMokkiValitsePostiNro.Enabled = false;
-                    tbValittuMokkiNimi.ReadOnly = true;
-                    tbValittuMokkiOsoite.ReadOnly = true;
-                    tbValittuMokkiHintaVrk.ReadOnly = true;
-                    rtbValittuMokkiKuvaus.ReadOnly = true;
-                    tbValittuMokkiHloMaara.ReadOnly = true;
-                    rtbValittuMokkiVarustelu.ReadOnly = true;
-                    // Set ReadOnly properties to true for all textboxes
-                    isUpdating = false;
-                    btnMuokkaaValitunMokinTietoja.Enabled = false;
+                    // muokkaustila
+                    btnLisaaMokinTiedot.Enabled = false;
+                    btnMuokkaaValitunMokinTietoja.Text = "Valmis";
+                    cmbUusiMokkiValitseAlueID.Enabled = true;
+                    cmbUusiMokkiValitsePostiNro.Enabled = true;
+                    tbValittuMokkiNimi.ReadOnly = false;
+                    tbValittuMokkiOsoite.ReadOnly = false;
+                    tbValittuMokkiHintaVrk.ReadOnly = false;
+                    rtbValittuMokkiKuvaus.ReadOnly = false;
+                    tbValittuMokkiHloMaara.ReadOnly = false;
+                    rtbValittuMokkiVarustelu.ReadOnly = false;
+                    muokkausMenossa = true;
                 }
                 else
                 {
-                    MessageBox.Show("Tarkasta tekstikenttien täyttö");
+                    if (ValidateTexts())
+                    {
+                        // tietokanta ja dgv päivittyvät
+                        UpdateDatabaseAndDataGridView();
+                        // pois muokkaustilasta
+                        btnLisaaMokinTiedot.Enabled = true;
+                        btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
+                        btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
+                        tbValittuMokkiMokkiID.ReadOnly = true;
+                        cmbUusiMokkiValitseAlueID.Enabled = false;
+                        cmbUusiMokkiValitsePostiNro.Enabled = false;
+                        tbValittuMokkiNimi.ReadOnly = true;
+                        tbValittuMokkiOsoite.ReadOnly = true;
+                        tbValittuMokkiHintaVrk.ReadOnly = true;
+                        rtbValittuMokkiKuvaus.ReadOnly = true;
+                        tbValittuMokkiHloMaara.ReadOnly = true;
+                        rtbValittuMokkiVarustelu.ReadOnly = true;
+                        // Set ReadOnly properties to true for all textboxes
+                        muokkausMenossa = false;
+                        btnMuokkaaValitunMokinTietoja.Enabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tarkasta tekstikenttien täyttö");
+                    }
+
                 }
-                
             }
+            else
+            {
+                MessageBox.Show("Laita ensin haku pois päältä 'Lopeta'-napista");
+            }
+            
         }
         private void UpdateDatabaseAndDataGridView()
         {
@@ -387,6 +414,103 @@ namespace Mokkivarausjarjestelma
             return true;
         }
 
+        private void btnHaeMokit_Click(object sender, EventArgs e)
+        {
+            if(btnHaeMokit.Text == "Hae mökkejä")
+            {
+                dgMokkiLista.ClearSelection();
+                hakuPaalla = true;
+                btnHaeMokit.Text = "Lopeta";
+                tbValittuMokkiMokkiID.Visible = false;
+                tbValittuMokkiNimi.Visible = false;
+                tbValittuMokkiOsoite.Visible = false;
+                tbValittuMokkiHintaVrk.Visible = false;
+                rtbValittuMokkiKuvaus.Visible = false;
+                tbValittuMokkiHloMaara.Visible = false;
+                rtbValittuMokkiVarustelu.Visible = false;
+                btnSuoritaMokkienHaku.Visible = true;
+                btnSuoritaMokkienHaku.Enabled = true;
+                checkAlueID.Visible = true;
+                checkPostiNro.Visible = true;
+                lbl1.Visible = false;
+                lbl2.Visible = false;
+                lbl3.Visible = false;
+                lbl4.Visible = false;
+                lbl5.Visible = false;
+                lbl6.Visible = false;
+                lbl7.Visible = false;
+                lbl8.Visible = false;
+                lbl9.Visible = false;
+                btnLisaaMokinTiedot.Visible = false;
+                btnMuokkaaValitunMokinTietoja.Visible = false;  
+            }
+            else
+            {
+                hakuPaalla = false;
+                btnHaeMokit.Text = "Hae mökkejä";
+                tbValittuMokkiMokkiID.Visible = true;
+                tbValittuMokkiNimi.Visible = true;
+                tbValittuMokkiOsoite.Visible = true;
+                tbValittuMokkiHintaVrk.Visible = true;
+                rtbValittuMokkiKuvaus.Visible = true;
+                tbValittuMokkiHloMaara.Visible = true;
+                rtbValittuMokkiVarustelu.Visible = true;
+                btnSuoritaMokkienHaku.Visible = false;
+                btnSuoritaMokkienHaku.Enabled = false;
+                checkAlueID.Visible = false;
+                checkPostiNro.Visible = false;
+                lbl1.Visible = true;
+                lbl2.Visible = true;
+                lbl3.Visible = true;
+                lbl4.Visible = true;
+                lbl5.Visible = true;
+                lbl6.Visible = true;
+                lbl7.Visible = true;
+                lbl8.Visible = true;
+                lbl9.Visible = true;
+                btnLisaaMokinTiedot.Visible = true;
+                btnMuokkaaValitunMokinTietoja.Visible = true;
+            }
+        }
 
+        private void btnSuoritaMokkienHaku_Click(object sender, EventArgs e)
+        {
+            hakuPaalla = false;
+            ClearTextBoxes();
+            btnHaeMokit.Text = "Hae mökkejä";
+            tbValittuMokkiMokkiID.Visible = true;
+            tbValittuMokkiNimi.Visible = true;
+            tbValittuMokkiOsoite.Visible = true;
+            tbValittuMokkiHintaVrk.Visible = true;
+            rtbValittuMokkiKuvaus.Visible = true;
+            tbValittuMokkiHloMaara.Visible = true;
+            rtbValittuMokkiVarustelu.Visible = true;
+            btnSuoritaMokkienHaku.Visible = false;
+            btnSuoritaMokkienHaku.Enabled = false;
+            checkAlueID.Visible = false;
+            checkPostiNro.Visible = false;
+            lbl1.Visible = true;
+            lbl2.Visible = true;
+            lbl3.Visible = true;
+            lbl4.Visible = true;
+            lbl5.Visible = true;
+            lbl6.Visible = true;
+            lbl7.Visible = true;
+            lbl8.Visible = true;
+            lbl9.Visible = true;
+            btnLisaaMokinTiedot.Visible = true;
+            btnMuokkaaValitunMokinTietoja.Visible = true;
+
+        }
+
+        private void checkAlueID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkPostiNro_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
