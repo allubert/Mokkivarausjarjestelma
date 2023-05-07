@@ -105,7 +105,15 @@ namespace Mokkivarausjarjestelma
                 string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
                 ExecuteMyQuery(deletequery);
                 populatedgvAsiakkaat();
+                foreach(Control c in Controls)
+                {
+                    if (c is TextBox)
+                    {
+                        c.Text = ""; 
+                    }
+                }
             }
+            
         }
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
