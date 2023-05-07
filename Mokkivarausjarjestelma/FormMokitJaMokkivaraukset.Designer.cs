@@ -510,7 +510,7 @@
             this.lblHakuOhjeet.BackColor = System.Drawing.Color.Bisque;
             this.lblHakuOhjeet.Location = new System.Drawing.Point(265, 156);
             this.lblHakuOhjeet.Name = "lblHakuOhjeet";
-            this.lblHakuOhjeet.Size = new System.Drawing.Size(235, 315);
+            this.lblHakuOhjeet.Size = new System.Drawing.Size(235, 300);
             this.lblHakuOhjeet.TabIndex = 82;
             this.lblHakuOhjeet.Text = resources.GetString("lblHakuOhjeet.Text");
             this.lblHakuOhjeet.Visible = false;
