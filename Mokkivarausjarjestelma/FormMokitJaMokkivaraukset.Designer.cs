@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMokitJaMokkivaraukset));
             this.btnLisaaMokinTiedot = new System.Windows.Forms.Button();
             this.btnMuokkaaValitunMokinTietoja = new System.Windows.Forms.Button();
@@ -60,10 +60,13 @@
             this.cmbUusiMokkiValitseAlueID = new System.Windows.Forms.ComboBox();
             this.cmbUusiMokkiValitsePostiNro = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblHaePostiNro = new System.Windows.Forms.Label();
+            this.lblHaeAlueID = new System.Windows.Forms.Label();
             this.checkPostiNro = new System.Windows.Forms.CheckBox();
             this.checkAlueID = new System.Windows.Forms.CheckBox();
             this.btnSuoritaMokkienHaku = new System.Windows.Forms.Button();
             this.btnHaeMokit = new System.Windows.Forms.Button();
+            this.lblHakuOhjeet = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiLista)).BeginInit();
@@ -301,28 +304,28 @@
             this.dgMokkiLista.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgMokkiLista.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgMokkiLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.AntiqueWhite;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSalmon;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMokkiLista.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AntiqueWhite;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSalmon;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMokkiLista.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgMokkiLista.EnableHeadersVisualStyles = false;
             this.dgMokkiLista.GridColor = System.Drawing.Color.BurlyWood;
             this.dgMokkiLista.Location = new System.Drawing.Point(250, 5);
             this.dgMokkiLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgMokkiLista.Name = "dgMokkiLista";
             this.dgMokkiLista.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Chocolate;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgMokkiLista.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Chocolate;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgMokkiLista.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgMokkiLista.RowHeadersWidth = 51;
             this.dgMokkiLista.RowTemplate.Height = 29;
             this.dgMokkiLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -400,6 +403,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Bisque;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lblHaePostiNro);
+            this.panel1.Controls.Add(this.lblHaeAlueID);
             this.panel1.Controls.Add(this.checkPostiNro);
             this.panel1.Controls.Add(this.checkAlueID);
             this.panel1.Controls.Add(this.btnSuoritaMokkienHaku);
@@ -429,6 +434,26 @@
             this.panel1.Size = new System.Drawing.Size(241, 479);
             this.panel1.TabIndex = 0;
             // 
+            // lblHaePostiNro
+            // 
+            this.lblHaePostiNro.AutoSize = true;
+            this.lblHaePostiNro.Location = new System.Drawing.Point(8, 99);
+            this.lblHaePostiNro.Name = "lblHaePostiNro";
+            this.lblHaePostiNro.Size = new System.Drawing.Size(53, 15);
+            this.lblHaePostiNro.TabIndex = 81;
+            this.lblHaePostiNro.Text = "PostiNro";
+            this.lblHaePostiNro.Visible = false;
+            // 
+            // lblHaeAlueID
+            // 
+            this.lblHaeAlueID.AutoSize = true;
+            this.lblHaeAlueID.Location = new System.Drawing.Point(19, 76);
+            this.lblHaeAlueID.Name = "lblHaeAlueID";
+            this.lblHaeAlueID.Size = new System.Drawing.Size(42, 15);
+            this.lblHaeAlueID.TabIndex = 80;
+            this.lblHaeAlueID.Text = "AlueID";
+            this.lblHaeAlueID.Visible = false;
+            // 
             // checkPostiNro
             // 
             this.checkPostiNro.AutoSize = true;
@@ -449,7 +474,7 @@
             this.checkAlueID.TabIndex = 78;
             this.checkAlueID.UseVisualStyleBackColor = true;
             this.checkAlueID.Visible = false;
-            this.checkAlueID.Click += new System.EventHandler(this.checkAlueID_Click);
+            this.checkAlueID.CheckedChanged += new System.EventHandler(this.checkAlueID_CheckedChanged);
             // 
             // btnSuoritaMokkienHaku
             // 
@@ -479,6 +504,17 @@
             this.btnHaeMokit.UseVisualStyleBackColor = false;
             this.btnHaeMokit.Click += new System.EventHandler(this.btnHaeMokit_Click);
             // 
+            // lblHakuOhjeet
+            // 
+            this.lblHakuOhjeet.AutoSize = true;
+            this.lblHakuOhjeet.BackColor = System.Drawing.Color.Bisque;
+            this.lblHakuOhjeet.Location = new System.Drawing.Point(265, 156);
+            this.lblHakuOhjeet.Name = "lblHakuOhjeet";
+            this.lblHakuOhjeet.Size = new System.Drawing.Size(235, 315);
+            this.lblHakuOhjeet.TabIndex = 82;
+            this.lblHakuOhjeet.Text = resources.GetString("lblHakuOhjeet.Text");
+            this.lblHakuOhjeet.Visible = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -507,6 +543,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SaddleBrown;
             this.ClientSize = new System.Drawing.Size(1199, 653);
+            this.Controls.Add(this.lblHakuOhjeet);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnMokkiPoista);
@@ -568,5 +605,8 @@
         private Button btnSuoritaMokkienHaku;
         private CheckBox checkPostiNro;
         private CheckBox checkAlueID;
+        private Label lblHaePostiNro;
+        private Label lblHaeAlueID;
+        private Label lblHakuOhjeet;
     }
 }

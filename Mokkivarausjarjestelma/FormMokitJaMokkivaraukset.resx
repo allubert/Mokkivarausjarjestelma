@@ -64,4 +64,27 @@ Voit myös hakea mökkejä Alue_ID:n ja Postinumeron perusteella.
 Voit poistaa mökin tietokannasta, mikäli sille ei ole tehty varausta. Valitse mökki listalta, ja paina 'Poista mökki tietokannasta'. 
 Mikäli haluat tehdä mökkivarauksia, paina 'Mökkivarausten hallinta'.</value>
   </data>
+  <data name="lblHakuOhjeet.Text" xml:space="preserve">
+    <value>Hakutilan saa pois päältä 'Lopeta'-napista.
+
+Hakuohjeet:
+1. Jos haluat hakea AlueID:llä, kytke se
+päälle klikkaamalla checkboxia.
+Jos haluat hakea
+Postinumerolla, klikkaa sen kohdalla olevaa
+checkboxia.
+Voit myös hakea käyttämällä molempia; 
+klikkaa molemmat checkboxit päälle.
+
+2. Valitse sopivat hakukriteerit laatikosta
+/laatikoista
+
+3. Paina 'Lopeta'-napin vieressä olevasta
+hakupainikkeesta.
+
+4. Mökit, jotka sisältävät valitsemasi
+hakukriteerit, tulevat näkyviin listalle.
+
+(Hakemistila lähtee itsestään pois)</value>
+  </data>
 </root>

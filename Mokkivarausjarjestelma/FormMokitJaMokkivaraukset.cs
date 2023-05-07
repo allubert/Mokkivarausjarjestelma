@@ -208,7 +208,7 @@ namespace Mokkivarausjarjestelma
                         btnMuokkaaValitunMokinTietoja.Enabled = true;
                         btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         MessageBox.Show("Virhe rivin valinnassa");
                     }
@@ -421,6 +421,8 @@ namespace Mokkivarausjarjestelma
                 dgMokkiLista.ClearSelection();
                 hakuPaalla = true;
                 btnHaeMokit.Text = "Lopeta";
+                cmbUusiMokkiValitseAlueID.Enabled = false;
+                cmbUusiMokkiValitsePostiNro.Enabled = false;
                 tbValittuMokkiMokkiID.Visible = false;
                 tbValittuMokkiNimi.Visible = false;
                 tbValittuMokkiOsoite.Visible = false;
@@ -442,7 +444,12 @@ namespace Mokkivarausjarjestelma
                 lbl8.Visible = false;
                 lbl9.Visible = false;
                 btnLisaaMokinTiedot.Visible = false;
-                btnMuokkaaValitunMokinTietoja.Visible = false;  
+                btnMuokkaaValitunMokinTietoja.Visible = false;
+                lblHaeAlueID.Visible = true;
+                lblHaePostiNro.Visible = true;
+                lblHakuOhjeet.Location = new Point(7, 127);
+                lblHakuOhjeet.Visible = true;
+
             }
             else
             {
@@ -470,6 +477,12 @@ namespace Mokkivarausjarjestelma
                 lbl9.Visible = true;
                 btnLisaaMokinTiedot.Visible = true;
                 btnMuokkaaValitunMokinTietoja.Visible = true;
+                lblHaeAlueID.Visible = false;
+                lblHaePostiNro.Visible = false;
+                lblHakuOhjeet.Location = new Point(265, 156);
+                lblHakuOhjeet.Visible = false;
+                cmbUusiMokkiValitseAlueID.Enabled = true;
+                cmbUusiMokkiValitsePostiNro.Enabled = true;
             }
         }
 
@@ -500,17 +513,36 @@ namespace Mokkivarausjarjestelma
             lbl9.Visible = true;
             btnLisaaMokinTiedot.Visible = true;
             btnMuokkaaValitunMokinTietoja.Visible = true;
-
+            lblHaeAlueID.Visible = false;
+            lblHaePostiNro.Visible = false;
+            lblHakuOhjeet.Location = new Point(265, 156);
+            lblHakuOhjeet.Visible = false;
+            cmbUusiMokkiValitseAlueID.Enabled = true;
+            cmbUusiMokkiValitsePostiNro.Enabled = true;
         }
 
-        private void checkAlueID_Click(object sender, EventArgs e)
+        private void checkAlueID_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (!cmbUusiMokkiValitseAlueID.Enabled)
+            {
+                cmbUusiMokkiValitseAlueID.Enabled = true;
+            }
+            else
+            {
+                cmbUusiMokkiValitseAlueID.Enabled = false;
+            }
         }
 
         private void checkPostiNro_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (!cmbUusiMokkiValitsePostiNro.Enabled)
+            {
+                cmbUusiMokkiValitsePostiNro.Enabled = true;
+            }
+            else
+            {
+                cmbUusiMokkiValitsePostiNro.Enabled = false;
+            }
         }
     }
 }
