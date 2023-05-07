@@ -196,5 +196,32 @@ namespace Mokkivarausjarjestelma
 
             populatedgvPalvelut();
         }
+        public void EmptyTB(Control con)
+        {
+            foreach (Control c in con.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+                else if (c is RichTextBox) 
+                {
+                    ((RichTextBox)c).Clear();
+                }
+                else
+                {
+                    EmptyTB(c);
+                }
+            }
+        }
+
+        private void btnPalveluTyhj_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Oletko varma, että haluat tyhjentää kaikki tekstikentät?", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                EmptyTB(this);
+            }
+        }
     }
 }

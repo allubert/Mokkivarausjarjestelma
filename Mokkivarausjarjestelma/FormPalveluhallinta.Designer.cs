@@ -37,7 +37,7 @@
             this.btnPalveluLisaa = new System.Windows.Forms.Button();
             this.btnPalveluPaivita = new System.Windows.Forms.Button();
             this.btnPalveluPoista = new System.Windows.Forms.Button();
-            this.btnPalveluHae = new System.Windows.Forms.Button();
+            this.btnPalveluTyhj = new System.Windows.Forms.Button();
             this.lblHinta = new System.Windows.Forms.Label();
             this.lblAlv = new System.Windows.Forms.Label();
             this.lblKuvaus = new System.Windows.Forms.Label();
@@ -124,14 +124,15 @@
             this.btnPalveluPoista.UseVisualStyleBackColor = true;
             this.btnPalveluPoista.Click += new System.EventHandler(this.btnPalveluPoista_Click);
             // 
-            // btnPalveluHae
+            // btnPalveluTyhj
             // 
-            this.btnPalveluHae.Location = new System.Drawing.Point(269, 22);
-            this.btnPalveluHae.Name = "btnPalveluHae";
-            this.btnPalveluHae.Size = new System.Drawing.Size(46, 28);
-            this.btnPalveluHae.TabIndex = 24;
-            this.btnPalveluHae.Text = "Hae";
-            this.btnPalveluHae.UseVisualStyleBackColor = true;
+            this.btnPalveluTyhj.Location = new System.Drawing.Point(14, 416);
+            this.btnPalveluTyhj.Name = "btnPalveluTyhj";
+            this.btnPalveluTyhj.Size = new System.Drawing.Size(134, 23);
+            this.btnPalveluTyhj.TabIndex = 24;
+            this.btnPalveluTyhj.Text = "Tyhjennä tekstikentät";
+            this.btnPalveluTyhj.UseVisualStyleBackColor = true;
+            this.btnPalveluTyhj.Click += new System.EventHandler(this.btnPalveluTyhj_Click);
             // 
             // lblHinta
             // 
@@ -241,7 +242,7 @@
             this.Controls.Add(this.btnPalveluLisaa);
             this.Controls.Add(this.btnPalveluPaivita);
             this.Controls.Add(this.btnPalveluPoista);
-            this.Controls.Add(this.btnPalveluHae);
+            this.Controls.Add(this.btnPalveluTyhj);
             this.Controls.Add(this.lblHinta);
             this.Controls.Add(this.lblAlv);
             this.Controls.Add(this.lblKuvaus);
@@ -270,7 +271,7 @@
         private Button btnPalveluLisaa;
         private Button btnPalveluPaivita;
         private Button btnPalveluPoista;
-        private Button btnPalveluHae;
+        private Button btnPalveluTyhj;
         private Label lblHinta;
         private Label lblAlv;
         private Label lblKuvaus;

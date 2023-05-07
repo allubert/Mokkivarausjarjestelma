@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tbLkm = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenpalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,20 +85,28 @@
             // 
             // label3
             // 
-            this.label3.AutoEllipsis = true;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(6, 148);
+            this.label3.Location = new System.Drawing.Point(12, 148);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(408, 13);
+            this.label3.Size = new System.Drawing.Size(215, 26);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Syötä haluamasi lukumäärä varaamallesi palveluille alla olevaan tekstikenttään";
+            this.label3.Text = "Syötä haluamasi lukumäärä varaamallesi \r\npalveluille alla olevaan tekstikenttään:" +
+    "";
+            // 
+            // tbLkm
+            // 
+            this.tbLkm.Location = new System.Drawing.Point(12, 188);
+            this.tbLkm.Name = "tbLkm";
+            this.tbLkm.Size = new System.Drawing.Size(253, 23);
+            this.tbLkm.TabIndex = 6;
             // 
             // FormVarauksenpalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbLkm);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -120,5 +129,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private TextBox tbLkm;
     }
 }
