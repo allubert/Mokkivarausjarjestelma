@@ -28,33 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            btnTakaisinAloitusFormiin = new Button();
+            btnTulosta = new Button();
+            btnPoistaLasku = new Button();
+            btnLahetalasku = new Button();
+            dgvLaskutus = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvLaskutus).BeginInit();
+            SuspendLayout();
             // 
             // btnTakaisinAloitusFormiin
             // 
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(695, 415);
-            this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 23);
-            this.btnTakaisinAloitusFormiin.TabIndex = 76;
-            this.btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
-            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
-            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            btnTakaisinAloitusFormiin.Location = new Point(982, 617);
+            btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
+            btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
+            btnTakaisinAloitusFormiin.Size = new Size(106, 31);
+            btnTakaisinAloitusFormiin.TabIndex = 76;
+            btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
+            btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            btnTakaisinAloitusFormiin.Click += btnTakaisinAloitusFormiin_Click;
+            // 
+            // btnTulosta
+            // 
+            btnTulosta.Location = new Point(329, 591);
+            btnTulosta.Name = "btnTulosta";
+            btnTulosta.Size = new Size(146, 83);
+            btnTulosta.TabIndex = 80;
+            btnTulosta.Text = "Tulosta lasku";
+            btnTulosta.UseVisualStyleBackColor = true;
+            // 
+            // btnPoistaLasku
+            // 
+            btnPoistaLasku.Location = new Point(167, 591);
+            btnPoistaLasku.Name = "btnPoistaLasku";
+            btnPoistaLasku.Size = new Size(156, 83);
+            btnPoistaLasku.TabIndex = 79;
+            btnPoistaLasku.Text = "Poista lasku";
+            btnPoistaLasku.UseVisualStyleBackColor = true;
+            // 
+            // btnLahetalasku
+            // 
+            btnLahetalasku.Location = new Point(12, 591);
+            btnLahetalasku.Name = "btnLahetalasku";
+            btnLahetalasku.Size = new Size(149, 83);
+            btnLahetalasku.TabIndex = 78;
+            btnLahetalasku.Text = "Lähetä lasku";
+            btnLahetalasku.UseVisualStyleBackColor = true;
+            btnLahetalasku.Click += btnLahetalasku_Click;
+            // 
+            // dgvLaskutus
+            // 
+            dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLaskutus.Location = new Point(12, 12);
+            dgvLaskutus.Name = "dgvLaskutus";
+            dgvLaskutus.RowHeadersWidth = 51;
+            dgvLaskutus.RowTemplate.Height = 29;
+            dgvLaskutus.Size = new Size(1063, 571);
+            dgvLaskutus.TabIndex = 77;
             // 
             // FormLaskutus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnTakaisinAloitusFormiin);
-            this.Name = "FormLaskutus";
-            this.Text = "FormLaskutus";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1128, 696);
+            Controls.Add(btnTulosta);
+            Controls.Add(btnPoistaLasku);
+            Controls.Add(btnLahetalasku);
+            Controls.Add(dgvLaskutus);
+            Controls.Add(btnTakaisinAloitusFormiin);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "FormLaskutus";
+            Text = "FormLaskutus";
+            ((System.ComponentModel.ISupportInitialize)dgvLaskutus).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private Button btnTakaisinAloitusFormiin;
+        private Button btnTulosta;
+        private Button btnPoistaLasku;
+        private Button btnLahetalasku;
+        private DataGridView dgvLaskutus;
     }
 }

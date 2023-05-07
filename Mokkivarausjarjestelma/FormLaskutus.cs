@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿
+using System;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Data;
+using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using System.IO;
+using System.Diagnostics;
+using iTextSharp.text.pdf;
 
 namespace Mokkivarausjarjestelma
 {
@@ -24,6 +30,11 @@ namespace Mokkivarausjarjestelma
 
             formaloitus.ShowDialog();
             this.Close();
+        }
+
+        private void btnLahetalasku_Click(object sender, EventArgs e)
+        {
+            PdfDocument pdf = new PdfDocument(); 
         }
     }
 }
