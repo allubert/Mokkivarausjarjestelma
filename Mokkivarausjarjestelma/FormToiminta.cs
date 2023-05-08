@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +24,7 @@ namespace Mokkivarausjarjestelma
         public void populatedgvToiminta()
         {
             //hae dataa
-            string selectQuery = "SELECT * FROM palvelu";
+            string selectQuery = "SELECT * FROM alue";
             DataTable table = new DataTable();
             MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
             adapter.Fill(table);
@@ -36,14 +38,14 @@ namespace Mokkivarausjarjestelma
 
                 command = new MySqlCommand(query, connection);
 
-                if (command.ExecuteNonQuery() == 1)
-                {
-                    MessageBox.Show("Kysely suoritettu");
-                }
-                else
-                {
-                    MessageBox.Show("Kyselyä ei suoritettu");
-                }
+                //if (command.ExecuteNonQuery() == 1)
+                //{
+                //    MessageBox.Show("Kysely suoritettu");
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Kyselyä ei suoritettu");
+                //}
             }
             catch (Exception ex)
             {
@@ -76,12 +78,12 @@ namespace Mokkivarausjarjestelma
             }
 
             string nimi = tbToimintaAlue.Text;
-            int alueid = int.Parse(tbToimintaAlueid.Text);  
-            string postinro = tbToimintaPostinro.Text;
-            string toimipaikka = tbToimintaToimip.Text;
-            
+            //int alueid = int.Parse(tbToimintaAlueid.Text);  
+            //string postinro = tbToimintaPostinro.Text;
+            //string toimipaikka = tbToimintaToimip.Text;
 
-            string insertQuery = "INSERT INTO alue(nimi, alue_id, postinro, toimipaikka) VALUES (@nimi, @alueid, @postinro, @toimipaikka)";
+
+            string insertQuery = "INSERT INTO alue(nimi) VALUES (@nimi)";
 
             try
             {
@@ -90,9 +92,9 @@ namespace Mokkivarausjarjestelma
                     using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
                     {
                         command.Parameters.AddWithValue("@nimi", nimi);
-                        command.Parameters.AddWithValue("@alueid", alueid);   
-                        command.Parameters.AddWithValue("@postinro", postinro);
-                        command.Parameters.AddWithValue("@toimipaikka", toimipaikka);
+                        //command.Parameters.AddWithValue("@alueid", alueid);   
+                        //command.Parameters.AddWithValue("@postinro", postinro);
+                        //command.Parameters.AddWithValue("@toimipaikka", toimipaikka);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -106,34 +108,7 @@ namespace Mokkivarausjarjestelma
             }
         }
 
-        private void btnToimintaPaivita_Click(object sender, EventArgs e)
-        {
-           
-                try
-                {
-                    using (connection)
-                    {
-                        string query = "UPDATE alue SET alue_id=@alueid, nimi=@nimi, postinro=@postinro, toimipaikka=@toimipaikka";
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
-                        {
-                        command.Parameters.AddWithValue("@nimi", tbToimintaAlue.Text);
-                        command.Parameters.AddWithValue("@alueid", tbToimintaAlueid.Text);
-                        command.Parameters.AddWithValue("@postinro", tbToimintaPostinro.Text);
-                        command.Parameters.AddWithValue("@toimipaikka", tbToimintaToimip.Text);
-                        connection.Open();
-                            int rowsAffected = command.ExecuteNonQuery();
-                            connection.Close();
-                            populatedgvToiminta();
-                        }
-                    }
-                    MessageBox.Show("Tietokannan päivittäminen onnistui", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Tietokannan päivittäminen epäonnistui");
-                }
-
-            }
+      
 
         private void FormToiminta_Load(object sender, EventArgs e)
         {
@@ -142,13 +117,58 @@ namespace Mokkivarausjarjestelma
 
         private void dgvToiminta_MouseClick(object sender, MouseEventArgs e)
         {
-            tbToimintaAlue.Text = dgvToiminta.CurrentRow.Cells[0].Value.ToString();
-            tbToimintaAlueid.Text = dgvToiminta.CurrentRow.Cells[1].Value.ToString();
-            tbToimintaPostinro.Text = dgvToiminta.CurrentRow.Cells[2].Value.ToString();
-            tbToimintaPostinro.Text = dgvToiminta.CurrentRow.Cells[3].Value.ToString();
-           
+            //tbToimintaAlue.Text = dgvToiminta.CurrentRow.Cells[0].Value.ToString();
+            //tbToimintaAlueid.Text = dgvToiminta.CurrentRow.Cells[1].Value.ToString();
+            //tbToimintaPostinro.Text = dgvToiminta.CurrentRow.Cells[2].Value.ToString();
+            //tbToimintaPostinro.Text = dgvToiminta.CurrentRow.Cells[3].Value.ToString();
+
+        }
+
+        private void btnToimintaPoistaAlue_Click(object sender, EventArgs e)
+        {
+
+            string deleteQuery = "DELETE FROM alue WHERE alue_id = @alue_id";
+
+            if (dgvToiminta.SelectedRows.Count > 0)
+            {
+                int valittuIndex = dgvToiminta.SelectedRows[0].Index;
+                int poistoID = Convert.ToInt32(dgvToiminta[0, valittuIndex].Value);
+
+                DialogResult result = MessageBox.Show("Oletko varma, että haluat poistaa kyseisen rivin tietokannastasi? Tämä poistaa kaikki syöttämäsi tiedot tietokantaan.", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(deleteQuery, connection))
+                        {
+                            command.Parameters.AddWithValue("@alue_id", poistoID);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    dgvToiminta.Rows.RemoveAt(valittuIndex);
+                    populatedgvToiminta();
+                }
+
+
+            }
+
+        }
+
+        private void btnToimintaKohteet_Click(object sender, EventArgs e)
+        {
+            Form formaloitus = new FormMokitJaMokkivaraukset();
+            this.Hide();
+
+            formaloitus.ShowDialog();
+            this.Close();
         }
     }
-    }
+}
+
+
+    
+    
     
 

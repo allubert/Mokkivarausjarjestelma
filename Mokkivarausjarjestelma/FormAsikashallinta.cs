@@ -202,5 +202,7 @@ namespace Mokkivarausjarjestelma
             btnAsiakasPaivita.Visible = true;
             btnAsiakasPoista.Visible = true;
         }
+
+      
     }
 }
