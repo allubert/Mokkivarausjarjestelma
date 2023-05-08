@@ -16,6 +16,7 @@ namespace Mokkivarausjarjestelma
         public FormAsiakashallinta()
         {
             InitializeComponent();
+            populatedgvAsiakkaat();
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
@@ -106,15 +107,15 @@ namespace Mokkivarausjarjestelma
                 string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
                 ExecuteMyQuery(deletequery);
                 populatedgvAsiakkaat();
-                foreach(Control c in Controls)
+                foreach (Control c in Controls)
                 {
                     if (c is TextBox)
                     {
-                        c.Text = ""; 
+                        c.Text = "";
                     }
                 }
             }
-            
+
         }
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
@@ -203,6 +204,6 @@ namespace Mokkivarausjarjestelma
             btnAsiakasPoista.Visible = true;
         }
 
-      
+
     }
 }
