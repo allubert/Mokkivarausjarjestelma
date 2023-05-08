@@ -105,7 +105,7 @@
             this.btnMokkiPoista.BackColor = System.Drawing.Color.PeachPuff;
             this.btnMokkiPoista.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMokkiPoista.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnMokkiPoista.Location = new System.Drawing.Point(1006, 490);
+            this.btnMokkiPoista.Location = new System.Drawing.Point(1006, 493);
             this.btnMokkiPoista.Name = "btnMokkiPoista";
             this.btnMokkiPoista.Size = new System.Drawing.Size(187, 30);
             this.btnMokkiPoista.TabIndex = 60;
@@ -118,7 +118,7 @@
             this.btnVaraaValittuMokki.BackColor = System.Drawing.Color.PeachPuff;
             this.btnVaraaValittuMokki.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVaraaValittuMokki.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnVaraaValittuMokki.Location = new System.Drawing.Point(250, 490);
+            this.btnVaraaValittuMokki.Location = new System.Drawing.Point(250, 493);
             this.btnVaraaValittuMokki.Name = "btnVaraaValittuMokki";
             this.btnVaraaValittuMokki.Size = new System.Drawing.Size(166, 30);
             this.btnVaraaValittuMokki.TabIndex = 57;
@@ -329,7 +329,7 @@
             this.dgMokkiLista.RowHeadersWidth = 51;
             this.dgMokkiLista.RowTemplate.Height = 29;
             this.dgMokkiLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgMokkiLista.Size = new System.Drawing.Size(943, 480);
+            this.dgMokkiLista.Size = new System.Drawing.Size(943, 485);
             this.dgMokkiLista.TabIndex = 62;
             this.dgMokkiLista.SelectionChanged += new System.EventHandler(this.dgMokkiLista_SelectionChanged);
             // 
@@ -431,7 +431,7 @@
             this.panel1.Controls.Add(this.lbl8);
             this.panel1.Location = new System.Drawing.Point(3, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(241, 479);
+            this.panel1.Size = new System.Drawing.Size(241, 485);
             this.panel1.TabIndex = 0;
             // 
             // lblHaePostiNro
@@ -500,7 +500,7 @@
             this.btnHaeMokit.Name = "btnHaeMokit";
             this.btnHaeMokit.Size = new System.Drawing.Size(112, 30);
             this.btnHaeMokit.TabIndex = 73;
-            this.btnHaeMokit.Text = "Hae mökkejä";
+            this.btnHaeMokit.Text = "Rajaa hakua";
             this.btnHaeMokit.UseVisualStyleBackColor = false;
             this.btnHaeMokit.Click += new System.EventHandler(this.btnHaeMokit_Click);
             // 
@@ -510,7 +510,7 @@
             this.lblHakuOhjeet.BackColor = System.Drawing.Color.Bisque;
             this.lblHakuOhjeet.Location = new System.Drawing.Point(265, 156);
             this.lblHakuOhjeet.Name = "lblHakuOhjeet";
-            this.lblHakuOhjeet.Size = new System.Drawing.Size(235, 300);
+            this.lblHakuOhjeet.Size = new System.Drawing.Size(235, 330);
             this.lblHakuOhjeet.TabIndex = 82;
             this.lblHakuOhjeet.Text = resources.GetString("lblHakuOhjeet.Text");
             this.lblHakuOhjeet.Visible = false;

@@ -66,8 +66,7 @@ Mikäli haluat tehdä mökkivarauksia, paina 'Mökkivarausten hallinta'.</value>
   </data>
   <data name="lblHakuOhjeet.Text" xml:space="preserve">
     <value>Hakutilan saa pois päältä 'Lopeta'-napista.
-
-Hakuohjeet:
+HAKUOHJEET:
 1. Jos haluat hakea AlueID:llä, kytke se
 päälle klikkaamalla checkboxia.
 Jos haluat hakea
@@ -76,8 +75,11 @@ checkboxia.
 Voit myös hakea käyttämällä molempia; 
 klikkaa molemmat checkboxit päälle.
 
+**Jos haluat kaikki mökit näkyviin, kytke
+molemmat checkboxit pois.**
+
 2. Valitse sopivat hakukriteerit laatikosta
-/laatikoista
+/laatikoista.
 
 3. Paina 'Lopeta'-napin vieressä olevasta
 hakupainikkeesta.

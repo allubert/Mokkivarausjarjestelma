@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iText.Layout.Splitting;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -416,7 +417,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnHaeMokit_Click(object sender, EventArgs e)
         {
-            if(btnHaeMokit.Text == "Hae mökkejä")
+            if(btnHaeMokit.Text == "Rajaa hakua")
             {
                 dgMokkiLista.ClearSelection();
                 hakuPaalla = true;
@@ -453,8 +454,9 @@ namespace Mokkivarausjarjestelma
             }
             else
             {
+                UpdatedgMokkiLista();
                 hakuPaalla = false;
-                btnHaeMokit.Text = "Hae mökkejä";
+                btnHaeMokit.Text = "Rajaa hakua";
                 tbValittuMokkiMokkiID.Visible = true;
                 tbValittuMokkiNimi.Visible = true;
                 tbValittuMokkiOsoite.Visible = true;
@@ -490,7 +492,7 @@ namespace Mokkivarausjarjestelma
         {
             hakuPaalla = false;
             ClearTextBoxes();
-            btnHaeMokit.Text = "Hae mökkejä";
+            btnHaeMokit.Text = "Rajaa hakua";
             tbValittuMokkiMokkiID.Visible = true;
             tbValittuMokkiNimi.Visible = true;
             tbValittuMokkiOsoite.Visible = true;
@@ -517,8 +519,77 @@ namespace Mokkivarausjarjestelma
             lblHaePostiNro.Visible = false;
             lblHakuOhjeet.Location = new Point(265, 156);
             lblHakuOhjeet.Visible = false;
+            
+
+            if (cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
+            {
+                int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
+                string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
+
+                string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid AND postinro = @postinro";
+                DataTable datatable = new DataTable();
+                using (connection)
+                {
+                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                    command.Parameters.AddWithValue("@alueid", alueid);
+                    command.Parameters.AddWithValue("@postinro", postinro);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+                dgMokkiLista.DataSource = datatable;
+
+
+                checkAlueID.Checked = false;
+                checkPostiNro.Checked = false;
+            }
+            else if (cmbUusiMokkiValitseAlueID.Enabled && !cmbUusiMokkiValitsePostiNro.Enabled)
+            {
+                int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
+
+                string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid";
+                DataTable datatable = new DataTable();
+                using (connection)
+                {
+                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                    command.Parameters.AddWithValue("@alueid", alueid);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+                dgMokkiLista.DataSource = datatable;
+
+                checkAlueID.Checked = false;
+                checkPostiNro.Checked = false;
+            }
+            else if (!cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
+            {
+                string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
+
+                string hakuQuery = "SELECT * FROM mokki WHERE postinro = @postinro";
+                DataTable datatable = new DataTable();
+                using (connection)
+                {
+                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                    command.Parameters.AddWithValue("@postinro", postinro);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                    connection.Close();
+                }
+                dgMokkiLista.DataSource = datatable;
+
+                checkAlueID.Checked = false;
+                checkPostiNro.Checked = false;
+            }
+            else
+            {
+                UpdatedgMokkiLista();
+                checkAlueID.Checked = false;
+                checkPostiNro.Checked = false;
+            }
             cmbUusiMokkiValitseAlueID.Enabled = true;
-            cmbUusiMokkiValitsePostiNro.Enabled = true;
+            cmbUusiMokkiValitsePostiNro.Enabled= true;
+                
         }
 
         private void checkAlueID_CheckedChanged(object sender, EventArgs e)
