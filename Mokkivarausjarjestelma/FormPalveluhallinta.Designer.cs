@@ -60,7 +60,7 @@
             this.rtbPalvelukuvaus.Location = new System.Drawing.Point(94, 184);
             this.rtbPalvelukuvaus.Name = "rtbPalvelukuvaus";
             this.rtbPalvelukuvaus.Size = new System.Drawing.Size(197, 65);
-            this.rtbPalvelukuvaus.TabIndex = 33;
+            this.rtbPalvelukuvaus.TabIndex = 4;
             this.rtbPalvelukuvaus.Text = "";
             // 
             // tbPalvelualv
@@ -68,35 +68,35 @@
             this.tbPalvelualv.Location = new System.Drawing.Point(94, 299);
             this.tbPalvelualv.Name = "tbPalvelualv";
             this.tbPalvelualv.Size = new System.Drawing.Size(130, 23);
-            this.tbPalvelualv.TabIndex = 32;
+            this.tbPalvelualv.TabIndex = 6;
             // 
             // tbPalveluhinta
             // 
             this.tbPalveluhinta.Location = new System.Drawing.Point(94, 255);
             this.tbPalveluhinta.Name = "tbPalveluhinta";
             this.tbPalveluhinta.Size = new System.Drawing.Size(130, 23);
-            this.tbPalveluhinta.TabIndex = 31;
+            this.tbPalveluhinta.TabIndex = 5;
             // 
             // tbPalvelutyyppi
             // 
             this.tbPalvelutyyppi.Location = new System.Drawing.Point(94, 143);
             this.tbPalvelutyyppi.Name = "tbPalvelutyyppi";
             this.tbPalvelutyyppi.Size = new System.Drawing.Size(130, 23);
-            this.tbPalvelutyyppi.TabIndex = 30;
+            this.tbPalvelutyyppi.TabIndex = 3;
             // 
             // tbPalvelunimi
             // 
             this.tbPalvelunimi.Location = new System.Drawing.Point(94, 102);
             this.tbPalvelunimi.Name = "tbPalvelunimi";
             this.tbPalvelunimi.Size = new System.Drawing.Size(130, 23);
-            this.tbPalvelunimi.TabIndex = 29;
+            this.tbPalvelunimi.TabIndex = 2;
             // 
             // tbPalveluID
             // 
             this.tbPalveluID.Location = new System.Drawing.Point(94, 22);
             this.tbPalveluID.Name = "tbPalveluID";
             this.tbPalveluID.Size = new System.Drawing.Size(130, 23);
-            this.tbPalveluID.TabIndex = 28;
+            this.tbPalveluID.TabIndex = 0;
             // 
             // btnPalveluLisaa
             // 
@@ -104,7 +104,7 @@
             this.btnPalveluLisaa.Location = new System.Drawing.Point(11, 367);
             this.btnPalveluLisaa.Name = "btnPalveluLisaa";
             this.btnPalveluLisaa.Size = new System.Drawing.Size(75, 23);
-            this.btnPalveluLisaa.TabIndex = 27;
+            this.btnPalveluLisaa.TabIndex = 7;
             this.btnPalveluLisaa.Text = "Syötä";
             this.btnPalveluLisaa.UseVisualStyleBackColor = false;
             this.btnPalveluLisaa.Click += new System.EventHandler(this.btnPalveluLisaa_Click);
@@ -115,7 +115,7 @@
             this.btnPalveluPaivita.Location = new System.Drawing.Point(110, 367);
             this.btnPalveluPaivita.Name = "btnPalveluPaivita";
             this.btnPalveluPaivita.Size = new System.Drawing.Size(75, 23);
-            this.btnPalveluPaivita.TabIndex = 26;
+            this.btnPalveluPaivita.TabIndex = 8;
             this.btnPalveluPaivita.Text = "Päivitä";
             this.btnPalveluPaivita.UseVisualStyleBackColor = false;
             this.btnPalveluPaivita.Click += new System.EventHandler(this.btnPalveluPaivita_Click);
@@ -126,7 +126,7 @@
             this.btnPalveluPoista.Location = new System.Drawing.Point(216, 367);
             this.btnPalveluPoista.Name = "btnPalveluPoista";
             this.btnPalveluPoista.Size = new System.Drawing.Size(75, 23);
-            this.btnPalveluPoista.TabIndex = 25;
+            this.btnPalveluPoista.TabIndex = 9;
             this.btnPalveluPoista.Text = "Poista";
             this.btnPalveluPoista.UseVisualStyleBackColor = false;
             this.btnPalveluPoista.Click += new System.EventHandler(this.btnPalveluPoista_Click);
@@ -137,7 +137,7 @@
             this.btnPalveluTyhj.Location = new System.Drawing.Point(14, 416);
             this.btnPalveluTyhj.Name = "btnPalveluTyhj";
             this.btnPalveluTyhj.Size = new System.Drawing.Size(134, 23);
-            this.btnPalveluTyhj.TabIndex = 24;
+            this.btnPalveluTyhj.TabIndex = 11;
             this.btnPalveluTyhj.Text = "Tyhjennä tekstikentät";
             this.btnPalveluTyhj.UseVisualStyleBackColor = false;
             this.btnPalveluTyhj.Click += new System.EventHandler(this.btnPalveluTyhj_Click);
@@ -212,7 +212,7 @@
             this.tbAlueID.Location = new System.Drawing.Point(94, 64);
             this.tbAlueID.Name = "tbAlueID";
             this.tbAlueID.Size = new System.Drawing.Size(130, 23);
-            this.tbAlueID.TabIndex = 34;
+            this.tbAlueID.TabIndex = 1;
             // 
             // label1
             // 
@@ -229,7 +229,7 @@
             this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(11, 558);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(137, 23);
-            this.btnTakaisinAloitusFormiin.TabIndex = 76;
+            this.btnTakaisinAloitusFormiin.TabIndex = 12;
             this.btnTakaisinAloitusFormiin.Text = "Takaisin aloitussivulle";
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
@@ -259,7 +259,7 @@
             this.btnHae.Location = new System.Drawing.Point(240, 16);
             this.btnHae.Name = "btnHae";
             this.btnHae.Size = new System.Drawing.Size(49, 32);
-            this.btnHae.TabIndex = 79;
+            this.btnHae.TabIndex = 10;
             this.btnHae.Text = "Hae";
             this.btnHae.UseVisualStyleBackColor = false;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
@@ -295,7 +295,7 @@
             this.Controls.Add(this.dgvPalvelut);
             this.Name = "FormPalveluhallinta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Palveluiden hallinta";
+            this.Text = "1";
             this.Load += new System.EventHandler(this.FormPalveluhallinta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
             this.ResumeLayout(false);

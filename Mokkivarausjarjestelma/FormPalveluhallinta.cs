@@ -231,6 +231,8 @@ namespace Mokkivarausjarjestelma
 
         private void btnHae_Click(object sender, EventArgs e)
         {
+            //hakee tiedot palveluid kautta datagridviewistä ja maalaa kyseisen rivin datagridviewistä
+
             string hakuQuery = "SELECT * FROM palvelu WHERE palvelu_id = @palveluid";
             string palveluid = tbPalveluID.Text;
 
