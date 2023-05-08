@@ -17,9 +17,11 @@ namespace Mokkivarausjarjestelma
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
         private DateTime vahvistuspvm;
         private bool muokkausMenossa = false;
+        private bool haunRajausPaalla = false;
         public FormVaraus()
         {
             InitializeComponent();
+            this.Shown += Form_Shown;
             using (connection)
             {
                 try
@@ -34,11 +36,12 @@ namespace Mokkivarausjarjestelma
                         .Select(row => new
                         {
                             asiakas_id = row.Field<uint>("asiakas_id"),
-                            FullName = row.Field<string>("etunimi") + " " + row.Field<string>("sukunimi")
+                            FullName = row.Field<string>("etunimi") + " " + row.Field<string>("sukunimi"),
+                            DisplayText = row.Field<string>("etunimi") + " " + row.Field<string>("sukunimi") + " (" + row.Field<uint>("asiakas_id") + ")"
                         })
                         .ToList();
 
-                    cmbUusiVarausValitseAsiakas.DisplayMember = "FullName";
+                    cmbUusiVarausValitseAsiakas.DisplayMember = "DisplayText";
                     cmbUusiVarausValitseAsiakas.ValueMember = "asiakas_id";
                     cmbUusiVarausValitseAsiakas.DataSource = asiakasData;
 
@@ -48,9 +51,19 @@ namespace Mokkivarausjarjestelma
                     MySqlDataAdapter mokkiAdapter = new MySqlDataAdapter(mokkinimiQuery, connection);
                     DataSet mokkiDs = new DataSet();
                     mokkiAdapter.Fill(mokkiDs, "mokki");
-                    cmbUusiVarausValitseMokki.DisplayMember = "mokkinimi";
+
+                    var mokkiData = mokkiDs.Tables["mokki"].AsEnumerable()
+                        .Select(row => new
+                        {
+                            mokki_id = row.Field<uint>("mokki_id"),
+                            mokkinimi = row.Field<string>("mokkinimi"),
+                            DisplayText = row.Field<string>("mokkinimi") + " (" + row.Field<uint>("mokki_id") + ")"
+                        })
+                        .ToList();
+
+                    cmbUusiVarausValitseMokki.DisplayMember = "DisplayText";
                     cmbUusiVarausValitseMokki.ValueMember = "mokki_id";
-                    cmbUusiVarausValitseMokki.DataSource = mokkiDs.Tables["mokki"];
+                    cmbUusiVarausValitseMokki.DataSource = mokkiData;
                 }
                 catch (Exception ex)
                 {
@@ -65,9 +78,11 @@ namespace Mokkivarausjarjestelma
             dgMokkiVaraukset.DataSource = datatable;
             adapter.Fill(datatable);
             connection.Close();
-
         }
-        
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            dgMokkiVaraukset.ClearSelection();
+        }
         private void btnValmisVaraus_Click(object sender, EventArgs e)
         {
             if (!muokkausMenossa)
@@ -158,9 +173,13 @@ namespace Mokkivarausjarjestelma
             }
             else //Jos muokkaustila on päällä
             {
+                tbUusiVarausVarausID.Enabled = true;
+                btnMuokkaaMokkiVarausta.Text = "Muokkaa varausta";
+                dgMokkiVaraukset.ClearSelection();
                 muokkausMenossa = false;
                 btnValmisVaraus.Text = "Tallenna Varaus";
                 btnMokinVarausVahvista.Text = "Vahvista varauksen tiedot";
+                btnPoistaMokkiVaraus.Visible = true;
                 if (Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text) > DateTime.Now) // varauksen loppupvm ei voi olla menneisyydessä
                 {
                     DateTime varattuloppupvm = Convert.ToDateTime(dateTimeMokinVarausLoppuPvm.Text);
@@ -243,11 +262,7 @@ namespace Mokkivarausjarjestelma
                     btnValmisVaraus.Enabled = false;
                 }
             }
-        
-            
-
-            
-        }
+        } //lisää annetut varaustiedot tietokantaan
         private void UpdatedgMokkiVaraukset()
         {
             //Varauksen hallinnan datagridviewiin tietojen vienti
@@ -264,153 +279,271 @@ namespace Mokkivarausjarjestelma
                 }
             }
             dgMokkiVaraukset.DataSource = datatable;
-
         }
-        //Käyttäjä 'vahvistaa' varauksen
+        
         private void btnMokinVarausVahvista_Click(object sender, EventArgs e)
         {
             vahvistuspvm = DateTime.Now;
             btnValmisVaraus.Enabled = true;
-        }
+        }//Käyttäjä 'vahvistaa' varauksen
         private void btnTakaisinMokkiFormiin_Click(object sender, EventArgs e)
         {
             Form formaloitus = new FormMokitJaMokkivaraukset();
             this.Hide();
             this.Close();
-        }
-
-        private void btnPoistaMokkiVaraus_Click(object sender, EventArgs e)
+        }//sulkee varaustenhallinnan
+        private void btnPoistaMokkiVaraus_Click(object sender, EventArgs e)//poistaa valitun varauksen tiedot
         {
-            if (dgMokkiVaraukset.SelectedRows.Count > 0)
+            if (!haunRajausPaalla == true)
             {
-                bool tyhjarivi = true;
-                foreach (DataGridViewCell cell in dgMokkiVaraukset.SelectedCells)
+                if (dgMokkiVaraukset.SelectedRows.Count > 0)
                 {
-                    if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                    bool tyhjarivi = true;
+                    foreach (DataGridViewCell cell in dgMokkiVaraukset.SelectedCells)
                     {
-                        tyhjarivi = false;
-                    }
-                }
-                if (!tyhjarivi)
-                {
-                    DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun varauksen tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        int selectedIndex = dgMokkiVaraukset.SelectedRows[0].Index;
-                        int varausid = int.Parse(dgMokkiVaraukset[0, selectedIndex].Value.ToString());
-                        string TarkastaMahdollisetLaskutVaraukselle = "SELECT * FROM lasku WHERE varaus_id = @varausid";
-                        string TarkastaMahdollisetVarauksenPalvelutVaraukselle = "SELECT * FROM varauksen_palvelut WHERE varaus_id = @varausid";
-                        using (connection)
+                        if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
                         {
-                            using (MySqlCommand checklaskutCommand = new MySqlCommand(TarkastaMahdollisetLaskutVaraukselle, connection))
+                            tyhjarivi = false;
+                        }
+                    }
+                    if (!tyhjarivi)
+                    {
+                        DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun varauksen tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int selectedIndex = dgMokkiVaraukset.SelectedRows[0].Index;
+                            int varausid = int.Parse(dgMokkiVaraukset[0, selectedIndex].Value.ToString());
+                            string TarkastaMahdollisetLaskutVaraukselle = "SELECT * FROM lasku WHERE varaus_id = @varausid";
+                            string TarkastaMahdollisetVarauksenPalvelutVaraukselle = "SELECT * FROM varauksen_palvelut WHERE varaus_id = @varausid";
+                            using (connection)
                             {
-                                checklaskutCommand.Parameters.AddWithValue("@varausid", varausid);
-                                connection.Open();
-                                MySqlDataReader reader = checklaskutCommand.ExecuteReader();
-
-                                if (!reader.HasRows) // true = Varauksesta ei ole tehty laskua
+                                using (MySqlCommand checklaskutCommand = new MySqlCommand(TarkastaMahdollisetLaskutVaraukselle, connection))
                                 {
-                                    reader.Close();
-                                    using (MySqlCommand checkvarauksenpalvelutCommand = new MySqlCommand(TarkastaMahdollisetVarauksenPalvelutVaraukselle, connection))
+                                    checklaskutCommand.Parameters.AddWithValue("@varausid", varausid);
+                                    connection.Open();
+                                    MySqlDataReader reader = checklaskutCommand.ExecuteReader();
+                                    if (!reader.HasRows) // true = Varauksesta ei ole tehty laskua
                                     {
-                                        checkvarauksenpalvelutCommand.Parameters.AddWithValue("@varausid", varausid);
-                                        reader = checkvarauksenpalvelutCommand.ExecuteReader();
-
-                                        if (!reader.HasRows) // true = Varaukseen ei liity varauksen_palvelut -tablen tietoja
+                                        reader.Close();
+                                        using (MySqlCommand checkvarauksenpalvelutCommand = new MySqlCommand(TarkastaMahdollisetVarauksenPalvelutVaraukselle, connection))
                                         {
-                                            reader.Close();
-                                            string PoistaVarauksenTiedotQuery = "DELETE FROM varaus WHERE varaus_id = @varausid";
-                                            using (MySqlCommand command = new MySqlCommand(PoistaVarauksenTiedotQuery, connection))
+                                            checkvarauksenpalvelutCommand.Parameters.AddWithValue("@varausid", varausid);
+                                            reader = checkvarauksenpalvelutCommand.ExecuteReader();
+                                            if (!reader.HasRows) // true = Varaukseen ei liity varauksen_palvelut -tablen tietoja
                                             {
-                                                command.Parameters.AddWithValue("@varausid", varausid);
-                                                command.ExecuteNonQuery();
+                                                reader.Close();
+                                                string PoistaVarauksenTiedotQuery = "DELETE FROM varaus WHERE varaus_id = @varausid";
+                                                using (MySqlCommand command = new MySqlCommand(PoistaVarauksenTiedotQuery, connection))
+                                                {
+                                                    command.Parameters.AddWithValue("@varausid", varausid);
+                                                    command.ExecuteNonQuery();
+                                                }
+                                                connection.Close();
+                                                UpdatedgMokkiVaraukset();
+                                                tbUusiVarausVarausID.Text = "";
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("Varaukseen on liitetty palveluita. Varauksen_palveluista täytyy ensin poistaa tällä varaus_id:llä lisätyt tiedot.");
                                             }
                                             connection.Close();
-                                            UpdatedgMokkiVaraukset();
-                                            tbUusiVarausVarausID.Text = "";
-
                                         }
-                                        else
-                                        {
-                                            MessageBox.Show("Varaukseen on liitetty palveluita. Varauksen_palveluista täytyy ensin poistaa tällä varaus_id:llä lisätyt tiedot.");
-                                        }
-                                        connection.Close();
                                     }
+                                    else
+                                    {
+                                        MessageBox.Show("Varauksesta on tehty lasku tietokantaan. Lasku täytyy poistaa ensin, jotta varauksen voi poistaa.");
+                                    }
+                                    connection.Close();
                                 }
-                                else
-                                {
-                                    MessageBox.Show("Varauksesta on tehty lasku tietokantaan. Lasku täytyy poistaa ensin, jotta varauksen voi poistaa.");
-                                }
-                                connection.Close();
                             }
                         }
                     }
+                    else
+                        MessageBox.Show("Olet valinnut tyhjän rivin. Sitä ei voi poistaa (ei ole mitään poistettavaa).");
                 }
                 else
-                    MessageBox.Show("Olet valinnut tyhjän rivin. Sitä ei voi poistaa (ei ole mitään poistettavaa).");
+                {
+                    MessageBox.Show("Valitse varaus, jonka haluat poistaa. Kokeile sitten uudelleen.");
+                }
             }
             else
-            {
-                MessageBox.Show("Valitse varaus, jonka haluat poistaa. Kokeile sitten uudelleen.");
-            }
+                MessageBox.Show("Suorita ensin haun rajaus loppuun");
+
+            
         }
 
         private void btnMuokkaaMokkiVarausta_Click(object sender, EventArgs e)
         {
-            muokkausMenossa = true;
-            if (dgMokkiVaraukset.SelectedRows.Count > 0)
+            if (!haunRajausPaalla == true)
             {
-                bool tyhjarivi = true;
-                foreach (DataGridViewCell cell in dgMokkiVaraukset.SelectedCells)
+                muokkausMenossa = true;
+                if (dgMokkiVaraukset.SelectedRows.Count > 0)
                 {
-                    if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                    bool tyhjarivi = true;
+                    foreach (DataGridViewCell cell in dgMokkiVaraukset.SelectedCells)
                     {
-                        tyhjarivi = false;
+                        if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                        {
+                            tyhjarivi = false;
+                        }
                     }
+                    if (!tyhjarivi)
+                    {
+                        btnMuokkaaMokkiVarausta.Text = "Muokkaus käynnissä...";
+                        muokkausMenossa = true;
+                        btnValmisVaraus.Text = "Tallenna muutokset";
+                        btnMokinVarausVahvista.Text = "Vahvista muutokset";
+                        btnPoistaMokkiVaraus.Visible = false;
+                        btnValmisVaraus.Enabled = false;
+                        tbUusiVarausVarausID.Enabled = false;
+                        tbUusiVarausVarausID.Text = dgMokkiVaraukset.CurrentRow.Cells[0].Value.ToString();
+                        dateTimeMokinVarausAlkuPvm.Value = DateTime.Parse(dgMokkiVaraukset.CurrentRow.Cells[5].Value.ToString());
+                        dateTimeMokinVarausLoppuPvm.Value = DateTime.Parse(dgMokkiVaraukset.CurrentRow.Cells[6].Value.ToString());
+                    }
+                    else
+                        MessageBox.Show("Olet valinnut tyhjän rivin. Sitä ei voi muokata (ei ole mitään muokattavaa).");
                 }
-                if (!tyhjarivi)
-                {
-                    muokkausMenossa = true;
-                    btnValmisVaraus.Text = "Tallenna muutokset";
-                    btnMokinVarausVahvista.Text = "Vahvista muutokset";
-                    btnPoistaMokkiVaraus.Visible = false;
-                    btnValmisVaraus.Enabled = false;
-
-                    string mokkiValue = dgMokkiVaraukset.CurrentRow.Cells[2].Value.ToString();
-                    int mokkiIndex = FindIndexByValue(cmbUusiVarausValitseMokki, mokkiValue);
-                    if (mokkiIndex != -1)
-                    {
-                        cmbUusiVarausValitseMokki.SelectedIndex = mokkiIndex;
-                    }
-
-                    string asiakasValue = dgMokkiVaraukset.CurrentRow.Cells[1].Value.ToString();
-                    int asiakasIndex = FindIndexByValue(cmbUusiVarausValitseAsiakas, asiakasValue);
-                    if (asiakasIndex != -1)
-                    {
-                        cmbUusiVarausValitseAsiakas.SelectedIndex = asiakasIndex;
-                    }
-
-                    tbUusiVarausVarausID.Enabled = false;
-                    tbUusiVarausVarausID.Text = dgMokkiVaraukset.CurrentRow.Cells[0].Value.ToString();
-                    dateTimeMokinVarausAlkuPvm.Value = DateTime.Parse(dgMokkiVaraukset.CurrentRow.Cells[5].Value.ToString());
-                    dateTimeMokinVarausLoppuPvm.Value = DateTime.Parse(dgMokkiVaraukset.CurrentRow.Cells[6].Value.ToString());
-                }
-                else
-                    MessageBox.Show("Olet valinnut tyhjän rivin. Sitä ei voi muokata (ei ole mitään muokattavaa).");
             }
-        }
-        private int FindIndexByValue(ComboBox comboBox, string value)
+            else
+                MessageBox.Show("Suorita ensin haun rajaus loppuun.");
+            
+        } //antaa muokata valitun varauksen tietoja
+
+        private void btmRajaaVarausHakua_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < comboBox.Items.Count; i++)
+            if (!haunRajausPaalla)
             {
-                if (comboBox.GetItemText(comboBox.Items[i]) == value)
-                {
-                    return i;
-                }
+                haunRajausPaalla = true;
+                panelHaunRajaus.Location = new Point(0, 40);
+                panelHaunRajaus.Visible = true;
+                btnRajaaVarausHakua.Text = "TEE HAKU";
+                cmbUusiVarausValitseAsiakas.Enabled = false;
+                cmbUusiVarausValitseMokki.Enabled = false;
+                panelHakuOhjeet.Visible = true;
+                panelHakuOhjeet.Location = new Point(5, 105);
+                btnMokinVarausVahvista.Visible = false;
+                btnValmisVaraus.Visible = false;
+                lblPvmOhje.Visible = false;
             }
-            return -1;
+            else
+            {
+                haunRajausPaalla = false;
+                panelHaunRajaus.Location = new Point(7, 221);
+                panelHaunRajaus.Visible = false;
+                btnRajaaVarausHakua.Text = "Rajaa hakua";
+                
+                try
+                {
+                    if (cmbUusiVarausValitseAsiakas.Enabled && cmbUusiVarausValitseMokki.Enabled)
+                    {
+                        int asiakasid = Convert.ToInt32(cmbUusiVarausValitseAsiakas.SelectedValue);
+                        try
+                        {
+                            string mokkimokkiid = cmbUusiVarausValitseMokki.SelectedValue.ToString();
+                            string hakuQuery = "SELECT * FROM varaus WHERE asiakas_id = @asiakasid AND mokki_mokki_id = @mokkimokkiid";
+                            DataTable datatable = new DataTable();
+                            using (connection)
+                            {
+                                MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                                command.Parameters.AddWithValue("@alueid", asiakasid);
+                                command.Parameters.AddWithValue("@postinro", mokkimokkiid);
+                                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                                adapter.Fill(datatable);
+                                connection.Close();
+                            }
+                            dgMokkiVaraukset.DataSource = datatable;
+
+
+                            checkMokkiNimiRajaus.Checked = false;
+                            checkVaraajaNimiRajaus.Checked = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Haku ei onnistunut" + ex);
+                        }
+
+
+                    }
+                    else if (cmbUusiVarausValitseAsiakas.Enabled && !cmbUusiVarausValitseMokki.Enabled)
+                    {
+                        int asiakasid = Convert.ToInt32(cmbUusiVarausValitseAsiakas.SelectedValue);
+
+                        string hakuQuery = "SELECT * FROM varaus WHERE asiakas_id = @asiakasid";
+                        DataTable datatable = new DataTable();
+                        using (connection)
+                        {
+                            MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                            command.Parameters.AddWithValue("@asiakasid", asiakasid);
+                            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                            adapter.Fill(datatable);
+                            connection.Close();
+                        }
+                        dgMokkiVaraukset.DataSource = datatable;
+
+                        checkMokkiNimiRajaus.Checked = false;
+                        checkVaraajaNimiRajaus.Checked = false;
+                    }
+                    else if (!cmbUusiVarausValitseAsiakas.Enabled && cmbUusiVarausValitseMokki.Enabled)
+                    {
+                        string mokkimokkiid = cmbUusiVarausValitseMokki.SelectedValue.ToString();
+
+                        string hakuQuery = "SELECT * FROM varaus WHERE mokki_mokki_id = @mokkimokkiid";
+                        DataTable datatable = new DataTable();
+                        using (connection)
+                        {
+                            MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                            command.Parameters.AddWithValue("@mokkimokkiid", mokkimokkiid);
+                            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                            adapter.Fill(datatable);
+                            connection.Close();
+                        }
+                        dgMokkiVaraukset.DataSource = datatable;
+
+                        checkMokkiNimiRajaus.Checked = false;
+                        checkVaraajaNimiRajaus.Checked = false;
+                    }
+                    else
+                    {
+                        UpdatedgMokkiVaraukset();
+                        checkMokkiNimiRajaus.Checked = false;
+                        checkVaraajaNimiRajaus.Checked = false;
+                    }
+                    cmbUusiVarausValitseAsiakas.Enabled = true;
+                    cmbUusiVarausValitseMokki.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Haku ei onnistunut" + ex);
+                }
+                cmbUusiVarausValitseAsiakas.Enabled = true;
+                cmbUusiVarausValitseMokki.Enabled = true;
+                panelHakuOhjeet.Visible = false;
+                panelHakuOhjeet.Location = new Point(344, 114);
+                btnMokinVarausVahvista.Visible = true;
+                btnValmisVaraus.Visible = true;
+                lblPvmOhje.Visible = true;
+            }
+        } //antaa hakea varauksia eri hakukriteereillä
+
+        private void checkMokkiNimiRajaus_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkMokkiNimiRajaus.Checked == true)
+            {
+                cmbUusiVarausValitseMokki.Enabled = true;
+            }
+            else
+                cmbUusiVarausValitseMokki.Enabled = false;
         }
 
+        private void checkVaraajaNimiRajaus_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkVaraajaNimiRajaus.Checked == true)
+            {
+                cmbUusiVarausValitseAsiakas.Enabled = true;
+            }
+            else
+                cmbUusiVarausValitseAsiakas.Enabled = false;
 
+        }
     }
 }

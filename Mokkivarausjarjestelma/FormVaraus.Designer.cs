@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVaraus));
             this.dateTimeMokinVarausAlkuPvm = new System.Windows.Forms.DateTimePicker();
             this.dateTimeMokinVarausLoppuPvm = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,14 +46,23 @@
             this.tbUusiVarausVarausID = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblVarausValittuAsiakasNimi = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblPvmOhje = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelHaunRajaus = new System.Windows.Forms.Panel();
+            this.lblCheckVaraajaNimi = new System.Windows.Forms.Label();
+            this.lblCheckMokkiNimi = new System.Windows.Forms.Label();
+            this.checkMokkiNimiRajaus = new System.Windows.Forms.CheckBox();
+            this.checkVaraajaNimiRajaus = new System.Windows.Forms.CheckBox();
+            this.panelHakuOhjeet = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnMuokkaaMokkiVarausta = new System.Windows.Forms.Button();
             this.btnPoistaMokkiVaraus = new System.Windows.Forms.Button();
-            this.btmRajaaVarausHakua = new System.Windows.Forms.Button();
+            this.btnRajaaVarausHakua = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panelHaunRajaus.SuspendLayout();
+            this.panelHakuOhjeet.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimeMokinVarausAlkuPvm
@@ -237,16 +247,16 @@
             this.lblVarausValittuAsiakasNimi.Size = new System.Drawing.Size(0, 15);
             this.lblVarausValittuAsiakasNimi.TabIndex = 15;
             // 
-            // label6
+            // lblPvmOhje
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label6.Location = new System.Drawing.Point(23, 6);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(285, 38);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Tarkasta, etteivät valitut päivämäärät mene\r\npäällekäin olemassaolevan varauksen " +
+            this.lblPvmOhje.AutoSize = true;
+            this.lblPvmOhje.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPvmOhje.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblPvmOhje.Location = new System.Drawing.Point(23, 6);
+            this.lblPvmOhje.Name = "lblPvmOhje";
+            this.lblPvmOhje.Size = new System.Drawing.Size(285, 38);
+            this.lblPvmOhje.TabIndex = 17;
+            this.lblPvmOhje.Text = "Tarkasta, etteivät valitut päivämäärät mene\r\npäällekäin olemassaolevan varauksen " +
     "kanssa";
             // 
             // btnTakaisinAloitusFormiin
@@ -255,7 +265,7 @@
             this.btnTakaisinAloitusFormiin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTakaisinAloitusFormiin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnTakaisinAloitusFormiin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 459);
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 314);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 31);
             this.btnTakaisinAloitusFormiin.TabIndex = 76;
@@ -266,8 +276,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Firebrick;
+            this.panel1.Controls.Add(this.panelHakuOhjeet);
+            this.panel1.Controls.Add(this.panelHaunRajaus);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.lblPvmOhje);
             this.panel1.Controls.Add(this.dateTimeMokinVarausAlkuPvm);
             this.panel1.Controls.Add(this.dateTimeMokinVarausLoppuPvm);
             this.panel1.Controls.Add(this.label5);
@@ -281,6 +293,75 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(319, 299);
             this.panel1.TabIndex = 77;
+            // 
+            // panelHaunRajaus
+            // 
+            this.panelHaunRajaus.Controls.Add(this.lblCheckVaraajaNimi);
+            this.panelHaunRajaus.Controls.Add(this.lblCheckMokkiNimi);
+            this.panelHaunRajaus.Controls.Add(this.checkMokkiNimiRajaus);
+            this.panelHaunRajaus.Controls.Add(this.checkVaraajaNimiRajaus);
+            this.panelHaunRajaus.Location = new System.Drawing.Point(7, 221);
+            this.panelHaunRajaus.Name = "panelHaunRajaus";
+            this.panelHaunRajaus.Size = new System.Drawing.Size(97, 65);
+            this.panelHaunRajaus.TabIndex = 83;
+            this.panelHaunRajaus.Visible = false;
+            // 
+            // lblCheckVaraajaNimi
+            // 
+            this.lblCheckVaraajaNimi.AutoSize = true;
+            this.lblCheckVaraajaNimi.Location = new System.Drawing.Point(0, 43);
+            this.lblCheckVaraajaNimi.Name = "lblCheckVaraajaNimi";
+            this.lblCheckVaraajaNimi.Size = new System.Drawing.Size(78, 15);
+            this.lblCheckVaraajaNimi.TabIndex = 84;
+            this.lblCheckVaraajaNimi.Text = "Varaajan nimi";
+            // 
+            // lblCheckMokkiNimi
+            // 
+            this.lblCheckMokkiNimi.AutoSize = true;
+            this.lblCheckMokkiNimi.Location = new System.Drawing.Point(10, 13);
+            this.lblCheckMokkiNimi.Name = "lblCheckMokkiNimi";
+            this.lblCheckMokkiNimi.Size = new System.Drawing.Size(68, 15);
+            this.lblCheckMokkiNimi.TabIndex = 83;
+            this.lblCheckMokkiNimi.Text = "Mökin nimi";
+            // 
+            // checkMokkiNimiRajaus
+            // 
+            this.checkMokkiNimiRajaus.AutoSize = true;
+            this.checkMokkiNimiRajaus.Location = new System.Drawing.Point(78, 14);
+            this.checkMokkiNimiRajaus.Name = "checkMokkiNimiRajaus";
+            this.checkMokkiNimiRajaus.Size = new System.Drawing.Size(15, 14);
+            this.checkMokkiNimiRajaus.TabIndex = 82;
+            this.checkMokkiNimiRajaus.UseVisualStyleBackColor = true;
+            this.checkMokkiNimiRajaus.CheckedChanged += new System.EventHandler(this.checkMokkiNimiRajaus_CheckedChanged);
+            // 
+            // checkVaraajaNimiRajaus
+            // 
+            this.checkVaraajaNimiRajaus.AutoSize = true;
+            this.checkVaraajaNimiRajaus.Location = new System.Drawing.Point(78, 44);
+            this.checkVaraajaNimiRajaus.Name = "checkVaraajaNimiRajaus";
+            this.checkVaraajaNimiRajaus.Size = new System.Drawing.Size(15, 14);
+            this.checkVaraajaNimiRajaus.TabIndex = 81;
+            this.checkVaraajaNimiRajaus.UseVisualStyleBackColor = true;
+            this.checkVaraajaNimiRajaus.CheckedChanged += new System.EventHandler(this.checkVaraajaNimiRajaus_CheckedChanged);
+            // 
+            // panelHakuOhjeet
+            // 
+            this.panelHakuOhjeet.BackColor = System.Drawing.Color.Firebrick;
+            this.panelHakuOhjeet.Controls.Add(this.label6);
+            this.panelHakuOhjeet.Location = new System.Drawing.Point(5, 105);
+            this.panelHakuOhjeet.Name = "panelHakuOhjeet";
+            this.panelHakuOhjeet.Size = new System.Drawing.Size(309, 191);
+            this.panelHakuOhjeet.TabIndex = 84;
+            this.panelHakuOhjeet.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(282, 180);
+            this.label6.TabIndex = 0;
+            this.label6.Text = resources.GetString("label6.Text");
             // 
             // btnMuokkaaMokkiVarausta
             // 
@@ -310,26 +391,27 @@
             this.btnPoistaMokkiVaraus.UseVisualStyleBackColor = false;
             this.btnPoistaMokkiVaraus.Click += new System.EventHandler(this.btnPoistaMokkiVaraus_Click);
             // 
-            // btmRajaaVarausHakua
+            // btnRajaaVarausHakua
             // 
-            this.btmRajaaVarausHakua.BackColor = System.Drawing.Color.DarkRed;
-            this.btmRajaaVarausHakua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btmRajaaVarausHakua.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btmRajaaVarausHakua.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btmRajaaVarausHakua.Location = new System.Drawing.Point(332, 314);
-            this.btmRajaaVarausHakua.Name = "btmRajaaVarausHakua";
-            this.btmRajaaVarausHakua.Size = new System.Drawing.Size(179, 31);
-            this.btmRajaaVarausHakua.TabIndex = 80;
-            this.btmRajaaVarausHakua.Text = "Rajaa hakua";
-            this.btmRajaaVarausHakua.UseVisualStyleBackColor = false;
+            this.btnRajaaVarausHakua.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRajaaVarausHakua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRajaaVarausHakua.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRajaaVarausHakua.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRajaaVarausHakua.Location = new System.Drawing.Point(332, 314);
+            this.btnRajaaVarausHakua.Name = "btnRajaaVarausHakua";
+            this.btnRajaaVarausHakua.Size = new System.Drawing.Size(179, 31);
+            this.btnRajaaVarausHakua.TabIndex = 80;
+            this.btnRajaaVarausHakua.Text = "Rajaa hakua";
+            this.btnRajaaVarausHakua.UseVisualStyleBackColor = false;
+            this.btnRajaaVarausHakua.Click += new System.EventHandler(this.btmRajaaVarausHakua_Click);
             // 
             // FormVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1083, 497);
-            this.Controls.Add(this.btmRajaaVarausHakua);
+            this.ClientSize = new System.Drawing.Size(1083, 354);
+            this.Controls.Add(this.btnRajaaVarausHakua);
             this.Controls.Add(this.btnPoistaMokkiVaraus);
             this.Controls.Add(this.btnMuokkaaMokkiVarausta);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
@@ -349,6 +431,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelHaunRajaus.ResumeLayout(false);
+            this.panelHaunRajaus.PerformLayout();
+            this.panelHakuOhjeet.ResumeLayout(false);
+            this.panelHakuOhjeet.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,11 +458,18 @@
         private TextBox tbUusiVarausVarausID;
         private Label label5;
         private Label lblVarausValittuAsiakasNimi;
-        private Label label6;
+        private Label lblPvmOhje;
         private Button btnTakaisinAloitusFormiin;
         private Panel panel1;
         private Button btnMuokkaaMokkiVarausta;
         private Button btnPoistaMokkiVaraus;
-        private Button btmRajaaVarausHakua;
+        private Button btnRajaaVarausHakua;
+        private Panel panelHaunRajaus;
+        private Label lblCheckVaraajaNimi;
+        private Label lblCheckMokkiNimi;
+        private CheckBox checkMokkiNimiRajaus;
+        private CheckBox checkVaraajaNimiRajaus;
+        private Panel panelHakuOhjeet;
+        private Label label6;
     }
 }

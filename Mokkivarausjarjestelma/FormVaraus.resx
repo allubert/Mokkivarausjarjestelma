@@ -66,4 +66,19 @@
   <metadata name="dgMokkiVaraukset.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Jos haluat hakea MokkiID:llä, kytke se päälle
+klikkaamalla viereistä checkboxia. || Jos haluat hakea
+AsiakasID:llä, klikkaa sen kohdalla oleva checkboxi
+päälle.
+Voit myös hakea käyttämällä molempia; 
+klikkaa molemmat checkboxit päälle.
+**Jos haluat kaikki mökit näkyviin, kytke
+molemmat checkboxit pois.**
+-- Valitse sopivat hakukriteerit, ja paina 'Tee haku'.
+:::: Mökit, jotka sisältävät valitsemasi
+hakukriteerit, tulevat näkyviin listalle.
+(ja hakemistila lähtee itsestään pois)
+</value>
+  </data>
 </root>
