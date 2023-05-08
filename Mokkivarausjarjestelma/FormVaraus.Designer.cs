@@ -48,6 +48,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMuokkaaMokkiVarausta = new System.Windows.Forms.Button();
+            this.btnPoistaMokkiVaraus = new System.Windows.Forms.Button();
+            this.btmRajaaVarausHakua = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgMokkiVaraukset)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -161,8 +164,8 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Beige;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Beige;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Firebrick;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgMokkiVaraukset.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgMokkiVaraukset.EnableHeadersVisualStyles = false;
@@ -170,6 +173,7 @@
             this.dgMokkiVaraukset.Name = "dgMokkiVaraukset";
             this.dgMokkiVaraukset.ReadOnly = true;
             this.dgMokkiVaraukset.RowTemplate.Height = 25;
+            this.dgMokkiVaraukset.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgMokkiVaraukset.Size = new System.Drawing.Size(747, 299);
             this.dgMokkiVaraukset.TabIndex = 9;
             // 
@@ -251,13 +255,13 @@
             this.btnTakaisinAloitusFormiin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTakaisinAloitusFormiin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnTakaisinAloitusFormiin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 450);
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(7, 459);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(93, 31);
             this.btnTakaisinAloitusFormiin.TabIndex = 76;
             this.btnTakaisinAloitusFormiin.Text = "Takaisin";
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
-            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinMokkiFormiin_Click);
             // 
             // panel1
             // 
@@ -278,12 +282,56 @@
             this.panel1.Size = new System.Drawing.Size(319, 299);
             this.panel1.TabIndex = 77;
             // 
+            // btnMuokkaaMokkiVarausta
+            // 
+            this.btnMuokkaaMokkiVarausta.BackColor = System.Drawing.Color.DarkRed;
+            this.btnMuokkaaMokkiVarausta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMuokkaaMokkiVarausta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnMuokkaaMokkiVarausta.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnMuokkaaMokkiVarausta.Location = new System.Drawing.Point(607, 314);
+            this.btnMuokkaaMokkiVarausta.Name = "btnMuokkaaMokkiVarausta";
+            this.btnMuokkaaMokkiVarausta.Size = new System.Drawing.Size(179, 31);
+            this.btnMuokkaaMokkiVarausta.TabIndex = 78;
+            this.btnMuokkaaMokkiVarausta.Text = "Muokkaa varausta";
+            this.btnMuokkaaMokkiVarausta.UseVisualStyleBackColor = false;
+            this.btnMuokkaaMokkiVarausta.Click += new System.EventHandler(this.btnMuokkaaMokkiVarausta_Click);
+            // 
+            // btnPoistaMokkiVaraus
+            // 
+            this.btnPoistaMokkiVaraus.BackColor = System.Drawing.Color.DarkRed;
+            this.btnPoistaMokkiVaraus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPoistaMokkiVaraus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPoistaMokkiVaraus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnPoistaMokkiVaraus.Location = new System.Drawing.Point(885, 314);
+            this.btnPoistaMokkiVaraus.Name = "btnPoistaMokkiVaraus";
+            this.btnPoistaMokkiVaraus.Size = new System.Drawing.Size(194, 31);
+            this.btnPoistaMokkiVaraus.TabIndex = 79;
+            this.btnPoistaMokkiVaraus.Text = "Poista varaus tietokannasta";
+            this.btnPoistaMokkiVaraus.UseVisualStyleBackColor = false;
+            this.btnPoistaMokkiVaraus.Click += new System.EventHandler(this.btnPoistaMokkiVaraus_Click);
+            // 
+            // btmRajaaVarausHakua
+            // 
+            this.btmRajaaVarausHakua.BackColor = System.Drawing.Color.DarkRed;
+            this.btmRajaaVarausHakua.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btmRajaaVarausHakua.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btmRajaaVarausHakua.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btmRajaaVarausHakua.Location = new System.Drawing.Point(332, 314);
+            this.btmRajaaVarausHakua.Name = "btmRajaaVarausHakua";
+            this.btmRajaaVarausHakua.Size = new System.Drawing.Size(179, 31);
+            this.btmRajaaVarausHakua.TabIndex = 80;
+            this.btmRajaaVarausHakua.Text = "Rajaa hakua";
+            this.btmRajaaVarausHakua.UseVisualStyleBackColor = false;
+            // 
             // FormVaraus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1083, 493);
+            this.ClientSize = new System.Drawing.Size(1083, 497);
+            this.Controls.Add(this.btmRajaaVarausHakua);
+            this.Controls.Add(this.btnPoistaMokkiVaraus);
+            this.Controls.Add(this.btnMuokkaaMokkiVarausta);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.lblVarausValittuAsiakasNimi);
             this.Controls.Add(this.dgMokkiVaraukset);
@@ -327,5 +375,8 @@
         private Label label6;
         private Button btnTakaisinAloitusFormiin;
         private Panel panel1;
+        private Button btnMuokkaaMokkiVarausta;
+        private Button btnPoistaMokkiVaraus;
+        private Button btmRajaaVarausHakua;
     }
 }

@@ -233,41 +233,55 @@ namespace Mokkivarausjarjestelma
             {
                 if (dgMokkiLista.SelectedRows.Count > 0)
                 {
-                    DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun mökin tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
+                    bool tyhjarivi = true;
+                    foreach(DataGridViewCell cell in dgMokkiLista.SelectedCells)
                     {
-                        int selectedIndex = dgMokkiLista.SelectedRows[0].Index;
-                        int mokkiid = int.Parse(dgMokkiLista[0, selectedIndex].Value.ToString());
-                        string TarkastaMahdollisetVarauksetMokilleQuery = "SELECT * FROM varaus WHERE mokki_mokki_id = @mokkiid";
-
-                        using (connection)
+                        if(cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
                         {
-                            using (MySqlCommand checkCommand = new MySqlCommand(TarkastaMahdollisetVarauksetMokilleQuery, connection))
-                            {
-                                checkCommand.Parameters.AddWithValue("@mokkiid", mokkiid);
-                                connection.Open();
-                                MySqlDataReader reader = checkCommand.ExecuteReader();
+                            tyhjarivi = false;
+                        }
+                    }
+                    if (!tyhjarivi)
+                    {
+                        DialogResult result = MessageBox.Show("Haluatko varmasti poistaa valitun mökin tietokannasta?", "Oletko varma?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int selectedIndex = dgMokkiLista.SelectedRows[0].Index;
+                            int mokkiid = int.Parse(dgMokkiLista[0, selectedIndex].Value.ToString());
+                            string TarkastaMahdollisetVarauksetMokilleQuery = "SELECT * FROM varaus WHERE mokki_mokki_id = @mokkiid";
 
-                                if (!reader.HasRows) // true = Mökille ei varauksia, joten sen voi poistaa
+                            using (connection)
+                            {
+                                using (MySqlCommand checkCommand = new MySqlCommand(TarkastaMahdollisetVarauksetMokilleQuery, connection))
                                 {
-                                    reader.Close();
-                                    string PoistaMokinTiedotQuery = "DELETE FROM mokki WHERE mokki_id = @mokkiid";
-                                    using (MySqlCommand command = new MySqlCommand(PoistaMokinTiedotQuery, connection))
+                                    checkCommand.Parameters.AddWithValue("@mokkiid", mokkiid);
+                                    connection.Open();
+                                    MySqlDataReader reader = checkCommand.ExecuteReader();
+
+                                    if (!reader.HasRows) // true = Mökille ei varauksia, joten sen voi poistaa
                                     {
-                                        command.Parameters.AddWithValue("@mokkiid", mokkiid);
-                                        command.ExecuteNonQuery();
+                                        reader.Close();
+                                        string PoistaMokinTiedotQuery = "DELETE FROM mokki WHERE mokki_id = @mokkiid";
+                                        using (MySqlCommand command = new MySqlCommand(PoistaMokinTiedotQuery, connection))
+                                        {
+                                            command.Parameters.AddWithValue("@mokkiid", mokkiid);
+                                            command.ExecuteNonQuery();
+                                        }
+                                        UpdatedgMokkiLista();
+                                        ClearTextBoxes();
                                     }
-                                    UpdatedgMokkiLista();
-                                    ClearTextBoxes();
+                                    else
+                                    {
+                                        MessageBox.Show("Mökki on varattu. Sitä ei voi poistaa tietokannasta. Varaus täytyy poistaa ensin.");
+                                    }
+                                    connection.Close();
                                 }
-                                else
-                                {
-                                    MessageBox.Show("Mökki on varattu. Sitä ei voi poistaa tietokannasta.");
-                                }
-                                connection.Close();
                             }
                         }
                     }
+                    else
+                        MessageBox.Show("Et voi poistaa tyhjää riviä");
+                    
                 }
                 else
                 {
