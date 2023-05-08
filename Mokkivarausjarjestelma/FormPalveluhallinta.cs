@@ -262,5 +262,23 @@ namespace Mokkivarausjarjestelma
                 MessageBox.Show("Ei tuloksia.");
             }
         }
+
+        private void btnMokit_Click(object sender, EventArgs e)
+        {
+            Form formmokit = new FormMokitJaMokkivaraukset();
+            this.Hide();
+
+            formmokit.ShowDialog();
+            this.Close();
+        }
+
+        private void btnVarauspalvelut_Click(object sender, EventArgs e)
+        {
+            Form varauspalvelut = new FormVarauksenpalvelut();
+            this.Hide();
+
+            varauspalvelut.ShowDialog();
+            this.Close();
+        }
     }
 }

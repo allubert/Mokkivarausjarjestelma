@@ -52,6 +52,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnHae = new System.Windows.Forms.Button();
+            this.btnMokit = new System.Windows.Forms.Button();
+            this.btnVarauspalvelut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -264,12 +266,36 @@
             this.btnHae.UseVisualStyleBackColor = false;
             this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
+            // btnMokit
+            // 
+            this.btnMokit.BackColor = System.Drawing.Color.Turquoise;
+            this.btnMokit.Location = new System.Drawing.Point(11, 495);
+            this.btnMokit.Name = "btnMokit";
+            this.btnMokit.Size = new System.Drawing.Size(137, 23);
+            this.btnMokit.TabIndex = 79;
+            this.btnMokit.Text = "Mökkivaraukset";
+            this.btnMokit.UseVisualStyleBackColor = false;
+            this.btnMokit.Click += new System.EventHandler(this.btnMokit_Click);
+            // 
+            // btnVarauspalvelut
+            // 
+            this.btnVarauspalvelut.BackColor = System.Drawing.Color.Turquoise;
+            this.btnVarauspalvelut.Location = new System.Drawing.Point(11, 524);
+            this.btnVarauspalvelut.Name = "btnVarauspalvelut";
+            this.btnVarauspalvelut.Size = new System.Drawing.Size(137, 24);
+            this.btnVarauspalvelut.TabIndex = 80;
+            this.btnVarauspalvelut.Text = "Varauksien palvelut";
+            this.btnVarauspalvelut.UseVisualStyleBackColor = false;
+            this.btnVarauspalvelut.Click += new System.EventHandler(this.btnVarauspalvelut_Click);
+            // 
             // FormPalveluhallinta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
             this.ClientSize = new System.Drawing.Size(942, 593);
+            this.Controls.Add(this.btnVarauspalvelut);
+            this.Controls.Add(this.btnMokit);
             this.Controls.Add(this.btnHae);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -295,7 +321,7 @@
             this.Controls.Add(this.dgvPalvelut);
             this.Name = "FormPalveluhallinta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "1";
+            this.Text = "Palveluhallinta";
             this.Load += new System.EventHandler(this.FormPalveluhallinta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).EndInit();
             this.ResumeLayout(false);
@@ -328,5 +354,7 @@
         private Label label3;
         private Label label4;
         private Button btnHae;
+        private Button btnMokit;
+        private Button btnVarauspalvelut;
     }
 }
