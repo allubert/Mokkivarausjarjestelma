@@ -62,7 +62,12 @@
 hakea listasta eri palveluita eri ID:llä sekä muokata jo olemassa olevia palveluita.
 Lisätyt palvelut tulevat näkyviin käyttöliittymässä olevaan taulukkoon ja samalla
 päivittyvät tietokantaan. Painamalla yhtä riviä taulukosta saat kyseisen palvelun tiedot
-tekstikenttiin.
+tekstikenttiin. Jos haluat muokata jo valmiiksi syötettyjä tietoja, niin klikkaa valitsemaasi
+riviä oikealla olevasta taulukosta, jolloin rivin tiedot siirtyvät takaisin vasemmalla oleviin tekstikenttiin.
+Tämän jälkeen POISTA se rivi taulukosta, jolloin se poistaa kyseiset tiedot tietokannasta, mutta
+tiedot jäävät tekstikenttiin, tämän jälkeen muokkaa haluamaasi tietoa tekstikentästä.
+Kun olet valmis, syötä tiedot takaisin taulukkoon ja tietokantaan painamalla "Lisää" -painiketta.
+
 </value>
   </data>
 </root>
