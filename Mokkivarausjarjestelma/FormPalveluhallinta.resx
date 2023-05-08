@@ -57,4 +57,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Tässä formissa voit lisätä palveluita, päivittää listan ja tietokannan palveluista,
+hakea listasta eri palveluita eri ID:llä sekä muokata jo olemassa olevia palveluita.
+Lisätyt palvelut tulevat näkyviin käyttöliittymässä olevaan taulukkoon ja samalla
+päivittyvät tietokantaan. Painamalla yhtä riviä taulukosta saat kyseisen palvelun tiedot
+tekstikenttiin.
+</value>
+  </data>
 </root>

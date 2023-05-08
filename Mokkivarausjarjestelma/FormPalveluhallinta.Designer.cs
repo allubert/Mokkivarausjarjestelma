@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPalveluhallinta));
             this.rtbPalvelukuvaus = new System.Windows.Forms.RichTextBox();
             this.tbPalvelualv = new System.Windows.Forms.TextBox();
             this.tbPalveluhinta = new System.Windows.Forms.TextBox();
@@ -48,6 +49,9 @@
             this.tbAlueID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnHae = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,42 +100,46 @@
             // 
             // btnPalveluLisaa
             // 
-            this.btnPalveluLisaa.Location = new System.Drawing.Point(14, 367);
+            this.btnPalveluLisaa.BackColor = System.Drawing.Color.Turquoise;
+            this.btnPalveluLisaa.Location = new System.Drawing.Point(11, 367);
             this.btnPalveluLisaa.Name = "btnPalveluLisaa";
             this.btnPalveluLisaa.Size = new System.Drawing.Size(75, 23);
             this.btnPalveluLisaa.TabIndex = 27;
             this.btnPalveluLisaa.Text = "Syötä";
-            this.btnPalveluLisaa.UseVisualStyleBackColor = true;
+            this.btnPalveluLisaa.UseVisualStyleBackColor = false;
             this.btnPalveluLisaa.Click += new System.EventHandler(this.btnPalveluLisaa_Click);
             // 
             // btnPalveluPaivita
             // 
-            this.btnPalveluPaivita.Location = new System.Drawing.Point(129, 367);
+            this.btnPalveluPaivita.BackColor = System.Drawing.Color.Turquoise;
+            this.btnPalveluPaivita.Location = new System.Drawing.Point(110, 367);
             this.btnPalveluPaivita.Name = "btnPalveluPaivita";
             this.btnPalveluPaivita.Size = new System.Drawing.Size(75, 23);
             this.btnPalveluPaivita.TabIndex = 26;
             this.btnPalveluPaivita.Text = "Päivitä";
-            this.btnPalveluPaivita.UseVisualStyleBackColor = true;
+            this.btnPalveluPaivita.UseVisualStyleBackColor = false;
             this.btnPalveluPaivita.Click += new System.EventHandler(this.btnPalveluPaivita_Click);
             // 
             // btnPalveluPoista
             // 
-            this.btnPalveluPoista.Location = new System.Drawing.Point(240, 367);
+            this.btnPalveluPoista.BackColor = System.Drawing.Color.Turquoise;
+            this.btnPalveluPoista.Location = new System.Drawing.Point(216, 367);
             this.btnPalveluPoista.Name = "btnPalveluPoista";
             this.btnPalveluPoista.Size = new System.Drawing.Size(75, 23);
             this.btnPalveluPoista.TabIndex = 25;
             this.btnPalveluPoista.Text = "Poista";
-            this.btnPalveluPoista.UseVisualStyleBackColor = true;
+            this.btnPalveluPoista.UseVisualStyleBackColor = false;
             this.btnPalveluPoista.Click += new System.EventHandler(this.btnPalveluPoista_Click);
             // 
             // btnPalveluTyhj
             // 
+            this.btnPalveluTyhj.BackColor = System.Drawing.Color.Turquoise;
             this.btnPalveluTyhj.Location = new System.Drawing.Point(14, 416);
             this.btnPalveluTyhj.Name = "btnPalveluTyhj";
             this.btnPalveluTyhj.Size = new System.Drawing.Size(134, 23);
             this.btnPalveluTyhj.TabIndex = 24;
             this.btnPalveluTyhj.Text = "Tyhjennä tekstikentät";
-            this.btnPalveluTyhj.UseVisualStyleBackColor = true;
+            this.btnPalveluTyhj.UseVisualStyleBackColor = false;
             this.btnPalveluTyhj.Click += new System.EventHandler(this.btnPalveluTyhj_Click);
             // 
             // lblHinta
@@ -217,19 +225,54 @@
             // 
             // btnTakaisinAloitusFormiin
             // 
+            this.btnTakaisinAloitusFormiin.BackColor = System.Drawing.Color.Turquoise;
             this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(11, 558);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(137, 23);
             this.btnTakaisinAloitusFormiin.TabIndex = 76;
             this.btnTakaisinAloitusFormiin.Text = "Takaisin aloitussivulle";
-            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(343, 466);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(457, 75);
+            this.label3.TabIndex = 77;
+            this.label3.Text = resources.GetString("label3.Text");
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(343, 436);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 21);
+            this.label4.TabIndex = 78;
+            this.label4.Text = "KÄYTTÖOHJE!";
+            // 
+            // btnHae
+            // 
+            this.btnHae.BackColor = System.Drawing.Color.Turquoise;
+            this.btnHae.Location = new System.Drawing.Point(240, 16);
+            this.btnHae.Name = "btnHae";
+            this.btnHae.Size = new System.Drawing.Size(49, 32);
+            this.btnHae.TabIndex = 79;
+            this.btnHae.Text = "Hae";
+            this.btnHae.UseVisualStyleBackColor = false;
+            this.btnHae.Click += new System.EventHandler(this.btnHae_Click);
             // 
             // FormPalveluhallinta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.NavajoWhite;
             this.ClientSize = new System.Drawing.Size(942, 593);
+            this.Controls.Add(this.btnHae);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbAlueID);
@@ -282,5 +325,8 @@
         private TextBox tbAlueID;
         private Label label1;
         private Button btnTakaisinAloitusFormiin;
+        private Label label3;
+        private Label label4;
+        private Button btnHae;
     }
 }

@@ -1,10 +1,12 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -224,6 +226,38 @@ namespace Mokkivarausjarjestelma
             if (result == DialogResult.Yes)
             {
                 EmptyTB(this);
+            }
+        }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string hakuQuery = "SELECT * FROM palvelu WHERE palvelu_id = @palveluid";
+            string palveluid = tbPalveluID.Text;
+
+            DataTable datatable = new DataTable();
+            using (connection)
+            {
+                MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                command.Parameters.AddWithValue("@palveluid", palveluid);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(datatable);
+            }
+
+            if (datatable.Rows.Count > 0)
+            {
+                dgvPalvelut.DataSource = datatable;
+                foreach (DataGridViewRow row in dgvPalvelut.Rows)
+                {
+                    if (row.Cells["palvelu_id"].Value.ToString() == palveluid)
+                    {
+                        row.Selected = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ei tuloksia.");
             }
         }
     }
