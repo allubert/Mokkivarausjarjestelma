@@ -21,6 +21,7 @@ namespace Mokkivarausjarjestelma
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
         MySqlCommand command;
 
+
         public void populatedgvAsiakkaat()
         {
             string query = "SELECT * FROM asiakas";

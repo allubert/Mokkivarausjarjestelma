@@ -32,11 +32,29 @@ namespace Mokkivarausjarjestelma
         public FormLaskutus()
         {
             InitializeComponent();
+            paivitalaskudgv(); 
         }
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
         MySqlCommand command;
 
+        public void paivitalaskudgv()
+        {
+            try
+            {
+                string kysely = "SELECT * from lasku"; 
+                DataTable dt = new DataTable();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(kysely, connection);
+                adapter.Fill(dt);
+                dgvLaskutus.DataSource = dt;
+
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Tietojen hakeminen tietokannasta ei onnistunut"); 
+            }
+           
+        }
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
             Form formaloitus = new Form1();
@@ -67,8 +85,8 @@ namespace Mokkivarausjarjestelma
 
             string kylysummasta = "SELECT summa FROM lasku WHERE lasku_id=" + dgvLaskutus.SelectedRows[0].Cells[0].Value;
 
-            MySqlCommand komento1 = new MySqlCommand(kylysummasta, connection);
-            MySqlCommand komento2 = new MySqlCommand(varausID, connection);
+            MySqlCommand komento1 = new MySqlCommand(varausID, connection);
+            MySqlCommand komento2 = new MySqlCommand(kylysummasta, connection);
             MySqlDataReader reader = komento1.ExecuteReader();
             MySqlDataReader lukija = komento2.ExecuteReader();
             reader.Read();
@@ -94,9 +112,26 @@ namespace Mokkivarausjarjestelma
 
             sahkoposti.From = new MailAddress("villagenewbies@gmail.com");
             sahkoposti.To.Add(reader.GetString(2));
-            connection.Close(); 
+            connection.Close();
+            sahkoposti.Subject = "Village Newbies laskusi";
+            sahkoposti.Body = "Tämän viestin liitteenä on laskusi mökkivarauksesta Village Newbies:n kautta";
+            Attachment laskupdf = new Attachment(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/lasku.pdf");
+            laskupdf.Name = "lasku.pdf";
+            sahkoposti.Attachments.Add(laskupdf);
 
+            string käyttäjä = "villagenewbies@gmail.com";
+            string salis = "noobs123";
 
+            servu.Port = 587;
+            servu.UseDefaultCredentials = false;
+            servu.Credentials = new System.Net.NetworkCredential(käyttäjä, salis);
+            servu.EnableSsl = true;
+
+            servu.Send(sahkoposti);
+            MessageBox.Show("Laskun lähettäminen onnistui", "Ilmoitus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            reader.Close();
+
+            paivitalaskudgv(); 
         }
     }
 }
