@@ -75,14 +75,14 @@
             this.tbToimintaAlue.Location = new System.Drawing.Point(6, 83);
             this.tbToimintaAlue.Name = "tbToimintaAlue";
             this.tbToimintaAlue.Size = new System.Drawing.Size(199, 23);
-            this.tbToimintaAlue.TabIndex = 16;
+            this.tbToimintaAlue.TabIndex = 2;
             // 
             // btnToimintaKohteet
             // 
             this.btnToimintaKohteet.Location = new System.Drawing.Point(8, 492);
             this.btnToimintaKohteet.Name = "btnToimintaKohteet";
             this.btnToimintaKohteet.Size = new System.Drawing.Size(94, 42);
-            this.btnToimintaKohteet.TabIndex = 26;
+            this.btnToimintaKohteet.TabIndex = 5;
             this.btnToimintaKohteet.Text = "Näytä kohteet";
             this.btnToimintaKohteet.UseVisualStyleBackColor = true;
             this.btnToimintaKohteet.Click += new System.EventHandler(this.btnToimintaKohteet_Click);
@@ -95,7 +95,7 @@
             this.dgvToiminta.RowHeadersWidth = 51;
             this.dgvToiminta.RowTemplate.Height = 25;
             this.dgvToiminta.Size = new System.Drawing.Size(696, 450);
-            this.dgvToiminta.TabIndex = 22;
+            this.dgvToiminta.TabIndex = 7;
             this.dgvToiminta.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvToiminta_MouseClick);
             // 
             // btnToimintaPoistaAlue
@@ -103,7 +103,7 @@
             this.btnToimintaPoistaAlue.Location = new System.Drawing.Point(116, 444);
             this.btnToimintaPoistaAlue.Name = "btnToimintaPoistaAlue";
             this.btnToimintaPoistaAlue.Size = new System.Drawing.Size(99, 42);
-            this.btnToimintaPoistaAlue.TabIndex = 25;
+            this.btnToimintaPoistaAlue.TabIndex = 4;
             this.btnToimintaPoistaAlue.Text = "Poista toiminta-alue";
             this.btnToimintaPoistaAlue.UseVisualStyleBackColor = true;
             this.btnToimintaPoistaAlue.Click += new System.EventHandler(this.btnToimintaPoistaAlue_Click);
@@ -113,7 +113,7 @@
             this.btnToimintaLisaaAlue.Location = new System.Drawing.Point(10, 444);
             this.btnToimintaLisaaAlue.Name = "btnToimintaLisaaAlue";
             this.btnToimintaLisaaAlue.Size = new System.Drawing.Size(94, 42);
-            this.btnToimintaLisaaAlue.TabIndex = 24;
+            this.btnToimintaLisaaAlue.TabIndex = 3;
             this.btnToimintaLisaaAlue.Text = "Lisää toiminta-alue";
             this.btnToimintaLisaaAlue.UseVisualStyleBackColor = true;
             this.btnToimintaLisaaAlue.Click += new System.EventHandler(this.btnToimintaLisaaAlue_Click);
@@ -123,7 +123,7 @@
             this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(116, 493);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(99, 41);
-            this.btnTakaisinAloitusFormiin.TabIndex = 75;
+            this.btnTakaisinAloitusFormiin.TabIndex = 6;
             this.btnTakaisinAloitusFormiin.Text = "Takaisin aloitussivulle";
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
