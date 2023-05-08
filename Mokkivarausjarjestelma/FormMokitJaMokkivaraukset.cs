@@ -53,12 +53,12 @@ namespace Mokkivarausjarjestelma
                 catch (Exception ex)
                 {
                     // tietokantaan ei ole lisätty alueita, tai postitoimipaikkoja.
-                    MessageBox.Show("Mökkilista ei ole saatavilla, koska tietokannasta luultavasti puuttuu alueen ja/tai postitoimipaikan tiedot\n " + ex.ToString()); ;
-                    Form formaloitus = new Form1();
-                    this.Hide();
-
-                    formaloitus.ShowDialog();
-                    this.Close();
+                    MessageBox.Show(ex.ToString());
+                }
+                if(cmbUusiMokkiValitseAlueID.Text == "" || cmbUusiMokkiValitsePostiNro.Text == "")
+                {
+                    btnHaeMokit.Enabled = false;
+                    MessageBox.Show("Tietokannasta puuttuu alueen ja/tai postitoimipaikan tiedot\nTästä johtuen et voi lisätä uusia mökkejä tietokantaan.\nLisää alueita ja postitoimipaikkoja Aluehallinnan kautta, jos haluat lisätä mökkejä tietokantaan.");
                 }
             }
         }
@@ -519,76 +519,89 @@ namespace Mokkivarausjarjestelma
             lblHaePostiNro.Visible = false;
             lblHakuOhjeet.Location = new Point(265, 156);
             lblHakuOhjeet.Visible = false;
-            
-
-            if (cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
+            try
             {
-                int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
-                string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
-
-                string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid AND postinro = @postinro";
-                DataTable datatable = new DataTable();
-                using (connection)
+                if (cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
                 {
-                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
-                    command.Parameters.AddWithValue("@alueid", alueid);
-                    command.Parameters.AddWithValue("@postinro", postinro);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    adapter.Fill(datatable);
-                    connection.Close();
+                    int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
+                    try
+                    {
+                        string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
+                        string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid AND postinro = @postinro";
+                        DataTable datatable = new DataTable();
+                        using (connection)
+                        {
+                            MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                            command.Parameters.AddWithValue("@alueid", alueid);
+                            command.Parameters.AddWithValue("@postinro", postinro);
+                            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                            adapter.Fill(datatable);
+                            connection.Close();
+                        }
+                        dgMokkiLista.DataSource = datatable;
+
+
+                        checkAlueID.Checked = false;
+                        checkPostiNro.Checked = false;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Haku ei onnistunut");
+                    }
+
+                    
                 }
-                dgMokkiLista.DataSource = datatable;
-
-
-                checkAlueID.Checked = false;
-                checkPostiNro.Checked = false;
-            }
-            else if (cmbUusiMokkiValitseAlueID.Enabled && !cmbUusiMokkiValitsePostiNro.Enabled)
-            {
-                int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
-
-                string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid";
-                DataTable datatable = new DataTable();
-                using (connection)
+                else if (cmbUusiMokkiValitseAlueID.Enabled && !cmbUusiMokkiValitsePostiNro.Enabled)
                 {
-                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
-                    command.Parameters.AddWithValue("@alueid", alueid);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    adapter.Fill(datatable);
-                    connection.Close();
+                    int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
+
+                    string hakuQuery = "SELECT * FROM mokki WHERE alue_id = @alueid";
+                    DataTable datatable = new DataTable();
+                    using (connection)
+                    {
+                        MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                        command.Parameters.AddWithValue("@alueid", alueid);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        adapter.Fill(datatable);
+                        connection.Close();
+                    }
+                    dgMokkiLista.DataSource = datatable;
+
+                    checkAlueID.Checked = false;
+                    checkPostiNro.Checked = false;
                 }
-                dgMokkiLista.DataSource = datatable;
-
-                checkAlueID.Checked = false;
-                checkPostiNro.Checked = false;
-            }
-            else if (!cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
-            {
-                string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
-
-                string hakuQuery = "SELECT * FROM mokki WHERE postinro = @postinro";
-                DataTable datatable = new DataTable();
-                using (connection)
+                else if (!cmbUusiMokkiValitseAlueID.Enabled && cmbUusiMokkiValitsePostiNro.Enabled)
                 {
-                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
-                    command.Parameters.AddWithValue("@postinro", postinro);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    adapter.Fill(datatable);
-                    connection.Close();
-                }
-                dgMokkiLista.DataSource = datatable;
+                    string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
 
-                checkAlueID.Checked = false;
-                checkPostiNro.Checked = false;
+                    string hakuQuery = "SELECT * FROM mokki WHERE postinro = @postinro";
+                    DataTable datatable = new DataTable();
+                    using (connection)
+                    {
+                        MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                        command.Parameters.AddWithValue("@postinro", postinro);
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        adapter.Fill(datatable);
+                        connection.Close();
+                    }
+                    dgMokkiLista.DataSource = datatable;
+
+                    checkAlueID.Checked = false;
+                    checkPostiNro.Checked = false;
+                }
+                else
+                {
+                    UpdatedgMokkiLista();
+                    checkAlueID.Checked = false;
+                    checkPostiNro.Checked = false;
+                }
+                cmbUusiMokkiValitseAlueID.Enabled = true;
+                cmbUusiMokkiValitsePostiNro.Enabled = true;
             }
-            else
+            catch
             {
-                UpdatedgMokkiLista();
-                checkAlueID.Checked = false;
-                checkPostiNro.Checked = false;
+                MessageBox.Show("Haku ei onnistunut");
             }
-            cmbUusiMokkiValitseAlueID.Enabled = true;
-            cmbUusiMokkiValitsePostiNro.Enabled= true;
                 
         }
 

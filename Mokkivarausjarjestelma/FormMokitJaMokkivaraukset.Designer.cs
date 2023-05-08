@@ -360,7 +360,7 @@
             this.lblMokkiListaOhje.AutoSize = true;
             this.lblMokkiListaOhje.Location = new System.Drawing.Point(106, 0);
             this.lblMokkiListaOhje.Name = "lblMokkiListaOhje";
-            this.lblMokkiListaOhje.Size = new System.Drawing.Size(1025, 75);
+            this.lblMokkiListaOhje.Size = new System.Drawing.Size(1033, 105);
             this.lblMokkiListaOhje.TabIndex = 43;
             this.lblMokkiListaOhje.Text = resources.GetString("lblMokkiListaOhje.Text");
             // 
