@@ -59,14 +59,14 @@ namespace Mokkivarausjarjestelma
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Haluatko varmasti siirtyä alkuvalikkoon?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
                 Form formaloitus = new Form1();
                 this.Hide();
                 formaloitus.ShowDialog();
                 this.Close();
             }
-            
+
         }
 
         private void btnLahetalasku_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace Mokkivarausjarjestelma
                 lasku.Add(new Paragraph("Laskuttajan tiedot").SetFontSize(30));
                 lasku.Add(new Paragraph("Nimi: Village Newbies").SetFontSize(10));
                 lasku.Add(new Paragraph("Osoite: Microkatu 1, 70210, Kuopio").SetFontSize(10));
-                lasku.Add(new Paragraph("Tilinumero: FI467XXXXXXXXXXX").SetFontSize(10));
+                lasku.Add(new Paragraph("Tilinumero: FI4672456623432312").SetFontSize(10));
                 lasku.Add(new Paragraph("Hinta: " + lukija.GetDouble(0) + "€").SetFontSize(10));
                 lasku.Add(new Paragraph("Maksuehto: 14pv").SetFontSize(10));
                 lasku.Add(new Paragraph("Viivästyskorko: 10%").SetFontSize(10));

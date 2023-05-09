@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             btnTakaisinAloitusFormiin = new Button();
-            btnTulosta = new Button();
             btnPoistaLasku = new Button();
             btnLahetalasku = new Button();
             dgvLaskutus = new DataGridView();
@@ -38,61 +37,59 @@
             // 
             // btnTakaisinAloitusFormiin
             // 
-            btnTakaisinAloitusFormiin.Location = new Point(632, 609);
+            btnTakaisinAloitusFormiin.BackColor = Color.Yellow;
+            btnTakaisinAloitusFormiin.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnTakaisinAloitusFormiin.Location = new Point(940, 608);
             btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
             btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             btnTakaisinAloitusFormiin.Size = new Size(216, 102);
             btnTakaisinAloitusFormiin.TabIndex = 76;
             btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
-            btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             btnTakaisinAloitusFormiin.Click += btnTakaisinAloitusFormiin_Click;
-            // 
-            // btnTulosta
-            // 
-            btnTulosta.Location = new Point(420, 608);
-            btnTulosta.Name = "btnTulosta";
-            btnTulosta.Size = new Size(206, 103);
-            btnTulosta.TabIndex = 80;
-            btnTulosta.Text = "Tulosta lasku";
-            btnTulosta.UseVisualStyleBackColor = true;
             // 
             // btnPoistaLasku
             // 
+            btnPoistaLasku.BackColor = Color.Yellow;
+            btnPoistaLasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnPoistaLasku.Location = new Point(218, 608);
             btnPoistaLasku.Name = "btnPoistaLasku";
             btnPoistaLasku.Size = new Size(196, 103);
             btnPoistaLasku.TabIndex = 79;
             btnPoistaLasku.Text = "Poista lasku";
-            btnPoistaLasku.UseVisualStyleBackColor = true;
+            btnPoistaLasku.UseVisualStyleBackColor = false;
             btnPoistaLasku.Click += btnPoistaLasku_Click;
             // 
             // btnLahetalasku
             // 
+            btnLahetalasku.BackColor = Color.Yellow;
+            btnLahetalasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnLahetalasku.Location = new Point(12, 608);
             btnLahetalasku.Name = "btnLahetalasku";
             btnLahetalasku.Size = new Size(200, 103);
             btnLahetalasku.TabIndex = 78;
             btnLahetalasku.Text = "Tallenna lasku";
-            btnLahetalasku.UseVisualStyleBackColor = true;
+            btnLahetalasku.UseVisualStyleBackColor = false;
             btnLahetalasku.Click += btnLahetalasku_Click;
             // 
             // dgvLaskutus
             // 
+            dgvLaskutus.BackgroundColor = Color.Navy;
             dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLaskutus.Location = new Point(2, 3);
+            dgvLaskutus.Location = new Point(12, 2);
             dgvLaskutus.Name = "dgvLaskutus";
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(1154, 586);
+            dgvLaskutus.Size = new Size(1135, 577);
             dgvLaskutus.TabIndex = 77;
             // 
             // FormLaskutus
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Bisque;
             ClientSize = new Size(1178, 723);
-            Controls.Add(btnTulosta);
             Controls.Add(btnPoistaLasku);
             Controls.Add(btnLahetalasku);
             Controls.Add(dgvLaskutus);
@@ -107,7 +104,6 @@
         #endregion
 
         private Button btnTakaisinAloitusFormiin;
-        private Button btnTulosta;
         private Button btnPoistaLasku;
         private Button btnLahetalasku;
         private DataGridView dgvLaskutus;
