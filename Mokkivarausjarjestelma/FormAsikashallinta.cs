@@ -18,11 +18,11 @@ namespace Mokkivarausjarjestelma
             InitializeComponent();
             populatedgvAsiakkaat();
         }
-
+        // julkinen komento jolla voi, sulkea ja avata yhteyden tietokantaan, mikäli käyttäjä suorittaa jotain tiettyjä toimintoja
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
         MySqlCommand command;
 
-
+        // funktio, joka päivittää datagridin tiedot 
         public void populatedgvAsiakkaat()
         {
             string query = "SELECT * FROM asiakas";
@@ -32,6 +32,7 @@ namespace Mokkivarausjarjestelma
             dgvAsiakashallinta.DataSource = table;
         }
 
+        // yleinen funktio kyselylle, mikäli tarvetta. Toteutin joissain kohdin omalla tavalla 
         public void ExecuteMyQuery(string query)
         {
             try
@@ -58,6 +59,8 @@ namespace Mokkivarausjarjestelma
                 connection.Close();
             }
         }
+
+        // aloitusformiin eventti
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
             Form formaloitus = new Form1();
@@ -75,14 +78,14 @@ namespace Mokkivarausjarjestelma
         private void btnAsiakasHae_Click(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;database=vn;username=root;password=Ruutti");
-
+            // tässä voidaan hakea asiakas id:n perusteella eri primary keyllä 
             string query = "SELECT * FROM asiakas WHERE asiakas_id = @asiakasid";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@asiakasid", tbAsiakasid.Text);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             DataTable table = new DataTable();
             adapter.Fill(table);
-
+            // tässä textboksit täyttyy kyselyn perusteella, mitä ollaan haettu tietokannasta. 
             if (table.Rows.Count > 0)
             {
                 DataRow row = table.Rows[0];
@@ -99,14 +102,16 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
+            
             DialogResult poisto = MessageBox.Show("Haluatko varmasti poistaa kyseisen asiakkaan tietokannasta?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
+            // luodaan kysely tietokantaan, mikäli käyttäjä on vastannut kyllä messageboksiin. Poisto tehdään asiakasid:n perusteella
             if (poisto == DialogResult.Yes)
             {
                 int numero = int.Parse(tbasiakasPostinumero.Text);
                 string deletequery = "DELETE FROM asiakas WHERE asiakas_id = " + tbAsiakasid.Text;
                 ExecuteMyQuery(deletequery);
                 populatedgvAsiakkaat();
+                // tyhjentää tekstikentät
                 foreach (Control c in Controls)
                 {
                     if (c is TextBox)
@@ -140,6 +145,7 @@ namespace Mokkivarausjarjestelma
                 {
                     using (MySqlCommand command = new MySqlCommand(insertQuery, myconnection))
                     {
+                        // tässä lisätään asiakastauluun 
                         myconnection.Open();
                         command.Parameters.AddWithValue("@asiakasid", asiakasid);
                         command.Parameters.AddWithValue("@postinro", tbasiakasPostinumero.Text);
@@ -148,8 +154,7 @@ namespace Mokkivarausjarjestelma
                         command.Parameters.AddWithValue("@lahiosoite", tbAsiakasLahiosoite.Text);
                         command.Parameters.AddWithValue("@email", tbAsiakasSahkoposti.Text);
                         command.Parameters.AddWithValue("@puhelinnro", tbAsiakasPuhelinnumero.Text);
-
-                        // tarkistaa onko postinro jo olemassa  posti taulussa 
+                        //kysely postitauluun 
                         string checkPostiQuery = "SELECT COUNT(*) FROM posti WHERE postinro = @postinro";
                         using (MySqlCommand komento = new MySqlCommand(checkPostiQuery, myconnection))
                         {
@@ -169,6 +174,7 @@ namespace Mokkivarausjarjestelma
                         populatedgvAsiakkaat();
                     }
                 }
+                //käyttäjälle info, mikäli onnistui lisääminen 
                 MessageBox.Show("Tietojen lisääminen onnistui!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnAsiakasPaivita.Visible = true;
                 btnAsiakasPoista.Visible = true;
