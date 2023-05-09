@@ -102,7 +102,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
-            
+
             DialogResult poisto = MessageBox.Show("Haluatko varmasti poistaa kyseisen asiakkaan tietokannasta?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             // luodaan kysely tietokantaan, mikäli käyttäjä on vastannut kyllä messageboksiin. Poisto tehdään asiakasid:n perusteella
             if (poisto == DialogResult.Yes)

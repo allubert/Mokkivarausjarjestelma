@@ -127,7 +127,7 @@
             tbAsiakasSukunimi.MaxLength = 40;
             tbAsiakasSukunimi.Name = "tbAsiakasSukunimi";
             tbAsiakasSukunimi.Size = new Size(157, 27);
-            tbAsiakasSukunimi.TabIndex = 91;
+            tbAsiakasSukunimi.TabIndex = 88;
             // 
             // tbAsiakasLahiosoite
             // 
@@ -135,7 +135,7 @@
             tbAsiakasLahiosoite.MaxLength = 40;
             tbAsiakasLahiosoite.Name = "tbAsiakasLahiosoite";
             tbAsiakasLahiosoite.Size = new Size(157, 27);
-            tbAsiakasLahiosoite.TabIndex = 90;
+            tbAsiakasLahiosoite.TabIndex = 89;
             // 
             // tbAsiakasEtunimi
             // 
@@ -143,7 +143,7 @@
             tbAsiakasEtunimi.MaxLength = 20;
             tbAsiakasEtunimi.Name = "tbAsiakasEtunimi";
             tbAsiakasEtunimi.Size = new Size(157, 27);
-            tbAsiakasEtunimi.TabIndex = 89;
+            tbAsiakasEtunimi.TabIndex = 87;
             // 
             // tbAsiakasSahkoposti
             // 
@@ -151,7 +151,7 @@
             tbAsiakasSahkoposti.MaxLength = 50;
             tbAsiakasSahkoposti.Name = "tbAsiakasSahkoposti";
             tbAsiakasSahkoposti.Size = new Size(157, 27);
-            tbAsiakasSahkoposti.TabIndex = 88;
+            tbAsiakasSahkoposti.TabIndex = 90;
             // 
             // tbAsiakasPuhelinnumero
             // 
@@ -159,7 +159,7 @@
             tbAsiakasPuhelinnumero.MaxLength = 15;
             tbAsiakasPuhelinnumero.Name = "tbAsiakasPuhelinnumero";
             tbAsiakasPuhelinnumero.Size = new Size(157, 27);
-            tbAsiakasPuhelinnumero.TabIndex = 87;
+            tbAsiakasPuhelinnumero.TabIndex = 91;
             // 
             // tbasiakasPostinumero
             // 
