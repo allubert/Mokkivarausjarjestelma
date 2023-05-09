@@ -15,8 +15,9 @@ namespace Mokkivarausjarjestelma
 {
     public partial class FormMokitJaMokkivaraukset : Form
     {
-        private bool muokkausMenossa = false;
-        private bool hakuPaalla = false;
+        private bool muokkausMenossa = false; //kertoo ohjelmalle, onko mökin tietojen muokkaus menossa
+        private bool hakuPaalla = false; // kertoo ohjelmalle, onko käyttäjä suorittamassa rajattua hakua
+        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti"); //yhteys tietokantaan
 
         public FormMokitJaMokkivaraukset()
         {
@@ -55,26 +56,23 @@ namespace Mokkivarausjarjestelma
                     // tietokantaan ei ole lisätty alueita, tai postitoimipaikkoja.
                     MessageBox.Show(ex.ToString());
                 }
-                if(cmbUusiMokkiValitseAlueID.Text == "" || cmbUusiMokkiValitsePostiNro.Text == "")
-                {
-                    btnHaeMokit.Enabled = false;
-                    MessageBox.Show("Tietokannasta puuttuu alueen ja/tai postitoimipaikan tiedot\nTästä johtuen et voi lisätä uusia mökkejä tietokantaan.\nLisää alueita ja postitoimipaikkoja Aluehallinnan kautta, jos haluat lisätä mökkejä tietokantaan.");
-                }
-            }
-        }
-        // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin
+                
+            } // etsii alue-taulun oliot yhteen comboboxiin, ja posti-taulun oliot toiseen.
+        } //toiminnot, jotka toteutuvat formin avautuessa
         private void Form_Shown(object sender, EventArgs e)
         {
             dgMokkiLista.ClearSelection();
-        }
-
-        MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
-
+            if (cmbUusiMokkiValitseAlueID.Text == "" || cmbUusiMokkiValitsePostiNro.Text == "")
+            {
+                btnHaeMokit.Enabled = false;
+                MessageBox.Show("Tietokannasta puuttuu alueen ja/tai postitoimipaikan tiedot\nTästä johtuen et voi lisätä uusia mökkejä tietokantaan.\nLisää alueita ja postitoimipaikkoja Aluehallinnan kautta, jos haluat lisätä mökkejä tietokantaan.");
+            }
+        } // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin. varoittaa myös käyttäjää, mikäli posti- ja alue-taulut ovat tyhjiä formin avautuessa.
         private void btnUusiVaraus_Click(object sender, EventArgs e)
         {
             var VarausForm = new FormVaraus();
             VarausForm.Show();
-        }
+        } //käyttäjä siirtyy mökkivarausten hallintaan
         private void UpdatedgMokkiLista()
         {
             // Mökkivarausten hallinnan datagridviewiin tietojen vienti
@@ -88,9 +86,7 @@ namespace Mokkivarausjarjestelma
                 connection.Close();
             }
             dgMokkiLista.DataSource = datatable;
-        }
-
-        //Lisää uuden mökin tiedot tietokantaan
+        } //mökkilista datagridview päivittyy
         private void btnLisaaMokinTiedot_Click(object sender, EventArgs e)
         {
             if (btnLisaaMokinTiedot.Text == "Lisää mökin tiedot")
@@ -167,7 +163,7 @@ namespace Mokkivarausjarjestelma
                 cmbUusiMokkiValitseAlueID.Enabled = true;
                 cmbUusiMokkiValitsePostiNro.Enabled = true;
             }
-        }
+        } // käyttäjä lisää uudet mökin tiedot järjestelmään
         private void ClearTextBoxes()
         {
             tbValittuMokkiMokkiID.Clear();
@@ -177,8 +173,7 @@ namespace Mokkivarausjarjestelma
             rtbValittuMokkiKuvaus.Clear();
             tbValittuMokkiHloMaara.Clear();
             rtbValittuMokkiVarustelu.Clear();
-        }
-
+        } // tyhjentää tekstikentät uuden mökin lisäystä varten
         private void dgMokkiLista_SelectionChanged(object sender, EventArgs e)
         {
             if (!hakuPaalla)
@@ -223,9 +218,7 @@ namespace Mokkivarausjarjestelma
             {
                 return;
             }            
-        }
-
-
+        } // kun käyttäjä klikkaa mökkiä listalta, mökin tiedot siirtyvät tekstikenttiin
         private void btnPoistaValittuMokkiListalta_Click(object sender, EventArgs e)
         {
             
@@ -293,9 +286,7 @@ namespace Mokkivarausjarjestelma
                 MessageBox.Show("Laita ensin haku pois päältä 'Lopeta'-napista");
             }
             
-        }
-
-        
+        } // poistaa valitun mökin tietokannasta, mikäli tietyt ehdot täyttyvät
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
             Form formaloitus = new Form1();
@@ -303,7 +294,7 @@ namespace Mokkivarausjarjestelma
 
             formaloitus.ShowDialog();
             this.Close();
-        }
+        } //palaa aloitusformiin
         private void btnMuokkaaValitunMokinTietoja_Click(object sender, EventArgs e)
         {
             
@@ -359,7 +350,7 @@ namespace Mokkivarausjarjestelma
                 MessageBox.Show("Laita ensin haku pois päältä 'Lopeta'-napista");
             }
             
-        }
+        } //antaa käyttäjän muokata tietoja
         private void UpdateDatabaseAndDataGridView()
         {
             int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
@@ -394,7 +385,7 @@ namespace Mokkivarausjarjestelma
                 }
             }
             UpdatedgMokkiLista();
-        }
+        } //päivittää tietokantaa, jos käyttäjä on halunnut muokata mökin tietoja
         private bool ValidateTexts()
         {
             int mokkiid;
@@ -427,7 +418,7 @@ namespace Mokkivarausjarjestelma
             }
 
             return true;
-        }
+        } // tarkastaa tekstikenttien oikeanmallisen täytön
 
         private void btnHaeMokit_Click(object sender, EventArgs e)
         {
@@ -500,7 +491,7 @@ namespace Mokkivarausjarjestelma
                 cmbUusiMokkiValitseAlueID.Enabled = true;
                 cmbUusiMokkiValitsePostiNro.Enabled = true;
             }
-        }
+        } // laittaa hakemistilan päälle
 
         private void btnSuoritaMokkienHaku_Click(object sender, EventArgs e)
         {
@@ -617,7 +608,7 @@ namespace Mokkivarausjarjestelma
                 MessageBox.Show("Haku ei onnistunut");
             }
                 
-        }
+        } // hakee mökkejä, jotka sisältävät valitut hakuehdot
 
         private void checkAlueID_CheckedChanged(object sender, EventArgs e)
         {
@@ -629,7 +620,7 @@ namespace Mokkivarausjarjestelma
             {
                 cmbUusiMokkiValitseAlueID.Enabled = false;
             }
-        }
+        }   //alue_id lähtee pois/tulee hakukriteereihin
 
         private void checkPostiNro_CheckedChanged(object sender, EventArgs e)
         {
@@ -641,6 +632,15 @@ namespace Mokkivarausjarjestelma
             {
                 cmbUusiMokkiValitsePostiNro.Enabled = false;
             }
-        }
+        } //postinumero lähtee pois/tulee hakukriteereihin
+
+        private void btnAlueHallintaan_Click(object sender, EventArgs e)
+        {
+            var toiminta= new FormToiminta();
+            this.Hide();
+            toiminta.ShowDialog();
+            this.Close();
+
+        } // avaa Toiminta-alueiden hallintaformin, jotta käyttäjä pääsee lisäämään uusia toimialueita ja postitoimipaikkoja järjestelmään
     }
 }

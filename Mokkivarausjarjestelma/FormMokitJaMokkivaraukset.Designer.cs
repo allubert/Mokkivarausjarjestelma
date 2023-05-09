@@ -54,6 +54,7 @@
             this.lbl1 = new System.Windows.Forms.Label();
             this.dgMokkiLista = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAlueHallintaan = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMokkiListaOhje = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
@@ -82,7 +83,7 @@
             this.btnLisaaMokinTiedot.Location = new System.Drawing.Point(7, 441);
             this.btnLisaaMokinTiedot.Name = "btnLisaaMokinTiedot";
             this.btnLisaaMokinTiedot.Size = new System.Drawing.Size(226, 30);
-            this.btnLisaaMokinTiedot.TabIndex = 56;
+            this.btnLisaaMokinTiedot.TabIndex = 9;
             this.btnLisaaMokinTiedot.Text = "Lisää mökin tiedot";
             this.btnLisaaMokinTiedot.UseVisualStyleBackColor = false;
             this.btnLisaaMokinTiedot.Click += new System.EventHandler(this.btnLisaaMokinTiedot_Click);
@@ -95,7 +96,7 @@
             this.btnMuokkaaValitunMokinTietoja.Location = new System.Drawing.Point(7, 369);
             this.btnMuokkaaValitunMokinTietoja.Name = "btnMuokkaaValitunMokinTietoja";
             this.btnMuokkaaValitunMokinTietoja.Size = new System.Drawing.Size(72, 30);
-            this.btnMuokkaaValitunMokinTietoja.TabIndex = 61;
+            this.btnMuokkaaValitunMokinTietoja.TabIndex = 10;
             this.btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
             this.btnMuokkaaValitunMokinTietoja.UseVisualStyleBackColor = false;
             this.btnMuokkaaValitunMokinTietoja.Click += new System.EventHandler(this.btnMuokkaaValitunMokinTietoja_Click);
@@ -108,7 +109,7 @@
             this.btnMokkiPoista.Location = new System.Drawing.Point(1006, 493);
             this.btnMokkiPoista.Name = "btnMokkiPoista";
             this.btnMokkiPoista.Size = new System.Drawing.Size(187, 30);
-            this.btnMokkiPoista.TabIndex = 60;
+            this.btnMokkiPoista.TabIndex = 2;
             this.btnMokkiPoista.Text = "Poista mökki tietokannasta";
             this.btnMokkiPoista.UseVisualStyleBackColor = false;
             this.btnMokkiPoista.Click += new System.EventHandler(this.btnPoistaValittuMokkiListalta_Click);
@@ -121,7 +122,7 @@
             this.btnVaraaValittuMokki.Location = new System.Drawing.Point(250, 493);
             this.btnVaraaValittuMokki.Name = "btnVaraaValittuMokki";
             this.btnVaraaValittuMokki.Size = new System.Drawing.Size(166, 30);
-            this.btnVaraaValittuMokki.TabIndex = 57;
+            this.btnVaraaValittuMokki.TabIndex = 0;
             this.btnVaraaValittuMokki.Text = "Mökkivarausten hallinta";
             this.btnVaraaValittuMokki.UseVisualStyleBackColor = false;
             this.btnVaraaValittuMokki.Click += new System.EventHandler(this.btnUusiVaraus_Click);
@@ -141,7 +142,7 @@
             this.tbValittuMokkiHintaVrk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiHintaVrk.Name = "tbValittuMokkiHintaVrk";
             this.tbValittuMokkiHintaVrk.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiHintaVrk.TabIndex = 52;
+            this.tbValittuMokkiHintaVrk.TabIndex = 5;
             // 
             // rtbValittuMokkiVarustelu
             // 
@@ -149,7 +150,7 @@
             this.rtbValittuMokkiVarustelu.Location = new System.Drawing.Point(88, 322);
             this.rtbValittuMokkiVarustelu.Name = "rtbValittuMokkiVarustelu";
             this.rtbValittuMokkiVarustelu.Size = new System.Drawing.Size(148, 113);
-            this.rtbValittuMokkiVarustelu.TabIndex = 55;
+            this.rtbValittuMokkiVarustelu.TabIndex = 8;
             this.rtbValittuMokkiVarustelu.Text = "";
             // 
             // rtbValittuMokkiKuvaus
@@ -158,7 +159,7 @@
             this.rtbValittuMokkiKuvaus.Location = new System.Drawing.Point(88, 187);
             this.rtbValittuMokkiKuvaus.Name = "rtbValittuMokkiKuvaus";
             this.rtbValittuMokkiKuvaus.Size = new System.Drawing.Size(148, 112);
-            this.rtbValittuMokkiKuvaus.TabIndex = 53;
+            this.rtbValittuMokkiKuvaus.TabIndex = 6;
             this.rtbValittuMokkiKuvaus.Text = "";
             // 
             // tbValittuMokkiHloMaara
@@ -168,7 +169,7 @@
             this.tbValittuMokkiHloMaara.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiHloMaara.Name = "tbValittuMokkiHloMaara";
             this.tbValittuMokkiHloMaara.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiHloMaara.TabIndex = 54;
+            this.tbValittuMokkiHloMaara.TabIndex = 7;
             // 
             // lbl8
             // 
@@ -211,7 +212,7 @@
             this.tbValittuMokkiNimi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiNimi.Name = "tbValittuMokkiNimi";
             this.tbValittuMokkiNimi.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiNimi.TabIndex = 50;
+            this.tbValittuMokkiNimi.TabIndex = 3;
             // 
             // tbValittuMokkiOsoite
             // 
@@ -220,7 +221,7 @@
             this.tbValittuMokkiOsoite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiOsoite.Name = "tbValittuMokkiOsoite";
             this.tbValittuMokkiOsoite.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiOsoite.TabIndex = 51;
+            this.tbValittuMokkiOsoite.TabIndex = 4;
             // 
             // tbValittuMokkiMokkiID
             // 
@@ -229,7 +230,7 @@
             this.tbValittuMokkiMokkiID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbValittuMokkiMokkiID.Name = "tbValittuMokkiMokkiID";
             this.tbValittuMokkiMokkiID.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiMokkiID.TabIndex = 47;
+            this.tbValittuMokkiMokkiID.TabIndex = 0;
             // 
             // lbl9
             // 
@@ -330,13 +331,14 @@
             this.dgMokkiLista.RowTemplate.Height = 29;
             this.dgMokkiLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgMokkiLista.Size = new System.Drawing.Size(943, 485);
-            this.dgMokkiLista.TabIndex = 62;
+            this.dgMokkiLista.TabIndex = 1;
             this.dgMokkiLista.SelectionChanged += new System.EventHandler(this.dgMokkiLista_SelectionChanged);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Bisque;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.btnAlueHallintaan);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblMokkiListaOhje);
             this.panel2.Controls.Add(this.btnTakaisinAloitusFormiin);
@@ -345,6 +347,19 @@
             this.panel2.Size = new System.Drawing.Size(1190, 119);
             this.panel2.TabIndex = 73;
             // 
+            // btnAlueHallintaan
+            // 
+            this.btnAlueHallintaan.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnAlueHallintaan.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAlueHallintaan.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAlueHallintaan.Location = new System.Drawing.Point(3, 46);
+            this.btnAlueHallintaan.Name = "btnAlueHallintaan";
+            this.btnAlueHallintaan.Size = new System.Drawing.Size(93, 30);
+            this.btnAlueHallintaan.TabIndex = 75;
+            this.btnAlueHallintaan.Text = "Aluehallinta";
+            this.btnAlueHallintaan.UseVisualStyleBackColor = false;
+            this.btnAlueHallintaan.Click += new System.EventHandler(this.btnAlueHallintaan_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -352,7 +367,7 @@
             this.label1.Location = new System.Drawing.Point(10, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 25);
-            this.label1.TabIndex = 45;
+            this.label1.TabIndex = 0;
             this.label1.Text = "HUOMIO!";
             // 
             // lblMokkiListaOhje
@@ -386,7 +401,7 @@
             this.cmbUusiMokkiValitseAlueID.Location = new System.Drawing.Point(88, 73);
             this.cmbUusiMokkiValitseAlueID.Name = "cmbUusiMokkiValitseAlueID";
             this.cmbUusiMokkiValitseAlueID.Size = new System.Drawing.Size(148, 23);
-            this.cmbUusiMokkiValitseAlueID.TabIndex = 75;
+            this.cmbUusiMokkiValitseAlueID.TabIndex = 1;
             // 
             // cmbUusiMokkiValitsePostiNro
             // 
@@ -397,7 +412,7 @@
             this.cmbUusiMokkiValitsePostiNro.Location = new System.Drawing.Point(88, 96);
             this.cmbUusiMokkiValitsePostiNro.Name = "cmbUusiMokkiValitsePostiNro";
             this.cmbUusiMokkiValitsePostiNro.Size = new System.Drawing.Size(148, 23);
-            this.cmbUusiMokkiValitsePostiNro.TabIndex = 76;
+            this.cmbUusiMokkiValitsePostiNro.TabIndex = 2;
             // 
             // panel1
             // 
@@ -485,7 +500,7 @@
             this.btnSuoritaMokkienHaku.Location = new System.Drawing.Point(203, 5);
             this.btnSuoritaMokkienHaku.Name = "btnSuoritaMokkienHaku";
             this.btnSuoritaMokkienHaku.Size = new System.Drawing.Size(31, 30);
-            this.btnSuoritaMokkienHaku.TabIndex = 77;
+            this.btnSuoritaMokkienHaku.TabIndex = 12;
             this.btnSuoritaMokkienHaku.Text = "L";
             this.btnSuoritaMokkienHaku.UseVisualStyleBackColor = false;
             this.btnSuoritaMokkienHaku.Visible = false;
@@ -499,7 +514,7 @@
             this.btnHaeMokit.Location = new System.Drawing.Point(7, 5);
             this.btnHaeMokit.Name = "btnHaeMokit";
             this.btnHaeMokit.Size = new System.Drawing.Size(112, 30);
-            this.btnHaeMokit.TabIndex = 73;
+            this.btnHaeMokit.TabIndex = 11;
             this.btnHaeMokit.Text = "Rajaa hakua";
             this.btnHaeMokit.UseVisualStyleBackColor = false;
             this.btnHaeMokit.Click += new System.EventHandler(this.btnHaeMokit_Click);
@@ -534,7 +549,7 @@
             this.label3.Location = new System.Drawing.Point(15, 493);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(206, 24);
-            this.label3.TabIndex = 78;
+            this.label3.TabIndex = 4;
             this.label3.Text = "H    Q    l    P";
             // 
             // FormMokitJaMokkivaraukset
@@ -608,5 +623,6 @@
         private Label lblHaePostiNro;
         private Label lblHaeAlueID;
         private Label lblHakuOhjeet;
+        private Button btnAlueHallintaan;
     }
 }
