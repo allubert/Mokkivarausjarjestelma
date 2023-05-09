@@ -124,6 +124,7 @@
             // tbAsiakasSukunimi
             // 
             tbAsiakasSukunimi.Location = new Point(109, 259);
+            tbAsiakasSukunimi.MaxLength = 40;
             tbAsiakasSukunimi.Name = "tbAsiakasSukunimi";
             tbAsiakasSukunimi.Size = new Size(157, 27);
             tbAsiakasSukunimi.TabIndex = 91;
@@ -131,6 +132,7 @@
             // tbAsiakasLahiosoite
             // 
             tbAsiakasLahiosoite.Location = new Point(109, 316);
+            tbAsiakasLahiosoite.MaxLength = 40;
             tbAsiakasLahiosoite.Name = "tbAsiakasLahiosoite";
             tbAsiakasLahiosoite.Size = new Size(157, 27);
             tbAsiakasLahiosoite.TabIndex = 90;
@@ -138,6 +140,7 @@
             // tbAsiakasEtunimi
             // 
             tbAsiakasEtunimi.Location = new Point(109, 189);
+            tbAsiakasEtunimi.MaxLength = 20;
             tbAsiakasEtunimi.Name = "tbAsiakasEtunimi";
             tbAsiakasEtunimi.Size = new Size(157, 27);
             tbAsiakasEtunimi.TabIndex = 89;
@@ -145,6 +148,7 @@
             // tbAsiakasSahkoposti
             // 
             tbAsiakasSahkoposti.Location = new Point(109, 377);
+            tbAsiakasSahkoposti.MaxLength = 50;
             tbAsiakasSahkoposti.Name = "tbAsiakasSahkoposti";
             tbAsiakasSahkoposti.Size = new Size(157, 27);
             tbAsiakasSahkoposti.TabIndex = 88;
@@ -152,6 +156,7 @@
             // tbAsiakasPuhelinnumero
             // 
             tbAsiakasPuhelinnumero.Location = new Point(121, 452);
+            tbAsiakasPuhelinnumero.MaxLength = 15;
             tbAsiakasPuhelinnumero.Name = "tbAsiakasPuhelinnumero";
             tbAsiakasPuhelinnumero.Size = new Size(157, 27);
             tbAsiakasPuhelinnumero.TabIndex = 87;
@@ -159,6 +164,7 @@
             // tbasiakasPostinumero
             // 
             tbasiakasPostinumero.Location = new Point(109, 133);
+            tbasiakasPostinumero.MaxLength = 5;
             tbasiakasPostinumero.Name = "tbasiakasPostinumero";
             tbasiakasPostinumero.Size = new Size(157, 27);
             tbasiakasPostinumero.TabIndex = 86;
@@ -166,6 +172,7 @@
             // tbAsiakasid
             // 
             tbAsiakasid.Location = new Point(109, 73);
+            tbAsiakasid.MaxLength = 11;
             tbAsiakasid.Name = "tbAsiakasid";
             tbAsiakasid.Size = new Size(157, 27);
             tbAsiakasid.TabIndex = 85;

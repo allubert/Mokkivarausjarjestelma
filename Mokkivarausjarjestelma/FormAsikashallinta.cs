@@ -120,6 +120,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasLisaa_Click(object sender, EventArgs e)
         {
+            // mikäli jokin kenttä on tyhjä niin sovellus ilmoittaa
             foreach (TextBox tb in Controls.OfType<TextBox>())
             {
                 if (tb.Text == "")
@@ -129,6 +130,7 @@ namespace Mokkivarausjarjestelma
                     return;
                 }
             }
+            // kyselyt molempiin tauluihin, eli siis postinumero ja asiakastauluun, vaikka postinumero taululla ei juurikaan tee mitään tai tiedon lisäämisellä sinne
             int asiakasid = int.Parse(tbAsiakasid.Text);
             string insertQuery = "INSERT INTO asiakas(asiakas_id, postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@asiakasid, @postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro)";
             string insertPostiQuery = "INSERT INTO posti(postinro) VALUES (@postinro)";
@@ -167,23 +169,25 @@ namespace Mokkivarausjarjestelma
                         populatedgvAsiakkaat();
                     }
                 }
-                MessageBox.Show("Mahtavaa", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Tietojen lisääminen onnistui!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnAsiakasPaivita.Visible = true;
                 btnAsiakasPoista.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ei voi lisätä päällekkäin. Tsekkaa postinumero ja asiakasid.");
+                MessageBox.Show("Ei voi lisätä päällekkäin. Tarkista postinumero ja asiakasid.");
             }
         }
 
         private void FormAsiakashallinta_Load(object sender, EventArgs e)
         {
+            // kun formi latautuu, tämä päivittää tiedot datagridiin 
             populatedgvAsiakkaat();
         }
 
         private void btnAsiakasPaivita_Click(object sender, EventArgs e)
         {
+            // Tässä käyttäjä voi päivittää tietoja sen perusteella, mitä on muokannut textbokseihin
             string kysely = "UPDATE asiakas SET postinro='" + tbasiakasPostinumero.Text + "', etunimi='" + tbAsiakasEtunimi.Text +
                 "', sukunimi='" + tbAsiakasSukunimi.Text + "', lahiosoite='" + tbAsiakasLahiosoite.Text + "', email='" + tbAsiakasSahkoposti.Text +
                 "', puhelinnro=" + tbAsiakasPuhelinnumero.Text + " WHERE asiakas_id = " + tbAsiakasid.Text;
@@ -193,6 +197,7 @@ namespace Mokkivarausjarjestelma
 
         private void dgvAsiakashallinta_Click(object sender, EventArgs e)
         {
+            //Kun käyttäjä painaa jotain tietyn asiakkaan id:tä, tulevat sen tiedot textbokseihin näkyviin
             tbAsiakasid.Text = dgvAsiakashallinta.CurrentRow.Cells[0].Value.ToString();
             tbasiakasPostinumero.Text = dgvAsiakashallinta.CurrentRow.Cells[1].Value.ToString();
             tbAsiakasEtunimi.Text = dgvAsiakashallinta.CurrentRow.Cells[2].Value.ToString();

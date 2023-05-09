@@ -41,10 +41,10 @@
             // 
             btnTakaisinAloitusFormiin.BackColor = Color.Yellow;
             btnTakaisinAloitusFormiin.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnTakaisinAloitusFormiin.Location = new Point(940, 608);
+            btnTakaisinAloitusFormiin.Location = new Point(940, 544);
             btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
             btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            btnTakaisinAloitusFormiin.Size = new Size(216, 102);
+            btnTakaisinAloitusFormiin.Size = new Size(216, 166);
             btnTakaisinAloitusFormiin.TabIndex = 76;
             btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
             btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
@@ -54,9 +54,9 @@
             // 
             btnPoistaLasku.BackColor = Color.Yellow;
             btnPoistaLasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnPoistaLasku.Location = new Point(218, 608);
+            btnPoistaLasku.Location = new Point(218, 544);
             btnPoistaLasku.Name = "btnPoistaLasku";
-            btnPoistaLasku.Size = new Size(196, 103);
+            btnPoistaLasku.Size = new Size(196, 167);
             btnPoistaLasku.TabIndex = 79;
             btnPoistaLasku.Text = "Poista lasku";
             btnPoistaLasku.UseVisualStyleBackColor = false;
@@ -66,9 +66,9 @@
             // 
             btnLahetalasku.BackColor = Color.Yellow;
             btnLahetalasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnLahetalasku.Location = new Point(12, 608);
+            btnLahetalasku.Location = new Point(12, 544);
             btnLahetalasku.Name = "btnLahetalasku";
-            btnLahetalasku.Size = new Size(200, 103);
+            btnLahetalasku.Size = new Size(200, 167);
             btnLahetalasku.TabIndex = 78;
             btnLahetalasku.Text = "Tallenna lasku";
             btnLahetalasku.UseVisualStyleBackColor = false;
@@ -83,15 +83,15 @@
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(1135, 528);
+            dgvLaskutus.Size = new Size(1135, 509);
             dgvLaskutus.TabIndex = 77;
             // 
             // lblOhjeet
             // 
             lblOhjeet.BackColor = Color.Aqua;
-            lblOhjeet.Location = new Point(440, 543);
+            lblOhjeet.Location = new Point(440, 524);
             lblOhjeet.Name = "lblOhjeet";
-            lblOhjeet.Size = new Size(461, 182);
+            lblOhjeet.Size = new Size(461, 201);
             lblOhjeet.TabIndex = 80;
             lblOhjeet.Text = resources.GetString("lblOhjeet.Text");
             // 

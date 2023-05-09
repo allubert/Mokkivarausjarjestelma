@@ -58,7 +58,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblOhjeet.Text" xml:space="preserve">
-    <value>Tässä formissa voit, joko tarkastella laskutustietoja, poistaa tai tallentaa laskun pdf muotoon. Laskun tallentaminen pdf-muotoon tapahtuu ensin siten, että painat yläpuolella olevasta taulukosta laskutusID:n riviä ja sitten painat tallenna nappia, jonka jälkeen tietokoneeltasi pitäisi löytyä lasku.pdf niminen tiedosto. Poista napilla voit poistaa kyseisen rivin, jonka olet valinnut. Se poistuu myös tällöin tietokannasta. Voit tulostaa laskun tai lähettää sen asiakkaalle, kun olet ensin tallentanut sen tietokoneelle tallenna napista. 
+    <value>Tässä formissa voit, joko tarkastella laskutustietoja, poistaa tai tallentaa laskun pdf muotoon. Laskun tallentaminen pdf-muotoon tapahtuu ensin siten, että painat yläpuolella olevasta taulukosta lasku_id:n riviä ja sitten painat tallenna nappia, jonka jälkeen tietokoneeltasi pitäisi löytyä lasku.pdf niminen tiedosto. Poista napilla voit poistaa kyseisen rivin, jonka olet valinnut. Se poistuu myös tällöin tietokannasta. Voit tulostaa laskun tai lähettää sen asiakkaalle, kun olet ensin tallentanut sen tietokoneelle tallenna napista. Laskun pitäisi löytyä dokumentit kansiosta käyttäjän tietokoneelta tai sitten hakemalla hakemistosta
+
  </value>
   </data>
 </root>

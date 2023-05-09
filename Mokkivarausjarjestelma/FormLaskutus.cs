@@ -38,7 +38,7 @@ namespace Mokkivarausjarjestelma
 
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti");
         MySqlCommand command;
-
+        //päivittää datagridin tiedot sen perusteella, mitä käyttäjä syöttää
         public void paivitalaskudgv()
         {
             try
@@ -58,6 +58,7 @@ namespace Mokkivarausjarjestelma
         }
         private void btnTakaisinAloitusFormiin_Click(object sender, EventArgs e)
         {
+            //alkuvalikkoon kysely 
             DialogResult result = MessageBox.Show("Haluatko varmasti siirtyä alkuvalikkoon?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -74,23 +75,24 @@ namespace Mokkivarausjarjestelma
 
             try
             {
+                // tallentaa tiedon dokumentteihin, mikäli käyttäjällä on sellainen 
                 string kohde = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/lasku.pdf";
                 PdfWriter writer = new PdfWriter(kohde);
                 PdfDocument pdf = new PdfDocument(writer);
                 Document lasku = new Document(pdf);
                 PageSize ps = PageSize.A4;
 
-
+                //Laskun otsikko 
                 Paragraph header = new Paragraph("Village Newbies laskusi").SetTextAlignment(TextAlignment.CENTER).SetFontSize(20);
                 lasku.Add(header);
                 lasku.Add(new Paragraph("Asiakkaan tiedot").SetFontSize(20));
                 connection.Open();
-
+                // kysely varauksesta ja perään alikyselyä tiedoista. 
                 string varausID = "SELECT etunimi, sukunimi, email, puhelinnro, lahiosoite, postinro FROM lasku " +
                            "INNER JOIN varaus on varaus.varaus_id = lasku.varaus_id " +
                            "INNER JOIN asiakas on asiakas.asiakas_id = varaus.asiakas_id " +
                            "WHERE lasku.lasku_id=" + dgvLaskutus.CurrentRow.Cells[0].Value.ToString(); ;
-
+                // laskuid tässäkin sen perusteella, mitä käyttäjä on valinnut dokumentista 
                 string kylysummasta = "SELECT summa FROM lasku WHERE lasku_id=" + dgvLaskutus.CurrentRow.Cells[0].Value.ToString();
 
                 MySqlCommand komento1 = new MySqlCommand(kylysummasta, connection);
@@ -106,7 +108,7 @@ namespace Mokkivarausjarjestelma
                 reader.Close();
                 MySqlDataReader lukija = komento1.ExecuteReader();
                 lukija.Read();
-                //Laskuttajan tiedot
+                //Laskuttajan tiedot itse keksittynä 
                 lasku.Add(new Paragraph("Laskuttajan tiedot").SetFontSize(30));
                 lasku.Add(new Paragraph("Nimi: Village Newbies").SetFontSize(10));
                 lasku.Add(new Paragraph("Osoite: Microkatu 1, 70210, Kuopio").SetFontSize(10));
@@ -123,12 +125,13 @@ namespace Mokkivarausjarjestelma
 
                 paivitalaskudgv();
             }
+            //mikäli tulee poikkeus, niin ilmoittaa sen tässä 
             catch (Exception ex)
             {
                 MessageBox.Show("Jokin meni pieleen");
             }
         }
-
+        // laskun poistamiseen funktio, joka kyselyn perusteella poistaa laskun tietokannasta. Tämäkin tapahtuu lasku_id:n perusteella. 
         private void btnPoistaLasku_Click(object sender, EventArgs e)
         {
             connection.Open();
