@@ -424,5 +424,14 @@ namespace Mokkivarausjarjestelma
             formpalvelu.ShowDialog();
             this.Close();
         }
+
+        private void btnToiminta_Click(object sender, EventArgs e)
+        {
+            FormToiminta formtoiminta = new FormToiminta();
+            this.Hide();
+
+            formtoiminta.ShowDialog();
+            this.Close();
+        }
     }
 }
