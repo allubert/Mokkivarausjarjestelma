@@ -67,14 +67,11 @@ namespace Mokkivarausjarjestelma
 
         private void btnToimintaLisaaAlue_Click(object sender, EventArgs e)
         {
-            foreach (TextBox tb in Controls.OfType<TextBox>())
+           
+            if (tbToimintaAlue.Text == "")
             {
-                if (tb.Text == "")
-                {
-                    tb.Focus();
-                    MessageBox.Show("Et ole täyttänyt kaikkia kenttiä!");
-                    return;
-                }
+                MessageBox.Show("Anna alueelle nimi.");
+                return;
             }
 
             string nimi = tbToimintaAlue.Text;
