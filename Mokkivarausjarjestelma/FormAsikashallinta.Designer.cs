@@ -269,7 +269,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
-            ClientSize = new Size(1097, 835);
+            ClientSize = new Size(1097, 697);
             Controls.Add(panel1);
             Controls.Add(btnAsiakasPoista);
             Controls.Add(btnAsiakasPaivita);

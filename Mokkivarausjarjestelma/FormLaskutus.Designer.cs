@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLaskutus));
             btnTakaisinAloitusFormiin = new Button();
             btnPoistaLasku = new Button();
             btnLahetalasku = new Button();
             dgvLaskutus = new DataGridView();
+            lblOhjeet = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).BeginInit();
             SuspendLayout();
             // 
@@ -74,15 +76,24 @@
             // 
             // dgvLaskutus
             // 
-            dgvLaskutus.BackgroundColor = Color.Navy;
+            dgvLaskutus.BackgroundColor = Color.Bisque;
             dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLaskutus.Location = new Point(12, 2);
+            dgvLaskutus.Location = new Point(12, 12);
             dgvLaskutus.Name = "dgvLaskutus";
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(1135, 577);
+            dgvLaskutus.Size = new Size(1135, 528);
             dgvLaskutus.TabIndex = 77;
+            // 
+            // lblOhjeet
+            // 
+            lblOhjeet.BackColor = Color.Aqua;
+            lblOhjeet.Location = new Point(440, 543);
+            lblOhjeet.Name = "lblOhjeet";
+            lblOhjeet.Size = new Size(461, 182);
+            lblOhjeet.TabIndex = 80;
+            lblOhjeet.Text = resources.GetString("lblOhjeet.Text");
             // 
             // FormLaskutus
             // 
@@ -90,6 +101,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
             ClientSize = new Size(1178, 723);
+            Controls.Add(lblOhjeet);
             Controls.Add(btnPoistaLasku);
             Controls.Add(btnLahetalasku);
             Controls.Add(dgvLaskutus);
@@ -107,5 +119,6 @@
         private Button btnPoistaLasku;
         private Button btnLahetalasku;
         private DataGridView dgvLaskutus;
+        private Label lblOhjeet;
     }
 }
