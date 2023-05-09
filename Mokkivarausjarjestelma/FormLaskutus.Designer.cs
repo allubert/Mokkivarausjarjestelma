@@ -33,19 +33,15 @@
             btnPoistaLasku = new Button();
             btnLahetalasku = new Button();
             dgvLaskutus = new DataGridView();
-            tbLaskutusid = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            tbSahkoposti = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).BeginInit();
             SuspendLayout();
             // 
             // btnTakaisinAloitusFormiin
             // 
-            btnTakaisinAloitusFormiin.Location = new Point(12, 679);
+            btnTakaisinAloitusFormiin.Location = new Point(632, 609);
             btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
             btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            btnTakaisinAloitusFormiin.Size = new Size(106, 31);
+            btnTakaisinAloitusFormiin.Size = new Size(216, 102);
             btnTakaisinAloitusFormiin.TabIndex = 76;
             btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
             btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
@@ -53,83 +49,49 @@
             // 
             // btnTulosta
             // 
-            btnTulosta.Location = new Point(220, 571);
+            btnTulosta.Location = new Point(420, 608);
             btnTulosta.Name = "btnTulosta";
-            btnTulosta.Size = new Size(109, 42);
+            btnTulosta.Size = new Size(206, 103);
             btnTulosta.TabIndex = 80;
             btnTulosta.Text = "Tulosta lasku";
             btnTulosta.UseVisualStyleBackColor = true;
             // 
             // btnPoistaLasku
             // 
-            btnPoistaLasku.Location = new Point(109, 571);
+            btnPoistaLasku.Location = new Point(218, 608);
             btnPoistaLasku.Name = "btnPoistaLasku";
-            btnPoistaLasku.Size = new Size(105, 39);
+            btnPoistaLasku.Size = new Size(196, 103);
             btnPoistaLasku.TabIndex = 79;
             btnPoistaLasku.Text = "Poista lasku";
             btnPoistaLasku.UseVisualStyleBackColor = true;
+            btnPoistaLasku.Click += btnPoistaLasku_Click;
             // 
             // btnLahetalasku
             // 
-            btnLahetalasku.Location = new Point(12, 571);
+            btnLahetalasku.Location = new Point(12, 608);
             btnLahetalasku.Name = "btnLahetalasku";
-            btnLahetalasku.Size = new Size(91, 42);
+            btnLahetalasku.Size = new Size(200, 103);
             btnLahetalasku.TabIndex = 78;
-            btnLahetalasku.Text = "Lähetä lasku";
+            btnLahetalasku.Text = "Tallenna lasku";
             btnLahetalasku.UseVisualStyleBackColor = true;
             btnLahetalasku.Click += btnLahetalasku_Click;
             // 
             // dgvLaskutus
             // 
             dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLaskutus.Location = new Point(335, 3);
+            dgvLaskutus.Location = new Point(2, 3);
             dgvLaskutus.Name = "dgvLaskutus";
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(831, 571);
+            dgvLaskutus.Size = new Size(1154, 586);
             dgvLaskutus.TabIndex = 77;
-            dgvLaskutus.Click += dgvLaskutus_Click;
-            // 
-            // tbLaskutusid
-            // 
-            tbLaskutusid.Location = new Point(109, 59);
-            tbLaskutusid.Name = "tbLaskutusid";
-            tbLaskutusid.Size = new Size(149, 27);
-            tbLaskutusid.TabIndex = 81;
-            // 
-            // label1
-            // 
-            label1.Location = new Point(14, 62);
-            label1.Name = "label1";
-            label1.Size = new Size(89, 40);
-            label1.TabIndex = 82;
-            label1.Text = "label1";
-            // 
-            // label2
-            // 
-            label2.Location = new Point(14, 117);
-            label2.Name = "label2";
-            label2.Size = new Size(89, 40);
-            label2.TabIndex = 83;
-            label2.Text = "label2";
-            // 
-            // tbSahkoposti
-            // 
-            tbSahkoposti.Location = new Point(109, 117);
-            tbSahkoposti.Name = "tbSahkoposti";
-            tbSahkoposti.Size = new Size(149, 27);
-            tbSahkoposti.TabIndex = 84;
             // 
             // FormLaskutus
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1178, 723);
-            Controls.Add(tbSahkoposti);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(tbLaskutusid);
             Controls.Add(btnTulosta);
             Controls.Add(btnPoistaLasku);
             Controls.Add(btnLahetalasku);
@@ -140,7 +102,6 @@
             Text = "FormLaskutus";
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -150,9 +111,5 @@
         private Button btnPoistaLasku;
         private Button btnLahetalasku;
         private DataGridView dgvLaskutus;
-        private TextBox tbLaskutusid;
-        private Label label1;
-        private Label label2;
-        private TextBox tbSahkoposti;
     }
 }

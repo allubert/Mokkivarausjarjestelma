@@ -24,9 +24,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using System.Net.Mail;
-using MailKit.Net.Smtp;
-using MailKit;
-using MimeKit; 
+
 
 namespace Mokkivarausjarjestelma
 {
@@ -84,15 +82,15 @@ namespace Mokkivarausjarjestelma
             string varausID = "SELECT etunimi, sukunimi, email, puhelinnro, lahiosoite, postinro FROM lasku " +
                        "INNER JOIN varaus on varaus.varaus_id = lasku.varaus_id " +
                        "INNER JOIN asiakas on asiakas.asiakas_id = varaus.asiakas_id " +
-                       "WHERE lasku.lasku_id=" + tbLaskutusid.Text;
+                       "WHERE lasku.lasku_id=" + dgvLaskutus.CurrentRow.Cells[0].Value.ToString(); ;
 
-            string kylysummasta = "SELECT summa FROM lasku WHERE lasku_id=" + tbLaskutusid.Text;
+            string kylysummasta = "SELECT summa FROM lasku WHERE lasku_id=" + dgvLaskutus.CurrentRow.Cells[0].Value.ToString();
 
             MySqlCommand komento1 = new MySqlCommand(kylysummasta, connection);
             MySqlCommand komento2 = new MySqlCommand(varausID, connection);
             MySqlDataReader reader = komento2.ExecuteReader();
             reader.Read();
-
+            // Laskutettavan tiedot tietokannasta 
             lasku.Add(new Paragraph("Nimi: " + reader.GetString(0) + " " + reader.GetString(1)).SetFontSize(10));
             lasku.Add(new Paragraph("Sähköposti: " + reader.GetString(2)).SetFontSize(10));
             lasku.Add(new Paragraph("Puhelinnumero: " + reader.GetString(3)).SetFontSize(10));
@@ -111,31 +109,22 @@ namespace Mokkivarausjarjestelma
             lasku.Add(new Paragraph("Viivästyskorko: 10%").SetFontSize(10));
             lukija.Close();
             lasku.Close();
-
-            var sahkoposti = new MimeMessage();
-           
-            reader = komento2.ExecuteReader();
-            reader.Read();
-            sahkoposti.From.Add(new MailboxAddress("Village Newbies", "villagenewbies@gmail.com"));
-            sahkoposti.To.Add(new MailboxAddress(reader.GetString(0)+ " " + reader.GetString(1), reader.GetString(2)));
             connection.Close();
-            sahkoposti.Subject = "Village Newbies laskusi";
-            sahkoposti.Body = new TextPart("Tämän viestin liitteenä on laskusi Village Newbies palvelusta");
-            Attachment laskupdf = new Attachment(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/lasku.pdf");
-            laskupdf.Name = "lasku.pdf";
 
-            string käyttäjä = "villagenewbies@gmail.com";
-            string salis = "noobs123";
-
-            MessageBox.Show("Laskun lähettäminen onnistui", "Ilmoitus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Laskun tallentaminen onnistui", "Ilmoitus", MessageBoxButtons.OK, MessageBoxIcon.Information);
             reader.Close();
 
             paivitalaskudgv();
         }
 
-        private void dgvLaskutus_Click(object sender, EventArgs e)
+        private void btnPoistaLasku_Click(object sender, EventArgs e)
         {
-            tbLaskutusid.Text = dgvLaskutus.CurrentRow.Cells[0].Value.ToString();
+            connection.Open();
+            string poista = "DELETE FROM lasku WHERE lasku_id=" + dgvLaskutus.CurrentRow.Cells[0].Value.ToString();
+            MySqlCommand komento = new MySqlCommand(poista, connection);
+            komento.ExecuteNonQuery();
+            paivitalaskudgv();
+            connection.Close(); 
         }
     }
 }

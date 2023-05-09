@@ -99,7 +99,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnAsiakasPoista_Click(object sender, EventArgs e)
         {
-            DialogResult poisto = MessageBox.Show("Haluatko varmasti poistaa kyseisen asiakkaan?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult poisto = MessageBox.Show("Haluatko varmasti poistaa kyseisen asiakkaan tietokannasta?", "Varoitus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (poisto == DialogResult.Yes)
             {
