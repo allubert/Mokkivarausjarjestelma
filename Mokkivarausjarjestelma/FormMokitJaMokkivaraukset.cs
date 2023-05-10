@@ -17,6 +17,7 @@ namespace Mokkivarausjarjestelma
     {
         private bool muokkausMenossa = false; //kertoo ohjelmalle, onko mökin tietojen muokkaus menossa
         private bool hakuPaalla = false; // kertoo ohjelmalle, onko käyttäjä suorittamassa rajattua hakua
+        private bool tyhjaLista;
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti"); //yhteys tietokantaan
         public FormMokitJaMokkivaraukset()
         {
@@ -67,6 +68,7 @@ namespace Mokkivarausjarjestelma
                     cmbUusiMokkiValitsePostiNro.DataSource = postiDs.Tables["posti"];
                     connection.Close();
                     connection.Open();
+                    tyhjaLista = false;
                 }
                 catch (Exception ex)
                 {
@@ -79,6 +81,7 @@ namespace Mokkivarausjarjestelma
             if (cmbUusiMokkiValitseAlueID.Text == "" || cmbUusiMokkiValitsePostiNro.Text == "")
             {
                 btnHaeMokit.Enabled = false;
+                tyhjaLista = true;
                 MessageBox.Show("Tietokannasta puuttuu alueen ja/tai postitoimipaikan tiedot\nTästä johtuen et voi lisätä uusia mökkejä tietokantaan.\nLisää alueita ja postitoimipaikkoja Aluehallinnan kautta, jos haluat lisätä mökkejä tietokantaan.");
             }
         } // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin. Etsii alue-taulun oliot yhteen comboboxiin, ja posti-taulun oliot toiseen, taikka varoittaa käyttäjää, mikäli posti- ja alue-taulut ovat tyhjiä formin avautuessa.
@@ -194,7 +197,7 @@ namespace Mokkivarausjarjestelma
         {
             if (!hakuPaalla)
             {
-                if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !muokkausMenossa)
+                if (dgMokkiLista.SelectedRows.Count > 0 && dgMokkiLista.Focused && !muokkausMenossa && !tyhjaLista)
                 {
                     try
                     {
@@ -207,7 +210,7 @@ namespace Mokkivarausjarjestelma
                         tbValittuMokkiHloMaara.ReadOnly = true;
                         rtbValittuMokkiVarustelu.ReadOnly = true;
 
-                        cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
+                        cmbUusiMokkiValitseAlueID.SelectedValue = uint.Parse(dgMokkiLista.CurrentRow.Cells[1].Value.ToString());
                         cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
                         tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
                         tbValittuMokkiOsoite.Text = dgMokkiLista.CurrentRow.Cells[4].Value.ToString();
@@ -367,7 +370,6 @@ namespace Mokkivarausjarjestelma
         private void UpdateDatabaseAndDataGridView()
         {
             int alueid = int.Parse(cmbUusiMokkiValitseAlueID.SelectedValue.ToString());
-            MessageBox.Show(" id : " + alueid);
             string postinro = cmbUusiMokkiValitsePostiNro.Text.ToString();
             string mokkinimi = tbValittuMokkiNimi.Text.ToString();
             string katuosoite = tbValittuMokkiOsoite.Text.ToString();
@@ -375,7 +377,7 @@ namespace Mokkivarausjarjestelma
             string mokinkuvaus = rtbValittuMokkiKuvaus.Text.ToString();
             int hlomaara = int.Parse(tbValittuMokkiHloMaara.Text);
             string mokinvarustelu = rtbValittuMokkiVarustelu.Text.ToString();
-            
+            int mokkiid = int.Parse(dgMokkiLista.CurrentRow.Cells[0].Value.ToString());
 
             string updateQuery = "UPDATE mokki SET alue_id=@alueid, postinro=@postinro, mokkinimi=@mokkinimi, katuosoite=@katuosoite, hinta=@hinta, kuvaus=@mokinkuvaus, henkilomaara=@hlomaara, varustelu=@mokinvarustelu WHERE mokki_id=@mokkiid";
 
@@ -383,7 +385,7 @@ namespace Mokkivarausjarjestelma
             {
                 using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
                 {
-                    //command.Parameters.AddWithValue("@mokkiid", mokki)
+                    command.Parameters.AddWithValue("@mokkiid", mokkiid);
                     command.Parameters.AddWithValue("@alueid", alueid);
                     command.Parameters.AddWithValue("@postinro", postinro);
                     command.Parameters.AddWithValue("@mokkinimi", mokkinimi);

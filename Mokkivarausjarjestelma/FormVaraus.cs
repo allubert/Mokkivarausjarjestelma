@@ -87,6 +87,7 @@ namespace Mokkivarausjarjestelma
                 MessageBox.Show("Asiakkaita ja/tai mökkejä ei ole lisätty tietokantaan, joten varauksia ei voi tehdä.\n" +
                     "Lisää ensin asiakkaat asiakashallinnan kautta, ja lisää tarvittaessa mökkejä mökkienhallinnan kautta.");
             }
+            tbUusiVarausVarausID.Visible = false;
         } // formi avautuu
         private void btnValmisVaraus_Click(object sender, EventArgs e)
         {
@@ -105,7 +106,7 @@ namespace Mokkivarausjarjestelma
                             int mokkimokkiid = Convert.ToInt32(cmbUusiVarausValitseMokki.SelectedValue);
                             try
                             {
-                                int varausid = int.Parse(tbUusiVarausVarausID.Text);
+                                //int varausid = int.Parse(tbUusiVarausVarausID.Text);
                                 using (connection)
                                 {
                                     connection.Open();
@@ -131,13 +132,13 @@ namespace Mokkivarausjarjestelma
                                         }
                                     }
 
-                                    string VarauksentiedotInsertQuery = "INSERT INTO varaus(varaus_id, asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, " +
+                                    string VarauksentiedotInsertQuery = "INSERT INTO varaus(asiakas_id, mokki_mokki_id, varattu_pvm, vahvistus_pvm, " +
                                         "varattu_alkupvm, varattu_loppupvm)" +
-                                    "VALUES (@varausid, @asiakasid, @mokkimokkiid, @varattupvm, @vahvistuspvm, @varattualkupvm, @varattuloppupvm)";
+                                    "VALUES (@asiakasid, @mokkimokkiid, @varattupvm, @vahvistuspvm, @varattualkupvm, @varattuloppupvm)";
 
                                     using (MySqlCommand command = new MySqlCommand(VarauksentiedotInsertQuery, connection))
                                     {
-                                        command.Parameters.AddWithValue("@varausid", varausid);
+                                        //command.Parameters.AddWithValue("@varausid", varausid);
                                         command.Parameters.AddWithValue("@asiakasid", asiakasid);
                                         command.Parameters.AddWithValue("@mokkimokkiid", mokkimokkiid);
                                         command.Parameters.AddWithValue("@varattupvm", DateTime.Now);
@@ -178,7 +179,7 @@ namespace Mokkivarausjarjestelma
             }
             else //Jos muokkaustila on päällä
             {
-                tbUusiVarausVarausID.Enabled = true;
+                //tbUusiVarausVarausID.Enabled = true;
                 btnMuokkaaMokkiVarausta.Text = "Muokkaa varausta";
                 dgMokkiVaraukset.ClearSelection();
                 muokkausMenossa = false;
@@ -198,6 +199,7 @@ namespace Mokkivarausjarjestelma
                             int mokkimokkiid = Convert.ToInt32(cmbUusiVarausValitseMokki.SelectedValue);
                             try
                             {
+
                                 int varausid = int.Parse(tbUusiVarausVarausID.Text);
                                 using (connection)
                                 {
