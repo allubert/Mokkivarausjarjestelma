@@ -40,6 +40,7 @@
             this.btnLaskuihin = new System.Windows.Forms.Button();
             this.btnLisaa = new System.Windows.Forms.Button();
             this.btnPoista = new System.Windows.Forms.Button();
+            this.btnAlkuvalikko = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenpalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -165,12 +166,24 @@
             this.btnPoista.UseVisualStyleBackColor = false;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
+            // btnAlkuvalikko
+            // 
+            this.btnAlkuvalikko.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnAlkuvalikko.Location = new System.Drawing.Point(678, 389);
+            this.btnAlkuvalikko.Name = "btnAlkuvalikko";
+            this.btnAlkuvalikko.Size = new System.Drawing.Size(110, 23);
+            this.btnAlkuvalikko.TabIndex = 12;
+            this.btnAlkuvalikko.Text = "Alkuvalikko";
+            this.btnAlkuvalikko.UseVisualStyleBackColor = false;
+            this.btnAlkuvalikko.Click += new System.EventHandler(this.btnAlkuvalikko_Click);
+            // 
             // FormVarauksenpalvelut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSalmon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAlkuvalikko);
             this.Controls.Add(this.btnPoista);
             this.Controls.Add(this.btnLisaa);
             this.Controls.Add(this.btnLaskuihin);
@@ -207,5 +220,6 @@
         private Button btnLaskuihin;
         private Button btnLisaa;
         private Button btnPoista;
+        private Button btnAlkuvalikko;
     }
 }

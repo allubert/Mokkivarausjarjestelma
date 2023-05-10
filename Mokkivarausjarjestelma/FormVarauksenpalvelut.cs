@@ -195,5 +195,13 @@ namespace Mokkivarausjarjestelma
             }
         }
 
+        private void btnAlkuvalikko_Click(object sender, EventArgs e)
+        {
+            Form alkuvalikko = new Form1();
+            this.Hide();
+
+            alkuvalikko.ShowDialog();
+            this.Close();
+        }
     }
 }
