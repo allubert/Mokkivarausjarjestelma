@@ -34,6 +34,15 @@
             btnLahetalasku = new Button();
             dgvLaskutus = new DataGridView();
             lblOhjeet = new Label();
+            lblVaraus_id = new Label();
+            lblSumma = new Label();
+            lblAlv = new Label();
+            lblLaskuID = new Label();
+            tbVarausID = new TextBox();
+            tbSumma = new TextBox();
+            tbAlv = new TextBox();
+            tbLaskuID = new TextBox();
+            btnHae = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).BeginInit();
             SuspendLayout();
             // 
@@ -78,12 +87,12 @@
             // 
             dgvLaskutus.BackgroundColor = Color.Bisque;
             dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLaskutus.Location = new Point(12, 12);
+            dgvLaskutus.Location = new Point(339, 12);
             dgvLaskutus.Name = "dgvLaskutus";
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(1135, 509);
+            dgvLaskutus.Size = new Size(808, 509);
             dgvLaskutus.TabIndex = 77;
             // 
             // lblOhjeet
@@ -95,12 +104,92 @@
             lblOhjeet.TabIndex = 80;
             lblOhjeet.Text = resources.GetString("lblOhjeet.Text");
             // 
+            // lblVaraus_id
+            // 
+            lblVaraus_id.Location = new Point(16, 33);
+            lblVaraus_id.Name = "lblVaraus_id";
+            lblVaraus_id.Size = new Size(77, 31);
+            lblVaraus_id.TabIndex = 81;
+            lblVaraus_id.Text = "Varaus_id";
+            // 
+            // lblSumma
+            // 
+            lblSumma.Location = new Point(16, 96);
+            lblSumma.Name = "lblSumma";
+            lblSumma.Size = new Size(62, 25);
+            lblSumma.TabIndex = 82;
+            lblSumma.Text = "Summa ";
+            // 
+            // lblAlv
+            // 
+            lblAlv.Location = new Point(16, 149);
+            lblAlv.Name = "lblAlv";
+            lblAlv.Size = new Size(62, 25);
+            lblAlv.TabIndex = 83;
+            lblAlv.Text = "Alv";
+            // 
+            // lblLaskuID
+            // 
+            lblLaskuID.Location = new Point(16, 204);
+            lblLaskuID.Name = "lblLaskuID";
+            lblLaskuID.Size = new Size(77, 25);
+            lblLaskuID.TabIndex = 84;
+            lblLaskuID.Text = "Lasku_id";
+            // 
+            // tbVarausID
+            // 
+            tbVarausID.Location = new Point(115, 30);
+            tbVarausID.Name = "tbVarausID";
+            tbVarausID.Size = new Size(125, 27);
+            tbVarausID.TabIndex = 85;
+            // 
+            // tbSumma
+            // 
+            tbSumma.Location = new Point(115, 96);
+            tbSumma.Name = "tbSumma";
+            tbSumma.Size = new Size(125, 27);
+            tbSumma.TabIndex = 86;
+            // 
+            // tbAlv
+            // 
+            tbAlv.Location = new Point(115, 149);
+            tbAlv.Name = "tbAlv";
+            tbAlv.Size = new Size(125, 27);
+            tbAlv.TabIndex = 87;
+            tbAlv.Text = "24%";
+            // 
+            // tbLaskuID
+            // 
+            tbLaskuID.Location = new Point(115, 204);
+            tbLaskuID.Name = "tbLaskuID";
+            tbLaskuID.Size = new Size(125, 27);
+            tbLaskuID.TabIndex = 88;
+            // 
+            // btnHae
+            // 
+            btnHae.Location = new Point(246, 28);
+            btnHae.Name = "btnHae";
+            btnHae.Size = new Size(69, 29);
+            btnHae.TabIndex = 89;
+            btnHae.Text = "Hae";
+            btnHae.UseVisualStyleBackColor = true;
+            btnHae.Click += btnHae_Click;
+            // 
             // FormLaskutus
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
             ClientSize = new Size(1178, 723);
+            Controls.Add(btnHae);
+            Controls.Add(tbLaskuID);
+            Controls.Add(tbAlv);
+            Controls.Add(tbSumma);
+            Controls.Add(tbVarausID);
+            Controls.Add(lblLaskuID);
+            Controls.Add(lblAlv);
+            Controls.Add(lblSumma);
+            Controls.Add(lblVaraus_id);
             Controls.Add(lblOhjeet);
             Controls.Add(btnPoistaLasku);
             Controls.Add(btnLahetalasku);
@@ -111,6 +200,7 @@
             Text = "FormLaskutus";
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -120,5 +210,14 @@
         private Button btnLahetalasku;
         private DataGridView dgvLaskutus;
         private Label lblOhjeet;
+        private Label lblVaraus_id;
+        private Label lblSumma;
+        private Label lblAlv;
+        private Label lblLaskuID;
+        private TextBox tbVarausID;
+        private TextBox tbSumma;
+        private TextBox tbAlv;
+        private TextBox tbLaskuID;
+        private Button btnHae;
     }
 }

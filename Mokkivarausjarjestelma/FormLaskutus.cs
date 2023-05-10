@@ -1,29 +1,10 @@
-﻿
-using System;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using System.IO;
-using System.Diagnostics;
-using iText.IO.Font;
-using iText.IO.Font.Constants;
-using iText.IO.Image;
-using iText.Kernel.Font;
-using iText.Kernel.Geom;
+﻿using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Annot;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
-using System.Net.Mail;
+using System.Data;
 
 
 namespace Mokkivarausjarjestelma
@@ -140,6 +121,74 @@ namespace Mokkivarausjarjestelma
             komento.ExecuteNonQuery();
             paivitalaskudgv();
             connection.Close();
+        }
+
+        private void btnHae_Click(object sender, EventArgs e)
+        {
+            string kysely = ("SELECT mokki.mokki_id, CAST(DATEDIFF(varaus.varattu_loppupvm, varaus.varattu_alkupvm) AS INT) AS jotain FROM varaus JOIN mokki ON varaus.mokki_mokki_id = mokki.mokki_id WHERE varaus.varaus_id=") + tbVarausID.Text;
+            int mokki_mokki_id;
+            int jotain;
+            double mokkihinta;
+            int palvelulkm;
+            double palveluhinta;
+            int palveluid;
+            double summa;
+            connection.Open();
+
+            using (MySqlCommand command = new MySqlCommand(kysely, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    mokki_mokki_id = reader.GetInt32("mokki_id");
+                    jotain = reader.GetInt32("jotain");
+                    reader.Close();
+                }
+            }
+            connection.Close();
+            string kysely1 = ("SELECT hinta FROM mokki WHERE mokki_id=" + mokki_mokki_id);
+            connection.Open();
+            using (MySqlCommand komento = new MySqlCommand(kysely1, connection))
+            {
+                using (MySqlDataReader lukija = komento.ExecuteReader())
+                {
+                    lukija.Read();
+                    mokkihinta = lukija.GetDouble("hinta");
+                    lukija.Close();
+                }
+            }
+            connection.Close();
+
+            string kysely2 = "SELECT lkm, palvelu_id FROM varauksen_palvelut WHERE varaus_id=@varaus_id";
+            connection.Open();
+            using (MySqlCommand komento2 = new MySqlCommand(kysely2, connection))
+            {
+                komento2.Parameters.AddWithValue("@varaus_id", tbVarausID.Text);
+                using (MySqlDataReader lukija2 = komento2.ExecuteReader())
+                {
+                    lukija2.Read();
+                    palvelulkm = lukija2.GetInt32("lkm");
+                    palveluid = lukija2.GetInt32("palvelu_id");
+                    lukija2.Close();
+                }
+            }
+            connection.Close();
+
+            string kysely3 = ("SELECT hinta FROM palvelu where palvelu_id=" + palveluid);
+            connection.Open();
+            using (MySqlCommand komento3 = new MySqlCommand(kysely3, connection))
+            {
+                using (MySqlDataReader lukija3 = komento3.ExecuteReader())
+                {
+                    lukija3.Read();
+                    palveluhinta = lukija3.GetDouble("hinta");
+                    lukija3.Close();
+                }
+            }
+            connection.Close();
+            summa = (jotain * mokkihinta + palvelulkm * palveluhinta);
+
+            tbSumma.Text = summa.ToString();
         }
     }
 }
