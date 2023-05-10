@@ -145,75 +145,82 @@ namespace Mokkivarausjarjestelma
 
         private void btnHae_Click(object sender, EventArgs e)
         {
-            // kysely loppu ja alkupvm, jotta saadaan montako päivää varaaja oli siellä
-            string kysely = ("SELECT mokki.mokki_id, CAST(DATEDIFF(varaus.varattu_loppupvm, varaus.varattu_alkupvm) AS INT) AS jotain FROM varaus JOIN mokki ON varaus.mokki_mokki_id = mokki.mokki_id WHERE varaus.varaus_id=") + cbVarausId.Text;
-            int mokki_mokki_id;
-            int jotain;
-            double mokkihinta;
-            int palvelulkm;
-            double palveluhinta;
-            int palveluid;
-            double summa;
-            connection.Open();
-            //ensimmäinen kysely, jolla selvitetään mökki_id
-            using (MySqlCommand command = new MySqlCommand(kysely, connection))
+            try
             {
-                using (MySqlDataReader reader = command.ExecuteReader())
+                // kysely loppu ja alkupvm, jotta saadaan montako päivää varaaja oli siellä
+                string kysely = ("SELECT mokki.mokki_id, CAST(DATEDIFF(varaus.varattu_loppupvm, varaus.varattu_alkupvm) AS INT) AS jotain FROM varaus JOIN mokki ON varaus.mokki_mokki_id = mokki.mokki_id WHERE varaus.varaus_id=") + cbVarausId.Text;
+                int mokki_mokki_id;
+                int jotain;
+                double mokkihinta;
+                int palvelulkm;
+                double palveluhinta;
+                int palveluid;
+                double summa;
+                connection.Open();
+                //ensimmäinen kysely, jolla selvitetään mökki_id
+                using (MySqlCommand command = new MySqlCommand(kysely, connection))
                 {
-                    reader.Read();
-                    mokki_mokki_id = reader.GetInt32("mokki_id");
-                    jotain = reader.GetInt32("jotain");
-                    reader.Close();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        mokki_mokki_id = reader.GetInt32("mokki_id");
+                        jotain = reader.GetInt32("jotain");
+                        reader.Close();
+                    }
                 }
-            }
-            connection.Close();
-            string kysely1 = ("SELECT hinta FROM mokki WHERE mokki_id=" + mokki_mokki_id);
-            connection.Open();
+                connection.Close();
+                string kysely1 = ("SELECT hinta FROM mokki WHERE mokki_id=" + mokki_mokki_id);
+                connection.Open();
 
-            // tässä selvitetään mökin hinta vrk
-            using (MySqlCommand komento = new MySqlCommand(kysely1, connection))
-            {
-                using (MySqlDataReader lukija = komento.ExecuteReader())
+                // tässä selvitetään mökin hinta vrk
+                using (MySqlCommand komento = new MySqlCommand(kysely1, connection))
                 {
-                    lukija.Read();
-                    mokkihinta = lukija.GetDouble("hinta");
-                    lukija.Close();
+                    using (MySqlDataReader lukija = komento.ExecuteReader())
+                    {
+                        lukija.Read();
+                        mokkihinta = lukija.GetDouble("hinta");
+                        lukija.Close();
+                    }
                 }
-            }
-            connection.Close();
+                connection.Close();
 
-            string kysely2 = "SELECT lkm, palvelu_id FROM varauksen_palvelut WHERE varaus_id=@varaus_id";
-            connection.Open();
-            // selvitetään palveluiden lukumäärä ja palveluid kyseiselle varaukselle 
-            using (MySqlCommand komento2 = new MySqlCommand(kysely2, connection))
-            {
-                komento2.Parameters.AddWithValue("@varaus_id", cbVarausId.Text);
-                using (MySqlDataReader lukija2 = komento2.ExecuteReader())
+                string kysely2 = "SELECT lkm, palvelu_id FROM varauksen_palvelut WHERE varaus_id=@varaus_id";
+                connection.Open();
+                // selvitetään palveluiden lukumäärä ja palveluid kyseiselle varaukselle 
+                using (MySqlCommand komento2 = new MySqlCommand(kysely2, connection))
                 {
-                    lukija2.Read();
-                    palvelulkm = lukija2.GetInt32("lkm");
-                    palveluid = lukija2.GetInt32("palvelu_id");
-                    lukija2.Close();
+                    komento2.Parameters.AddWithValue("@varaus_id", cbVarausId.Text);
+                    using (MySqlDataReader lukija2 = komento2.ExecuteReader())
+                    {
+                        lukija2.Read();
+                        palvelulkm = lukija2.GetInt32("lkm");
+                        palveluid = lukija2.GetInt32("palvelu_id");
+                        lukija2.Close();
+                    }
                 }
-            }
-            connection.Close();
-            // selvitetään palvelun hinta palveluid:n perusteella 
-            string kysely3 = ("SELECT hinta FROM palvelu where palvelu_id=" + palveluid);
-            connection.Open();
-            using (MySqlCommand komento3 = new MySqlCommand(kysely3, connection))
-            {
-                using (MySqlDataReader lukija3 = komento3.ExecuteReader())
+                connection.Close();
+                // selvitetään palvelun hinta palveluid:n perusteella 
+                string kysely3 = ("SELECT hinta FROM palvelu where palvelu_id=" + palveluid);
+                connection.Open();
+                using (MySqlCommand komento3 = new MySqlCommand(kysely3, connection))
                 {
-                    lukija3.Read();
-                    palveluhinta = lukija3.GetDouble("hinta");
-                    lukija3.Close();
+                    using (MySqlDataReader lukija3 = komento3.ExecuteReader())
+                    {
+                        lukija3.Read();
+                        palveluhinta = lukija3.GetDouble("hinta");
+                        lukija3.Close();
+                    }
                 }
-            }
-            connection.Close();
-            // lasketaan summa yhteen 
-            summa = (jotain * mokkihinta + palvelulkm * palveluhinta);
+                connection.Close();
+                // lasketaan summa yhteen 
+                summa = (jotain * mokkihinta + palvelulkm * palveluhinta);
 
-            tbSumma.Text = summa.ToString();
+                tbSumma.Text = summa.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tarkista varausID uudelleen");
+            }
         }
 
         private void btnLisää_Click(object sender, EventArgs e)
@@ -262,6 +269,14 @@ namespace Mokkivarausjarjestelma
             cbVarausId.Text = dgvLaskutus.CurrentRow.Cells[1].Value.ToString();
             tbSumma.Text = dgvLaskutus.CurrentRow.Cells[2].Value.ToString();
             tbAlv.Text = dgvLaskutus.CurrentRow.Cells[3].Value.ToString();
+        }
+
+        private void tbLaskuID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

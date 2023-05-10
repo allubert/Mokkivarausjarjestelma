@@ -143,12 +143,14 @@
             tbSumma.Location = new Point(113, 188);
             tbSumma.MaxLength = 11;
             tbSumma.Name = "tbSumma";
+            tbSumma.ReadOnly = true;
             tbSumma.Size = new Size(125, 27);
             tbSumma.TabIndex = 86;
             // 
             // tbAlv
             // 
             tbAlv.Location = new Point(113, 244);
+            tbAlv.MaxLength = 13;
             tbAlv.Name = "tbAlv";
             tbAlv.ReadOnly = true;
             tbAlv.Size = new Size(125, 27);
@@ -158,9 +160,11 @@
             // tbLaskuID
             // 
             tbLaskuID.Location = new Point(113, 299);
+            tbLaskuID.MaxLength = 11;
             tbLaskuID.Name = "tbLaskuID";
             tbLaskuID.Size = new Size(125, 27);
             tbLaskuID.TabIndex = 88;
+            tbLaskuID.KeyPress += tbLaskuID_KeyPress;
             // 
             // btnHae
             // 
