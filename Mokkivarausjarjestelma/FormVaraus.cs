@@ -78,7 +78,6 @@ namespace Mokkivarausjarjestelma
             dgMokkiVaraukset.DataSource = datatable;
             adapter.Fill(datatable);
             connection.Close();
-            
         }
         private void Form_Shown(object sender, EventArgs e)
         {
@@ -293,10 +292,11 @@ namespace Mokkivarausjarjestelma
         }//Käyttäjä 'vahvistaa' varauksen
         private void btnTakaisinMokkiFormiin_Click(object sender, EventArgs e)
         {
-            Form formaloitus = new FormMokitJaMokkivaraukset();
+            Form mokit = new FormMokitJaMokkivaraukset();
             this.Hide();
+            mokit.ShowDialog();
             this.Close();
-        }//sulkee varaustenhallinnan
+        }//avaa mökkienhallinnan
         private void btnPoistaMokkiVaraus_Click(object sender, EventArgs e)
         {
             if (!haunRajausPaalla == true)
@@ -570,6 +570,7 @@ namespace Mokkivarausjarjestelma
             this.Hide();
             asiakkaat.ShowDialog();
             this.Close();
+            
         } // avaa asiakashallinnan, jotta asiakkaita voi lisätä järjestelmään
     }
 }
