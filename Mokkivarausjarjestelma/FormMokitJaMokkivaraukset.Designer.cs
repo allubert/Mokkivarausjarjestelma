@@ -45,7 +45,6 @@
             this.lbl6 = new System.Windows.Forms.Label();
             this.tbValittuMokkiNimi = new System.Windows.Forms.TextBox();
             this.tbValittuMokkiOsoite = new System.Windows.Forms.TextBox();
-            this.tbValittuMokkiMokkiID = new System.Windows.Forms.TextBox();
             this.lbl9 = new System.Windows.Forms.Label();
             this.lbl5 = new System.Windows.Forms.Label();
             this.lbl4 = new System.Windows.Forms.Label();
@@ -222,15 +221,6 @@
             this.tbValittuMokkiOsoite.Name = "tbValittuMokkiOsoite";
             this.tbValittuMokkiOsoite.Size = new System.Drawing.Size(148, 23);
             this.tbValittuMokkiOsoite.TabIndex = 4;
-            // 
-            // tbValittuMokkiMokkiID
-            // 
-            this.tbValittuMokkiMokkiID.BackColor = System.Drawing.Color.PeachPuff;
-            this.tbValittuMokkiMokkiID.Location = new System.Drawing.Point(88, 48);
-            this.tbValittuMokkiMokkiID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbValittuMokkiMokkiID.Name = "tbValittuMokkiMokkiID";
-            this.tbValittuMokkiMokkiID.Size = new System.Drawing.Size(148, 23);
-            this.tbValittuMokkiMokkiID.TabIndex = 0;
             // 
             // lbl9
             // 
@@ -442,7 +432,6 @@
             this.panel1.Controls.Add(this.lbl9);
             this.panel1.Controls.Add(this.tbValittuMokkiOsoite);
             this.panel1.Controls.Add(this.lbl6);
-            this.panel1.Controls.Add(this.tbValittuMokkiMokkiID);
             this.panel1.Controls.Add(this.lbl8);
             this.panel1.Location = new System.Drawing.Point(3, 5);
             this.panel1.Name = "panel1";
@@ -599,7 +588,6 @@
         private Label lbl6;
         private TextBox tbValittuMokkiNimi;
         private TextBox tbValittuMokkiOsoite;
-        private TextBox tbValittuMokkiMokkiID;
         private Label lbl9;
         private Label lbl5;
         private Label lbl4;

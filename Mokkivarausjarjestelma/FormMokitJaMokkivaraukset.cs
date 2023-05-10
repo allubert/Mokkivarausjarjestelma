@@ -26,20 +26,36 @@ namespace Mokkivarausjarjestelma
             UpdatedgMokkiLista();
             this.Shown += Form_Shown; // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin
             btnMuokkaaValitunMokinTietoja.Enabled = false;
+            
+        } //toiminnot, jotka toteutuvat formin avautuessa
+        private void Form_Shown(object sender, EventArgs e)
+        {
+            dgMokkiLista.ClearSelection();
+            
             using (connection)
             {
                 try
                 {
                     // täyttää alue_id comboboxin
-                    string alueidQuery = "SELECT alue_id FROM alue";
-                    MySqlDataAdapter alueAdapter = new MySqlDataAdapter(alueidQuery, connection);
-                    DataSet alueDs= new DataSet();
-                    alueAdapter.Fill(alueDs, "alue");
+                    string aluenimiQuery = "SELECT alue_id, nimi FROM alue";
+                    MySqlDataAdapter alueNimiAdapter = new MySqlDataAdapter(aluenimiQuery, connection);
+                    DataSet alueDs = new DataSet();
+                    alueNimiAdapter.Fill(alueDs, "alue");
 
-                    cmbUusiMokkiValitseAlueID.DisplayMember = "alue_id";
+                    var aluenimiData = alueDs.Tables["alue"].AsEnumerable()
+                        .Select(row => new
+                        {
+                            alue_id = row.Field<uint>("alue_id"),
+                            nimi = row.Field<string>("nimi"),
+                            DisplayText = row.Field<string>("nimi") + " (" + row.Field<uint>("alue_id") + ")"
+                        })
+                        .ToList();
+
+                    cmbUusiMokkiValitseAlueID.DisplayMember = "DisplayText";
                     cmbUusiMokkiValitseAlueID.ValueMember = "alue_id";
-                    cmbUusiMokkiValitseAlueID.DataSource = alueDs.Tables["alue"];
-
+                    cmbUusiMokkiValitseAlueID.DataSource = aluenimiData;
+                    connection.Close();
+                    connection.Open();
 
                     // täyttää postinumero comboboxin
                     string postinroQuery = "SELECT postinro FROM posti";
@@ -50,24 +66,23 @@ namespace Mokkivarausjarjestelma
                     cmbUusiMokkiValitsePostiNro.DisplayMember = "postinro";
                     cmbUusiMokkiValitsePostiNro.ValueMember = "postinro";
                     cmbUusiMokkiValitsePostiNro.DataSource = postiDs.Tables["posti"];
+                    connection.Close();
+                    connection.Open();
                 }
                 catch (Exception ex)
                 {
                     // tietokantaan ei ole lisätty alueita, tai postitoimipaikkoja.
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show("VIRHE: " + ex);
+                    connection.Close();
                 }
-                
-            } // etsii alue-taulun oliot yhteen comboboxiin, ja posti-taulun oliot toiseen.
-        } //toiminnot, jotka toteutuvat formin avautuessa
-        private void Form_Shown(object sender, EventArgs e)
-        {
-            dgMokkiLista.ClearSelection();
+
+            }
             if (cmbUusiMokkiValitseAlueID.Text == "" || cmbUusiMokkiValitsePostiNro.Text == "")
             {
                 btnHaeMokit.Enabled = false;
                 MessageBox.Show("Tietokannasta puuttuu alueen ja/tai postitoimipaikan tiedot\nTästä johtuen et voi lisätä uusia mökkejä tietokantaan.\nLisää alueita ja postitoimipaikkoja Aluehallinnan kautta, jos haluat lisätä mökkejä tietokantaan.");
             }
-        } // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin. varoittaa myös käyttäjää, mikäli posti- ja alue-taulut ovat tyhjiä formin avautuessa.
+        } // ilman tätä dgv:n tietorivi on automaattisesti valittuna, kun käyttäjä avaa formin. Etsii alue-taulun oliot yhteen comboboxiin, ja posti-taulun oliot toiseen, taikka varoittaa käyttäjää, mikäli posti- ja alue-taulut ovat tyhjiä formin avautuessa.
         private void btnUusiVaraus_Click(object sender, EventArgs e)
         {
             var VarausForm = new FormVaraus();
@@ -98,19 +113,21 @@ namespace Mokkivarausjarjestelma
                     int alueid = Convert.ToInt32(cmbUusiMokkiValitseAlueID.SelectedValue);
                     string postinro = cmbUusiMokkiValitsePostiNro.SelectedValue.ToString();
 
-                    int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
+                    //int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
                     string mokkinimi = tbValittuMokkiNimi.Text.ToString();
                     string katuosoite = tbValittuMokkiOsoite.Text.ToString();
                     double hinta = double.Parse(tbValittuMokkiHintaVrk.Text);
                     string mokinkuvaus = rtbValittuMokkiKuvaus.Text.ToString();
                     int hlomaara = int.Parse(tbValittuMokkiHloMaara.Text);
                     string mokinvarustelu = rtbValittuMokkiVarustelu.Text.ToString();
-                    string MokintiedotInsertQuery = "INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (@mokkiid, @alueid, @postinro, @mokkinimi, @katuosoite, @hinta, @mokinkuvaus, @hlomaara, @mokinvarustelu)";
+                    //string MokintiedotInsertQuery = "INSERT INTO mokki(mokki_id, alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (@mokkiid, @alueid, @postinro, @mokkinimi, @katuosoite, @hinta, @mokinkuvaus, @hlomaara, @mokinvarustelu)";
+                    string MokintiedotInsertQuery = "INSERT INTO mokki(alue_id, postinro, mokkinimi, katuosoite, hinta, kuvaus, henkilomaara, varustelu) VALUES (@alueid, @postinro, @mokkinimi, @katuosoite, @hinta, @mokinkuvaus, @hlomaara, @mokinvarustelu)";
+
                     using (connection)
                     {
                         using (MySqlCommand command = new MySqlCommand(MokintiedotInsertQuery, connection))
                         {
-                            command.Parameters.AddWithValue("@mokkiid", mokkiid);
+                            //command.Parameters.AddWithValue("@mokkiid", mokkiid);
                             command.Parameters.AddWithValue("@alueid", alueid);
                             command.Parameters.AddWithValue("@postinro", postinro);
                             command.Parameters.AddWithValue("@mokkinimi", mokkinimi);
@@ -390,13 +407,13 @@ namespace Mokkivarausjarjestelma
         } //päivittää tietokantaa, jos käyttäjä on halunnut muokata mökin tietoja
         private bool ValidateTexts()
         {
-            int mokkiid;
+            //int mokkiid;
             int alueid;
             double hinta;
             int hlomaara;
 
-            // tarkastaa int-tekstikentät
-            if (!int.TryParse(tbValittuMokkiMokkiID.Text, out mokkiid) ||
+            // tarkastaa int-tekstikentät !int.TryParse(tbValittuMokkiMokkiID.Text, out mokkiid) ||
+            if (
                 !int.TryParse(cmbUusiMokkiValitseAlueID.Text, out alueid) ||
                 !int.TryParse(tbValittuMokkiHloMaara.Text, out hlomaara))
             {
