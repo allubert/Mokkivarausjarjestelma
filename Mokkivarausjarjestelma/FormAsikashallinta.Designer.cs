@@ -57,6 +57,7 @@
             // 
             // btnTakaisinAloitusFormiin
             // 
+            btnTakaisinAloitusFormiin.BackColor = Color.PeachPuff;
             btnTakaisinAloitusFormiin.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnTakaisinAloitusFormiin.Location = new Point(2, 1);
             btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
@@ -64,7 +65,7 @@
             btnTakaisinAloitusFormiin.Size = new Size(106, 31);
             btnTakaisinAloitusFormiin.TabIndex = 76;
             btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
-            btnTakaisinAloitusFormiin.UseVisualStyleBackColor = true;
+            btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             btnTakaisinAloitusFormiin.Click += btnTakaisinAloitusFormiin_Click;
             // 
             // btnAsiakasPoista
@@ -157,7 +158,7 @@
             // 
             // tbAsiakasPuhelinnumero
             // 
-            tbAsiakasPuhelinnumero.Location = new Point(121, 452);
+            tbAsiakasPuhelinnumero.Location = new Point(130, 452);
             tbAsiakasPuhelinnumero.MaxLength = 15;
             tbAsiakasPuhelinnumero.Name = "tbAsiakasPuhelinnumero";
             tbAsiakasPuhelinnumero.Size = new Size(157, 27);

@@ -38,22 +38,23 @@
             lblSumma = new Label();
             lblAlv = new Label();
             lblLaskuID = new Label();
-            tbVarausID = new TextBox();
             tbSumma = new TextBox();
             tbAlv = new TextBox();
             tbLaskuID = new TextBox();
             btnHae = new Button();
+            btnLisää = new Button();
+            cbVarausId = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvLaskutus).BeginInit();
             SuspendLayout();
             // 
             // btnTakaisinAloitusFormiin
             // 
-            btnTakaisinAloitusFormiin.BackColor = Color.Yellow;
+            btnTakaisinAloitusFormiin.BackColor = Color.PeachPuff;
             btnTakaisinAloitusFormiin.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnTakaisinAloitusFormiin.Location = new Point(940, 544);
+            btnTakaisinAloitusFormiin.Location = new Point(-1, 2);
             btnTakaisinAloitusFormiin.Margin = new Padding(3, 4, 3, 4);
             btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
-            btnTakaisinAloitusFormiin.Size = new Size(216, 166);
+            btnTakaisinAloitusFormiin.Size = new Size(128, 36);
             btnTakaisinAloitusFormiin.TabIndex = 76;
             btnTakaisinAloitusFormiin.Text = "Alkuvalikko";
             btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
@@ -61,11 +62,11 @@
             // 
             // btnPoistaLasku
             // 
-            btnPoistaLasku.BackColor = Color.Yellow;
+            btnPoistaLasku.BackColor = Color.PeachPuff;
             btnPoistaLasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnPoistaLasku.Location = new Point(218, 544);
+            btnPoistaLasku.Location = new Point(244, 378);
             btnPoistaLasku.Name = "btnPoistaLasku";
-            btnPoistaLasku.Size = new Size(196, 167);
+            btnPoistaLasku.Size = new Size(99, 75);
             btnPoistaLasku.TabIndex = 79;
             btnPoistaLasku.Text = "Poista lasku";
             btnPoistaLasku.UseVisualStyleBackColor = false;
@@ -73,13 +74,13 @@
             // 
             // btnLahetalasku
             // 
-            btnLahetalasku.BackColor = Color.Yellow;
+            btnLahetalasku.BackColor = Color.PeachPuff;
             btnLahetalasku.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnLahetalasku.Location = new Point(12, 544);
+            btnLahetalasku.Location = new Point(113, 378);
             btnLahetalasku.Name = "btnLahetalasku";
-            btnLahetalasku.Size = new Size(200, 167);
+            btnLahetalasku.Size = new Size(125, 75);
             btnLahetalasku.TabIndex = 78;
-            btnLahetalasku.Text = "Tallenna lasku";
+            btnLahetalasku.Text = "Tallenna lasku dokumentiksi";
             btnLahetalasku.UseVisualStyleBackColor = false;
             btnLahetalasku.Click += btnLahetalasku_Click;
             // 
@@ -87,26 +88,27 @@
             // 
             dgvLaskutus.BackgroundColor = Color.Bisque;
             dgvLaskutus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLaskutus.Location = new Point(339, 12);
+            dgvLaskutus.Location = new Point(358, 12);
             dgvLaskutus.Name = "dgvLaskutus";
             dgvLaskutus.ReadOnly = true;
             dgvLaskutus.RowHeadersWidth = 51;
             dgvLaskutus.RowTemplate.Height = 29;
-            dgvLaskutus.Size = new Size(808, 509);
+            dgvLaskutus.Size = new Size(789, 509);
             dgvLaskutus.TabIndex = 77;
+            dgvLaskutus.Click += dgvLaskutus_Click;
             // 
             // lblOhjeet
             // 
             lblOhjeet.BackColor = Color.Aqua;
-            lblOhjeet.Location = new Point(440, 524);
+            lblOhjeet.Location = new Point(-1, 524);
             lblOhjeet.Name = "lblOhjeet";
-            lblOhjeet.Size = new Size(461, 201);
+            lblOhjeet.Size = new Size(1148, 144);
             lblOhjeet.TabIndex = 80;
             lblOhjeet.Text = resources.GetString("lblOhjeet.Text");
             // 
             // lblVaraus_id
             // 
-            lblVaraus_id.Location = new Point(16, 33);
+            lblVaraus_id.Location = new Point(14, 128);
             lblVaraus_id.Name = "lblVaraus_id";
             lblVaraus_id.Size = new Size(77, 31);
             lblVaraus_id.TabIndex = 81;
@@ -114,7 +116,7 @@
             // 
             // lblSumma
             // 
-            lblSumma.Location = new Point(16, 96);
+            lblSumma.Location = new Point(14, 191);
             lblSumma.Name = "lblSumma";
             lblSumma.Size = new Size(62, 25);
             lblSumma.TabIndex = 82;
@@ -122,7 +124,7 @@
             // 
             // lblAlv
             // 
-            lblAlv.Location = new Point(16, 149);
+            lblAlv.Location = new Point(14, 244);
             lblAlv.Name = "lblAlv";
             lblAlv.Size = new Size(62, 25);
             lblAlv.TabIndex = 83;
@@ -130,62 +132,81 @@
             // 
             // lblLaskuID
             // 
-            lblLaskuID.Location = new Point(16, 204);
+            lblLaskuID.Location = new Point(14, 299);
             lblLaskuID.Name = "lblLaskuID";
             lblLaskuID.Size = new Size(77, 25);
             lblLaskuID.TabIndex = 84;
             lblLaskuID.Text = "Lasku_id";
             // 
-            // tbVarausID
-            // 
-            tbVarausID.Location = new Point(115, 30);
-            tbVarausID.Name = "tbVarausID";
-            tbVarausID.Size = new Size(125, 27);
-            tbVarausID.TabIndex = 85;
-            // 
             // tbSumma
             // 
-            tbSumma.Location = new Point(115, 96);
+            tbSumma.Location = new Point(113, 188);
+            tbSumma.MaxLength = 11;
             tbSumma.Name = "tbSumma";
             tbSumma.Size = new Size(125, 27);
             tbSumma.TabIndex = 86;
             // 
             // tbAlv
             // 
-            tbAlv.Location = new Point(115, 149);
+            tbAlv.Location = new Point(113, 244);
             tbAlv.Name = "tbAlv";
+            tbAlv.ReadOnly = true;
             tbAlv.Size = new Size(125, 27);
             tbAlv.TabIndex = 87;
-            tbAlv.Text = "24%";
+            tbAlv.Text = "24";
             // 
             // tbLaskuID
             // 
-            tbLaskuID.Location = new Point(115, 204);
+            tbLaskuID.Location = new Point(113, 299);
             tbLaskuID.Name = "tbLaskuID";
             tbLaskuID.Size = new Size(125, 27);
             tbLaskuID.TabIndex = 88;
             // 
             // btnHae
             // 
-            btnHae.Location = new Point(246, 28);
+            btnHae.BackColor = Color.PeachPuff;
+            btnHae.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnHae.Location = new Point(254, 127);
             btnHae.Name = "btnHae";
-            btnHae.Size = new Size(69, 29);
+            btnHae.Size = new Size(89, 29);
             btnHae.TabIndex = 89;
             btnHae.Text = "Hae";
-            btnHae.UseVisualStyleBackColor = true;
+            btnHae.UseVisualStyleBackColor = false;
             btnHae.Click += btnHae_Click;
+            // 
+            // btnLisää
+            // 
+            btnLisää.BackColor = Color.PeachPuff;
+            btnLisää.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnLisää.Location = new Point(10, 378);
+            btnLisää.Name = "btnLisää";
+            btnLisää.Size = new Size(97, 75);
+            btnLisää.TabIndex = 90;
+            btnLisää.Text = "Lisää";
+            btnLisää.UseVisualStyleBackColor = false;
+            btnLisää.Click += btnLisää_Click;
+            // 
+            // cbVarausId
+            // 
+            cbVarausId.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbVarausId.FormattingEnabled = true;
+            cbVarausId.Location = new Point(97, 128);
+            cbVarausId.Name = "cbVarausId";
+            cbVarausId.Size = new Size(151, 28);
+            cbVarausId.TabIndex = 91;
             // 
             // FormLaskutus
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Bisque;
-            ClientSize = new Size(1178, 723);
+            ClientSize = new Size(1178, 677);
+            Controls.Add(cbVarausId);
+            Controls.Add(btnLisää);
             Controls.Add(btnHae);
             Controls.Add(tbLaskuID);
             Controls.Add(tbAlv);
             Controls.Add(tbSumma);
-            Controls.Add(tbVarausID);
             Controls.Add(lblLaskuID);
             Controls.Add(lblAlv);
             Controls.Add(lblSumma);
@@ -214,10 +235,11 @@
         private Label lblSumma;
         private Label lblAlv;
         private Label lblLaskuID;
-        private TextBox tbVarausID;
         private TextBox tbSumma;
         private TextBox tbAlv;
         private TextBox tbLaskuID;
         private Button btnHae;
+        private Button btnLisää;
+        private ComboBox cbVarausId;
     }
 }
