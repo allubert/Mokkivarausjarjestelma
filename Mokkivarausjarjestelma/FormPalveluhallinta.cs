@@ -84,8 +84,7 @@ namespace Mokkivarausjarjestelma
 
             string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
 
-            try
-            {
+
                 using (connection)
                 {
                     using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
@@ -102,11 +101,6 @@ namespace Mokkivarausjarjestelma
                         populatedgvPalvelut();
                     }
                 }
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show("Olit juuri niin idiootti, että syötit jo olemassa olevan palveluID:n tietokantaan. Ole hyvä ja tapa itsesi.");
-            }
         }
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)
@@ -233,33 +227,40 @@ namespace Mokkivarausjarjestelma
         {
             //hakee tiedot palveluid kautta datagridviewistä ja maalaa kyseisen rivin datagridviewistä
 
-            string hakuQuery = "SELECT * FROM palvelu WHERE palvelu_id = @palveluid";
-            string palveluid = tbPalveluID.Text;
-
-            DataTable datatable = new DataTable();
-            using (connection)
+            try
             {
-                MySqlCommand command = new MySqlCommand(hakuQuery, connection);
-                command.Parameters.AddWithValue("@palveluid", palveluid);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                adapter.Fill(datatable);
-            }
+                string hakuQuery = "SELECT * FROM palvelu WHERE palvelu_id = @palveluid";
+                string palveluid = tbPalveluID.Text;
 
-            if (datatable.Rows.Count > 0)
-            {
-                dgvPalvelut.DataSource = datatable;
-                foreach (DataGridViewRow row in dgvPalvelut.Rows)
+                DataTable datatable = new DataTable();
+                using (connection)
                 {
-                    if (row.Cells["palvelu_id"].Value.ToString() == palveluid)
+                    MySqlCommand command = new MySqlCommand(hakuQuery, connection);
+                    command.Parameters.AddWithValue("@palveluid", palveluid);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(datatable);
+                }
+
+                if (datatable.Rows.Count > 0)
+                {
+                    dgvPalvelut.DataSource = datatable;
+                    foreach (DataGridViewRow row in dgvPalvelut.Rows)
                     {
-                        row.Selected = true;
-                        break;
+                        if (row.Cells["palvelu_id"].Value.ToString() == palveluid)
+                        {
+                            row.Selected = true;
+                            break;
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Ei tuloksia.");
+                }
             }
-            else
+            catch (Exception ex) 
             {
-                MessageBox.Show("Ei tuloksia.");
+                
             }
         }
 
@@ -279,6 +280,41 @@ namespace Mokkivarausjarjestelma
 
             varauspalvelut.ShowDialog();
             this.Close();
+        }
+
+        private void tbPalveluID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("ID pitää syöttää numeromuodossa!");
+                e.Handled = true;
+            }
+        }
+
+        private void tbAlueID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("ID pitää syöttää numeromuodossa!");
+                e.Handled = true;
+            }
+        }
+
+        private void tbPalvelutyyppi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("ID pitää syöttää numeromuodossa!");
+                e.Handled = true;
+            }
+        }
+
+        private void tbPalvelunimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

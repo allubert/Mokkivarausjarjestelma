@@ -71,7 +71,9 @@ namespace Mokkivarausjarjestelma
         private void btnUusiVaraus_Click(object sender, EventArgs e)
         {
             var VarausForm = new FormVaraus();
-            VarausForm.Show();
+            this.Hide();
+            VarausForm.ShowDialog();
+            this.Close();
         } //käyttäjä siirtyy mökkivarausten hallintaan
         private void UpdatedgMokkiLista()
         {
