@@ -117,7 +117,7 @@
             this.btnLasku.TabIndex = 10;
             this.btnLasku.Text = "Laskujen hallinta";
             this.btnLasku.UseVisualStyleBackColor = true;
-            this.btnLasku.Click += new System.EventHandler(this.btnAsiakas_Click_1);
+            this.btnLasku.Click += new System.EventHandler(this.btnLasku_Click_1);
             // 
             // btnPalvelu
             // 
