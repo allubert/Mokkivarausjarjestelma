@@ -85,9 +85,11 @@ namespace Mokkivarausjarjestelma
             string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
 
 
-                using (connection)
+            using (connection)
+            {
+                using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
                 {
-                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    try
                     {
                         command.Parameters.AddWithValue("@palveluid", palveluid);
                         command.Parameters.AddWithValue("@alueid", alueid);
@@ -100,7 +102,13 @@ namespace Mokkivarausjarjestelma
                         command.ExecuteNonQuery();
                         populatedgvPalvelut();
                     }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Alue ID:si on väärin, syötä jo olemassa oleva alueID");
+                    }
                 }
+        
+            }
         }
 
         private void btnPalveluPaivita_Click(object sender, EventArgs e)

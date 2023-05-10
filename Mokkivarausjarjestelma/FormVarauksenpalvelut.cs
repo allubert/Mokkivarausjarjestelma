@@ -138,7 +138,7 @@ namespace Mokkivarausjarjestelma
                 }
                 catch (Exception ex) 
                 {
-                    MessageBox.Show(ex.Message.ToString());
+                    MessageBox.Show("Et voi syöttää jo olemassa olevalle varaukselle sille valittua palvelua. Ole hyvä ja tarkista tietosi");
                 }
             }
         }
@@ -158,7 +158,42 @@ namespace Mokkivarausjarjestelma
 
         private void btnPoista_Click(object sender, EventArgs e)
         {
+            string deleteQuery = "DELETE FROM varauksen_palvelut WHERE varaus_id = @varausid AND palvelu_id = @palveluid AND lkm = @lkm";
 
+            if (dgvVarauksenpalvelut.SelectedRows.Count > 0)
+            {
+                int valittuIndex = dgvVarauksenpalvelut.SelectedRows[0].Index;
+                int varausID = Convert.ToInt32(dgvVarauksenpalvelut[0, valittuIndex].Value);
+                int palveluID = Convert.ToInt32(dgvVarauksenpalvelut[1, valittuIndex].Value);
+                int lkm = Convert.ToInt32(dgvVarauksenpalvelut[2, valittuIndex].Value);
+
+                DialogResult result = MessageBox.Show("Oletko varma, että haluat poistaa kyseisen rivin tietokannastasi? Tämä poistaa kaikki syöttämäsi tiedot tietokantaan.", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (connection)
+                        {
+                            connection.Open();
+                            using (MySqlCommand command = new MySqlCommand(deleteQuery, connection))
+                            {
+                                command.Parameters.AddWithValue("@varausid", varausID);
+                                command.Parameters.AddWithValue("@palveluid", palveluID);
+                                command.Parameters.AddWithValue("@lkm", lkm);
+                                int rowsAffected = command.ExecuteNonQuery();
+                            }
+                        }
+                        dgvVarauksenpalvelut.Rows.RemoveAt(valittuIndex);
+                        populatedgvVarauspalvelut();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
         }
+
     }
 }
