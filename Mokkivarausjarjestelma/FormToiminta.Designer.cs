@@ -76,6 +76,7 @@
             this.tbToimintaAlue.Name = "tbToimintaAlue";
             this.tbToimintaAlue.Size = new System.Drawing.Size(199, 23);
             this.tbToimintaAlue.TabIndex = 2;
+            this.tbToimintaAlue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbToimintaAlue_KeyPress);
             // 
             // btnToimintaKohteet
             // 
