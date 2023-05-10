@@ -37,8 +37,20 @@
             this.btnToimintaPoistaAlue = new System.Windows.Forms.Button();
             this.btnToimintaLisaaAlue = new System.Windows.Forms.Button();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
+            this.lblToimintaPostinro = new System.Windows.Forms.Label();
+            this.tbToimintaPostinro = new System.Windows.Forms.TextBox();
+            this.tbToimintaPostitoimi = new System.Windows.Forms.TextBox();
+            this.lblToimintaPostitoimip = new System.Windows.Forms.Label();
+            this.dgvToimintaPosti = new System.Windows.Forms.DataGridView();
+            this.btnToimintaPoistaPostinro = new System.Windows.Forms.Button();
+            this.btnToimintaLisaaPostinro = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.pnlToiminta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvToiminta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvToimintaPosti)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlToiminta
@@ -93,11 +105,11 @@
             // 
             this.dgvToiminta.BackgroundColor = System.Drawing.Color.Bisque;
             this.dgvToiminta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvToiminta.Location = new System.Drawing.Point(252, 30);
+            this.dgvToiminta.Location = new System.Drawing.Point(231, 36);
             this.dgvToiminta.Name = "dgvToiminta";
             this.dgvToiminta.RowHeadersWidth = 51;
             this.dgvToiminta.RowTemplate.Height = 25;
-            this.dgvToiminta.Size = new System.Drawing.Size(696, 450);
+            this.dgvToiminta.Size = new System.Drawing.Size(251, 450);
             this.dgvToiminta.TabIndex = 7;
             this.dgvToiminta.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvToiminta_MouseClick);
             // 
@@ -108,7 +120,7 @@
             this.btnToimintaPoistaAlue.Name = "btnToimintaPoistaAlue";
             this.btnToimintaPoistaAlue.Size = new System.Drawing.Size(99, 42);
             this.btnToimintaPoistaAlue.TabIndex = 4;
-            this.btnToimintaPoistaAlue.Text = "Poista toiminta-alue";
+            this.btnToimintaPoistaAlue.Text = "Poista rivi";
             this.btnToimintaPoistaAlue.UseVisualStyleBackColor = false;
             this.btnToimintaPoistaAlue.Click += new System.EventHandler(this.btnToimintaPoistaAlue_Click);
             // 
@@ -126,7 +138,7 @@
             // btnTakaisinAloitusFormiin
             // 
             this.btnTakaisinAloitusFormiin.BackColor = System.Drawing.Color.Bisque;
-            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(116, 493);
+            this.btnTakaisinAloitusFormiin.Location = new System.Drawing.Point(849, 573);
             this.btnTakaisinAloitusFormiin.Name = "btnTakaisinAloitusFormiin";
             this.btnTakaisinAloitusFormiin.Size = new System.Drawing.Size(99, 41);
             this.btnTakaisinAloitusFormiin.TabIndex = 6;
@@ -134,12 +146,116 @@
             this.btnTakaisinAloitusFormiin.UseVisualStyleBackColor = false;
             this.btnTakaisinAloitusFormiin.Click += new System.EventHandler(this.btnTakaisinAloitusFormiin_Click);
             // 
+            // lblToimintaPostinro
+            // 
+            this.lblToimintaPostinro.AutoSize = true;
+            this.lblToimintaPostinro.Location = new System.Drawing.Point(3, 44);
+            this.lblToimintaPostinro.Name = "lblToimintaPostinro";
+            this.lblToimintaPostinro.Size = new System.Drawing.Size(75, 15);
+            this.lblToimintaPostinro.TabIndex = 24;
+            this.lblToimintaPostinro.Text = "Postinumero";
+            // 
+            // tbToimintaPostinro
+            // 
+            this.tbToimintaPostinro.Location = new System.Drawing.Point(3, 62);
+            this.tbToimintaPostinro.Name = "tbToimintaPostinro";
+            this.tbToimintaPostinro.Size = new System.Drawing.Size(197, 23);
+            this.tbToimintaPostinro.TabIndex = 25;
+            this.tbToimintaPostinro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbToimintaPostinro_KeyPress);
+            // 
+            // tbToimintaPostitoimi
+            // 
+            this.tbToimintaPostitoimi.Location = new System.Drawing.Point(3, 106);
+            this.tbToimintaPostitoimi.Name = "tbToimintaPostitoimi";
+            this.tbToimintaPostitoimi.Size = new System.Drawing.Size(197, 23);
+            this.tbToimintaPostitoimi.TabIndex = 26;
+            this.tbToimintaPostitoimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbToimintaPostitoimi_KeyPress);
+            // 
+            // lblToimintaPostitoimip
+            // 
+            this.lblToimintaPostitoimip.AutoSize = true;
+            this.lblToimintaPostitoimip.Location = new System.Drawing.Point(3, 88);
+            this.lblToimintaPostitoimip.Name = "lblToimintaPostitoimip";
+            this.lblToimintaPostitoimip.Size = new System.Drawing.Size(95, 15);
+            this.lblToimintaPostitoimip.TabIndex = 27;
+            this.lblToimintaPostitoimip.Text = "Postitoimipaikka";
+            // 
+            // dgvToimintaPosti
+            // 
+            this.dgvToimintaPosti.BackgroundColor = System.Drawing.Color.Bisque;
+            this.dgvToimintaPosti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvToimintaPosti.Location = new System.Drawing.Point(697, 36);
+            this.dgvToimintaPosti.Name = "dgvToimintaPosti";
+            this.dgvToimintaPosti.RowHeadersWidth = 51;
+            this.dgvToimintaPosti.RowTemplate.Height = 25;
+            this.dgvToimintaPosti.Size = new System.Drawing.Size(251, 450);
+            this.dgvToimintaPosti.TabIndex = 28;
+            // 
+            // btnToimintaPoistaPostinro
+            // 
+            this.btnToimintaPoistaPostinro.BackColor = System.Drawing.Color.Bisque;
+            this.btnToimintaPoistaPostinro.Location = new System.Drawing.Point(592, 445);
+            this.btnToimintaPoistaPostinro.Name = "btnToimintaPoistaPostinro";
+            this.btnToimintaPoistaPostinro.Size = new System.Drawing.Size(99, 42);
+            this.btnToimintaPoistaPostinro.TabIndex = 30;
+            this.btnToimintaPoistaPostinro.Text = "Poista rivi";
+            this.btnToimintaPoistaPostinro.UseVisualStyleBackColor = false;
+            this.btnToimintaPoistaPostinro.Click += new System.EventHandler(this.btnToimintaPoistaPostinro_Click);
+            // 
+            // btnToimintaLisaaPostinro
+            // 
+            this.btnToimintaLisaaPostinro.BackColor = System.Drawing.Color.Bisque;
+            this.btnToimintaLisaaPostinro.Location = new System.Drawing.Point(488, 445);
+            this.btnToimintaLisaaPostinro.Name = "btnToimintaLisaaPostinro";
+            this.btnToimintaLisaaPostinro.Size = new System.Drawing.Size(94, 42);
+            this.btnToimintaLisaaPostinro.TabIndex = 31;
+            this.btnToimintaLisaaPostinro.Text = "Lisää tiedot";
+            this.btnToimintaLisaaPostinro.UseVisualStyleBackColor = false;
+            this.btnToimintaLisaaPostinro.Click += new System.EventHandler(this.btnToimintaLisaaPostinro_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblToimintaPostinro);
+            this.panel1.Controls.Add(this.tbToimintaPostinro);
+            this.panel1.Controls.Add(this.tbToimintaPostitoimi);
+            this.panel1.Controls.Add(this.lblToimintaPostitoimip);
+            this.panel1.Location = new System.Drawing.Point(488, 72);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(203, 351);
+            this.panel1.TabIndex = 33;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Bisque;
+            this.button1.Location = new System.Drawing.Point(487, 492);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 42);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "Tyhjennä taulukko";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Bisque;
+            this.button2.Location = new System.Drawing.Point(116, 492);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 42);
+            this.button2.TabIndex = 35;
+            this.button2.Text = "Tyhjennä taulukko";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // FormToiminta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(960, 626);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnToimintaLisaaPostinro);
+            this.Controls.Add(this.btnToimintaPoistaPostinro);
+            this.Controls.Add(this.dgvToimintaPosti);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.pnlToiminta);
             this.Controls.Add(this.btnToimintaKohteet);
@@ -153,6 +269,9 @@
             this.pnlToiminta.ResumeLayout(false);
             this.pnlToiminta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvToiminta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvToimintaPosti)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -167,5 +286,15 @@
         private Button btnToimintaPoistaAlue;
         private Button btnToimintaLisaaAlue;
         private Button btnTakaisinAloitusFormiin;
+        private Label lblToimintaPostinro;
+        private TextBox tbToimintaPostinro;
+        private TextBox tbToimintaPostitoimi;
+        private Label lblToimintaPostitoimip;
+        private DataGridView dgvToimintaPosti;
+        private Button btnToimintaPoistaPostinro;
+        private Button btnToimintaLisaaPostinro;
+        private Panel panel1;
+        private Button button1;
+        private Button button2;
     }
 }

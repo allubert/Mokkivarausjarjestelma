@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Mokkivarausjarjestelma
 {
@@ -29,6 +30,16 @@ namespace Mokkivarausjarjestelma
             MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
             adapter.Fill(table);
             dgvToiminta.DataSource = table;
+
+        }
+        public void populatedgvToimintaPosti()
+        {
+            //hae dataa
+            string selectQuery = "SELECT * FROM posti";
+            DataTable table = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(selectQuery, connection);
+            adapter.Fill(table);
+            dgvToimintaPosti.DataSource = table;
         }
         public void ExecuteMyQuery(string query)
         {
@@ -67,7 +78,7 @@ namespace Mokkivarausjarjestelma
 
         private void btnToimintaLisaaAlue_Click(object sender, EventArgs e)
         {
-           
+
             if (tbToimintaAlue.Text == "")
             {
                 MessageBox.Show("Anna alueelle nimi.");
@@ -105,11 +116,12 @@ namespace Mokkivarausjarjestelma
             }
         }
 
-      
+
 
         private void FormToiminta_Load(object sender, EventArgs e)
         {
             populatedgvToiminta();
+            populatedgvToimintaPosti();
         }
 
         private void dgvToiminta_MouseClick(object sender, MouseEventArgs e)
@@ -169,8 +181,106 @@ namespace Mokkivarausjarjestelma
                 e.Handled = true;
             }
         }
+
+        private void tbToimintaPostinro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (tbToimintaPostinro.Text.Length >= 5 && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbToimintaPostitoimi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar)) { e.Handled = true; }
+        }
+
+
+
+        private void btnToimintaLisaaPostinro_Click(object sender, EventArgs e)
+        {
+            if (tbToimintaPostinro.Text == "")
+            {
+                MessageBox.Show("Anna postinumero.");
+                return;
+            }
+            if (tbToimintaPostitoimi.Text == "")
+            {
+                MessageBox.Show("Anna postitoimipaikka.");
+                return;
+            }
+
+
+            string postinro = tbToimintaPostinro.Text;
+            string toimipaikka = tbToimintaPostitoimi.Text;
+
+
+            string insertQuery = "INSERT INTO posti(postinro, toimipaikka) VALUES (@postinro, @toimipaikka)";
+
+            try
+            {
+                using (connection)
+                {
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    {
+
+                        command.Parameters.AddWithValue("@postinro", postinro);
+                        command.Parameters.AddWithValue("@toimipaikka", toimipaikka);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        populatedgvToimintaPosti();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Virhe" + ex);
+            }
+        }
+
+        private void btnToimintaPoistaPostinro_Click(object sender, EventArgs e)
+        {
+            string deleteQuery = "DELETE FROM posti WHERE postinro = @postinro; DELETE FROM posti WHERE toimipaikka = @toimipaikka";
+
+
+            if (dgvToimintaPosti.SelectedRows.Count > 0)
+            {
+                int valittuIndex = dgvToimintaPosti.SelectedRows[0].Index;
+                int poistoID = Convert.ToInt32(dgvToimintaPosti[0, valittuIndex].Value);
+                string postinrodel = tbToimintaPostinro.Text;
+
+                DialogResult result = MessageBox.Show("Oletko varma, että haluat poistaa kyseisen rivin tietokannastasi? Tämä poistaa kaikki syöttämäsi tiedot tietokantaan.", "Vahvista valintasi!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand(deleteQuery, connection))
+                        {
+                            command.Parameters.AddWithValue("@postinro", poistoID);
+                            command.Parameters.AddWithValue("@toimipaikka", postinrodel);
+                            command.ExecuteNonQuery();
+                        }
+                        dgvToimintaPosti.Rows.RemoveAt(valittuIndex);
+                        populatedgvToimintaPosti();
+                    }
+                }
+            }
+
+        }
     }
 }
+
+
+
+    
+
 
 
     
