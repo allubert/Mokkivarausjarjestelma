@@ -268,7 +268,7 @@ namespace Mokkivarausjarjestelma
             }
             catch (Exception ex) 
             {
-                Mesa
+                MessageBox.Show(ex.ToString());
             }
         }
 
