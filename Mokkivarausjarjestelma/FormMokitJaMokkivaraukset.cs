@@ -18,7 +18,6 @@ namespace Mokkivarausjarjestelma
         private bool muokkausMenossa = false; //kertoo ohjelmalle, onko mökin tietojen muokkaus menossa
         private bool hakuPaalla = false; // kertoo ohjelmalle, onko käyttäjä suorittamassa rajattua hakua
         MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3307;Initial Catalog='vn';username=root;password=Ruutti"); //yhteys tietokantaan
-
         public FormMokitJaMokkivaraukset()
         {
             InitializeComponent();
@@ -169,7 +168,6 @@ namespace Mokkivarausjarjestelma
             else if (btnLisaaMokinTiedot.Text == "Tyhjennä tekstikentät")
             {
                 ClearTextBoxes();
-                tbValittuMokkiMokkiID.ReadOnly = false;
                 tbValittuMokkiNimi.ReadOnly = false;
                 tbValittuMokkiOsoite.ReadOnly = false;
                 tbValittuMokkiHintaVrk.ReadOnly = false;
@@ -185,7 +183,6 @@ namespace Mokkivarausjarjestelma
         } // käyttäjä lisää uudet mökin tiedot järjestelmään
         private void ClearTextBoxes()
         {
-            tbValittuMokkiMokkiID.Clear();
             tbValittuMokkiNimi.Clear();
             tbValittuMokkiOsoite.Clear();
             tbValittuMokkiHintaVrk.Clear();
@@ -201,7 +198,6 @@ namespace Mokkivarausjarjestelma
                 {
                     try
                     {
-                        tbValittuMokkiMokkiID.ReadOnly = true;
                         cmbUusiMokkiValitseAlueID.Enabled = false;
                         cmbUusiMokkiValitsePostiNro.Enabled = false;
                         tbValittuMokkiNimi.ReadOnly = true;
@@ -211,7 +207,6 @@ namespace Mokkivarausjarjestelma
                         tbValittuMokkiHloMaara.ReadOnly = true;
                         rtbValittuMokkiVarustelu.ReadOnly = true;
 
-                        tbValittuMokkiMokkiID.Text = dgMokkiLista.CurrentRow.Cells[0].Value.ToString();
                         cmbUusiMokkiValitseAlueID.SelectedValue = dgMokkiLista.CurrentRow.Cells[1].Value.ToString();
                         cmbUusiMokkiValitsePostiNro.SelectedValue = dgMokkiLista.CurrentRow.Cells[2].Value.ToString();
                         tbValittuMokkiNimi.Text = dgMokkiLista.CurrentRow.Cells[3].Value.ToString();
@@ -344,7 +339,6 @@ namespace Mokkivarausjarjestelma
                         btnLisaaMokinTiedot.Enabled = true;
                         btnLisaaMokinTiedot.Text = "Tyhjennä tekstikentät";
                         btnMuokkaaValitunMokinTietoja.Text = "Muokkaa";
-                        tbValittuMokkiMokkiID.ReadOnly = true;
                         cmbUusiMokkiValitseAlueID.Enabled = false;
                         cmbUusiMokkiValitsePostiNro.Enabled = false;
                         tbValittuMokkiNimi.ReadOnly = true;
@@ -372,8 +366,8 @@ namespace Mokkivarausjarjestelma
         } //antaa käyttäjän muokata tietoja
         private void UpdateDatabaseAndDataGridView()
         {
-            int mokkiid = int.Parse(tbValittuMokkiMokkiID.Text);
-            int alueid = int.Parse(cmbUusiMokkiValitseAlueID.Text);
+            int alueid = int.Parse(cmbUusiMokkiValitseAlueID.SelectedValue.ToString());
+            MessageBox.Show(" id : " + alueid);
             string postinro = cmbUusiMokkiValitsePostiNro.Text.ToString();
             string mokkinimi = tbValittuMokkiNimi.Text.ToString();
             string katuosoite = tbValittuMokkiOsoite.Text.ToString();
@@ -381,6 +375,7 @@ namespace Mokkivarausjarjestelma
             string mokinkuvaus = rtbValittuMokkiKuvaus.Text.ToString();
             int hlomaara = int.Parse(tbValittuMokkiHloMaara.Text);
             string mokinvarustelu = rtbValittuMokkiVarustelu.Text.ToString();
+            
 
             string updateQuery = "UPDATE mokki SET alue_id=@alueid, postinro=@postinro, mokkinimi=@mokkinimi, katuosoite=@katuosoite, hinta=@hinta, kuvaus=@mokinkuvaus, henkilomaara=@hlomaara, varustelu=@mokinvarustelu WHERE mokki_id=@mokkiid";
 
@@ -388,7 +383,7 @@ namespace Mokkivarausjarjestelma
             {
                 using (MySqlCommand command = new MySqlCommand(updateQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@mokkiid", mokkiid);
+                    //command.Parameters.AddWithValue("@mokkiid", mokki)
                     command.Parameters.AddWithValue("@alueid", alueid);
                     command.Parameters.AddWithValue("@postinro", postinro);
                     command.Parameters.AddWithValue("@mokkinimi", mokkinimi);
@@ -398,24 +393,28 @@ namespace Mokkivarausjarjestelma
                     command.Parameters.AddWithValue("@hlomaara", hlomaara);
                     command.Parameters.AddWithValue("@mokinvarustelu", mokinvarustelu);
 
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message + "\n\n" + ex);
+                    }
+
                 }
             }
             UpdatedgMokkiLista();
         } //päivittää tietokantaa, jos käyttäjä on halunnut muokata mökin tietoja
         private bool ValidateTexts()
         {
-            //int mokkiid;
             int alueid;
             double hinta;
             int hlomaara;
 
-            // tarkastaa int-tekstikentät !int.TryParse(tbValittuMokkiMokkiID.Text, out mokkiid) ||
-            if (
-                !int.TryParse(cmbUusiMokkiValitseAlueID.Text, out alueid) ||
-                !int.TryParse(tbValittuMokkiHloMaara.Text, out hlomaara))
+            if (!int.TryParse(tbValittuMokkiHloMaara.Text, out hlomaara))
             {
                 return false;
             }
@@ -448,7 +447,6 @@ namespace Mokkivarausjarjestelma
                 btnHaeMokit.Text = "Lopeta";
                 cmbUusiMokkiValitseAlueID.Enabled = false;
                 cmbUusiMokkiValitsePostiNro.Enabled = false;
-                tbValittuMokkiMokkiID.Visible = false;
                 tbValittuMokkiNimi.Visible = false;
                 tbValittuMokkiOsoite.Visible = false;
                 tbValittuMokkiHintaVrk.Visible = false;
@@ -459,7 +457,6 @@ namespace Mokkivarausjarjestelma
                 btnSuoritaMokkienHaku.Enabled = true;
                 checkAlueID.Visible = true;
                 checkPostiNro.Visible = true;
-                lbl1.Visible = false;
                 lbl2.Visible = false;
                 lbl3.Visible = false;
                 lbl4.Visible = false;
@@ -481,7 +478,6 @@ namespace Mokkivarausjarjestelma
                 UpdatedgMokkiLista();
                 hakuPaalla = false;
                 btnHaeMokit.Text = "Rajaa hakua";
-                tbValittuMokkiMokkiID.Visible = true;
                 tbValittuMokkiNimi.Visible = true;
                 tbValittuMokkiOsoite.Visible = true;
                 tbValittuMokkiHintaVrk.Visible = true;
@@ -492,7 +488,6 @@ namespace Mokkivarausjarjestelma
                 btnSuoritaMokkienHaku.Enabled = false;
                 checkAlueID.Visible = false;
                 checkPostiNro.Visible = false;
-                lbl1.Visible = true;
                 lbl2.Visible = true;
                 lbl3.Visible = true;
                 lbl4.Visible = true;
@@ -517,7 +512,6 @@ namespace Mokkivarausjarjestelma
             hakuPaalla = false;
             ClearTextBoxes();
             btnHaeMokit.Text = "Rajaa hakua";
-            tbValittuMokkiMokkiID.Visible = true;
             tbValittuMokkiNimi.Visible = true;
             tbValittuMokkiOsoite.Visible = true;
             tbValittuMokkiHintaVrk.Visible = true;
@@ -528,7 +522,6 @@ namespace Mokkivarausjarjestelma
             btnSuoritaMokkienHaku.Enabled = false;
             checkAlueID.Visible = false;
             checkPostiNro.Visible = false;
-            lbl1.Visible = true;
             lbl2.Visible = true;
             lbl3.Visible = true;
             lbl4.Visible = true;

@@ -50,7 +50,6 @@
             this.lbl4 = new System.Windows.Forms.Label();
             this.lbl3 = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
-            this.lbl1 = new System.Windows.Forms.Label();
             this.dgMokkiLista = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAlueHallintaan = new System.Windows.Forms.Button();
@@ -278,17 +277,6 @@
             this.lbl2.Text = "Alue_ID";
             this.lbl2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lbl1
-            // 
-            this.lbl1.BackColor = System.Drawing.Color.Bisque;
-            this.lbl1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.lbl1.Location = new System.Drawing.Point(-2, 51);
-            this.lbl1.Name = "lbl1";
-            this.lbl1.Size = new System.Drawing.Size(88, 24);
-            this.lbl1.TabIndex = 64;
-            this.lbl1.Text = "Mokki_ID";
-            this.lbl1.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // dgMokkiLista
             // 
             this.dgMokkiLista.BackgroundColor = System.Drawing.Color.Bisque;
@@ -419,7 +407,6 @@
             this.panel1.Controls.Add(this.btnMuokkaaValitunMokinTietoja);
             this.panel1.Controls.Add(this.cmbUusiMokkiValitseAlueID);
             this.panel1.Controls.Add(this.lbl7);
-            this.panel1.Controls.Add(this.lbl1);
             this.panel1.Controls.Add(this.lbl2);
             this.panel1.Controls.Add(this.lbl3);
             this.panel1.Controls.Add(this.tbValittuMokkiHintaVrk);
@@ -593,7 +580,6 @@
         private Label lbl4;
         private Label lbl3;
         private Label lbl2;
-        private Label lbl1;
         private DataGridView dgMokkiLista;
         private Panel panel2;
         private Label label1;
