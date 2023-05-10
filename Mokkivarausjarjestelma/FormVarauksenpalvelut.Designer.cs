@@ -49,7 +49,9 @@
             this.dgvVarauksenpalvelut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVarauksenpalvelut.Location = new System.Drawing.Point(280, 12);
             this.dgvVarauksenpalvelut.Name = "dgvVarauksenpalvelut";
+            this.dgvVarauksenpalvelut.ReadOnly = true;
             this.dgvVarauksenpalvelut.RowTemplate.Height = 25;
+            this.dgvVarauksenpalvelut.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVarauksenpalvelut.Size = new System.Drawing.Size(508, 308);
             this.dgvVarauksenpalvelut.TabIndex = 0;
             // 
@@ -154,12 +156,13 @@
             // 
             // btnPoista
             // 
+            this.btnPoista.BackColor = System.Drawing.Color.AntiqueWhite;
             this.btnPoista.Location = new System.Drawing.Point(117, 235);
             this.btnPoista.Name = "btnPoista";
             this.btnPoista.Size = new System.Drawing.Size(75, 23);
             this.btnPoista.TabIndex = 11;
             this.btnPoista.Text = "Poista";
-            this.btnPoista.UseVisualStyleBackColor = true;
+            this.btnPoista.UseVisualStyleBackColor = false;
             this.btnPoista.Click += new System.EventHandler(this.btnPoista_Click);
             // 
             // FormVarauksenpalvelut
@@ -181,6 +184,7 @@
             this.Controls.Add(this.cmbVarausID);
             this.Controls.Add(this.dgvVarauksenpalvelut);
             this.Name = "FormVarauksenpalvelut";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormVarauksenpalvelut";
             this.Load += new System.EventHandler(this.FormVarauksenpalvelut_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVarauksenpalvelut)).EndInit();
