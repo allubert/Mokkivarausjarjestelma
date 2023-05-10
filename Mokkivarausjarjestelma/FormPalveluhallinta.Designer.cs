@@ -85,6 +85,7 @@
             this.tbPalvelutyyppi.Name = "tbPalvelutyyppi";
             this.tbPalvelutyyppi.Size = new System.Drawing.Size(130, 23);
             this.tbPalvelutyyppi.TabIndex = 3;
+            this.tbPalvelutyyppi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPalvelutyyppi_KeyPress);
             // 
             // tbPalvelunimi
             // 
@@ -92,6 +93,7 @@
             this.tbPalvelunimi.Name = "tbPalvelunimi";
             this.tbPalvelunimi.Size = new System.Drawing.Size(130, 23);
             this.tbPalvelunimi.TabIndex = 2;
+            this.tbPalvelunimi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPalvelunimi_KeyPress);
             // 
             // tbPalveluID
             // 
@@ -99,6 +101,7 @@
             this.tbPalveluID.Name = "tbPalveluID";
             this.tbPalveluID.Size = new System.Drawing.Size(130, 23);
             this.tbPalveluID.TabIndex = 0;
+            this.tbPalveluID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPalveluID_KeyPress);
             // 
             // btnPalveluLisaa
             // 
@@ -215,6 +218,7 @@
             this.tbAlueID.Name = "tbAlueID";
             this.tbAlueID.Size = new System.Drawing.Size(130, 23);
             this.tbAlueID.TabIndex = 1;
+            this.tbAlueID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlueID_KeyPress);
             // 
             // label1
             // 
