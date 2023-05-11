@@ -17,6 +17,7 @@ namespace Mokkivarausjarjestelma
         {
             InitializeComponent();
 
+            //täyttää comboboxit
             Comboboxfill();
         }
 
