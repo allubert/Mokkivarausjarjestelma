@@ -216,6 +216,7 @@ namespace Mokkivarausjarjestelma
                 summa = (jotain * mokkihinta + palvelulkm * palveluhinta);
 
                 tbSumma.Text = summa.ToString();
+                tbAlv.Text = "24"; 
             }
             catch (Exception ex)
             {
