@@ -63,7 +63,7 @@ namespace Mokkivarausjarjestelma
             }
 
         }
-
+        // tämä on tallenna nappi todellisuudessa 
         private void btnLahetalasku_Click(object sender, EventArgs e)
         {
 
