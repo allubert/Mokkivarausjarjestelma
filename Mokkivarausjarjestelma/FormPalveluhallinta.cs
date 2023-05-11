@@ -75,7 +75,7 @@ namespace Mokkivarausjarjestelma
             }
 
             int palveluid = int.Parse(tbPalveluID.Text);
-            int alueid = int.Parse(tbAlueID.Text);
+            int alueid = Convert.ToInt32(cmbAlueID.SelectedValue);
             string nimi = tbPalvelunimi.Text;
             int tyyppi = int.Parse(tbPalvelutyyppi.Text);
             string palvelukuvaus = rtbPalvelukuvaus.Text;
@@ -83,7 +83,6 @@ namespace Mokkivarausjarjestelma
             double alv = double.Parse(tbPalvelualv.Text);
 
             string insertQuery = "INSERT INTO palvelu(palvelu_id, alue_id, nimi, tyyppi, kuvaus, hinta, alv) VALUES (@palveluid, @alueid, @nimi, @tyyppi, @palvelukuvaus, @hinta, @alv)";
-
 
             using (connection)
             {
@@ -102,9 +101,9 @@ namespace Mokkivarausjarjestelma
                         command.ExecuteNonQuery();
                         populatedgvPalvelut();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Alue ID:si on väärin, syötä jo olemassa oleva alueID");
+                        MessageBox.Show("Et voi syöttää jo olemassa olevaa palveluID:tä uudeksi palveluID:ksi. Jos haluat käyttää kyseistä ID:tä, ole hyvä, ja poista se ensin tietokannasta.");
                     }
                 }
         
@@ -120,7 +119,7 @@ namespace Mokkivarausjarjestelma
                     string query = "UPDATE palvelu SET alue_id=@alueid, nimi=@nimi, tyyppi=@tyyppi, kuvaus=@palvelukuvaus, hinta=@hinta, alv=@alv WHERE palvelu_id=@palveluid";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@alueid", tbAlueID.Text);
+                        command.Parameters.AddWithValue("@alueid", cmbAlueID.SelectedValue);
                         command.Parameters.AddWithValue("@nimi", tbPalvelunimi.Text);
                         command.Parameters.AddWithValue("@tyyppi", tbPalvelutyyppi.Text);
                         command.Parameters.AddWithValue("@palvelukuvaus", rtbPalvelukuvaus.Text);
@@ -177,7 +176,7 @@ namespace Mokkivarausjarjestelma
             //siirtää datagridviewissä olevan rivin tiedot takaisin textboxeihin
 
             tbPalveluID.Text = dgvPalvelut.CurrentRow.Cells[0].Value.ToString();
-            tbAlueID.Text = dgvPalvelut.CurrentRow.Cells[1].Value.ToString();
+            cmbAlueID.SelectedValue = dgvPalvelut.CurrentRow.Cells[1].Value.ToString();
             tbPalvelunimi.Text = dgvPalvelut.CurrentRow.Cells[2].Value.ToString();
             tbPalvelutyyppi.Text = dgvPalvelut.CurrentRow.Cells[3].Value.ToString();
             rtbPalvelukuvaus.Text = dgvPalvelut.CurrentRow.Cells[4].Value.ToString();
@@ -199,6 +198,25 @@ namespace Mokkivarausjarjestelma
             //päivittää datagridviewin heti sovelluksen käynnistäessä
 
             populatedgvPalvelut();
+
+            // täyttää alue_id comboboxin
+            string aluenimiQuery = "SELECT alue_id, nimi FROM alue";
+            MySqlDataAdapter alueNimiAdapter = new MySqlDataAdapter(aluenimiQuery, connection);
+            DataSet alueDs = new DataSet();
+            alueNimiAdapter.Fill(alueDs, "alue");
+
+            var aluenimiData = alueDs.Tables["alue"].AsEnumerable()
+                .Select(row => new
+                {
+                    alue_id = row.Field<uint>("alue_id"),
+                    nimi = row.Field<string>("nimi"),
+                    DisplayText = row.Field<string>("nimi") + " (" + row.Field<uint>("alue_id") + ")"
+                })
+                .ToList();
+
+            cmbAlueID.DisplayMember = "DisplayText";
+            cmbAlueID.ValueMember = "alue_id";
+            cmbAlueID.DataSource = aluenimiData;
         }
         public void EmptyTB(Control con)
         {

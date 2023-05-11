@@ -46,7 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblPalveluID = new System.Windows.Forms.Label();
             this.dgvPalvelut = new System.Windows.Forms.DataGridView();
-            this.tbAlueID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTakaisinAloitusFormiin = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,6 +53,7 @@
             this.btnHae = new System.Windows.Forms.Button();
             this.btnMokit = new System.Windows.Forms.Button();
             this.btnVarauspalvelut = new System.Windows.Forms.Button();
+            this.cmbAlueID = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalvelut)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,14 +212,6 @@
             this.dgvPalvelut.TabIndex = 17;
             this.dgvPalvelut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvPalvelut_MouseClick);
             // 
-            // tbAlueID
-            // 
-            this.tbAlueID.Location = new System.Drawing.Point(94, 64);
-            this.tbAlueID.Name = "tbAlueID";
-            this.tbAlueID.Size = new System.Drawing.Size(130, 23);
-            this.tbAlueID.TabIndex = 1;
-            this.tbAlueID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbAlueID_KeyPress);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -292,12 +284,24 @@
             this.btnVarauspalvelut.UseVisualStyleBackColor = false;
             this.btnVarauspalvelut.Click += new System.EventHandler(this.btnVarauspalvelut_Click);
             // 
+            // cmbAlueID
+            // 
+            this.cmbAlueID.BackColor = System.Drawing.SystemColors.Window;
+            this.cmbAlueID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAlueID.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbAlueID.FormattingEnabled = true;
+            this.cmbAlueID.Location = new System.Drawing.Point(94, 64);
+            this.cmbAlueID.Name = "cmbAlueID";
+            this.cmbAlueID.Size = new System.Drawing.Size(130, 23);
+            this.cmbAlueID.TabIndex = 81;
+            // 
             // FormPalveluhallinta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
             this.ClientSize = new System.Drawing.Size(942, 593);
+            this.Controls.Add(this.cmbAlueID);
             this.Controls.Add(this.btnVarauspalvelut);
             this.Controls.Add(this.btnMokit);
             this.Controls.Add(this.btnHae);
@@ -305,7 +309,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnTakaisinAloitusFormiin);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbAlueID);
             this.Controls.Add(this.rtbPalvelukuvaus);
             this.Controls.Add(this.tbPalvelualv);
             this.Controls.Add(this.tbPalveluhinta);
@@ -352,7 +355,6 @@
         private Label label2;
         private Label lblPalveluID;
         private DataGridView dgvPalvelut;
-        private TextBox tbAlueID;
         private Label label1;
         private Button btnTakaisinAloitusFormiin;
         private Label label3;
@@ -360,5 +362,6 @@
         private Button btnHae;
         private Button btnMokit;
         private Button btnVarauspalvelut;
+        private ComboBox cmbAlueID;
     }
 }
